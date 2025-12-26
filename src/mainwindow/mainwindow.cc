@@ -21,6 +21,7 @@
 #include "src/mainwindow/mainwindow.h"
 #include "src/mainwindow/ui_mainwindow.h"
 #include "src/user_info/user_info.h"
+#include "src/application_services/application_services.h"
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
 namespace panel {
@@ -57,12 +58,19 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
   ui_->avatar_btn->setIcon(
     QIcon(backend::UserInfo::GetUserAvatarPath()));
 
+  connect(ui_->krunner_btn, &QPushButton::clicked, this, &MainWindow::
+    TriggerKRunner);
+
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
 
 MainWindow::~MainWindow() {
   delete ui_;
   qInfo() << "[ OK ] Top Bar: Successfully cleaned up main window.";
+}
+
+void MainWindow::TriggerKRunner() {
+  backend::ApplicationServices::GetKRunner();
 }
 
 }  // namespace frontend

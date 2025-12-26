@@ -64,6 +64,8 @@ set(PROJECT_SOURCES
   src/mainwindow/mainwindow.ui
   src/user_info/user_info.h
   src/user_info/user_info.cc
+  src/application_services/application_services.h
+  src/application_services/application_services.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds

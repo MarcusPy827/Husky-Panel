@@ -15,34 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_MAINWINDOW_MAINWINDOW_H_
-#define SRC_MAINWINDOW_MAINWINDOW_H_
+#ifndef SRC_APPLICATION_SERVICES_APPLICATION_SERVICES_H_
+#define SRC_APPLICATION_SERVICES_APPLICATION_SERVICES_H_
 
-#include <QWidget>
+#include <QString>
 
 namespace panel {
-namespace frontend {
+namespace backend {
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QWidget {
-  Q_OBJECT
-
+class ApplicationServices {
  public:
-  explicit MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
-
- private:
-  Ui::MainWindow * ui_;
-  int inclusive_zone_height_ = 32;
-
- private slots:
-  void TriggerKRunner();
+  static void GetKRunner();
 };
 
-}  // namespace frontend
+}  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_MAINWINDOW_MAINWINDOW_H_
+#endif  // SRC_APPLICATION_SERVICES_APPLICATION_SERVICES_H_
