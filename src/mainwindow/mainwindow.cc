@@ -57,11 +57,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
   ui->avatar_btn->setIcon(
     QIcon(backend::UserInfo::GetUserAvatarPath()));
 
-  qInfo() << "[INFO] Top Bar: Initialization complete.";
+  qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
 
 MainWindow::~MainWindow() {
   delete ui;
+  qInfo() << "[ OK ] Top Bar: Successfully cleaned up main window.";
 }
 
 }  // namespace frontend
