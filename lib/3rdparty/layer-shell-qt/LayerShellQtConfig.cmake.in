@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>
+# SPDX-License-Identifier: BSD-3-Clause
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(Qt6Gui "@QT_MIN_VERSION@")
+
+include("${CMAKE_CURRENT_LIST_DIR}/LayerShellQtTargets.cmake")
