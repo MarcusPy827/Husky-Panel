@@ -62,6 +62,9 @@ set(PROJECT_SOURCES
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
   src/mainwindow/mainwindow.ui
+  src/quick_kde_su/quick_kde_su.h
+  src/quick_kde_su/quick_kde_su.cc
+  src/quick_kde_su/quick_kde_su.ui
   src/user_info/user_info.h
   src/user_info/user_info.cc
   src/application_services/application_services.h
@@ -83,6 +86,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
   qt_add_executable(HuskyPanel
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
+    src/quick_kde_su/quick_kde_su.h src/quick_kde_su/quick_kde_su.cc src/quick_kde_su/quick_kde_su.ui
   )
   
   qt_create_translation(QM_FILES 

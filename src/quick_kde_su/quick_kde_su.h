@@ -15,41 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_MAINWINDOW_MAINWINDOW_H_
-#define SRC_MAINWINDOW_MAINWINDOW_H_
+#ifndef SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_
+#define SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_
 
 #include <QWidget>
-#include <QScreen>
-
-#include "src/quick_kde_su/quick_kde_su.h"
 
 namespace panel {
 namespace frontend {
 
 namespace Ui {
-class MainWindow;
+class QuickKDESU;
 }
 
-class MainWindow : public QWidget {
+class QuickKDESU : public QWidget {
   Q_OBJECT
 
  public:
-  explicit MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+  explicit QuickKDESU(QWidget *parent = nullptr);
+  ~QuickKDESU();
 
  private:
-  int inclusive_zone_height_ = 32;
-  QRect screen_geometry_ = qApp->primaryScreen()->geometry();
-
-  Ui::MainWindow * ui_;
-  QuickKDESU * quick_kde_su_panel_ = nullptr;
+  void ExecWithKDESU(const QString &prog, const QStringList &args);
+  Ui::QuickKDESU * ui_;
 
  private slots:
-  void TriggerKRunner();
-  void TriggerQuickKDESUPanel();
+  void OpenDoplhinWithKDESU();
+  void OpenKonsoleWithKDESU();
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_MAINWINDOW_MAINWINDOW_H_
+#endif  // SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_

@@ -184,11 +184,11 @@
 }
 
 #quick_kdesu_btn:hover {
-  color: #89b4fa;
+  color: #dc8a78;
   background: transparent;
   font-size: 16px;
   font-weight: bold;
-  border: 1px solid #89b4fa;
+  border: 1px solid #dc8a78;
   border-radius: 5px;
 }</string>
        </property>

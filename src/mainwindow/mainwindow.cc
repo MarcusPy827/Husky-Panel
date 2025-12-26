@@ -58,8 +58,14 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
   ui_->avatar_btn->setIcon(
     QIcon(backend::UserInfo::GetUserAvatarPath()));
 
-  connect(ui_->krunner_btn, &QPushButton::clicked, this, &MainWindow::
-    TriggerKRunner);
+  connect(ui_->krunner_btn, &QPushButton::clicked, this,
+    &MainWindow::TriggerKRunner);
+
+  qInfo() << "[INFO] Top Bar: Initializing QuickKDESU panel...";
+  quick_kde_su_panel_ = new QuickKDESU(nullptr);
+  quick_kde_su_panel_->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint);
+  connect(ui_->quick_kdesu_btn, &QPushButton::clicked, this,
+    &MainWindow::TriggerQuickKDESUPanel);
 
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
@@ -71,6 +77,18 @@ MainWindow::~MainWindow() {
 
 void MainWindow::TriggerKRunner() {
   backend::ApplicationServices::GetKRunner();
+}
+
+void MainWindow::TriggerQuickKDESUPanel() {
+  if (quick_kde_su_panel_->isVisible()) {
+    qInfo() << "[INFO] Top Bar: Now closing quick KDESU panel...";
+    quick_kde_su_panel_->hide();
+  } else {
+    qInfo() << "[INFO] Top Bar: Now opening quick KDESU panel...";
+    quick_kde_su_panel_->show();
+    quick_kde_su_panel_->move(screen_geometry_.left() + ui_->
+      quick_kdesu_btn->x() - 9, 32);
+  }
 }
 
 }  // namespace frontend
