@@ -29,6 +29,7 @@ find_package(QT
   Widgets 
   LinguistTools
   WaylandClient
+  DBus
 )
 
 find_package(Qt${QT_VERSION_MAJOR} 
@@ -36,6 +37,7 @@ find_package(Qt${QT_VERSION_MAJOR}
   Widgets 
   LinguistTools
   WaylandClient
+  DBus
 )
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
@@ -60,6 +62,8 @@ set(PROJECT_SOURCES
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
   src/mainwindow/mainwindow.ui
+  src/user_info/user_info.h
+  src/user_info/user_info.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
@@ -101,6 +105,7 @@ target_link_libraries(HuskyPanel
   PRIVATE 
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
+  Qt${QT_VERSION_MAJOR}::DBus
   LayerShellQtInterface
 )
 

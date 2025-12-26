@@ -16,9 +16,11 @@
  */
 
 #include <QWindow>
+#include <QDebug>
 
 #include "src/mainwindow/mainwindow.h"
 #include "src/mainwindow/ui_mainwindow.h"
+#include "src/user_info/user_info.h"
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
 namespace panel {
@@ -44,7 +46,14 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
     layer_shell->setKeyboardInteractivity(LayerShellQt::Window::
       KeyboardInteractivityNone);
     layer_shell->setExclusiveZone(inclusive_zone_height_);
+  } else {
+    qFatal() << tr(
+      "Failed to get native window handle. Please check your session,");
+    return;
   }
+
+  qInfo() << "[INFO] Top Bar: Now initializing user info...";
+  ui->user_name_display->setText(backend::UserInfo::GetUserName());
 }
 
 MainWindow::~MainWindow() {
