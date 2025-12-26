@@ -1,0 +1,2 @@
+# Ignore 3rd party libraries
+lib/3rdparty/*
