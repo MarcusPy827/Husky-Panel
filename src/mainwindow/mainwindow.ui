@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow {
+   <string notr="true">QWidget {
   background: #11111b;
 }</string>
   </property>
@@ -67,17 +67,20 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>8</number>
+     </property>
      <property name="leftMargin">
       <number>8</number>
      </property>
      <property name="topMargin">
-      <number>8</number>
+      <number>4</number>
      </property>
      <property name="rightMargin">
       <number>8</number>
      </property>
      <property name="bottomMargin">
-      <number>8</number>
+      <number>4</number>
      </property>
      <item>
       <widget class="QPushButton" name="user_name_btn">
@@ -92,11 +95,105 @@
   color: #cdd6f4;
   padding-left: 8px;
   font-size: 16px;
+  font-weight: bold;
   border: none;
 }</string>
        </property>
        <property name="text">
         <string>User Profile 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="app_drawer_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#app_drawer_btn {
+  color: #cdd6f4;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#app_drawer_btn:hover {
+  color: #89b4fa;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #89b4fa;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Apps</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="krunner_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#krunner_btn {
+  color: #cdd6f4;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#krunner_btn:hover {
+  color: #89b4fa;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #89b4fa;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string>KRunner</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="quick_kdesu_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#quick_kdesu_btn {
+  color: #cdd6f4;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#quick_kdesu_btn:hover {
+  color: #89b4fa;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #89b4fa;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string>KDESU</string>
        </property>
       </widget>
      </item>
