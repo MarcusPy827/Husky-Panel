@@ -15,15 +15,36 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QWindow>
+
 #include "src/mainwindow/mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "src/mainwindow/ui_mainwindow.h"
+#include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
 namespace panel {
 namespace frontend {
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
     Ui::MainWindow) {
   ui->setupUi(this);
+  setWindowTitle(tr("Top Panel"));
+  setFixedHeight(inclusive_zone_height_);
+  setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
+
+  winId();
+  QWindow * native_handle = windowHandle();
+  if (native_handle) {
+    LayerShellQt::Window * layer_shell = LayerShellQt::Window::get(
+      native_handle);
+    layer_shell->setAnchors(static_cast<LayerShellQt::Window::Anchor>(
+      LayerShellQt::Window::Anchor::AnchorTop |
+      LayerShellQt::Window::Anchor::AnchorLeft |
+      LayerShellQt::Window::Anchor::AnchorRight));
+    layer_shell->setLayer(LayerShellQt::Window::LayerTop);
+    layer_shell->setKeyboardInteractivity(LayerShellQt::Window::
+      KeyboardInteractivityNone);
+    layer_shell->setExclusiveZone(inclusive_zone_height_);
+  }
 }
 
 MainWindow::~MainWindow() {

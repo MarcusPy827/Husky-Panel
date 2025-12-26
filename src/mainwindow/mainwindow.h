@@ -18,18 +18,16 @@
 #ifndef SRC_MAINWINDOW_MAINWINDOW_H_
 #define SRC_MAINWINDOW_MAINWINDOW_H_
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace panel {
 namespace frontend {
 
-QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QWidget {
   Q_OBJECT
 
  public:
@@ -37,7 +35,8 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
  private:
-  Ui::MainWindow *ui;
+  Ui::MainWindow * ui;
+  int inclusive_zone_height_ = 32;
 };
 
 }  // namespace frontend
