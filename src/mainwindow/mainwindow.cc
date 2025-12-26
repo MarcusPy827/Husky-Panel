@@ -26,9 +26,9 @@
 namespace panel {
 namespace frontend {
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
     Ui::MainWindow) {
-  ui->setupUi(this);
+  ui_->setupUi(this);
   setWindowTitle(tr("Top Panel"));
   setFixedHeight(inclusive_zone_height_);
   setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
@@ -53,15 +53,15 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
   }
 
   qInfo() << "[INFO] Top Bar: Now initializing user info...";
-  ui->user_name_btn->setText(backend::UserInfo::GetUserName());
-  ui->avatar_btn->setIcon(
+  ui_->user_name_btn->setText(backend::UserInfo::GetUserName());
+  ui_->avatar_btn->setIcon(
     QIcon(backend::UserInfo::GetUserAvatarPath()));
 
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
 
 MainWindow::~MainWindow() {
-  delete ui;
+  delete ui_;
   qInfo() << "[ OK ] Top Bar: Successfully cleaned up main window.";
 }
 

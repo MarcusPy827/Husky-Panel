@@ -35,7 +35,7 @@ class MainWindow : public QWidget {
   ~MainWindow();
 
  private:
-  Ui::MainWindow * ui;
+  Ui::MainWindow * ui_;
   int inclusive_zone_height_ = 32;
 };
 
