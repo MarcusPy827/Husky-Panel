@@ -53,7 +53,11 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new
   }
 
   qInfo() << "[INFO] Top Bar: Now initializing user info...";
-  ui->user_name_display->setText(backend::UserInfo::GetUserName());
+  ui->user_name_btn->setText(backend::UserInfo::GetUserName());
+  ui->avatar_btn->setIcon(
+    QIcon(backend::UserInfo::GetUserAvatarPath()));
+
+  qInfo() << "[INFO] Top Bar: Initialization complete.";
 }
 
 MainWindow::~MainWindow() {

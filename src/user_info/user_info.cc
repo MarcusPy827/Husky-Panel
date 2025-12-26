@@ -17,6 +17,8 @@
 
 #include <QDBusInterface>
 #include <QDebug>
+#include <QFile>
+#include <QDir>
 #include <sys/types.h>
 #include <unistd.h>
 #include <pwd.h>
@@ -45,6 +47,40 @@ QString UserInfo::GetUserName() {
   qWarning() << "[WARN] User Info: Failed to get user display name from"
     << "D-Bus. Now falling back to login name...";
   result = QString::fromLocal8Bit(qgetenv("USER"));
+  return result;
+}
+
+QString UserInfo::GetUserAvatarPath() {
+  uid_t uid = getuid();
+  QString result;
+  QString user_path = QString("/org/freedesktop/Accounts/User%1").arg(uid);
+  QDBusInterface interface("org.freedesktop.Accounts", user_path,
+    "org.freedesktop.Accounts.User", QDBusConnection::systemBus());
+  if (interface.isValid()) {
+    QVariant avatar_read = interface.property("IconFile");
+    if (avatar_read.isValid() && !avatar_read.toString().isEmpty()) {
+      result = avatar_read.toString();
+      if (QFile::exists(result)) {
+        qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
+          << "D-Bus.";
+        return result;
+      }
+    }
+  }
+
+  qWarning() << "[WARN] User Info: Failed to get user avatar path from"
+    << "D-Bus. Now falling back to ~/.face.icon...";
+  QString user_home = QDir::homePath();
+  result = user_home + "/.face.icon";
+  if (QFile::exists(result)) {
+    qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
+      << "~/.face.icon.";
+    return result;
+  }
+
+  qCritical() << "[ERROR] User Info: Failed to get user avatar path from"
+    << "D-Bus and ~/.face.icon does not exist either, returning empty string.";
+  result = "";
   return result;
 }
 

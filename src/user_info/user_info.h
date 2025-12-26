@@ -26,6 +26,7 @@ namespace backend {
 class UserInfo {
  public:
   static QString GetUserName();
+  static QString GetUserAvatarPath();
 };
 
 }  // namespace backend
