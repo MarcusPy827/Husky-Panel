@@ -210,6 +210,28 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QPushButton" name="clock_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#clock_btn {
+  color: #cdd6f4;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}</string>
+       </property>
+       <property name="text">
+        <string>CLOCK INITIALIZING</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
