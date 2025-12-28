@@ -71,6 +71,8 @@ set(PROJECT_SOURCES
   src/application_services/application_services.cc
   src/clock/clock.h
   src/clock/clock.cc
+  src/battery_info/battery_info.h
+  src/battery_info/battery_info.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
@@ -106,6 +108,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     ${QM_FILES}
+    res/resources.qrc
   )
 else()
   if(ANDROID)
