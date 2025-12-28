@@ -84,16 +84,28 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dummy_install_path")
 add_subdirectory(lib/3rdparty/layer-shell-qt EXCLUDE_FROM_ALL)
 set(CMAKE_INSTALL_PREFIX ${OLD_INSTALL_PREFIX})
 
+set_source_files_properties(${TS_FILES}
+  PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/locales"
+)
+
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/locales")
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-  qt_add_executable(HuskyPanel
-    MANUAL_FINALIZATION
-    ${PROJECT_SOURCES}
-    src/quick_kde_su/quick_kde_su.h src/quick_kde_su/quick_kde_su.cc src/quick_kde_su/quick_kde_su.ui
-  )
-  
   qt_create_translation(QM_FILES 
     ${CMAKE_SOURCE_DIR} 
     ${TS_FILES}
+  )
+
+  set_source_files_properties(${QM_FILES} 
+    PROPERTIES 
+    QT_RESOURCE_PREFIX 
+    "/i18n"
+  )
+
+  qt_add_executable(HuskyPanel
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+    ${QM_FILES}
   )
 else()
   if(ANDROID)
@@ -107,6 +119,13 @@ else()
   endif()
 
   qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+endif()
+
+if(COMMAND qt_add_lupdate)
+  qt_add_lupdate(HuskyPanel
+    TS_FILES 
+    ${TS_FILES}
+  )
 endif()
 
 target_link_libraries(HuskyPanel 

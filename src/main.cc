@@ -25,12 +25,21 @@ int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
 
   QTranslator translator;
-  const QStringList uiLanguages = QLocale::system().uiLanguages();
-  for (const QString &locale : uiLanguages) {
-    const QString baseName = "HuskyPanel_" + QLocale(locale).name();
-    if (translator.load(":/i18n/" + baseName)) {
+  const QStringList ui_lang = QLocale::system().uiLanguages();
+  for (const QString &locale : ui_lang) {
+    const QString base_name = "HuskyPanel_" + QLocale(locale).name();
+    QString path = QCoreApplication::applicationDirPath() + "/locales/"
+      + base_name;
+    if (translator.load(base_name, QCoreApplication::applicationDirPath()
+        + "/locales/")) {
+      qInfo() << "[ OK ] Translator: Successfully loaded translation:"
+        << base_name;
       a.installTranslator(&translator);
       break;
+    } else {
+      qWarning() << "[WARN] Translator: Failed to load"
+        << base_name << "at" << QCoreApplication::applicationDirPath()
+        + "/locales/";
     }
   }
 
