@@ -75,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
 
 MainWindow::~MainWindow() {
   delete ui_;
+  delete quick_kde_su_panel_;
+  delete clock_updater_;
   qInfo() << "[ OK ] Top Bar: Successfully cleaned up main window.";
 }
 
