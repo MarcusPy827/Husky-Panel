@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>517</width>
     <height>300</height>
    </rect>
   </property>
@@ -211,6 +211,45 @@
       </spacer>
      </item>
      <item>
+      <widget class="QToolButton" name="battery_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#battery_btn {
+  color: #cdd6f4;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#battery_btn:hover {
+  color: #dc8a78;
+  background: transparent;
+  font-weight: bold;
+  border: 1px solid #dc8a78;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../res/resources.qrc">
+         <normaloff>:/icons/icons/3rdparty/material-symbols/bat_alert.svg</normaloff>:/icons/icons/3rdparty/material-symbols/bat_alert.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="clock_btn">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -236,6 +275,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../res/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

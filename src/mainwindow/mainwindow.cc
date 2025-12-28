@@ -17,11 +17,14 @@
 
 #include <QWindow>
 #include <QDebug>
+#include <QTimer>
 
 #include "src/mainwindow/mainwindow.h"
 #include "src/mainwindow/ui_mainwindow.h"
 #include "src/user_info/user_info.h"
 #include "src/application_services/application_services.h"
+#include "src/battery_info/battery_info.h"
+#include "src/utils/utils.h"
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
 namespace panel {
@@ -72,6 +75,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
   qInfo() << "[INFO] Top Bar: Initializing clock updater...";
   clock_updater_ = new backend::Clock(ui_->clock_btn);
 
+  qInfo() << "[INFO] Top Bar: Initializing internal updater...";
+  QTimer * timer = new QTimer(this);
+  connect(timer, &QTimer::timeout, this,
+    &MainWindow::UpdateBatteryPercentage);
+  timer->start(1000);
+
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
 
@@ -96,6 +105,44 @@ void MainWindow::TriggerQuickKDESUPanel() {
     quick_kde_su_panel_->move(screen_geometry_.left() + ui_->
       quick_kdesu_btn->x() - 9, 32);
   }
+}
+
+void MainWindow::UpdateBatteryPercentage() {
+  int battery_level = backend::BatteryInfo::GetBatteryLevel();
+  QString battery_icon_name;
+  switch (battery_level) {
+    case 0 ... 20:
+      battery_icon_name = "alert";
+      break;
+
+    case 21 ... 40:
+      battery_icon_name = "30";
+      break;
+
+    case 41 ... 50:
+      battery_icon_name = "40";
+      break;
+
+    case 51 ... 75:
+      battery_icon_name = "75";
+      break;
+
+    case 76 ... 90:
+      battery_icon_name = "80";
+      break;
+
+    case 91 ... 100:
+      battery_icon_name = "full";
+      break;
+
+    default:
+      battery_icon_name = "alert";
+      break;
+  }
+  QString icon_path = utils::Utils::TemplateCat(QStringLiteral(
+    """:/icons/icons/3rdparty/material-symbols/bat_%t1%.svg"""),
+    QList<QString>{battery_icon_name});
+  ui_->battery_btn->setIcon(QIcon(icon_path));
 }
 
 }  // namespace frontend

@@ -49,6 +49,7 @@ class MainWindow : public QWidget {
  private slots:
   void TriggerKRunner();
   void TriggerQuickKDESUPanel();
+  void UpdateBatteryPercentage();
 };
 
 }  // namespace frontend
