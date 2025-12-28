@@ -33,6 +33,7 @@ class Clock : public QObject {
   ~Clock();
 
  private:
+  QString GetTranslatedTheDayOfTheWeek(QString in);
   QTimer * clock_timer_ = nullptr;
   QPushButton * install_target_ = nullptr;
 

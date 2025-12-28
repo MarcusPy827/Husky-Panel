@@ -79,11 +79,24 @@ void Clock::UpdateTime() {
   }
 
   QString time_str_gen = current_hrs_str + ":" + current_timer.toString("mm")
-    + " " + is_afternoon_desc + "  "
-    + current_timer.toString(tr("yyyy-M-dd ddd"));
+    + " " + is_afternoon_desc + "  " + current_timer.toString(tr("yyyy-M-dd"))
+    + " " + GetTranslatedTheDayOfTheWeek(current_timer.toString("ddd"));
   if (install_target_ != nullptr) {
     install_target_->setText(time_str_gen);
   }
+}
+
+QString Clock::GetTranslatedTheDayOfTheWeek(QString in) {
+  static const QMap<QString, QString> translated = {
+    {"mon", tr("Mon.")},
+    {"tue", tr("Tue.")},
+    {"wed", tr("Wed.")},
+    {"thu", tr("Thu.")},
+    {"fri", tr("Fri.")},
+    {"sat", tr("Sat.")},
+    {"sun", tr("Sun.")}
+  };
+  return translated.value(in.toLower(), in);
 }
 
 }  // namespace backend
