@@ -50,47 +50,47 @@
         <location filename="../src/mainwindow/mainwindow.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="178"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>顶栏</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="103"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="180"/>
         <source>User Profile 1</source>
-        <translation type="unfinished"></translation>
+        <translation>用户资料1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="134"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="181"/>
         <source>Apps</source>
-        <translation type="unfinished"></translation>
+        <translation>应用程序</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="165"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="182"/>
         <source>KRunner</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="196"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="183"/>
         <source>KDESU</source>
-        <translation type="unfinished"></translation>
+        <translation>以SU身份执行</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="231"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="184"/>
         <source>CLOCK INITIALIZING</source>
-        <translation type="unfinished"></translation>
+        <translation>时钟正在初始化</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cc" line="33"/>
         <source>Top Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>顶栏</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cc" line="51"/>
         <source>Failed to get native window handle. Please check your session,</source>
-        <translation type="unfinished"></translation>
+        <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>
 </context>
 <context>
@@ -99,19 +99,19 @@
         <location filename="../src/quick_kde_su/quick_kde_su.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="147"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>KDESU快速面板</translation>
     </message>
     <message>
         <location filename="../src/quick_kde_su/quick_kde_su.ui" line="67"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="148"/>
         <source>Dolphin</source>
-        <translation type="unfinished"></translation>
+        <translation>文件管理</translation>
     </message>
     <message>
         <location filename="../src/quick_kde_su/quick_kde_su.ui" line="118"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="149"/>
         <source>Konsole</source>
-        <translation type="unfinished"></translation>
+        <translation>终端</translation>
     </message>
 </context>
 </TS>
