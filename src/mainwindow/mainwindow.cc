@@ -67,6 +67,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
   connect(ui_->quick_kdesu_btn, &QPushButton::clicked, this,
     &MainWindow::TriggerQuickKDESUPanel);
 
+  qInfo() << "[INFO] Top Bar: Initializing clock updater...";
+  clock_updater_ = new backend::Clock(ui_->clock_btn);
+
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
 }
 

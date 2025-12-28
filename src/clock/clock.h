@@ -15,43 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_MAINWINDOW_MAINWINDOW_H_
-#define SRC_MAINWINDOW_MAINWINDOW_H_
+#ifndef SRC_CLOCK_CLOCK_H_
+#define SRC_CLOCK_CLOCK_H_
 
-#include <QWidget>
-#include <QScreen>
-
-#include "src/quick_kde_su/quick_kde_su.h"
-#include "src/clock/clock.h"
+#include <QObject>
+#include <QPushButton>
+#include <QTimer>
 
 namespace panel {
-namespace frontend {
+namespace backend {
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QWidget {
+class Clock : public QObject {
   Q_OBJECT
 
  public:
-  explicit MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+  explicit Clock(QPushButton * target = nullptr);
+  ~Clock();
 
  private:
-  int inclusive_zone_height_ = 32;
-  QRect screen_geometry_ = qApp->primaryScreen()->geometry();
-
-  Ui::MainWindow * ui_;
-  QuickKDESU * quick_kde_su_panel_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
+  QTimer * clock_timer_ = nullptr;
+  QPushButton * install_target_ = nullptr;
 
  private slots:
-  void TriggerKRunner();
-  void TriggerQuickKDESUPanel();
+  void UpdateTime();
 };
 
-}  // namespace frontend
+}  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_MAINWINDOW_MAINWINDOW_H_
+#endif  // SRC_CLOCK_CLOCK_H_

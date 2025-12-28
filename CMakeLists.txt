@@ -69,6 +69,8 @@ set(PROJECT_SOURCES
   src/user_info/user_info.cc
   src/application_services/application_services.h
   src/application_services/application_services.cc
+  src/clock/clock.h
+  src/clock/clock.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
