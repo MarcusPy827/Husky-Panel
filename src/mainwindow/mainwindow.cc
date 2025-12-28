@@ -55,8 +55,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
 
   qInfo() << "[INFO] Top Bar: Now initializing user info...";
   ui_->user_name_btn->setText(backend::UserInfo::GetUserName());
+  ui_->user_name_btn->setVisible(false);
   ui_->avatar_btn->setIcon(
     QIcon(backend::UserInfo::GetUserAvatarPath()));
+  ui_->avatar_btn->setVisible(false);
 
   connect(ui_->krunner_btn, &QPushButton::clicked, this,
     &MainWindow::TriggerKRunner);
