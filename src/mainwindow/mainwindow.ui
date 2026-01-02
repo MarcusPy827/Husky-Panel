@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>517</width>
+    <width>583</width>
     <height>300</height>
    </rect>
   </property>
@@ -239,7 +239,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../res/resources.qrc">
-         <normaloff>:/icons/icons/3rdparty/material-symbols/wifi_3.svg</normaloff>:/icons/icons/3rdparty/material-symbols/wifi_3.svg</iconset>
+         <normaloff>:/icons/icons/3rdparty/material-symbols/wifi_off.svg</normaloff>:/icons/icons/3rdparty/material-symbols/wifi_off.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
