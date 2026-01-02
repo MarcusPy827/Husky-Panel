@@ -211,6 +211,45 @@
       </spacer>
      </item>
      <item>
+      <widget class="QToolButton" name="volume_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#volume_btn {
+  color: #cdd6f4;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#volume_btn:hover {
+  color: #89b4fa;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #89b4fa;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../res/resources.qrc">
+         <normaloff>:/icons/icons/3rdparty/material-symbols/volume_mute.svg</normaloff>:/icons/icons/3rdparty/material-symbols/volume_mute.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="wlan_btn">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">

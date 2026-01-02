@@ -15,5 +15,9 @@
     <file>icons/3rdparty/material-symbols/wifi_2.svg</file>
     <file>icons/3rdparty/material-symbols/wifi_full.svg</file>
     <file>icons/3rdparty/material-symbols/wifi_off.svg</file>
+    <file>icons/3rdparty/material-symbols/volume_full.svg</file>
+    <file>icons/3rdparty/material-symbols/volume_high.svg</file>
+    <file>icons/3rdparty/material-symbols/volume_low.svg</file>
+    <file>icons/3rdparty/material-symbols/volume_mute.svg</file>
   </qresource>
 </RCC>
