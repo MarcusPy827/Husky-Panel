@@ -15,28 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QDBusInterface>
-#include <QDebug>
+#ifndef SRC_WLAN_INFO_WLAN_INFO_H_
+#define SRC_WLAN_INFO_WLAN_INFO_H_
+#define WI_WIFI_TYPE 2
 
-#include "src/battery_info/battery_info.h"
-#include "src/utils/dbus_def.h"
+#include <QString>
 
 namespace panel {
 namespace backend {
 
-int BatteryInfo::GetBatteryLevel() {
-  QDBusInterface interface(DBUS_UPOWER_SERVICE,
-    DBUS_UPOWER_DISPLAY_SERVICE_PATH, DBUS_UPOWER_DEVICE_INTERFACE,
-    QDBusConnection::systemBus());
-
-  if (!interface.isValid()) {
-    qCritical() << "[ERROR] Battery Info: Failed to connect to UPower D-Bus"
-      << "interface.";
-    return -1;
-  }
-  QVariant percentage = interface.property("Percentage");
-  return percentage.toInt();
-}
+class WlanInfo {
+ public:
+  static int GetWlanSignalStrength();
+};
 
 }  // namespace backend
 }  // namespace panel
+
+#endif  // SRC_WLAN_INFO_WLAN_INFO_H_

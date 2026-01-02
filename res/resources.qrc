@@ -10,5 +10,10 @@
     <file>icons/3rdparty/material-symbols/bat_charging.svg</file>
     <file>icons/3rdparty/material-symbols/bat_full.svg</file>
     <file>icons/3rdparty/material-symbols/bat_75.svg</file>
+    <file>icons/3rdparty/material-symbols/wifi_1.svg</file>
+    <file>icons/3rdparty/material-symbols/wifi_3.svg</file>
+    <file>icons/3rdparty/material-symbols/wifi_2.svg</file>
+    <file>icons/3rdparty/material-symbols/wifi_full.svg</file>
+    <file>icons/3rdparty/material-symbols/wifi_off.svg</file>
   </qresource>
 </RCC>

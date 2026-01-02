@@ -24,6 +24,7 @@
 #include <pwd.h>
 
 #include "src/user_info/user_info.h"
+#include "src/utils/dbus_def.h"
 
 namespace panel {
 namespace backend {
@@ -32,8 +33,8 @@ QString UserInfo::GetUserName() {
   uid_t uid = getuid();
   QString result = "User Profile 1";
   QString user_path = QString("/org/freedesktop/Accounts/User%1").arg(uid);
-  QDBusInterface interface("org.freedesktop.Accounts", user_path,
-    "org.freedesktop.Accounts.User", QDBusConnection::systemBus());
+  QDBusInterface interface(DBUS_ACCOUNTS_SERVICE, user_path,
+    DBUS_ACCOUNTS_USER_INTERFACE, QDBusConnection::systemBus());
   if (interface.isValid()) {
     QVariant name_read = interface.property("RealName");
     if (name_read.isValid() && !name_read.toString().isEmpty()) {
@@ -54,8 +55,8 @@ QString UserInfo::GetUserAvatarPath() {
   uid_t uid = getuid();
   QString result;
   QString user_path = QString("/org/freedesktop/Accounts/User%1").arg(uid);
-  QDBusInterface interface("org.freedesktop.Accounts", user_path,
-    "org.freedesktop.Accounts.User", QDBusConnection::systemBus());
+  QDBusInterface interface(DBUS_ACCOUNTS_SERVICE, user_path,
+    DBUS_ACCOUNTS_USER_INTERFACE, QDBusConnection::systemBus());
   if (interface.isValid()) {
     QVariant avatar_read = interface.property("IconFile");
     if (avatar_read.isValid() && !avatar_read.toString().isEmpty()) {

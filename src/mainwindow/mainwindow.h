@@ -50,6 +50,7 @@ class MainWindow : public QWidget {
   void TriggerKRunner();
   void TriggerQuickKDESUPanel();
   void UpdateBatteryPercentage();
+  void UpdateWlanSignalStrength();
 };
 
 }  // namespace frontend

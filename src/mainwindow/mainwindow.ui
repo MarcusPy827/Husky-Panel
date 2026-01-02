@@ -211,6 +211,45 @@
       </spacer>
      </item>
      <item>
+      <widget class="QToolButton" name="wlan_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#wlan_btn {
+  color: #cdd6f4;
+  font-weight: bold;
+  border: 0px solid #89dceb;
+}
+
+#wlan_btn:hover {
+  color: #89b4fa;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #89b4fa;
+  border-radius: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../res/resources.qrc">
+         <normaloff>:/icons/icons/3rdparty/material-symbols/wifi_3.svg</normaloff>:/icons/icons/3rdparty/material-symbols/wifi_3.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="battery_btn">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -227,10 +266,11 @@
 }
 
 #battery_btn:hover {
-  color: #dc8a78;
+  color: #89b4fa;
   background: transparent;
+  font-size: 16px;
   font-weight: bold;
-  border: 1px solid #dc8a78;
+  border: 1px solid #89b4fa;
   border-radius: 5px;
 }</string>
        </property>

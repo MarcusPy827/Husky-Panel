@@ -24,6 +24,7 @@
 #include "src/user_info/user_info.h"
 #include "src/application_services/application_services.h"
 #include "src/battery_info/battery_info.h"
+#include "src/wlan_info/wlan_info.h"
 #include "src/utils/utils.h"
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
@@ -79,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
   QTimer * timer = new QTimer(this);
   connect(timer, &QTimer::timeout, this,
     &MainWindow::UpdateBatteryPercentage);
+  connect(timer, &QTimer::timeout, this,
+    &MainWindow::UpdateWlanSignalStrength);
   timer->start(1000);
 
   qInfo() << "[ OK ] Top Bar: Initialization complete.";
@@ -128,7 +131,7 @@ void MainWindow::UpdateBatteryPercentage() {
       break;
 
     case 76 ... 90:
-      battery_icon_name = "80";
+      battery_icon_name = "90";
       break;
 
     case 91 ... 100:
@@ -143,6 +146,40 @@ void MainWindow::UpdateBatteryPercentage() {
     """:/icons/icons/3rdparty/material-symbols/bat_%t1%.svg"""),
     QList<QString>{battery_icon_name});
   ui_->battery_btn->setIcon(QIcon(icon_path));
+}
+
+void MainWindow::UpdateWlanSignalStrength() {
+  int signal_strength = backend::WlanInfo::GetWlanSignalStrength();
+  QString wlan_icon_name;
+  switch (signal_strength) {
+    case -1:
+      wlan_icon_name = "off";
+      break;
+
+    case 0 ... 25:
+      wlan_icon_name = "1";
+      break;
+
+    case 26 ... 50:
+      wlan_icon_name = "2";
+      break;
+
+    case 51 ... 75:
+      wlan_icon_name = "3";
+      break;
+
+    case 76 ... 100:
+      wlan_icon_name = "4";
+      break;
+
+    default:
+      wlan_icon_name = "0";
+      break;
+  }
+  QString icon_path = utils::Utils::TemplateCat(QStringLiteral(
+    """:/icons/icons/3rdparty/material-symbols/wifi_%t1%.svg"""),
+    QList<QString>{wlan_icon_name});
+  ui_->wlan_btn->setIcon(QIcon(icon_path));
 }
 
 }  // namespace frontend

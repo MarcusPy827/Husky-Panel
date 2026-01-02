@@ -73,8 +73,11 @@ set(PROJECT_SOURCES
   src/clock/clock.cc
   src/battery_info/battery_info.h
   src/battery_info/battery_info.cc
+  src/wlan_info/wlan_info.h
+  src/wlan_info/wlan_info.cc
   src/utils/utils.h
   src/utils/utils.cc
+  src/utils/dbus_def.h
 )
 
 # Switch off testing to accelerate 3rdparty builds

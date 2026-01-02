@@ -25,13 +25,14 @@
 #include <pwd.h>
 
 #include "src/application_services/application_services.h"
+#include "src/utils/dbus_def.h"
 
 namespace panel {
 namespace backend {
 
 void ApplicationServices::GetKRunner() {
-  QDBusInterface interface("org.kde.krunner", "/App", "org.kde.krunner.App",
-    QDBusConnection::sessionBus());
+  QDBusInterface interface(DBUS_KRUNNER_SERVICE, DBUS_KRUNNER_APP_PATH,
+    DBUS_KRUNNER_APP_INTERFACE, QDBusConnection::sessionBus());
 
   if (!interface.isValid()) {
     qWarning() << "[WARN] Application services: Failed to connect to KRunner"
