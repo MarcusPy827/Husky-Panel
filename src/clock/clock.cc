@@ -79,7 +79,8 @@ void Clock::UpdateTime() {
   }
 
   QString time_str_gen = current_hrs_str + ":" + current_timer.toString("mm")
-    + " " + is_afternoon_desc + "  " + current_timer.toString(tr("yyyy-M-dd"))
+    + " " + is_afternoon_desc + "  " + current_timer.toString(tr("yyyy-M-"))
+    + GetOptimizedDateString(current_timer.toString(tr("dd")))
     + " " + GetTranslatedTheDayOfTheWeek(current_timer.toString("ddd"));
   if (install_target_ != nullptr) {
     install_target_->setText(time_str_gen);
@@ -97,6 +98,14 @@ QString Clock::GetTranslatedTheDayOfTheWeek(QString in) {
     {"sun", tr("Sun.")}
   };
   return translated.value(in.toLower(), in);
+}
+
+QString Clock::GetOptimizedDateString(QString in) {
+  QString result = in;
+  if (result.startsWith('0')) {
+    result = result.mid(1);
+  }
+  return result;
 }
 
 }  // namespace backend

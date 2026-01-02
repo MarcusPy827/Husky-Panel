@@ -4,42 +4,51 @@
 <context>
     <name>panel::backend::Clock</name>
     <message>
-        <location filename="../src/clock/clock.cc" line="82"/>
         <source>yyyy-M-dd</source>
-        <translation>yyyy年M月dd日</translation>
+        <translation type="vanished">yyyy年M月dd日</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="91"/>
+        <location filename="../src/clock/clock.cc" line="82"/>
+        <source>yyyy-M-</source>
+        <translation>yyyy年M月</translation>
+    </message>
+    <message>
+        <location filename="../src/clock/clock.cc" line="83"/>
+        <source>dd</source>
+        <translation>dd日</translation>
+    </message>
+    <message>
+        <location filename="../src/clock/clock.cc" line="92"/>
         <source>Mon.</source>
         <translation>星期一</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="92"/>
+        <location filename="../src/clock/clock.cc" line="93"/>
         <source>Tue.</source>
         <translation>星期二</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="93"/>
+        <location filename="../src/clock/clock.cc" line="94"/>
         <source>Wed.</source>
         <translation>星期三</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="94"/>
+        <location filename="../src/clock/clock.cc" line="95"/>
         <source>Thu.</source>
         <translation>星期四</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="95"/>
+        <location filename="../src/clock/clock.cc" line="96"/>
         <source>Fri.</source>
         <translation>星期五</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="96"/>
+        <location filename="../src/clock/clock.cc" line="97"/>
         <source>Sat.</source>
         <translation>星期六</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="97"/>
+        <location filename="../src/clock/clock.cc" line="98"/>
         <source>Sun.</source>
         <translation>星期日</translation>
     </message>

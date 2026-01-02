@@ -34,6 +34,7 @@ class Clock : public QObject {
 
  private:
   QString GetTranslatedTheDayOfTheWeek(QString in);
+  QString GetOptimizedDateString(QString in);
   QTimer * clock_timer_ = nullptr;
   QPushButton * install_target_ = nullptr;
 
