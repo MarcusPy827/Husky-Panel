@@ -169,7 +169,7 @@ void MainWindow::UpdateWlanSignalStrength() {
       break;
 
     case 76 ... 100:
-      wlan_icon_name = "4";
+      wlan_icon_name = "full";
       break;
 
     default:
