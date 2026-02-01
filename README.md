@@ -18,6 +18,14 @@ sudo zypper in wayland-devel \
   libxkbcommon-devel
 ```
 
+在Archlinux上：
+On Archlinux: 
+```bash
+# 注意：请使用Qt6以及Plasma 6
+# Note: Do use Qt6 and Plasma 6
+sudo pacman -S wayland wayland-protocols extra-cmake-modules libxkbcommon
+```
+
 托了KDE的福，我们已经在`lib/3rdparty/layer-shell-qt`集成了`Layershell-Qt`库！！
 
 Luckily, the `Layershell-Qt` library has been vendored to `lib/3rdparty/layer-shell-qt`, thanks KDE for the awsome library!!
