@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AppDrawerBtn</name>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer_btn.cc" line="40"/>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Clock</name>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="82"/>

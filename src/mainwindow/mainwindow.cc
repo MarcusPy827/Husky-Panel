@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_left_ = new QHBoxLayout();
     slot_left_->setContentsMargins(0, 0, 0, 0);
     slot_left_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_left_->setSpacing(0);
+    slot_left_->setSpacing(8);
   }
   bar_layout->addLayout(slot_left_);
 
@@ -99,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_middle_ = new QHBoxLayout();
     slot_middle_->setContentsMargins(0, 0, 0, 0);
     slot_middle_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_middle_->setSpacing(0);
+    slot_middle_->setSpacing(8);
   }
   bar_layout->addLayout(slot_middle_);
 
@@ -111,7 +111,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_right_ = new QHBoxLayout();
     slot_right_->setContentsMargins(0, 0, 0, 0);
     slot_right_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_right_->setSpacing(0);
+    slot_right_->setSpacing(8);
   }
   bar_layout->addLayout(slot_right_);
 
@@ -182,6 +182,12 @@ void MainWindow::LoadLeftSlot() {
     LOG(INFO) << absl::StrCat("Now loading application indicator...");
     app_indicator_ = new AppIndicator();
     slot_left_->addWidget(app_indicator_);
+  }
+
+  if (app_drawer_btn_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading application drawer...");
+    app_drawer_btn_ = new AppDrawerBtn();
+    slot_left_->addWidget(app_drawer_btn_);
   }
 }
 

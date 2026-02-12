@@ -15,32 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_CLOCK_BTN_CLOCK_BTN_H_
-#define SRC_COMPONENTS_CLOCK_BTN_CLOCK_BTN_H_
+#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
 
 #include <memory>
 #include <QWidget>
 #include <QPushButton>
 
-#include "src/info_server/clock/clock.h"
-
 namespace panel {
 namespace frontend {
 
-class ClockBtn : public QWidget {
+class AppDrawerBtn : public QWidget {
   Q_OBJECT
 
  public:
-  explicit ClockBtn(QWidget *parent = nullptr);
-  ~ClockBtn();
+  explicit AppDrawerBtn(QWidget *parent = nullptr);
+  ~AppDrawerBtn();
   QPushButton * GetBtn();
 
  private:
   QPushButton * btn_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_CLOCK_BTN_CLOCK_BTN_H_
+#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
