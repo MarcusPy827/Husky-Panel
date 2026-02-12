@@ -15,8 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#ifndef SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
+#define SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
 
 #include <QWidget>
 #include <QPushButton>
@@ -24,19 +24,22 @@
 namespace panel {
 namespace frontend {
 
-class AppDrawerBtn : public QWidget {
+class KRunnerBtn : public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppDrawerBtn(QWidget *parent = nullptr);
-  ~AppDrawerBtn();
+  explicit KRunnerBtn(QWidget *parent = nullptr);
+  ~KRunnerBtn();
   QPushButton * GetBtn();
 
  private:
   QPushButton * btn_ = nullptr;
+
+ private slots:
+  void ToggleKRunner();
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#endif  // SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_

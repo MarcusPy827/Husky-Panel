@@ -189,6 +189,12 @@ void MainWindow::LoadLeftSlot() {
     app_drawer_btn_ = new AppDrawerBtn();
     slot_left_->addWidget(app_drawer_btn_);
   }
+
+  if (krunner_btn_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading KRunner toggler...");
+    krunner_btn_ = new KRunnerBtn();
+    slot_left_->addWidget(krunner_btn_);
+  }
 }
 
 void MainWindow::LoadMiddleSlot() {

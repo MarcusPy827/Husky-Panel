@@ -107,6 +107,8 @@ set(COMMON_SOURCES
   src/components/clock_btn/clock_btn.cc
   src/components/app_drawer/app_drawer_btn.h
   src/components/app_drawer/app_drawer_btn.cc
+  src/components/krunner_btn/krunner_btn.h
+  src/components/krunner_btn/krunner_btn.cc
   src/info_server/current_window/current_window_provider.h
   src/info_server/current_window/current_window_provider_factory.h
   src/info_server/current_window/current_window_provider_factory.cc

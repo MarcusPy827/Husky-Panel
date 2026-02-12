@@ -119,6 +119,14 @@
     </message>
 </context>
 <context>
+    <name>KRunnerBtn</name>
+    <message>
+        <location filename="../src/components/krunner_btn/krunner_btn.cc" line="43"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="63"/>
