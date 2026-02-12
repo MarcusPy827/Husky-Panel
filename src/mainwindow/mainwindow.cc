@@ -17,6 +17,7 @@
 
 #include <QWindow>
 #include <QDebug>
+#include <QHBoxLayout>
 #include <QTimer>
 
 #include "src/mainwindow/mainwindow.h"
@@ -26,6 +27,7 @@
 #include "src/battery_info/battery_info.h"
 #include "src/wlan_info/wlan_info.h"
 #include "src/utils/utils.h"
+
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
 namespace panel {
@@ -55,6 +57,17 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui_(new
     qFatal() << tr(
       "Failed to get native window handle. Please check your session,");
     return;
+  }
+
+  QHBoxLayout * widget_slot_front_layout = new QHBoxLayout();
+  widget_slot_front_layout->setContentsMargins(0, 0, 0, 0);
+  widget_slot_front_layout->setSpacing(8);
+  ui_->widget_slot_front->setLayout(widget_slot_front_layout);
+
+  if (app_indicator_ == nullptr) {
+    qInfo() << "[INFO] Top Bar: Initializing app indicator...";
+    app_indicator_ = new AppIndicator();
+    widget_slot_front_layout->addWidget(app_indicator_);
   }
 
   qInfo() << "[INFO] Top Bar: Now initializing user info...";

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,47 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_MAINWINDOW_MAINWINDOW_H_
-#define SRC_MAINWINDOW_MAINWINDOW_H_
+#ifndef SRC_COMPONENTS_APP_INDICATOR_APP_INDICATOR_H_
+#define SRC_COMPONENTS_APP_INDICATOR_APP_INDICATOR_H_
 
+#include <memory>
 #include <QWidget>
-#include <QScreen>
+#include <QLabel>
 
-#include "src/quick_kde_su/quick_kde_su.h"
-#include "src/clock/clock.h"
-#include "src/components/app_indicator/app_indicator.h"
+#include "src/info_server/current_window/current_window_provider_factory.h"
+#include "src/info_server/current_window/current_window_provider.h"
 
 namespace panel {
 namespace frontend {
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QWidget {
+class AppIndicator : public QWidget {
   Q_OBJECT
 
  public:
-  explicit MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+  explicit AppIndicator(QWidget *parent = nullptr);
+  ~AppIndicator();
 
  private:
-  int inclusive_zone_height_ = 32;
-  QRect screen_geometry_ = qApp->primaryScreen()->geometry();
-
-  Ui::MainWindow * ui_;
-  AppIndicator * app_indicator_ = nullptr;
-  QuickKDESU * quick_kde_su_panel_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
+  QLabel * app_name_ = nullptr;
+  QLabel * app_package_name_ = nullptr;
+  std::unique_ptr<backend::CurrentWindowProvider>
+    current_window_info_ = nullptr;
 
  private slots:
-  void TriggerKRunner();
-  void TriggerQuickKDESUPanel();
-  void UpdateBatteryPercentage();
-  void UpdateWlanSignalStrength();
+  void OnCurrentWindowChanged();
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_MAINWINDOW_MAINWINDOW_H_
+#endif  // SRC_COMPONENTS_APP_INDICATOR_APP_INDICATOR_H_

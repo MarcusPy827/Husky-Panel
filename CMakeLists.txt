@@ -78,6 +78,15 @@ set(PROJECT_SOURCES
   src/utils/utils.h
   src/utils/utils.cc
   src/utils/dbus_def.h
+  src/components/app_indicator/app_indicator.h
+  src/components/app_indicator/app_indicator.cc
+  src/info_server/current_window/current_window_provider.h
+  src/info_server/current_window/current_window_provider_factory.h
+  src/info_server/current_window/current_window_provider_factory.cc
+  src/info_server/current_window/current_window_kwin_impl.h
+  src/info_server/current_window/current_window_kwin_impl.cc
+  src/info_server/current_window/current_window_null_impl.h
+  src/info_server/current_window/current_window_null_impl.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
