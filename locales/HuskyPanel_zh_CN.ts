@@ -10,6 +10,160 @@
     </message>
 </context>
 <context>
+    <name>FramelessWindow</name>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="15"/>
+        <source>QWindowKit QtQuick Demo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="163"/>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="171"/>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="177"/>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="186"/>
+        <source>Special effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="195"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="209"/>
+        <source>DWM blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="222"/>
+        <source>Acrylic material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="235"/>
+        <source>Mica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="248"/>
+        <source>Mica Alt</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="63"/>
+        <source>Example MainWindow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="144"/>
+        <source>File(&amp;F)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="145"/>
+        <source>New(&amp;N)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="146"/>
+        <source>Open(&amp;O)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="149"/>
+        <source>Edit(&amp;E)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="150"/>
+        <source>Undo(&amp;U)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="151"/>
+        <source>Redo(&amp;R)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="154"/>
+        <source>Enable dark theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="164"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="169"/>
+        <source>Enable DWM blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="173"/>
+        <source>Enable acrylic material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="177"/>
+        <source>Enable mica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="181"/>
+        <source>Enable mica alt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="218"/>
+        <source>Dark blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="230"/>
+        <source>Light blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="242"/>
+        <source>No blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="261"/>
+        <source>Settings(&amp;S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/main.qml" line="33"/>
+        <source>Open Child Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../lib/3rdparty/qwindowkit/examples/qml/main.qml" line="38"/>
+        <source>Open Drawer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>panel::backend::Clock</name>
     <message>
         <source>yyyy-M-dd</source>
