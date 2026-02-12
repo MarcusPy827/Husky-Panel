@@ -24,7 +24,7 @@
 
 #include "src/font_loader/font_loader.h"
 
-namespace flake {
+namespace panel {
 namespace loader {
 
 QFont FontLoader::GetOutlinedMaterialSymbolFont() {
@@ -71,4 +71,4 @@ QFont FontLoader::GetSharpMaterialSymbolFont() {
 }
 
 }  // namespace loader
-}  // namespace flake
+}  // namespace panel

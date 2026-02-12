@@ -24,7 +24,7 @@
 
 #include "src/theme_loader/theme_conf.h"
 
-namespace flake {
+namespace panel {
 namespace loader {
 
 class ThemeLoader: public QObject {
@@ -44,6 +44,6 @@ class ThemeLoader: public QObject {
 };
 
 }  // namespace loader
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_THEME_LOADER_THEME_LOADER_H_

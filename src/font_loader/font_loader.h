@@ -21,7 +21,7 @@
 #include <QFont>
 #include <QFontDatabase>
 
-namespace flake {
+namespace panel {
 namespace loader {
 
 class FontLoader {
@@ -42,6 +42,6 @@ class FontLoader {
 };
 
 }  // namespace loader
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_FONT_LOADER_FONT_LOADER_H_

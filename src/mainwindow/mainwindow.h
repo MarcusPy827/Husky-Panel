@@ -20,17 +20,15 @@
 
 #include <QWidget>
 #include <QScreen>
+#include <QHBoxLayout>
 
 #include "src/quick_kde_su/quick_kde_su.h"
 #include "src/clock/clock.h"
 #include "src/components/app_indicator/app_indicator.h"
+#include "src/theme_loader/theme_loader.h"
 
 namespace panel {
 namespace frontend {
-
-namespace Ui {
-class MainWindow;
-}
 
 class MainWindow : public QWidget {
   Q_OBJECT
@@ -40,10 +38,19 @@ class MainWindow : public QWidget {
   ~MainWindow();
 
  private:
+  void LoadLeftSlot();
+  void LoadMiddleSlot();
+  void LoadRightSlot();
+  void HandleTheme();
   int inclusive_zone_height_ = 32;
   QRect screen_geometry_ = qApp->primaryScreen()->geometry();
 
-  Ui::MainWindow * ui_;
+  QWidget * base_layer_ = nullptr;
+  QHBoxLayout * slot_left_ = nullptr;
+  QHBoxLayout * slot_middle_ = nullptr;
+  QHBoxLayout * slot_right_ = nullptr;
+
+  loader::ThemeLoader * theme_loader_ = nullptr;
   AppIndicator * app_indicator_ = nullptr;
   QuickKDESU * quick_kde_su_panel_ = nullptr;
   backend::Clock * clock_updater_ = nullptr;

@@ -20,7 +20,7 @@
 
 #include "src/utils/strings/strings.h"
 
-namespace flake {
+namespace panel {
 namespace utils {
 
 QString Strings::TemplateCat(QString original, QList<QString> args) {
@@ -34,4 +34,4 @@ QString Strings::TemplateCat(QString original, QList<QString> args) {
 }
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel

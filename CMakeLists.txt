@@ -102,6 +102,7 @@ set(COMMON_SOURCES
   src/utils/utils.h
   src/utils/utils.cc
   src/utils/dbus_def.h
+  src/components/app_indicator/app_indicator_style.h
   src/components/app_indicator/app_indicator.h
   src/components/app_indicator/app_indicator.cc
   src/info_server/current_window/current_window_provider.h

@@ -20,6 +20,11 @@
 #include <QDBusReply>
 #include <QDBusMessage>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/current_window/current_window_kwin_impl.h"
 #include "src/utils/dbus_def.h"
 
@@ -30,24 +35,28 @@ CurrentWindowKwinImpl::CurrentWindowKwinImpl(QObject *parent) :
     CurrentWindowProvider(parent) {
   QDBusConnection bus = QDBusConnection::sessionBus();
   if (!bus.registerService(DBUS_CUSTOM_KWIN_WINDOW_SERVICE)) {
-    qCritical() << "[ERROR] Cannot regester D-Bus service: "
-      << bus.lastError().message();
+    LOG(ERROR) << absl::StrCat("Cannot register D-Bus service: ",
+      bus.lastError().message().toStdString());
+    return;
   }
 
   if (!bus.registerObject(DBUS_CUSTOM_KWIN_WINDOW_PATH, this,
       QDBusConnection::ExportAllSlots)) {
-    qCritical() << "[ERROR] Cannot regester D-Bus object: "
-      << bus.lastError().message();
+    LOG(ERROR) << absl::StrCat("Cannot register D-Bus object: ",
+      bus.lastError().message().toStdString());
+    return;
   }
+
+  LOG(INFO) << absl::StrCat("App Indicator D-Bus service is up!!");
 }
 
 CurrentWindowKwinImpl::~CurrentWindowKwinImpl() {
-  qInfo() << "[INFO] CurrentWindowKwinImpl: CurrentWindowKwinImpl is being"
-    << "deleted.";
+  LOG(INFO) << absl::StrCat("CurrentWindowKwinImpl is being deleted...");
 }
 
 void CurrentWindowKwinImpl::UpdateActiveApp(QString name, QString appid,
     QString title) {
+  LOG(INFO) << absl::StrCat("Detected active window changed!!");
   KService::Ptr service = KService::serviceByDesktopName(name);
   if (!service) {
     service = KService::serviceByDesktopName(appid.toLower());
