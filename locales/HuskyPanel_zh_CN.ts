@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AppIndicator</name>
+    <message>
+        <location filename="../src/components/app_indicator/app_indicator.cc" line="35"/>
+        <source>INITIALIZING</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>panel::backend::Clock</name>
     <message>
         <source>yyyy-M-dd</source>
@@ -57,47 +65,47 @@
     <name>panel::frontend::MainWindow</name>
     <message>
         <location filename="../src/mainwindow/mainwindow.ui" line="14"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="262"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="277"/>
         <source>Form</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="103"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="264"/>
+        <location filename="../src/mainwindow/mainwindow.ui" line="125"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="279"/>
         <source>User Profile 1</source>
         <translation>用户资料1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="134"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="265"/>
+        <location filename="../src/mainwindow/mainwindow.ui" line="156"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="280"/>
         <source>Apps</source>
         <translation>应用程序</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="165"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="266"/>
+        <location filename="../src/mainwindow/mainwindow.ui" line="187"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="281"/>
         <source>KRunner</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="196"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="267"/>
+        <location filename="../src/mainwindow/mainwindow.ui" line="218"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="282"/>
         <source>KDESU</source>
         <translation>以SU身份执行</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="349"/>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="271"/>
+        <location filename="../src/mainwindow/mainwindow.ui" line="371"/>
+        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="286"/>
         <source>CLOCK INITIALIZING</source>
         <translation>时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="37"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="39"/>
         <source>Top Panel</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="55"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="57"/>
         <source>Failed to get native window handle. Please check your session,</source>
         <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>
