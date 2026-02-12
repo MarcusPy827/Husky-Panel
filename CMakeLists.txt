@@ -34,6 +34,11 @@ find_package(QT
 
 find_package(KF6Service REQUIRED)
 
+add_subdirectory(lib/3rdparty/abseil-cpp)
+add_subdirectory(lib/3rdparty/gtest)
+add_subdirectory(lib/3rdparty/qwindowkit)
+add_subdirectory(cmake/material-color-utils)
+
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
   Widgets 
@@ -58,9 +63,26 @@ set(TS_FILES
   locales/HuskyPanel_zh_CN.ts
 )
 
-set(PROJECT_SOURCES
+set(MATERIAL_DESIGN_DEPS
+  res/resources.qrc
+  src/utils/log/log.h
+  src/utils/log/log.cc
+  src/utils/strings/strings.h
+  src/utils/strings/strings.cc
+  src/utils/colors/colors.h
+  src/utils/colors/colors.cc
+  src/utils/color_palette_wrapper/color_palette_wrapper.h
+  src/utils/color_palette_wrapper/color_palette_wrapper.cc
+  src/theme_loader/theme_conf.h
+  src/theme_loader/theme_loader.h
+  src/theme_loader/theme_loader.cc
+  src/font_loader/font_loader.h
+  src/font_loader/font_loader.cc
+)
+
+set(COMMON_SOURCES
   ${TS_FILES}
-  src/main.cc
+  ${MATERIAL_DESIGN_DEPS}
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
   src/mainwindow/mainwindow.ui
@@ -89,6 +111,11 @@ set(PROJECT_SOURCES
   src/info_server/current_window/current_window_kwin_impl.cc
   src/info_server/current_window/current_window_null_impl.h
   src/info_server/current_window/current_window_null_impl.cc
+)
+
+set(PROJECT_SOURCES
+  ${COMMON_SOURCES}
+  src/main.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
@@ -154,6 +181,18 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
   LayerShellQtInterface
+  absl::strings
+  absl::flat_hash_map
+  absl::raw_logging_internal
+  absl::optional
+  absl::log
+  absl::log_initialize
+  MaterialColorUtils
+)
+
+target_link_libraries(HuskyPanel
+  PUBLIC 
+  QWindowKit::Widgets
 )
 
 include(GNUInstallDirs)
@@ -166,6 +205,26 @@ install(TARGETS
 
 if(QT_VERSION_MAJOR EQUAL 6)
   qt_finalize_executable(HuskyPanel)
+endif()
+
+include(CTest)
+if(BUILD_TESTING)
+  add_executable(HuskyPanelTest
+    ${COMMON_SOURCES}
+    src/utils/color_palette_wrapper/color_palette_wrapper_test.cc
+  )
+  target_link_libraries(HuskyPanelTest PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets 
+    QWindowKit::Widgets
+    absl::base
+    absl::log
+    absl::log_initialize
+    GTest::gtest_main
+    MaterialColorUtils
+  )
+
+  include(GoogleTest)
+  gtest_discover_tests(HuskyPanelTest)
 endif()
 
 target_include_directories(HuskyPanel PRIVATE ${PROJECT_SOURCE_DIR})
