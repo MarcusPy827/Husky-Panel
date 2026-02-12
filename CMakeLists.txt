@@ -24,13 +24,15 @@ pkg_check_modules(WaylandClient
 )
 
 find_package(QT 
-  NAMES Qt6 Qt5 
+  NAMES Qt6 
   REQUIRED COMPONENTS 
   Widgets 
   LinguistTools
   WaylandClient
   DBus
 )
+
+find_package(KF6Service REQUIRED)
 
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
@@ -78,6 +80,15 @@ set(PROJECT_SOURCES
   src/utils/utils.h
   src/utils/utils.cc
   src/utils/dbus_def.h
+  src/components/app_indicator/app_indicator.h
+  src/components/app_indicator/app_indicator.cc
+  src/info_server/current_window/current_window_provider.h
+  src/info_server/current_window/current_window_provider_factory.h
+  src/info_server/current_window/current_window_provider_factory.cc
+  src/info_server/current_window/current_window_kwin_impl.h
+  src/info_server/current_window/current_window_kwin_impl.cc
+  src/info_server/current_window/current_window_null_impl.h
+  src/info_server/current_window/current_window_null_impl.cc
 )
 
 # Switch off testing to accelerate 3rdparty builds
@@ -141,6 +152,7 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
+  KF6::Service
   LayerShellQtInterface
 )
 

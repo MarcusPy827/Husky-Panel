@@ -19,18 +19,22 @@
 #ifndef SRC_UTILS_DBUS_DEF_H_
 #define SRC_UTILS_DBUS_DEF_H_
 
+// Battery Info
 #define DBUS_UPOWER_SERVICE "org.freedesktop.UPower"
 #define DBUS_UPOWER_DISPLAY_SERVICE_PATH \
   "/org/freedesktop/UPower/devices/DisplayDevice"
 #define DBUS_UPOWER_DEVICE_INTERFACE "org.freedesktop.UPower.Device"
 
+// KDE KRunner
 #define DBUS_KRUNNER_SERVICE "org.kde.krunner"
 #define DBUS_KRUNNER_APP_PATH "/App"
 #define DBUS_KRUNNER_APP_INTERFACE "org.kde.krunner.App"
 
+// User Info
 #define DBUS_ACCOUNTS_SERVICE "org.freedesktop.Accounts"
 #define DBUS_ACCOUNTS_USER_INTERFACE "org.freedesktop.Accounts.User"
 
+// WLAN
 #define DBUS_NETWORK_MANAGER_SERVICE "org.freedesktop.NetworkManager"
 #define DBUS_NETWORK_MANAGER_PATH "/org/freedesktop/NetworkManager"
 #define DBUS_NETWORK_MANAGER_INTERFACE "org.freedesktop.NetworkManager"
@@ -40,5 +44,12 @@
   "org.freedesktop.NetworkManager.Device.Wireless"
 #define DBUS_NETWORK_MANAGER_ACCESS_POINT_INTERFACE \
   "org.freedesktop.NetworkManager.AccessPoint"
+
+// Current Window Info (KWin)
+#define DBUS_KWIN_SERVICE "org.kde.KWin"
+#define DBUS_CUSTOM_KWIN_WINDOW_SERVICE "marcus.panel.util.AppBridge"
+#define DBUS_CUSTOM_KWIN_WINDOW_PATH "/AppBridge"
+#define DBUS_CUSTOM_KWIN_WINDOW_INTERFACE "marcus.panel.util.AppBridge"
+#define DBUS_CUSTOM_KWIN_WINDOW_INFO_INTERFACE "UpdateActiveApp"
 
 #endif  // SRC_UTILS_DBUS_DEF_H_
