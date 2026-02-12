@@ -2,6 +2,62 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>Clock</name>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="82"/>
+        <source>yyyy-M-</source>
+        <translation type="unfinished">yyyy年M月</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="83"/>
+        <source>dd</source>
+        <translation type="unfinished">dd日</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="92"/>
+        <source>Mon.</source>
+        <translation type="unfinished">星期一</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="93"/>
+        <source>Tue.</source>
+        <translation type="unfinished">星期二</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="94"/>
+        <source>Wed.</source>
+        <translation type="unfinished">星期三</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="95"/>
+        <source>Thu.</source>
+        <translation type="unfinished">星期四</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="96"/>
+        <source>Fri.</source>
+        <translation type="unfinished">星期五</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="97"/>
+        <source>Sat.</source>
+        <translation type="unfinished">星期六</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="98"/>
+        <source>Sun.</source>
+        <translation type="unfinished">星期日</translation>
+    </message>
+</context>
+<context>
+    <name>ClockBtn</name>
+    <message>
+        <location filename="../src/components/clock_btn/clock_btn.cc" line="40"/>
+        <source>INITIALIZING CLOCK...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FramelessWindow</name>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="15"/>
@@ -162,49 +218,40 @@
         <translation type="vanished">yyyy年M月dd日</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="82"/>
         <source>yyyy-M-</source>
-        <translation>yyyy年M月</translation>
+        <translation type="vanished">yyyy年M月</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="83"/>
         <source>dd</source>
-        <translation>dd日</translation>
+        <translation type="vanished">dd日</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="92"/>
         <source>Mon.</source>
-        <translation>星期一</translation>
+        <translation type="vanished">星期一</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="93"/>
         <source>Tue.</source>
-        <translation>星期二</translation>
+        <translation type="vanished">星期二</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="94"/>
         <source>Wed.</source>
-        <translation>星期三</translation>
+        <translation type="vanished">星期三</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="95"/>
         <source>Thu.</source>
-        <translation>星期四</translation>
+        <translation type="vanished">星期四</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="96"/>
         <source>Fri.</source>
-        <translation>星期五</translation>
+        <translation type="vanished">星期五</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="97"/>
         <source>Sat.</source>
-        <translation>星期六</translation>
+        <translation type="vanished">星期六</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="98"/>
         <source>Sun.</source>
-        <translation>星期日</translation>
+        <translation type="vanished">星期日</translation>
     </message>
 </context>
 <context>

@@ -63,12 +63,64 @@ static QString GetAppBackground(
       })"""), QList<QString>{bg_hex, border_hex});
 }
 
+static QString GetCommonBtnStyle(
+  const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb text_color = palette->GetOnSurface();
+  QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.08);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.1);
+
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QPushButton[class='common_bar_btn'] {
+        color: %t1%;
+        background: transparent;
+        border: 0px solid %t1%;
+        border-radius: 6px;
+        font-size: 16px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+        
+      QPushButton[class='common_bar_btn']:hover {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t2%;
+        border-radius: 6px;
+        font-size: 16px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+        
+      QPushButton[class='common_bar_btn']:pressed {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t3%;
+        border-radius: 6px;
+        font-size: 16px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+      })"""), QList<QString>{text_hex, state_layer_hex_hover,
+                             state_layer_hex_pressed});
+}
+
 static StyleTuple GetThemeMap(const SchemeTuple& conf) {
   return {
     GetAppBackground(conf.dark)
-      + GetAppIndicatorStyle(conf.dark),
+      + GetAppIndicatorStyle(conf.dark)
+      + GetCommonBtnStyle(conf.dark),
     GetAppBackground(conf.dark)
       + GetAppIndicatorStyle(conf.dark)
+      + GetCommonBtnStyle(conf.dark)
   };
 }
 

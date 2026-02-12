@@ -15,8 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_CLOCK_CLOCK_H_
-#define SRC_CLOCK_CLOCK_H_
+#ifndef SRC_INFO_SERVER_CLOCK_CLOCK_H_
+#define SRC_INFO_SERVER_CLOCK_CLOCK_H_
 
 #include <QObject>
 #include <QPushButton>
@@ -45,4 +45,4 @@ class Clock : public QObject {
 }  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_CLOCK_CLOCK_H_
+#endif  // SRC_INFO_SERVER_CLOCK_CLOCK_H_

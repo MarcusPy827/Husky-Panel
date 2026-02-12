@@ -23,8 +23,8 @@
 #include <QHBoxLayout>
 
 #include "src/quick_kde_su/quick_kde_su.h"
-#include "src/clock/clock.h"
 #include "src/components/app_indicator/app_indicator.h"
+#include "src/components/clock_btn/clock_btn.h"
 #include "src/theme_loader/theme_loader.h"
 
 namespace panel {
@@ -50,10 +50,10 @@ class MainWindow : public QWidget {
   QHBoxLayout * slot_middle_ = nullptr;
   QHBoxLayout * slot_right_ = nullptr;
 
-  loader::ThemeLoader * theme_loader_ = nullptr;
   AppIndicator * app_indicator_ = nullptr;
+  ClockBtn * clock_btn_ = nullptr;
   QuickKDESU * quick_kde_su_panel_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
+  loader::ThemeLoader * theme_loader_ = nullptr;
 
  private slots:
   void TriggerKRunner();

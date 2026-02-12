@@ -93,8 +93,6 @@ set(COMMON_SOURCES
   src/user_info/user_info.cc
   src/application_services/application_services.h
   src/application_services/application_services.cc
-  src/clock/clock.h
-  src/clock/clock.cc
   src/battery_info/battery_info.h
   src/battery_info/battery_info.cc
   src/wlan_info/wlan_info.h
@@ -105,6 +103,8 @@ set(COMMON_SOURCES
   src/components/app_indicator/app_indicator_style.h
   src/components/app_indicator/app_indicator.h
   src/components/app_indicator/app_indicator.cc
+  src/components/clock_btn/clock_btn.h
+  src/components/clock_btn/clock_btn.cc
   src/info_server/current_window/current_window_provider.h
   src/info_server/current_window/current_window_provider_factory.h
   src/info_server/current_window/current_window_provider_factory.cc
@@ -112,6 +112,8 @@ set(COMMON_SOURCES
   src/info_server/current_window/current_window_kwin_impl.cc
   src/info_server/current_window/current_window_null_impl.h
   src/info_server/current_window/current_window_null_impl.cc
+  src/info_server/clock/clock.h
+  src/info_server/clock/clock.cc
 )
 
 set(PROJECT_SOURCES

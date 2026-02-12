@@ -115,10 +115,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
   }
   bar_layout->addLayout(slot_right_);
 
-  QSpacerItem * bar_spacer_3 = new QSpacerItem(8, 8, QSizePolicy::Expanding,
-    QSizePolicy::Expanding);
-  bar_layout->addSpacerItem(bar_spacer_3);
-
   LoadLeftSlot();
   LoadMiddleSlot();
   LoadRightSlot();
@@ -194,7 +190,11 @@ void MainWindow::LoadMiddleSlot() {
 }
 
 void MainWindow::LoadRightSlot() {
-
+  if (clock_btn_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading clock...");
+    clock_btn_ = new ClockBtn();
+    slot_right_->addWidget(clock_btn_);
+  }
 }
 
 void MainWindow::TriggerKRunner() {
