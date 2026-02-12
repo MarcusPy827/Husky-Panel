@@ -12,7 +12,7 @@
     "Icon": "preferences-system-windows",
     "Id": "marcus-app-bridge",
     "Name": "Husky-Panel App Bridge",
-    "Version": "0.9",
+    "Version": "0.9.2",
     "License": "GPL-3.0-only"
   }
 }

@@ -15,6 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <KService>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDBusMessage>
@@ -47,8 +48,17 @@ CurrentWindowKwinImpl::~CurrentWindowKwinImpl() {
 
 void CurrentWindowKwinImpl::UpdateActiveApp(QString name, QString appid,
     QString title) {
-  qInfo() << "Successfully updated window info:" << name << appid;
-  window_info_.application_name = name;
+  KService::Ptr service = KService::serviceByDesktopName(name);
+  if (!service) {
+    service = KService::serviceByDesktopName(appid.toLower());
+  }
+
+  if (service) {
+    window_info_.application_name = service->name();
+  } else {
+    window_info_.application_name = name;
+  }
+
   window_info_.package_name = appid;
   emit CurrentWindowChanged();
 }

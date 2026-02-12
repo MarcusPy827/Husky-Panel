@@ -24,13 +24,15 @@ pkg_check_modules(WaylandClient
 )
 
 find_package(QT 
-  NAMES Qt6 Qt5 
+  NAMES Qt6 
   REQUIRED COMPONENTS 
   Widgets 
   LinguistTools
   WaylandClient
   DBus
 )
+
+find_package(KF6Service REQUIRED)
 
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
@@ -150,6 +152,7 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
+  KF6::Service
   LayerShellQtInterface
 )
 
