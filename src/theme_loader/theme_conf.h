@@ -102,7 +102,7 @@ static QString GetCommonBtnStyle(
         
       QPushButton[class='common_bar_btn']:pressed {
         color: %t1%;
-        background: %t2%;
+        background: %t3%;
         border: 0px solid %t3%;
         border-radius: 6px;
         font-size: 16px;
