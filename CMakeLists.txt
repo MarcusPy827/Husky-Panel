@@ -85,12 +85,8 @@ set(COMMON_SOURCES
   ${MATERIAL_DESIGN_DEPS}
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
-  src/user_info/user_info.h
-  src/user_info/user_info.cc
   src/application_services/application_services.h
   src/application_services/application_services.cc
-  src/utils/utils.h
-  src/utils/utils.cc
   src/utils/dbus_def.h
   src/components/app_indicator/app_indicator_style.h
   src/components/app_indicator/app_indicator.h
@@ -118,6 +114,8 @@ set(COMMON_SOURCES
   src/info_server/battery_info/battery_info.cc
   src/info_server/wlan_info/wlan_info.h
   src/info_server/wlan_info/wlan_info.cc
+  src/info_server/user_info/user_info.h
+  src/info_server/user_info/user_info.cc
 )
 
 set(PROJECT_SOURCES

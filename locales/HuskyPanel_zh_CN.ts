@@ -303,12 +303,12 @@
         <translation>时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="41"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="39"/>
         <source>Top Panel</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="59"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="57"/>
         <source>Failed to get native window handle. Please check your session,</source>
         <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>

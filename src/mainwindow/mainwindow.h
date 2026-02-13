@@ -21,7 +21,6 @@
 #include <QWidget>
 #include <QScreen>
 #include <QHBoxLayout>
-#include <QTimer>
 
 #include "src/components/app_indicator/app_indicator.h"
 #include "src/components/app_drawer/app_drawer_btn.h"
@@ -48,7 +47,6 @@ class MainWindow : public QWidget {
   void HandleTheme();
   int inclusive_zone_height_ = 32;
   QRect screen_geometry_ = qApp->primaryScreen()->geometry();
-  QTimer * update_timer_ = nullptr;
 
   QWidget * base_layer_ = nullptr;
   QHBoxLayout * slot_left_ = nullptr;

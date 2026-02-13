@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2025 MarcusPy827
  *
@@ -16,22 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_UTILS_UTILS_H_
-#define SRC_UTILS_UTILS_H_
+#ifndef SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
+#define SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
 
-#include <QStringLiteral>
 #include <QString>
-#include <QList>
 
 namespace panel {
-namespace utils {
-class Utils {
+namespace backend {
+
+class UserInfo {
  public:
-  static QString TemplateCat(QString original,
-    QList<QString> args = QList<QString>());
+  static QString GetUserName();
+  static QString GetUserAvatarPath();
 };
 
-}  // namespace utils
+}  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_UTILS_UTILS_H_
+#endif  // SRC_USER_INFO_USER_INFO_H_

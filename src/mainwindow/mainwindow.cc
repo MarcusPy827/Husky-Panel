@@ -28,9 +28,7 @@
 
 #include "src/mainwindow/mainwindow.h"
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
-#include "src/user_info/user_info.h"
 #include "src/application_services/application_services.h"
-#include "src/utils/utils.h"
 
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
 
@@ -117,54 +115,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
   LoadMiddleSlot();
   LoadRightSlot();
   HandleTheme();
-
-  if (update_timer_ == nullptr) {
-    LOG(INFO) << "Initializing updater timer...";
-    update_timer_ = new QTimer(this);
-  }
-  update_timer_->start(1000);
-
-  /*
-  QHBoxLayout * widget_slot_front_layout = new QHBoxLayout();
-  widget_slot_front_layout->setContentsMargins(0, 0, 0, 0);
-  widget_slot_front_layout->setSpacing(8);
-  // ui_->widget_slot_front->setLayout(widget_slot_front_layout);
-
-  if (app_indicator_ == nullptr) {
-    qInfo() << "[INFO] Top Bar: Initializing app indicator...";
-    app_indicator_ = new AppIndicator();
-    widget_slot_front_layout->addWidget(app_indicator_);
-  }
-
-  qInfo() << "[INFO] Top Bar: Now initializing user info...";
-  // ui_->user_name_btn->setText(backend::UserInfo::GetUserName());
-  // ui_->user_name_btn->setVisible(false);
-  // ui_->avatar_btn->setIcon(
-    QIcon(backend::UserInfo::GetUserAvatarPath()));
-  // ui_->avatar_btn->setVisible(false);
-
-  connect(// ui_->krunner_btn, &QPushButton::clicked, this,
-    &MainWindow::TriggerKRunner);
-
-  qInfo() << "[INFO] Top Bar: Initializing QuickKDESU panel...";
-  quick_kde_su_panel_ = new QuickKDESU(nullptr);
-  quick_kde_su_panel_->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint);
-  connect(// ui_->quick_kdesu_btn, &QPushButton::clicked, this,
-    &MainWindow::TriggerQuickKDESUPanel);
-
-  qInfo() << "[INFO] Top Bar: Initializing clock updater...";
-  clock_updater_ = new backend::Clock(// ui_->clock_btn);
-
-  qInfo() << "[INFO] Top Bar: Initializing internal updater...";
-  QTimer * timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this,
-    &MainWindow::UpdateBatteryPercentage);
-  connect(timer, &QTimer::timeout, this,
-    &MainWindow::UpdateWlanSignalStrength);
-  timer->start(1000);
-
-  qInfo() << "[ OK ] Top Bar: Initialization complete.";
-  */
 }
 
 MainWindow::~MainWindow() {
