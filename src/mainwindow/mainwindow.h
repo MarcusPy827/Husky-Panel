@@ -20,17 +20,18 @@
 
 #include <QWidget>
 #include <QScreen>
+#include <QHBoxLayout>
 
-#include "src/quick_kde_su/quick_kde_su.h"
-#include "src/clock/clock.h"
 #include "src/components/app_indicator/app_indicator.h"
+#include "src/components/app_drawer/app_drawer_btn.h"
+#include "src/components/krunner_btn/krunner_btn.h"
+#include "src/components/wlan_indicator/wlan_indicator.h"
+#include "src/components/battery_indicator/battery_indicator.h"
+#include "src/components/clock_btn/clock_btn.h"
+#include "src/theme_loader/theme_loader.h"
 
 namespace panel {
 namespace frontend {
-
-namespace Ui {
-class MainWindow;
-}
 
 class MainWindow : public QWidget {
   Q_OBJECT
@@ -40,19 +41,28 @@ class MainWindow : public QWidget {
   ~MainWindow();
 
  private:
+  void LoadLeftSlot();
+  void LoadMiddleSlot();
+  void LoadRightSlot();
+  void HandleTheme();
   int inclusive_zone_height_ = 32;
   QRect screen_geometry_ = qApp->primaryScreen()->geometry();
 
-  Ui::MainWindow * ui_;
+  QWidget * base_layer_ = nullptr;
+  QHBoxLayout * slot_left_ = nullptr;
+  QHBoxLayout * slot_middle_ = nullptr;
+  QHBoxLayout * slot_right_ = nullptr;
+
   AppIndicator * app_indicator_ = nullptr;
-  QuickKDESU * quick_kde_su_panel_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
+  AppDrawerBtn * app_drawer_btn_ = nullptr;
+  KRunnerBtn * krunner_btn_ = nullptr;
+  WLANIndicator * wlan_indicator_ = nullptr;
+  BatteryIndicator * battery_indicator_ = nullptr;
+  ClockBtn * clock_btn_ = nullptr;
+  loader::ThemeLoader * theme_loader_ = nullptr;
 
  private slots:
   void TriggerKRunner();
-  void TriggerQuickKDESUPanel();
-  void UpdateBatteryPercentage();
-  void UpdateWlanSignalStrength();
 };
 
 }  // namespace frontend

@@ -23,7 +23,7 @@
 #include <unistd.h>
 #include <pwd.h>
 
-#include "src/user_info/user_info.h"
+#include "src/info_server/user_info/user_info.h"
 #include "src/utils/dbus_def.h"
 
 namespace panel {

@@ -27,7 +27,7 @@
 #include "lib/3rdparty/material-color-utilities/cpp/scheme/scheme_expressive.h"
 #include "lib/3rdparty/material-color-utilities/cpp/scheme/scheme_tonal_spot.h"
 
-namespace flake {
+namespace panel {
 namespace eval {
 namespace {
 
@@ -189,4 +189,4 @@ TEST(ColorPaletteWrapperTest, SchemeTypeDetectTest) {
 }
 
 }  // namespace eval
-}  // namespace flake
+}  // namespace panel

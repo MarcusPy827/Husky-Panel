@@ -15,9 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QDebug>
 #include <QGridLayout>
+#include <QVBoxLayout>
+#include <QSpacerItem>
 #include <QStackedWidget>
+
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
 
 #include "src/components/app_indicator/app_indicator.h"
 
@@ -25,22 +31,22 @@ namespace panel {
 namespace frontend {
 
 AppIndicator::AppIndicator(QWidget *parent) : QWidget(parent) {
-  QGridLayout * layout_gen = new QGridLayout();
-  layout_gen->setContentsMargins(0, 0, 0, 0);
+  QVBoxLayout * layout_gen = new QVBoxLayout();
+  layout_gen->setContentsMargins(0, 4, 0, 4);
   layout_gen->setSpacing(0);
   setLayout(layout_gen);
 
-  if (app_name_ == nullptr) {
-    app_name_ = new QLabel();
-    app_name_->setText(tr("INITIALIZING"));
-    layout_gen->addWidget(app_name_, 0, 0);
-  }
-
   if (app_package_name_ == nullptr) {
     app_package_name_ = new QLabel();
-    app_package_name_->setText("APP INDICATOR");
-    layout_gen->addWidget(app_package_name_, 1, 0);
+    app_package_name_->setProperty("class", "app_indicator_package_name_desc");
   }
+  layout_gen->addWidget(app_package_name_);
+
+  if (app_name_ == nullptr) {
+    app_name_ = new QLabel();
+    app_name_->setProperty("class", "app_indicator_app_name_desc");
+  }
+  layout_gen->addWidget(app_name_);
 
   if (current_window_info_ == nullptr) {
     current_window_info_ = backend::InitCurrentWindowInfoServer(this);
@@ -49,9 +55,6 @@ AppIndicator::AppIndicator(QWidget *parent) : QWidget(parent) {
     connect(current_window_info_.get(), SIGNAL(CurrentWindowChanged()), this,
       SLOT(OnCurrentWindowChanged()));
   }
-
-  app_name_->setStyleSheet("color: white;");
-  app_package_name_->setStyleSheet("color: white;");
 }
 
 AppIndicator::~AppIndicator() {
@@ -59,12 +62,12 @@ AppIndicator::~AppIndicator() {
     current_window_info_ = nullptr;
   }
 
-  qInfo() << "[INFO] AppIndicator: AppIndicator is being deleted";
+  LOG(INFO) << absl::StrCat("AppIndicator is being deleted.");
 }
 
 void AppIndicator::OnCurrentWindowChanged() {
-  qInfo() << "[INFO] AppIndicator: Current window changed,"
-    << "updating app indicator labels.";
+  LOG(INFO) << absl::StrCat("Current window has been changed, ",
+    "updating AppIndicator labels...");
   app_name_->setText(current_window_info_->GetApplicationName());
   app_package_name_->setText(current_window_info_->GetPackageName());
 }

@@ -2,10 +2,66 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
-    <name>AppIndicator</name>
+    <name>AppDrawerBtn</name>
     <message>
-        <location filename="../src/components/app_indicator/app_indicator.cc" line="35"/>
-        <source>INITIALIZING</source>
+        <location filename="../src/components/app_drawer/app_drawer_btn.cc" line="40"/>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Clock</name>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="82"/>
+        <source>yyyy-M-</source>
+        <translation type="unfinished">yyyy年M月</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="83"/>
+        <source>dd</source>
+        <translation type="unfinished">dd日</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="92"/>
+        <source>Mon.</source>
+        <translation type="unfinished">星期一</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="93"/>
+        <source>Tue.</source>
+        <translation type="unfinished">星期二</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="94"/>
+        <source>Wed.</source>
+        <translation type="unfinished">星期三</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="95"/>
+        <source>Thu.</source>
+        <translation type="unfinished">星期四</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="96"/>
+        <source>Fri.</source>
+        <translation type="unfinished">星期五</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="97"/>
+        <source>Sat.</source>
+        <translation type="unfinished">星期六</translation>
+    </message>
+    <message>
+        <location filename="../src/info_server/clock/clock.cc" line="98"/>
+        <source>Sun.</source>
+        <translation type="unfinished">星期日</translation>
+    </message>
+</context>
+<context>
+    <name>ClockBtn</name>
+    <message>
+        <location filename="../src/components/clock_btn/clock_btn.cc" line="40"/>
+        <source>INITIALIZING CLOCK...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -59,6 +115,14 @@
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="248"/>
         <source>Mica Alt</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KRunnerBtn</name>
+    <message>
+        <location filename="../src/components/krunner_btn/krunner_btn.cc" line="43"/>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -170,85 +234,70 @@
         <translation type="vanished">yyyy年M月dd日</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="82"/>
         <source>yyyy-M-</source>
-        <translation>yyyy年M月</translation>
+        <translation type="vanished">yyyy年M月</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="83"/>
         <source>dd</source>
-        <translation>dd日</translation>
+        <translation type="vanished">dd日</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="92"/>
         <source>Mon.</source>
-        <translation>星期一</translation>
+        <translation type="vanished">星期一</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="93"/>
         <source>Tue.</source>
-        <translation>星期二</translation>
+        <translation type="vanished">星期二</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="94"/>
         <source>Wed.</source>
-        <translation>星期三</translation>
+        <translation type="vanished">星期三</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="95"/>
         <source>Thu.</source>
-        <translation>星期四</translation>
+        <translation type="vanished">星期四</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="96"/>
         <source>Fri.</source>
-        <translation>星期五</translation>
+        <translation type="vanished">星期五</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="97"/>
         <source>Sat.</source>
-        <translation>星期六</translation>
+        <translation type="vanished">星期六</translation>
     </message>
     <message>
-        <location filename="../src/clock/clock.cc" line="98"/>
         <source>Sun.</source>
-        <translation>星期日</translation>
+        <translation type="vanished">星期日</translation>
     </message>
 </context>
 <context>
     <name>panel::frontend::MainWindow</name>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="277"/>
         <source>Form</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="125"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="279"/>
         <source>User Profile 1</source>
         <translation>用户资料1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="156"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="280"/>
         <source>Apps</source>
         <translation>应用程序</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="187"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="281"/>
         <source>KRunner</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="218"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="282"/>
         <source>KDESU</source>
         <translation>以SU身份执行</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="371"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="286"/>
         <source>CLOCK INITIALIZING</source>
         <translation>时钟正在初始化</translation>
@@ -267,19 +316,19 @@
 <context>
     <name>panel::frontend::QuickKDESU</name>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="14"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="147"/>
         <source>Form</source>
         <translation>KDESU快速面板</translation>
     </message>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="67"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="67"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="148"/>
         <source>Dolphin</source>
         <translation>文件管理</translation>
     </message>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="118"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="118"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="149"/>
         <source>Konsole</source>
         <translation>终端</translation>

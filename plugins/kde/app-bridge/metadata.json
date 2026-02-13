@@ -1,18 +1,21 @@
 {
   "KPackageStructure": "KWin/Script",
   "KPlugin": {
+    "Id": "marcus-app-bridge",
+    "Name": "Husky-Panel App Bridge",
+    "Description": "Forward current window info via DBus",
+    "Icon": "preferences-system-windows",
+    "Version": "0.9.2",
+    "License": "GPL-3.0-only",
+    "EnabledByDefault": true,
+    "Category": "Scripting",
+    "ServiceTypes": ["KWin/Script"],
     "Authors": [
       {
         "Name": "MarcusPy827"
       }
-    ],
-    "Category": "Scripting",
-    "Description": "Forward current window info via DBus",
-    "EnabledByDefault": true,
-    "Icon": "preferences-system-windows",
-    "Id": "marcus-app-bridge",
-    "Name": "Husky-Panel App Bridge",
-    "Version": "0.9.2",
-    "License": "GPL-3.0-only"
-  }
+    ]
+  },
+  "X-Plasma-API": "javascript",
+  "X-Plasma-MainScript": "code/main.js"
 }

@@ -17,7 +17,7 @@
 
 #include <QString>
 
-namespace flake {
+namespace panel {
 namespace utils {
 class Strings {
  public:
@@ -26,6 +26,6 @@ class Strings {
 };
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_UTILS_STRINGS_STRINGS_H_

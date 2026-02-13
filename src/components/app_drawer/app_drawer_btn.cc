@@ -15,38 +15,43 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QDBusInterface>
-#include <QDBusReply>
-#include <QDBusMessage>
+#include <QHBoxLayout>
 
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
-#include "src/info_server/current_window/current_window_null_impl.h"
-#include "src/utils/dbus_def.h"
+#include "src/components/app_drawer/app_drawer_btn.h"
 
 namespace panel {
-namespace backend {
+namespace frontend {
 
-CurrentWindowNullImpl::CurrentWindowNullImpl(QObject *parent) :
-    CurrentWindowProvider(parent) {
-  LOG(ERROR) << absl::StrCat("Current WM is NOT supported. ",
-    "Current window info server could NOT be initialized.");
+AppDrawerBtn::AppDrawerBtn(QWidget *parent) : QWidget(parent) {
+  QHBoxLayout * layout_gen = new QHBoxLayout();
+  layout_gen->setContentsMargins(0, 0, 0, 0);
+  layout_gen->setSpacing(0);
+  setLayout(layout_gen);
+
+  if (btn_ == nullptr) {
+    btn_ = new QPushButton();
+    btn_->setProperty("class", "common_bar_btn");
+  }
+  btn_->setText(tr("Applications"));
+  layout_gen->addWidget(btn_);
 }
 
-CurrentWindowNullImpl::~CurrentWindowNullImpl() {
-  LOG(INFO) << absl::StrCat("CurrentWindowNullImpl is being deleted.");
+AppDrawerBtn::~AppDrawerBtn() {
+  LOG(INFO) << absl::StrCat("AppDrawerBtn is being deleted.");
 }
 
-QString CurrentWindowNullImpl::GetApplicationName() {
-  return "";
+QPushButton* AppDrawerBtn::GetBtn() {
+  if (btn_ == nullptr) {
+    LOG(ERROR) << absl::StrCat("App drawer button is a null pointer, except ",
+      "a nullptr passing in!");
+  }
+  return btn_;
 }
 
-QString CurrentWindowNullImpl::GetPackageName() {
-  return "";
-}
-
-}  // namespace backend
+}  // namespace frontend
 }  // namespace panel

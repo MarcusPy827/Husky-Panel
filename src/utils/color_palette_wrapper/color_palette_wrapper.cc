@@ -37,7 +37,7 @@
 #include "lib/3rdparty/material-color-utilities/cpp/scheme/scheme_rainbow.h"
 #include "lib/3rdparty/material-color-utilities/cpp/scheme/scheme_tonal_spot.h"
 
-namespace flake {
+namespace panel {
 namespace utils {
 
 QColor ColorPaletteWrapper::GetSystemHighlightColor() {
@@ -218,4 +218,4 @@ bool ColorPaletteWrapper::IsDark() {
 }
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel

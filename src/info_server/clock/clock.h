@@ -15,35 +15,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_
-#define SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_
+#ifndef SRC_INFO_SERVER_CLOCK_CLOCK_H_
+#define SRC_INFO_SERVER_CLOCK_CLOCK_H_
 
-#include <QWidget>
+#include <QObject>
+#include <QPushButton>
+#include <QTimer>
 
 namespace panel {
-namespace frontend {
+namespace backend {
 
-namespace Ui {
-class QuickKDESU;
-}
-
-class QuickKDESU : public QWidget {
+class Clock : public QObject {
   Q_OBJECT
 
  public:
-  explicit QuickKDESU(QWidget *parent = nullptr);
-  ~QuickKDESU();
+  explicit Clock(QPushButton * target = nullptr);
+  ~Clock();
 
  private:
-  void ExecWithKDESU(const QString &prog, const QStringList &args);
-  Ui::QuickKDESU * ui_;
+  QString GetTranslatedTheDayOfTheWeek(QString in);
+  QString GetOptimizedDateString(QString in);
+  QTimer * clock_timer_ = nullptr;
+  QPushButton * install_target_ = nullptr;
 
  private slots:
-  void OpenDoplhinWithKDESU();
-  void OpenKonsoleWithKDESU();
+  void UpdateTime();
 };
 
-}  // namespace frontend
+}  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_QUICK_KDE_SU_QUICK_KDE_SU_H_
+#endif  // SRC_INFO_SERVER_CLOCK_CLOCK_H_

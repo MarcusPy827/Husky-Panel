@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,28 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QDBusInterface>
-#include <QDebug>
+#ifndef SRC_COMPONENTS_WLAN_INDICATOR_WLAN_INDICATOR_H_
+#define SRC_COMPONENTS_WLAN_INDICATOR_WLAN_INDICATOR_H_
 
-#include "src/battery_info/battery_info.h"
-#include "src/utils/dbus_def.h"
+#include <QWidget>
+#include <QPushButton>
 
 namespace panel {
-namespace backend {
+namespace frontend {
 
-int BatteryInfo::GetBatteryLevel() {
-  QDBusInterface interface(DBUS_UPOWER_SERVICE,
-    DBUS_UPOWER_DISPLAY_SERVICE_PATH, DBUS_UPOWER_DEVICE_INTERFACE,
-    QDBusConnection::systemBus());
+class WLANIndicator : public QWidget {
+  Q_OBJECT
 
-  if (!interface.isValid()) {
-    qCritical() << "[ERROR] Battery Info: Failed to connect to UPower D-Bus"
-      << "interface.";
-    return -1;
-  }
-  QVariant percentage = interface.property("Percentage");
-  return percentage.toInt();
-}
+ public:
+  explicit WLANIndicator(QWidget *parent = nullptr);
+  ~WLANIndicator();
+  QPushButton * GetBtn();
 
-}  // namespace backend
+ private:
+  QPushButton * btn_ = nullptr;
+
+ public slots:
+  void UpdateWLANStrength();
+};
+
+}  // namespace frontend
 }  // namespace panel
+
+#endif  // SRC_COMPONENTS_WLAN_INDICATOR_WLAN_INDICATOR_H_

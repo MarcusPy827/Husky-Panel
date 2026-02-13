@@ -19,7 +19,7 @@
 #include <QTimer>
 #include <QDateTime>
 
-#include "src/clock/clock.h"
+#include "src/info_server/clock/clock.h"
 
 namespace panel {
 namespace backend {

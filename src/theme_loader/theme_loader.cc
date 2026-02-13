@@ -27,7 +27,7 @@
 #include "src/theme_loader/theme_loader.h"
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 
-namespace flake {
+namespace panel {
 namespace loader {
 
 ThemeLoader::ThemeLoader(QWidget * base_layer, QString base_color,
@@ -70,4 +70,4 @@ bool ThemeLoader::IsDarkMode() {
 }
 
 }  // namespace loader
-}  // namespace flake
+}  // namespace panel

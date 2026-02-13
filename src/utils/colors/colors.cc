@@ -26,7 +26,7 @@
 #include "src/utils/colors/colors.h"
 #include "src/utils/strings/strings.h"
 
-namespace flake {
+namespace panel {
 namespace utils {
 
 QString Colors::ApplyOpacityToHexColor(const QString& hex,
@@ -51,4 +51,4 @@ QString Colors::ApplyOpacityToHexColor(const QString& hex,
 }
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel
