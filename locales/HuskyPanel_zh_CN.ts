@@ -309,12 +309,12 @@
         <translation>时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="43"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="42"/>
         <source>Top Panel</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="61"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="60"/>
         <source>Failed to get native window handle. Please check your session,</source>
         <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>
@@ -322,19 +322,19 @@
 <context>
     <name>panel::frontend::QuickKDESU</name>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="14"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="147"/>
         <source>Form</source>
         <translation>KDESU快速面板</translation>
     </message>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="67"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="67"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="148"/>
         <source>Dolphin</source>
         <translation>文件管理</translation>
     </message>
     <message>
-        <location filename="../src/quick_kde_su/quick_kde_su.ui" line="118"/>
+        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="118"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="149"/>
         <source>Konsole</source>
         <translation>终端</translation>

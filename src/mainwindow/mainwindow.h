@@ -21,12 +21,13 @@
 #include <QWidget>
 #include <QScreen>
 #include <QHBoxLayout>
+#include <QTimer>
 
-#include "src/quick_kde_su/quick_kde_su.h"
 #include "src/components/app_indicator/app_indicator.h"
-#include "src/components/clock_btn/clock_btn.h"
 #include "src/components/app_drawer/app_drawer_btn.h"
 #include "src/components/krunner_btn/krunner_btn.h"
+#include "src/components/battery_indicator/battery_indicator.h"
+#include "src/components/clock_btn/clock_btn.h"
 #include "src/theme_loader/theme_loader.h"
 
 namespace panel {
@@ -46,6 +47,7 @@ class MainWindow : public QWidget {
   void HandleTheme();
   int inclusive_zone_height_ = 32;
   QRect screen_geometry_ = qApp->primaryScreen()->geometry();
+  QTimer * update_timer_ = nullptr;
 
   QWidget * base_layer_ = nullptr;
   QHBoxLayout * slot_left_ = nullptr;
@@ -53,16 +55,15 @@ class MainWindow : public QWidget {
   QHBoxLayout * slot_right_ = nullptr;
 
   AppIndicator * app_indicator_ = nullptr;
-  ClockBtn * clock_btn_ = nullptr;
   AppDrawerBtn * app_drawer_btn_ = nullptr;
   KRunnerBtn * krunner_btn_ = nullptr;
-  QuickKDESU * quick_kde_su_panel_ = nullptr;
+  BatteryIndicator * battery_indicator_ = nullptr;
+  ClockBtn * clock_btn_ = nullptr;
   loader::ThemeLoader * theme_loader_ = nullptr;
 
  private slots:
   void TriggerKRunner();
   void TriggerQuickKDESUPanel();
-  void UpdateBatteryPercentage();
   void UpdateWlanSignalStrength();
 };
 

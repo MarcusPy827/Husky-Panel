@@ -86,15 +86,10 @@ set(COMMON_SOURCES
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
   src/mainwindow/mainwindow.ui
-  src/quick_kde_su/quick_kde_su.h
-  src/quick_kde_su/quick_kde_su.cc
-  src/quick_kde_su/quick_kde_su.ui
   src/user_info/user_info.h
   src/user_info/user_info.cc
   src/application_services/application_services.h
   src/application_services/application_services.cc
-  src/battery_info/battery_info.h
-  src/battery_info/battery_info.cc
   src/wlan_info/wlan_info.h
   src/wlan_info/wlan_info.cc
   src/utils/utils.h
@@ -109,6 +104,8 @@ set(COMMON_SOURCES
   src/components/app_drawer/app_drawer_btn.cc
   src/components/krunner_btn/krunner_btn.h
   src/components/krunner_btn/krunner_btn.cc
+  src/components/battery_indicator/battery_indicator.h
+  src/components/battery_indicator/battery_indicator.cc
   src/info_server/current_window/current_window_provider.h
   src/info_server/current_window/current_window_provider_factory.h
   src/info_server/current_window/current_window_provider_factory.cc
@@ -118,6 +115,8 @@ set(COMMON_SOURCES
   src/info_server/current_window/current_window_null_impl.cc
   src/info_server/clock/clock.h
   src/info_server/clock/clock.cc
+  src/info_server/battery_info/battery_info.h
+  src/info_server/battery_info/battery_info.cc
 )
 
 set(PROJECT_SOURCES

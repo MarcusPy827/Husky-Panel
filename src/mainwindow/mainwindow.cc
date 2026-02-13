@@ -30,7 +30,6 @@
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 #include "src/user_info/user_info.h"
 #include "src/application_services/application_services.h"
-#include "src/battery_info/battery_info.h"
 #include "src/wlan_info/wlan_info.h"
 #include "src/utils/utils.h"
 
@@ -120,6 +119,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
   LoadRightSlot();
   HandleTheme();
 
+  if (update_timer_ == nullptr) {
+    LOG(INFO) << "Initializing updater timer...";
+    update_timer_ = new QTimer(this);
+  }
+  update_timer_->start(1000);
+
   /*
   QHBoxLayout * widget_slot_front_layout = new QHBoxLayout();
   widget_slot_front_layout->setContentsMargins(0, 0, 0, 0);
@@ -202,6 +207,12 @@ void MainWindow::LoadMiddleSlot() {
 }
 
 void MainWindow::LoadRightSlot() {
+  if (battery_indicator_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading battery indicator...");
+    battery_indicator_ = new BatteryIndicator();
+    slot_right_->addWidget(battery_indicator_);
+  }
+
   if (clock_btn_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading clock...");
     clock_btn_ = new ClockBtn();
@@ -225,46 +236,6 @@ void MainWindow::TriggerQuickKDESUPanel() {
       quick_kdesu_btn->x() - 9, 32);
   }
       */
-}
-
-void MainWindow::UpdateBatteryPercentage() {
-  /*
-  int battery_level = backend::BatteryInfo::GetBatteryLevel();
-  QString battery_icon_name;
-  switch (battery_level) {
-    case 0 ... 20:
-      battery_icon_name = "alert";
-      break;
-
-    case 21 ... 40:
-      battery_icon_name = "30";
-      break;
-
-    case 41 ... 50:
-      battery_icon_name = "40";
-      break;
-
-    case 51 ... 75:
-      battery_icon_name = "75";
-      break;
-
-    case 76 ... 90:
-      battery_icon_name = "90";
-      break;
-
-    case 91 ... 100:
-      battery_icon_name = "full";
-      break;
-
-    default:
-      battery_icon_name = "alert";
-      break;
-  }
-  QString icon_path = utils::Utils::TemplateCat(QStringLiteral(
-    """:/icons/icons/3rdparty/material-symbols/bat_%t1%.svg"""),
-    QList<QString>{battery_icon_name});
-  // ui_->battery_btn->setIcon(QIcon(icon_path));
-  */
 }
 
 void MainWindow::UpdateWlanSignalStrength() {
