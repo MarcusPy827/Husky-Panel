@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,34 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_CLOCK_CLOCK_H_
-#define SRC_CLOCK_CLOCK_H_
+#ifndef SRC_COMPONENTS_BATTERY_INDICATOR_BATTERY_INDICATOR_H_
+#define SRC_COMPONENTS_BATTERY_INDICATOR_BATTERY_INDICATOR_H_
 
-#include <QObject>
+#include <QWidget>
 #include <QPushButton>
-#include <QTimer>
 
 namespace panel {
-namespace backend {
+namespace frontend {
 
-class Clock : public QObject {
+class BatteryIndicator : public QWidget {
   Q_OBJECT
 
  public:
-  explicit Clock(QPushButton * target = nullptr);
-  ~Clock();
+  explicit BatteryIndicator(QWidget *parent = nullptr);
+  ~BatteryIndicator();
+  QPushButton * GetBtn();
 
  private:
-  QString GetTranslatedTheDayOfTheWeek(QString in);
-  QString GetOptimizedDateString(QString in);
-  QTimer * clock_timer_ = nullptr;
-  QPushButton * install_target_ = nullptr;
+  QPushButton * btn_ = nullptr;
 
- private slots:
-  void UpdateTime();
+ public slots:
+  void UpdateBatteryPercentage();
 };
 
-}  // namespace backend
+}  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_CLOCK_CLOCK_H_
+#endif  // SRC_COMPONENTS_BATTERY_INDICATOR_BATTERY_INDICATOR_H_

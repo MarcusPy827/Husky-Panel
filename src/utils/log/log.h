@@ -25,7 +25,7 @@
 #include <QString>
 #include <QDebug>
 
-namespace flake {
+namespace panel {
 namespace utils {
 class Log {
  public:
@@ -47,6 +47,6 @@ class Log {
 };
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_UTILS_LOG_LOG_H_

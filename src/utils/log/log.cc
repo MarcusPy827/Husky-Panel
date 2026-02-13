@@ -14,7 +14,7 @@
 
 #include "src/utils/log/log.h"
 
-namespace flake {
+namespace panel {
 namespace utils {
 
 QString Log::Info(const QString& tag, const QString& content) {
@@ -70,4 +70,4 @@ QString Log::Error(const QString& tag, const QString& title,
 }
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel

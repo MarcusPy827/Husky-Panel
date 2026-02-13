@@ -17,7 +17,7 @@
 
 #include <QString>
 
-namespace flake {
+namespace panel {
 namespace utils {
 class Colors {
  public:
@@ -26,6 +26,6 @@ class Colors {
 };
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_UTILS_COLORS_COLORS_H_

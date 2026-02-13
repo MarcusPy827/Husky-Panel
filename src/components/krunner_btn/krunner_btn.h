@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,20 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "src/utils/utils.h"
+#ifndef SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
+#define SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
+
+#include <QWidget>
+#include <QPushButton>
 
 namespace panel {
-namespace utils {
+namespace frontend {
 
-QString Utils::TemplateCat(QString original, QList<QString> args) {
-  for (int i = 0; i < args.size(); i++) {
-    const QString current_arg = args.at(i);
-    const QString current_template_placeholder = "%t" + QString::number(i + 1)
-      + "%";
-    original.replace(current_template_placeholder, current_arg);
-  }
-  return original;
-}
+class KRunnerBtn : public QWidget {
+  Q_OBJECT
 
-}  // namespace utils
+ public:
+  explicit KRunnerBtn(QWidget *parent = nullptr);
+  ~KRunnerBtn();
+  QPushButton * GetBtn();
+
+ private:
+  QPushButton * btn_ = nullptr;
+
+ private slots:
+  void ToggleKRunner();
+};
+
+}  // namespace frontend
 }  // namespace panel
+
+#endif  // SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_

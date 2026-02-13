@@ -25,7 +25,7 @@
 #include "lib/3rdparty/material-color-utilities/cpp/palettes/tones.h"
 #include "lib/3rdparty/material-color-utilities/cpp/dynamiccolor/dynamic_scheme.h"
 
-namespace flake {
+namespace panel {
 namespace utils {
 
 enum class ColorSchemeType {
@@ -54,6 +54,6 @@ class ColorPaletteWrapper {
 };
 
 }  // namespace utils
-}  // namespace flake
+}  // namespace panel
 
 #endif  // SRC_UTILS_COLOR_PALETTE_WRAPPER_COLOR_PALETTE_WRAPPER_H_

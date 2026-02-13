@@ -1,4 +1,4 @@
-console.log("marcus.panel.util.AppBridge is being loaded!!");
+console.info("marcus.panel.util.AppBridge is being loaded!!");
 
 workspace.windowActivated.connect(function(window) {
   if (!window){

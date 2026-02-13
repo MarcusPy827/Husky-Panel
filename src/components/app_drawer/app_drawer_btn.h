@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,22 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_UTILS_UTILS_H_
-#define SRC_UTILS_UTILS_H_
+#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
 
-#include <QStringLiteral>
-#include <QString>
-#include <QList>
+#include <QWidget>
+#include <QPushButton>
 
 namespace panel {
-namespace utils {
-class Utils {
+namespace frontend {
+
+class AppDrawerBtn : public QWidget {
+  Q_OBJECT
+
  public:
-  static QString TemplateCat(QString original,
-    QList<QString> args = QList<QString>());
+  explicit AppDrawerBtn(QWidget *parent = nullptr);
+  ~AppDrawerBtn();
+  QPushButton * GetBtn();
+
+ private:
+  QPushButton * btn_ = nullptr;
 };
 
-}  // namespace utils
+}  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_UTILS_UTILS_H_
+#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_

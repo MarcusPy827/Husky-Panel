@@ -15,23 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QColor>
+#include <QDBusInterface>
 #include <QDebug>
 
-#include "src/utils/strings/strings.h"
+#include "src/info_server/battery_info/battery_info.h"
+#include "src/utils/dbus_def.h"
 
 namespace panel {
-namespace utils {
+namespace backend {
 
-QString Strings::TemplateCat(QString original, QList<QString> args) {
-  for (int i = 0; i < args.size(); i++) {
-    const QString current_arg = args.at(i);
-    const QString current_template_placeholder = "%t" + QString::number(i + 1)
-      + "%";
-    original.replace(current_template_placeholder, current_arg);
+int BatteryInfo::GetBatteryLevel() {
+  QDBusInterface interface(DBUS_UPOWER_SERVICE,
+    DBUS_UPOWER_DISPLAY_SERVICE_PATH, DBUS_UPOWER_DEVICE_INTERFACE,
+    QDBusConnection::systemBus());
+
+  if (!interface.isValid()) {
+    qCritical() << "[ERROR] Battery Info: Failed to connect to UPower D-Bus"
+      << "interface.";
+    return -1;
   }
-  return original;
+  QVariant percentage = interface.property("Percentage");
+  return percentage.toInt();
 }
 
-}  // namespace utils
+}  // namespace backend
 }  // namespace panel

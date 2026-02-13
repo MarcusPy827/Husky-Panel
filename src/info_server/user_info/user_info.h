@@ -15,8 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_USER_INFO_USER_INFO_H_
-#define SRC_USER_INFO_USER_INFO_H_
+#ifndef SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
+#define SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
 
 #include <QString>
 
