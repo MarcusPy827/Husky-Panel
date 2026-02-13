@@ -20,7 +20,7 @@
 #include <QList>
 #include <QDebug>
 
-#include "src/wlan_info/wlan_info.h"
+#include "src/info_server/wlan_info/wlan_info.h"
 #include "src/utils/dbus_def.h"
 
 namespace panel {

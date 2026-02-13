@@ -273,48 +273,42 @@
 <context>
     <name>panel::frontend::MainWindow</name>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="277"/>
         <source>Form</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="125"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="279"/>
         <source>User Profile 1</source>
         <translation>用户资料1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="156"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="280"/>
         <source>Apps</source>
         <translation>应用程序</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="187"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="281"/>
         <source>KRunner</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="218"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="282"/>
         <source>KDESU</source>
         <translation>以SU身份执行</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.ui" line="371"/>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="286"/>
         <source>CLOCK INITIALIZING</source>
         <translation>时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="42"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="41"/>
         <source>Top Panel</source>
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="60"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="59"/>
         <source>Failed to get native window handle. Please check your session,</source>
         <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>

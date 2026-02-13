@@ -30,7 +30,6 @@
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 #include "src/user_info/user_info.h"
 #include "src/application_services/application_services.h"
-#include "src/wlan_info/wlan_info.h"
 #include "src/utils/utils.h"
 
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
@@ -86,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_left_ = new QHBoxLayout();
     slot_left_->setContentsMargins(0, 0, 0, 0);
     slot_left_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_left_->setSpacing(8);
+    slot_left_->setSpacing(4);
   }
   bar_layout->addLayout(slot_left_);
 
@@ -98,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_middle_ = new QHBoxLayout();
     slot_middle_->setContentsMargins(0, 0, 0, 0);
     slot_middle_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_middle_->setSpacing(8);
+    slot_middle_->setSpacing(4);
   }
   bar_layout->addLayout(slot_middle_);
 
@@ -110,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     slot_right_ = new QHBoxLayout();
     slot_right_->setContentsMargins(0, 0, 0, 0);
     slot_right_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    slot_right_->setSpacing(8);
+    slot_right_->setSpacing(4);
   }
   bar_layout->addLayout(slot_right_);
 
@@ -203,10 +202,16 @@ void MainWindow::LoadLeftSlot() {
 }
 
 void MainWindow::LoadMiddleSlot() {
-
+  LOG(INFO) << absl::StrCat("Nothing to load for middle slot...");
 }
 
 void MainWindow::LoadRightSlot() {
+  if (wlan_indicator_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading WLAN indicator...");
+    wlan_indicator_ = new WLANIndicator();
+    slot_right_->addWidget(wlan_indicator_);
+  }
+
   if (battery_indicator_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading battery indicator...");
     battery_indicator_ = new BatteryIndicator();
@@ -222,56 +227,6 @@ void MainWindow::LoadRightSlot() {
 
 void MainWindow::TriggerKRunner() {
   backend::ApplicationServices::GetKRunner();
-}
-
-void MainWindow::TriggerQuickKDESUPanel() {
-  /*
-  if (quick_kde_su_panel_->isVisible()) {
-    qInfo() << "[INFO] Top Bar: Now closing quick KDESU panel...";
-    quick_kde_su_panel_->hide();
-  } else {
-    qInfo() << "[INFO] Top Bar: Now opening quick KDESU panel...";
-    quick_kde_su_panel_->show();
-    quick_kde_su_panel_->move(screen_geometry_.left() + // ui_->
-      quick_kdesu_btn->x() - 9, 32);
-  }
-      */
-}
-
-void MainWindow::UpdateWlanSignalStrength() {
-  /*
-  int signal_strength = backend::WlanInfo::GetWlanSignalStrength();
-  QString wlan_icon_name;
-  switch (signal_strength) {
-    case -1:
-      wlan_icon_name = "off";
-      break;
-
-    case 0 ... 25:
-      wlan_icon_name = "1";
-      break;
-
-    case 26 ... 50:
-      wlan_icon_name = "2";
-      break;
-
-    case 51 ... 75:
-      wlan_icon_name = "3";
-      break;
-
-    case 76 ... 100:
-      wlan_icon_name = "full";
-      break;
-
-    default:
-      wlan_icon_name = "0";
-      break;
-  }
-  QString icon_path = utils::Utils::TemplateCat(QStringLiteral(
-    """:/icons/icons/3rdparty/material-symbols/wifi_%t1%.svg"""),
-    QList<QString>{wlan_icon_name});
-  // // ui_->wlan_btn->setIcon(QIcon(icon_path));
-  */
 }
 
 }  // namespace frontend
