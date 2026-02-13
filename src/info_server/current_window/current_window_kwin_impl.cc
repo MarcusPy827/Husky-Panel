@@ -63,9 +63,17 @@ void CurrentWindowKwinImpl::UpdateActiveApp(QString name, QString appid,
   }
 
   if (service) {
-    window_info_.application_name = service->name();
+    if (appid == "plasmashell" && name == "plasmashell") {
+      window_info_.application_name = "KDE Plasma";
+    } else {
+      window_info_.application_name = service->name();
+    }
   } else {
-    window_info_.application_name = name;
+    if (appid == "plasmashell" && name == "plasmashell") {
+      window_info_.application_name = "KDE Plasma";
+    } else {
+      window_info_.application_name = name;
+    }
   }
 
   window_info_.package_name = appid;

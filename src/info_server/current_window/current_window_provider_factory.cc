@@ -21,6 +21,11 @@
 #include <QDBusConnectionInterface>
 #include <QDebug>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/current_window/current_window_provider_factory.h"
 #include "src/info_server/current_window/current_window_kwin_impl.h"
 #include "src/info_server/current_window/current_window_null_impl.h"
@@ -40,8 +45,8 @@ std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
     return std::make_unique<CurrentWindowKwinImpl>(parent);
   }
 
-  qCritical() << "[ERROR] CurrentWindowProvider: Current WM is not supported. "
-    << "Current window info server could NOT be initialized.";
+  LOG(ERROR) << absl::StrCat("Current WM is NOT supported. ",
+    "Current window info server could NOT be initialized.");
   return std::make_unique<CurrentWindowNullImpl>(parent);
 }
 

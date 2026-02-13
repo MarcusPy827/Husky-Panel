@@ -19,6 +19,11 @@
 #include <QDBusReply>
 #include <QDBusMessage>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/current_window/current_window_null_impl.h"
 #include "src/utils/dbus_def.h"
 
@@ -27,13 +32,12 @@ namespace backend {
 
 CurrentWindowNullImpl::CurrentWindowNullImpl(QObject *parent) :
     CurrentWindowProvider(parent) {
-  qCritical() << "[ERROR] CurrentWindowNullImpl: Current WM is not"
-    << "supported. Current window info server could NOT be initialized.";
+  LOG(ERROR) << absl::StrCat("Current WM is NOT supported. ",
+    "Current window info server could NOT be initialized.");
 }
 
 CurrentWindowNullImpl::~CurrentWindowNullImpl() {
-  qInfo() << "[INFO] CurrentWindowNullImpl: CurrentWindowNullImpl is being"
-    << "deleted.";
+  LOG(INFO) << absl::StrCat("CurrentWindowNullImpl is being deleted.");
 }
 
 QString CurrentWindowNullImpl::GetApplicationName() {
@@ -41,7 +45,7 @@ QString CurrentWindowNullImpl::GetApplicationName() {
 }
 
 QString CurrentWindowNullImpl::GetPackageName() {
-  return "U";
+  return "";
 }
 
 }  // namespace backend
