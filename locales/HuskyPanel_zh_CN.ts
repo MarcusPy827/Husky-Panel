@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/components/app_drawer/app_drawer_btn.cc" line="40"/>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">应用程序</translation>
     </message>
 </context>
 <context>
@@ -62,7 +62,7 @@
     <message>
         <location filename="../src/components/clock_btn/clock_btn.cc" line="40"/>
         <source>INITIALIZING CLOCK...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">正在初始化时钟...</translation>
     </message>
 </context>
 <context>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../src/components/krunner_btn/krunner_btn.cc" line="43"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">搜索</translation>
     </message>
 </context>
 <context>
@@ -271,6 +271,27 @@
     </message>
 </context>
 <context>
+    <name>panel::frontend::AppDrawerBtn</name>
+    <message>
+        <source>Applications</source>
+        <translation type="vanished">应用程序</translation>
+    </message>
+</context>
+<context>
+    <name>panel::frontend::ClockBtn</name>
+    <message>
+        <source>INITIALIZING CLOCK...</source>
+        <translation type="vanished">正在初始化时钟...</translation>
+    </message>
+</context>
+<context>
+    <name>panel::frontend::KRunnerBtn</name>
+    <message>
+        <source>Search</source>
+        <translation type="vanished">搜索</translation>
+    </message>
+</context>
+<context>
     <name>panel::frontend::MainWindow</name>
     <message>
         <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="277"/>
@@ -316,19 +337,16 @@
 <context>
     <name>panel::frontend::QuickKDESU</name>
     <message>
-        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="14"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="147"/>
         <source>Form</source>
         <translation>KDESU快速面板</translation>
     </message>
     <message>
-        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="67"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="148"/>
         <source>Dolphin</source>
         <translation>文件管理</translation>
     </message>
     <message>
-        <location filename="../src/depreciated/quick_kde_su/quick_kde_su.ui" line="118"/>
         <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="149"/>
         <source>Konsole</source>
         <translation>终端</translation>

@@ -1,28 +1,11 @@
 <!DOCTYPE RCC>
 <RCC>
-  <qresource prefix="/icons">
-    <file>icons/3rdparty/material-symbols/bat_20.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_30.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_50.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_40.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_90.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_alert.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_charging.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_full.svg</file>
-    <file>icons/3rdparty/material-symbols/bat_75.svg</file>
-    <file>icons/3rdparty/material-symbols/wifi_1.svg</file>
-    <file>icons/3rdparty/material-symbols/wifi_3.svg</file>
-    <file>icons/3rdparty/material-symbols/wifi_2.svg</file>
-    <file>icons/3rdparty/material-symbols/wifi_full.svg</file>
-    <file>icons/3rdparty/material-symbols/wifi_off.svg</file>
-    <file>icons/3rdparty/material-symbols/volume_full.svg</file>
-    <file>icons/3rdparty/material-symbols/volume_high.svg</file>
-    <file>icons/3rdparty/material-symbols/volume_low.svg</file>
-    <file>icons/3rdparty/material-symbols/volume_mute.svg</file>
-  </qresource>
   <qresource prefix="/m3qw/fonts">
     <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
     <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
     <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
+  </qresource>
+  <qresource prefix="/translations">
+    <file>translations/HuskyPanel_zh_CN.qm</file>
   </qresource>
 </RCC>
