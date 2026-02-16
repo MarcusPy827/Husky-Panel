@@ -32,11 +32,15 @@ find_package(QT
   DBus
 )
 
-find_package(KF6Service REQUIRED)
+find_package(
+  KF6Service 
+  REQUIRED
+)
 
 add_subdirectory(lib/3rdparty/abseil-cpp)
 add_subdirectory(lib/3rdparty/gtest)
 add_subdirectory(lib/3rdparty/qwindowkit)
+add_subdirectory(lib/3rdparty/libdbusmenu)
 add_subdirectory(cmake/material-color-utils)
 
 find_package(Qt${QT_VERSION_MAJOR} 
@@ -80,27 +84,18 @@ set(MATERIAL_DESIGN_DEPS
   src/font_loader/font_loader.cc
 )
 
-set(COMMON_SOURCES
-  ${TS_FILES}
-  ${MATERIAL_DESIGN_DEPS}
+set(WIDGET_SOURCES
   src/mainwindow/mainwindow.cc
   src/mainwindow/mainwindow.h
+)
+
+set(UTIL_SOURCES
+  src/utils/dbus_def.h
+)
+
+set(BACKEND_SOURCES
   src/application_services/application_services.h
   src/application_services/application_services.cc
-  src/utils/dbus_def.h
-  src/components/app_indicator/app_indicator_style.h
-  src/components/app_indicator/app_indicator.h
-  src/components/app_indicator/app_indicator.cc
-  src/components/clock_btn/clock_btn.h
-  src/components/clock_btn/clock_btn.cc
-  src/components/app_drawer/app_drawer_btn.h
-  src/components/app_drawer/app_drawer_btn.cc
-  src/components/krunner_btn/krunner_btn.h
-  src/components/krunner_btn/krunner_btn.cc
-  src/components/battery_indicator/battery_indicator.h
-  src/components/battery_indicator/battery_indicator.cc
-  src/components/wlan_indicator/wlan_indicator.h
-  src/components/wlan_indicator/wlan_indicator.cc
   src/info_server/current_window/current_window_provider.h
   src/info_server/current_window/current_window_provider_factory.h
   src/info_server/current_window/current_window_provider_factory.cc
@@ -116,6 +111,33 @@ set(COMMON_SOURCES
   src/info_server/wlan_info/wlan_info.cc
   src/info_server/user_info/user_info.h
   src/info_server/user_info/user_info.cc
+  src/info_server/tray_handler/tray_handler.h
+  src/info_server/tray_handler/tray_handler.cc
+)
+
+set(FRONTEND_SOURCES
+  src/components/app_indicator/app_indicator_style.h
+  src/components/app_indicator/app_indicator.h
+  src/components/app_indicator/app_indicator.cc
+  src/components/clock_btn/clock_btn.h
+  src/components/clock_btn/clock_btn.cc
+  src/components/app_drawer/app_drawer_btn.h
+  src/components/app_drawer/app_drawer_btn.cc
+  src/components/krunner_btn/krunner_btn.h
+  src/components/krunner_btn/krunner_btn.cc
+  src/components/battery_indicator/battery_indicator.h
+  src/components/battery_indicator/battery_indicator.cc
+  src/components/wlan_indicator/wlan_indicator.h
+  src/components/wlan_indicator/wlan_indicator.cc
+)
+
+set(COMMON_SOURCES
+  ${TS_FILES}
+  ${MATERIAL_DESIGN_DEPS}
+  ${WIDGET_SOURCES}
+  ${UTIL_SOURCES}
+  ${BACKEND_SOURCES}
+  ${FRONTEND_SOURCES}
 )
 
 set(PROJECT_SOURCES
@@ -185,13 +207,14 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
-  LayerShellQtInterface
   absl::strings
   absl::flat_hash_map
   absl::raw_logging_internal
   absl::optional
   absl::log
   absl::log_initialize
+  dbusmenu-lxqt
+  LayerShellQtInterface
   MaterialColorUtils
 )
 
