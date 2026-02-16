@@ -28,10 +28,9 @@ int main(int argc, char *argv[]) {
   const QStringList ui_lang = QLocale::system().uiLanguages();
   for (const QString &locale : ui_lang) {
     const QString base_name = "HuskyPanel_" + QLocale(locale).name();
-    QString path = QCoreApplication::applicationDirPath() + "/locales/"
+    QString path = ":/translations/translations/"
       + base_name;
-    if (translator.load(base_name, QCoreApplication::applicationDirPath()
-        + "/locales/")) {
+    if (translator.load(base_name, ":/translations/translations/")) {
       qInfo() << "[ OK ] Translator: Successfully loaded translation:"
         << base_name;
       a.installTranslator(&translator);
