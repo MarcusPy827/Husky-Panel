@@ -159,6 +159,39 @@ static QString GetCommonIconBtnStyle(
         height: 32px;
         padding-left: 8px;
         padding-right: 8px;
+      }
+        
+      QToolButton[class='common_bar_icon_btn'] {
+        color: %t1%;
+        background: transparent;
+        border: 0px solid %t1%;
+        border-radius: 6px;
+        font-size: 24px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+        
+      QToolButton[class='common_bar_icon_btn']:hover {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t2%;
+        border-radius: 6px;
+        font-size: 24px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+        
+      QToolButton[class='common_bar_icon_btn']:pressed {
+        color: %t1%;
+        background: %t3%;
+        border: 0px solid %t3%;
+        border-radius: 6px;
+        font-size: 24px;
+        height: 32px;
+        padding-left: 8px;
+        padding-right: 8px;
       })"""), QList<QString>{text_hex, state_layer_hex_hover,
                              state_layer_hex_pressed});
 }

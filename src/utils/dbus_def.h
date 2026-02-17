@@ -52,4 +52,16 @@
 #define DBUS_CUSTOM_KWIN_WINDOW_INTERFACE "marcus.panel.util.AppBridge"
 #define DBUS_CUSTOM_KWIN_WINDOW_INFO_INTERFACE "UpdateActiveApp"
 
+// System Tray
+#define DBUS_STATUS_NOTIFIER_WATCHER_SERVICE "org.kde.StatusNotifierWatcher"
+#define DBUS_STATUS_NOTIFIER_WATCHER_PATH "/StatusNotifierWatcher"
+#define DBUS_STATUS_NOTIFIER_WATCHER_INTERFACE "org.kde.StatusNotifierWatcher"
+#define DBUS_STATUS_NOTIFIER_WATCHER_METHOD "RegisterStatusNotifierHost"
+#define DBUS_STATUS_NOTIFIER_WATCHER_ICON_REGISTERED_METHOD \
+  "StatusNotifierItemRegistered"
+#define DBUS_STATUS_NOTIFIER_WATCHER_ICON_UNREGISTERED_METHOD \
+  "StatusNotifierItemUnregistered"
+#define DBUS_STATUS_NOTIFIER_WATCHER_GET_REGISTERED_METHOD \
+  "RegisteredStatusNotifierItems"
+
 #endif  // SRC_UTILS_DBUS_DEF_H_

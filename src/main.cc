@@ -19,11 +19,22 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
+#include "src/info_server/tray_handler/tray_def.h"
 #include "src/mainwindow/mainwindow.h"
 
 int main(int argc, char *argv[]) {
+  LOG(INFO) << absl::StrCat("Initializing SNI types...");
+  panel::backend::InitSystemTrayTypes();
+
+  LOG(INFO) << absl::StrCat("Now initializing panel...");
   QApplication a(argc, argv);
 
+  LOG(INFO) << absl::StrCat("Loading locales...");
   QTranslator translator;
   const QStringList ui_lang = QLocale::system().uiLanguages();
   for (const QString &locale : ui_lang) {
@@ -31,17 +42,17 @@ int main(int argc, char *argv[]) {
     QString path = ":/translations/translations/"
       + base_name;
     if (translator.load(base_name, ":/translations/translations/")) {
-      qInfo() << "[ OK ] Translator: Successfully loaded translation:"
-        << base_name;
+      LOG(INFO) << absl::StrCat("Successfully loaded translation: ",
+        base_name.toStdString(), ".");
       a.installTranslator(&translator);
       break;
     } else {
-      qWarning() << "[WARN] Translator: Failed to load"
-        << base_name << "at" << QCoreApplication::applicationDirPath()
-        + "/locales/";
+      LOG(WARNING) << absl::StrCat("Failed to load translation file '",
+        base_name.toStdString(), "' at '", path.toStdString(), "'.");
     }
   }
 
+  LOG(INFO) << absl::StrCat("Loading panel window...");
   panel::frontend::MainWindow w;
   w.show();
   return a.exec();

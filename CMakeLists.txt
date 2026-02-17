@@ -111,6 +111,7 @@ set(BACKEND_SOURCES
   src/info_server/wlan_info/wlan_info.cc
   src/info_server/user_info/user_info.h
   src/info_server/user_info/user_info.cc
+  src/info_server/tray_handler/tray_def.h
   src/info_server/tray_handler/tray_handler.h
   src/info_server/tray_handler/tray_handler.cc
 )
@@ -129,6 +130,10 @@ set(FRONTEND_SOURCES
   src/components/battery_indicator/battery_indicator.cc
   src/components/wlan_indicator/wlan_indicator.h
   src/components/wlan_indicator/wlan_indicator.cc
+  src/components/system_tray/system_tray.h
+  src/components/system_tray/system_tray.cc
+  src/components/system_tray/system_tray_icon_render.h
+  src/components/system_tray/system_tray_icon_render.cc
 )
 
 set(COMMON_SOURCES
@@ -179,6 +184,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     ${PROJECT_SOURCES}
     ${QM_FILES}
     res/resources.qrc
+  )
+
+  target_include_directories(HuskyPanel PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/lib/3rdparty/libdbusmenu/src"
   )
 else()
   if(ANDROID)

@@ -19,6 +19,10 @@
 #define SRC_INFO_SERVER_TRAY_HANDLER_TRAY_HANDLER_H_
 
 #include <QObject>
+#include <QString>
+#include <QDBusServiceWatcher>
+
+#include "src/info_server/tray_handler/tray_def.h"
 
 namespace panel {
 namespace backend {
@@ -29,8 +33,18 @@ class TrayHandler : public QObject {
  public:
   explicit TrayHandler();
   ~TrayHandler();
+  void InitDataServer();
 
  private:
+  QDBusServiceWatcher * service_watcher_ = nullptr;
+
+ private slots:
+  void OnTrayIconRegistered(const QString& service);
+  void OnTrayIconUnregistered(const QString& service);
+
+ signals:
+  void NewTrayIcon(const QString& services);
+  void TrayIconDeleted(const QString& services);
 };
 
 }  // namespace backend
