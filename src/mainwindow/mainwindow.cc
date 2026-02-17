@@ -156,6 +156,12 @@ void MainWindow::LoadMiddleSlot() {
 }
 
 void MainWindow::LoadRightSlot() {
+  if (system_tray_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading system tray...");
+    system_tray_ = new SystemTray();
+    slot_right_->addWidget(system_tray_);
+  }
+
   if (wlan_indicator_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading WLAN indicator...");
     wlan_indicator_ = new WLANIndicator();
