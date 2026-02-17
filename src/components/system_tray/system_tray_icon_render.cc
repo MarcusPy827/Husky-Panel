@@ -254,20 +254,20 @@ void SystemTrayIcon::UpdateIcon() {
 
   // Otherwise it will be a pixmap...
   QDBusMessage call = QDBusMessage::createMethodCall(
-      icon_dbus_interface_->service(),
-      icon_dbus_interface_->path(),
-      "org.freedesktop.DBus.Properties", "Get");
+    icon_dbus_interface_->service(),
+    icon_dbus_interface_->path(),
+    "org.freedesktop.DBus.Properties", "Get");
   call << "org.kde.StatusNotifierItem" << "IconPixmap";
 
   QDBusReply<QDBusVariant> reply = QDBusConnection::sessionBus().call(call);
 
   if (!reply.isValid()) {
-      call = QDBusMessage::createMethodCall(
-          icon_dbus_interface_->service(),
-          icon_dbus_interface_->path(),
-          "org.freedesktop.DBus.Properties", "Get");
-      call << "org.freedesktop.StatusNotifierItem" << "IconPixmap";
-      reply = QDBusConnection::sessionBus().call(call);
+    call = QDBusMessage::createMethodCall(
+      icon_dbus_interface_->service(),
+      icon_dbus_interface_->path(),
+      "org.freedesktop.DBus.Properties", "Get");
+    call << "org.freedesktop.StatusNotifierItem" << "IconPixmap";
+    reply = QDBusConnection::sessionBus().call(call);
   }
 
   if (!reply.isValid()) return;
@@ -300,6 +300,9 @@ void SystemTrayIcon::UpdateIcon() {
       continue;
     }
 
+    // Referenced from LXQt system tray, original licensed under GPL v2.0+
+    // Original repository: https://github.com/lxqt/lxqt-panel.git
+    // Location: ./plugin-statusnotifier/statusnotifierbutton.cpp
     int diff = std::abs(w - target_size);
     if (diff < best_diff) {
       best_diff = diff;
