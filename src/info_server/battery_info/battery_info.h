@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,20 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_BATTERY_INFO_BATTERY_INFO_H_
-#define SRC_BATTERY_INFO_BATTERY_INFO_H_
+#ifndef SRC_INFO_SERVER_BATTERY_INFO_BATTERY_INFO_H_
+#define SRC_INFO_SERVER_BATTERY_INFO_BATTERY_INFO_H_
 
+#include <QObject>
 #include <QString>
+#include <QStringList>
+#include <QVariantMap>
 
 namespace panel {
 namespace backend {
 
-class BatteryInfo {
+class BatteryInfo : public QObject {
+  Q_OBJECT
  public:
+  explicit BatteryInfo();
+  ~BatteryInfo() = default;
+
   static int GetBatteryLevel();
+  static bool GetIsCharging();
+
+ private slots:
+  void OnUpdateProperties(const QString& interface, const QVariantMap& changed,
+    const QStringList& invalidated);
+
+ signals:
+  void StatusChanged();
 };
 
 }  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_BATTERY_INFO_BATTERY_INFO_H_
+#endif  // SRC_INFO_SERVER_BATTERY_INFO_BATTERY_INFO_H_

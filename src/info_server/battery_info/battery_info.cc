@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,24 @@
 #include <QDBusInterface>
 #include <QDebug>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/battery_info/battery_info.h"
 #include "src/utils/dbus_def.h"
 
 namespace panel {
 namespace backend {
+
+BatteryInfo::BatteryInfo() {
+  QDBusConnection::systemBus().connect(
+    DBUS_UPOWER_SERVICE, DBUS_UPOWER_DISPLAY_SERVICE_PATH,
+    DBUS_PROPERTIES_INTERFACE, DBUS_PROP_UPDTE_METHOD, this,
+    SLOT(OnUpdateProperties(QString, QVariantMap, QStringList)));
+}
+
 
 int BatteryInfo::GetBatteryLevel() {
   QDBusInterface interface(DBUS_UPOWER_SERVICE,
@@ -30,12 +43,37 @@ int BatteryInfo::GetBatteryLevel() {
     QDBusConnection::systemBus());
 
   if (!interface.isValid()) {
-    qCritical() << "[ERROR] Battery Info: Failed to connect to UPower D-Bus"
-      << "interface.";
-    return -1;
+    LOG(ERROR) << absl::StrCat("Failed to connect to UPower D-Bus interface.");
   }
+
   QVariant percentage = interface.property("Percentage");
   return percentage.toInt();
+}
+
+bool BatteryInfo::GetIsCharging() {
+  QDBusInterface interface(DBUS_UPOWER_SERVICE,
+    DBUS_UPOWER_DISPLAY_SERVICE_PATH, DBUS_UPOWER_DEVICE_INTERFACE,
+    QDBusConnection::systemBus());
+
+  if (!interface.isValid()) {
+    LOG(ERROR) << absl::StrCat("Failed to connect to UPower D-Bus interface.");
+  }
+
+  QVariant state_raw = interface.property("State");
+  int state = state_raw.toInt();
+  return (state == 1 || state == 5);
+}
+
+void BatteryInfo::OnUpdateProperties(const QString& interface,
+    const QVariantMap& changed, const QStringList& invalidated) {
+  Q_UNUSED(changed);
+  Q_UNUSED(invalidated);
+
+  if (interface != DBUS_UPOWER_DEVICE_INTERFACE) {
+    return;
+  }
+
+  emit StatusChanged();
 }
 
 }  // namespace backend
