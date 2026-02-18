@@ -25,9 +25,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
+  <!--
   <a href="https://github.com/github_username/repo_name">
     <img style="display: none;" src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
+  -->
 
 <h3 align="center">Husky Panel</h3>
 
@@ -38,11 +40,13 @@
     <img src="./docs/screenshots/screenshot.png" />
     <br />
     <br />
+    <!--
     <a style="display: none;"  href="https://github.com/github_username/repo_name">View Demo</a>
     <span style="display: none;" >&middot;</span>
     <a style="display: none;"  href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     <span style="display: none;" >&middot;</span>
     <a style="display: none;"  href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    -->
   </p>
 </div>
 
