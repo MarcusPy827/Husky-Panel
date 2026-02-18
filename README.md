@@ -36,7 +36,9 @@
   <p align="center">
     (WIP) Yet another bar for Linux on Wayland session...
     <br />
+    <!--
     <a style="display: none;" href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    -->
     <img src="./docs/screenshots/screenshot.png" />
     <br />
     <br />
