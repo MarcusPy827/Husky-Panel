@@ -15,34 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_THEME_LOADER_THEME_LOADER_H_
-#define SRC_THEME_LOADER_THEME_LOADER_H_
+#ifndef SRC_COMPONENTS_CALENDAR_CALENDAR_H_
+#define SRC_COMPONENTS_CALENDAR_CALENDAR_H_
 
-#include <QObject>
-#include <QList>
 #include <QWidget>
+#include <QCalendarWidget>
 
-#include "src/theme_loader/theme_conf.h"
+#include "src/info_server/clock/clock.h"
+#include "src/theme_loader/theme_loader.h"
 
 namespace panel {
-namespace loader {
+namespace frontend {
 
-class ThemeLoader: public QObject {
+class Calendar : public QWidget {
   Q_OBJECT
 
  public:
-  explicit ThemeLoader(QWidget * base_layer, QString base_color,
-    QWidget * parent = nullptr);
-  ~ThemeLoader() = default;
-  void LoadThemeFromMap(bool use_dark_mode = false);
-  bool IsDarkMode();
+  explicit Calendar(QWidget *parent = nullptr);
+  ~Calendar();
 
  private:
-  QWidget * install_target_ = nullptr;
-  StyleTuple theme_map_;
+  QCalendarWidget * cal_ = nullptr;
+  loader::ThemeLoader * theme_loader_ = nullptr;
 };
 
-}  // namespace loader
+}  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_THEME_LOADER_THEME_LOADER_H_
+#endif  // SRC_COMPONENTS_CALENDAR_CALENDAR_H_
