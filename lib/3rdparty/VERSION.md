@@ -1,4 +1,13 @@
 # VERSION | 第三方库版本
+## Layershell-Qt
+* **Author · 原作者**: KDE
+* **Repository · 原储存库**: https://github.com/KDE/layer-shell-qt.git
+* **Commit ID**: `58f549d136375ca932a79e18df7b33fafc88e1dd`.
+* **Commit date · 提交日期**: Dec 24<sup>th</sup>, 2025.
+* **Check out date · 拉取日期**: Dec 26<sup>th</sup>, 2025.
+* **License · 许可证**: CC0-1.0.
+* **Note · 备注**: See `README.md.license` for license. | 请打开`README.md.license`以阅读许可证。
+
 ## Material Color Utility
 * **Author · 原作者**: Material Foundation
 * **Repository · 原储存库**: https://github.com/material-foundation/material-color-utilities/tree/main
