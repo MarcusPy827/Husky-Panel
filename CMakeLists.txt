@@ -134,6 +134,9 @@ set(FRONTEND_SOURCES
   src/components/system_tray/system_tray.cc
   src/components/system_tray/system_tray_icon_render.h
   src/components/system_tray/system_tray_icon_render.cc
+  src/components/calendar/calendar_style.h
+  src/components/calendar/calendar.h
+  src/components/calendar/calendar.cc
 )
 
 set(COMMON_SOURCES

@@ -23,6 +23,7 @@
 #include <QPushButton>
 
 #include "src/info_server/clock/clock.h"
+#include "src/components/calendar/calendar.h"
 
 namespace panel {
 namespace frontend {
@@ -31,13 +32,17 @@ class ClockBtn : public QWidget {
   Q_OBJECT
 
  public:
-  explicit ClockBtn(QWidget *parent = nullptr);
+  explicit ClockBtn(Calendar * calandar_in, QWidget *parent = nullptr);
   ~ClockBtn();
   QPushButton * GetBtn();
 
  private:
   QPushButton * btn_ = nullptr;
   backend::Clock * clock_updater_ = nullptr;
+  Calendar * calendar_ = nullptr;
+
+ private slots:
+  void ToggleCalendar();
 };
 
 }  // namespace frontend

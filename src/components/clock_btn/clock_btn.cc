@@ -27,7 +27,7 @@
 namespace panel {
 namespace frontend {
 
-ClockBtn::ClockBtn(QWidget *parent) : QWidget(parent) {
+ClockBtn::ClockBtn(Calendar * calandar_in, QWidget *parent) : QWidget(parent) {
   QHBoxLayout * layout_gen = new QHBoxLayout();
   layout_gen->setContentsMargins(0, 0, 0, 0);
   layout_gen->setSpacing(0);
@@ -38,11 +38,21 @@ ClockBtn::ClockBtn(QWidget *parent) : QWidget(parent) {
     btn_->setProperty("class", "common_bar_btn");
   }
   btn_->setText(tr("INITIALIZING CLOCK..."));
+  QObject::connect(btn_, &QPushButton::clicked, this,
+    &ClockBtn::ToggleCalendar);
   layout_gen->addWidget(btn_);
 
   LOG(INFO) << absl::StrCat("Initializing clock...");
   if (clock_updater_ == nullptr) {
     clock_updater_ = new backend::Clock(btn_);
+  }
+
+  LOG(INFO) << absl::StrCat("Initializing calendar...");
+  if (calandar_in == nullptr) {
+    LOG(ERROR) << absl::StrCat("Calendar widget is null pointer, calendar ",
+      "widget will NOT show.");
+  } else {
+    calendar_ = calandar_in;
   }
 }
 
@@ -56,6 +66,20 @@ QPushButton* ClockBtn::GetBtn() {
       "nullptr passing in!");
   }
   return btn_;
+}
+
+void ClockBtn::ToggleCalendar() {
+  if (calendar_ == nullptr) {
+    LOG(ERROR) << absl::StrCat(
+      "Calendar widget is NOT initialized, aborting...");
+    return;
+  }
+
+  if (calendar_->isVisible()) {
+    calendar_->hide();
+  } else {
+    calendar_->show();
+  }
 }
 
 }  // namespace frontend

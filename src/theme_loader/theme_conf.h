@@ -29,6 +29,7 @@
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 #include "src/utils/colors/colors.h"
 #include "src/components/app_indicator/app_indicator_style.h"
+#include "src/components/calendar/calendar_style.h"
 #include "lib/3rdparty/material-color-utilities/cpp/dynamiccolor/dynamic_scheme.h"
 
 namespace panel {
@@ -197,7 +198,7 @@ static QString GetCommonIconBtnStyle(
 }
 
 static QString GetCommonSmallIconBtnStyle(
-  const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
   material_color_utilities::Argb text_color = palette->GetOnSurface();
   QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
   material_color_utilities::Argb state_layer_color = palette
@@ -246,18 +247,38 @@ static QString GetCommonSmallIconBtnStyle(
                              state_layer_hex_pressed});
 }
 
+static QString GetSmallAppBarBaseStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb bg_color = palette->GetSurfaceContainer();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_bar_container_small'] {
+        min-height: 64px;
+        max-height: 64px;
+        background: %t1%;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+      })"""), QList<QString>{bg_hex});
+}
+
 static StyleTuple GetThemeMap(const SchemeTuple& conf) {
   return {
     GetAppBackground(conf.dark)
       + GetAppIndicatorStyle(conf.dark)
       + GetCommonBtnStyle(conf.dark)
       + GetCommonIconBtnStyle(conf.dark)
-      + GetCommonSmallIconBtnStyle(conf.dark),
+      + GetCommonSmallIconBtnStyle(conf.dark)
+      + GetCalendarStyle(conf.light)
+      + GetSmallAppBarBaseStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetAppIndicatorStyle(conf.dark)
       + GetCommonBtnStyle(conf.dark)
       + GetCommonIconBtnStyle(conf.dark)
       + GetCommonSmallIconBtnStyle(conf.dark)
+      + GetCalendarStyle(conf.dark)
+      + GetSmallAppBarBaseStyle(conf.dark)
   };
 }
 

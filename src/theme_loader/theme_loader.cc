@@ -39,11 +39,14 @@ ThemeLoader::ThemeLoader(QWidget * base_layer, QString base_color,
   }
 
   install_target_ = base_layer;
-  palette_conf_.dark = utils::ColorPaletteWrapper::GenScheme(base_color,
+  SchemeTuple palette_conf;
+
+  palette_conf.dark = utils::ColorPaletteWrapper::GenScheme(base_color,
     utils::ColorSchemeType::kTonalSpot, true);
-  palette_conf_.light = utils::ColorPaletteWrapper::GenScheme(base_color,
+  palette_conf.light = utils::ColorPaletteWrapper::GenScheme(base_color,
     utils::ColorSchemeType::kTonalSpot, false);
-  theme_map_ = GetThemeMap(palette_conf_);
+  theme_map_ = GetThemeMap(palette_conf);
+
   LoadThemeFromMap(IsDarkMode());
 
   connect(qApp->styleHints(), &QStyleHints::colorSchemeChanged, this,
