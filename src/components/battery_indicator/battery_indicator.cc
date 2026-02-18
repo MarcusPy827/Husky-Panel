@@ -44,10 +44,24 @@ BatteryIndicator::BatteryIndicator(QWidget *parent) : QWidget(parent) {
   btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
   layout_gen->addWidget(btn_);
 
-  QTimer * timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this,
-    &BatteryIndicator::UpdateBatteryPercentage);
-  timer->start(1000);
+  if (charging_indicator_ == nullptr) {
+    charging_indicator_ = new QPushButton();
+    charging_indicator_->setProperty("class",
+      "common_bar_extra_small_icon_btn");
+    charging_indicator_->setVisible(false);
+    charging_indicator_->setFont(
+      loader::FontLoader::GetRoundedMaterialSymbolFont());
+    charging_indicator_->setText("bolt");
+  }
+  layout_gen->addWidget(charging_indicator_);
+
+  if (battery_info_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Initializing battery Info Server...");
+    battery_info_ = new backend::BatteryInfo();
+  }
+  QObject::connect(battery_info_, &backend::BatteryInfo::StatusChanged, this,
+    &BatteryIndicator::UpdateBatteryStatus);
+  UpdateBatteryStatus();
 }
 
 BatteryIndicator::~BatteryIndicator() {
@@ -62,7 +76,7 @@ QPushButton* BatteryIndicator::GetBtn() {
   return btn_;
 }
 
-void BatteryIndicator::UpdateBatteryPercentage() {
+void BatteryIndicator::UpdateBatteryStatus() {
   if (btn_ == nullptr) {
     LOG(ERROR) << absl::StrCat("Battery indicator button is a null pointer! ",
       "Skipping updating icons...");
@@ -70,6 +84,7 @@ void BatteryIndicator::UpdateBatteryPercentage() {
   }
 
   int battery_level = backend::BatteryInfo::GetBatteryLevel();
+  bool is_charging = backend::BatteryInfo::GetIsCharging();
   QString battery_icon_name = "battery_android_frame_";
   switch (battery_level) {
     case 0 ... 20:
@@ -105,6 +120,12 @@ void BatteryIndicator::UpdateBatteryPercentage() {
       break;
   }
   btn_->setText(battery_icon_name);
+
+  if (is_charging) {
+    charging_indicator_->setVisible(true);
+  } else {
+    charging_indicator_->setVisible(false);
+  }
 }
 
 }  // namespace frontend

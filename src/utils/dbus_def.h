@@ -24,6 +24,8 @@
 #define DBUS_UPOWER_DISPLAY_SERVICE_PATH \
   "/org/freedesktop/UPower/devices/DisplayDevice"
 #define DBUS_UPOWER_DEVICE_INTERFACE "org.freedesktop.UPower.Device"
+#define DBUS_PROPERTIES_INTERFACE "org.freedesktop.DBus.Properties"
+#define DBUS_PROP_UPDTE_METHOD "PropertiesChanged"
 
 // KDE KRunner
 #define DBUS_KRUNNER_SERVICE "org.kde.krunner"

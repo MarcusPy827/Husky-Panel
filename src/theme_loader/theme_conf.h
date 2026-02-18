@@ -247,6 +247,56 @@ static QString GetCommonSmallIconBtnStyle(
                              state_layer_hex_pressed});
 }
 
+static QString GetCommonExtraSmallIconBtnStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb text_color = palette->GetOnSurface();
+  QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.08);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.1);
+
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QPushButton[class='common_bar_extra_small_icon_btn'] {
+        color: %t1%;
+        background: transparent;
+        border: 0px solid %t1%;
+        border-radius: 6px;
+        font-size: 14px;
+        height: 32px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+        
+      QPushButton[class='common_bar_extra_small_icon_btn']:hover {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t2%;
+        border-radius: 6px;
+        font-size: 14px;
+        height: 32px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+        
+      QPushButton[class='common_bar_extra_small_icon_btn']:pressed {
+        color: %t1%;
+        background: %t3%;
+        border: 0px solid %t3%;
+        border-radius: 6px;
+        font-size: 14px;
+        height: 32px;
+        padding-left: 4px;
+        padding-right: 4px;
+      })"""), QList<QString>{text_hex, state_layer_hex_hover,
+                             state_layer_hex_pressed});
+}
+
 static QString GetSmallAppBarBaseStyle(
     const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
   material_color_utilities::Argb bg_color = palette->GetSurfaceContainer();
@@ -270,6 +320,7 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetCommonBtnStyle(conf.dark)
       + GetCommonIconBtnStyle(conf.dark)
       + GetCommonSmallIconBtnStyle(conf.dark)
+      + GetCommonExtraSmallIconBtnStyle(conf.dark)
       + GetCalendarStyle(conf.light)
       + GetSmallAppBarBaseStyle(conf.light),
     GetAppBackground(conf.dark)
@@ -277,6 +328,7 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetCommonBtnStyle(conf.dark)
       + GetCommonIconBtnStyle(conf.dark)
       + GetCommonSmallIconBtnStyle(conf.dark)
+      + GetCommonExtraSmallIconBtnStyle(conf.dark)
       + GetCalendarStyle(conf.dark)
       + GetSmallAppBarBaseStyle(conf.dark)
   };

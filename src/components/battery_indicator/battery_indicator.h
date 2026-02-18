@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QPushButton>
 
+#include "src/info_server/battery_info/battery_info.h"
+
 namespace panel {
 namespace frontend {
 
@@ -34,9 +36,11 @@ class BatteryIndicator : public QWidget {
 
  private:
   QPushButton * btn_ = nullptr;
+  QPushButton * charging_indicator_ = nullptr;
+  backend::BatteryInfo * battery_info_ = nullptr;
 
- public slots:
-  void UpdateBatteryPercentage();
+ private slots:
+  void UpdateBatteryStatus();
 };
 
 }  // namespace frontend
