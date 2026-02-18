@@ -54,8 +54,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
       KeyboardInteractivityNone);
     layer_shell->setExclusiveZone(inclusive_zone_height_);
   } else {
-    qFatal() << tr(
-      "Failed to get native window handle. Please check your session,");
+    LOG(ERROR) << absl::StrCat("Failed to get native window handle. ",
+      "Please check your session.");
     return;
   }
 
@@ -118,9 +118,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 }
 
 MainWindow::~MainWindow() {
-  //delete quick_kde_su_panel_;
-  //delete clock_updater_;
-  qInfo() << "[ OK ] Top Bar: Successfully cleaned up main window.";
+  LOG(INFO) << absl::StrCat("Successfully cleaned up main window.");
 }
 
 void MainWindow::HandleTheme() {
@@ -174,9 +172,14 @@ void MainWindow::LoadRightSlot() {
     slot_right_->addWidget(battery_indicator_);
   }
 
+  if (calendar_ == nullptr) {
+    LOG(INFO) << absl::StrCat("Now loading calendar...");
+    calendar_ = new Calendar();
+  }
+
   if (clock_btn_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading clock...");
-    clock_btn_ = new ClockBtn();
+    clock_btn_ = new ClockBtn(calendar_);
     slot_right_->addWidget(clock_btn_);
   }
 }

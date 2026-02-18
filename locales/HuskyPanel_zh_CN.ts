@@ -6,7 +6,24 @@
     <message>
         <location filename="../src/components/app_drawer/app_drawer_btn.cc" line="40"/>
         <source>Applications</source>
-        <translation type="unfinished">应用程序</translation>
+        <translation>应用程序</translation>
+    </message>
+</context>
+<context>
+    <name>Calendar</name>
+    <message>
+        <source>Top Panel</source>
+        <translation type="obsolete">顶栏</translation>
+    </message>
+    <message>
+        <source>Failed to get native window handle. Please check your session,</source>
+        <translation type="obsolete">无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
+    </message>
+    <message>
+        <location filename="../src/components/calendar/calendar.cc" line="41"/>
+        <location filename="../src/components/calendar/calendar.cc" line="91"/>
+        <source>Calendar</source>
+        <translation>日历</translation>
     </message>
 </context>
 <context>
@@ -14,47 +31,47 @@
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="82"/>
         <source>yyyy-M-</source>
-        <translation type="unfinished">yyyy年M月</translation>
+        <translation>yyyy年M月</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="83"/>
         <source>dd</source>
-        <translation type="unfinished">dd日</translation>
+        <translation>dd日</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="92"/>
         <source>Mon.</source>
-        <translation type="unfinished">星期一</translation>
+        <translation>星期一</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="93"/>
         <source>Tue.</source>
-        <translation type="unfinished">星期二</translation>
+        <translation>星期二</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="94"/>
         <source>Wed.</source>
-        <translation type="unfinished">星期三</translation>
+        <translation>星期三</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="95"/>
         <source>Thu.</source>
-        <translation type="unfinished">星期四</translation>
+        <translation>星期四</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="96"/>
         <source>Fri.</source>
-        <translation type="unfinished">星期五</translation>
+        <translation>星期五</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="97"/>
         <source>Sat.</source>
-        <translation type="unfinished">星期六</translation>
+        <translation>星期六</translation>
     </message>
     <message>
         <location filename="../src/info_server/clock/clock.cc" line="98"/>
         <source>Sun.</source>
-        <translation type="unfinished">星期日</translation>
+        <translation>星期日</translation>
     </message>
 </context>
 <context>
@@ -62,7 +79,7 @@
     <message>
         <location filename="../src/components/clock_btn/clock_btn.cc" line="40"/>
         <source>INITIALIZING CLOCK...</source>
-        <translation type="unfinished">正在初始化时钟...</translation>
+        <translation>正在初始化时钟...</translation>
     </message>
 </context>
 <context>
@@ -70,52 +87,52 @@
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="15"/>
         <source>QWindowKit QtQuick Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>QWindowKit QtQuick演示</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="163"/>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>主题</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="171"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>浅色</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="177"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>深色</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="186"/>
         <source>Special effect</source>
-        <translation type="unfinished"></translation>
+        <translation>特殊效果</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="195"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="209"/>
         <source>DWM blur</source>
-        <translation type="unfinished"></translation>
+        <translation>DWM模糊</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="222"/>
         <source>Acrylic material</source>
-        <translation type="unfinished"></translation>
+        <translation>亚克力效果</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="235"/>
         <source>Mica</source>
-        <translation type="unfinished"></translation>
+        <translation>Mica特效</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/FramelessWindow.qml" line="248"/>
         <source>Mica Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Mica Alt特效</translation>
     </message>
 </context>
 <context>
@@ -123,7 +140,7 @@
     <message>
         <location filename="../src/components/krunner_btn/krunner_btn.cc" line="43"/>
         <source>Search</source>
-        <translation type="unfinished">搜索</translation>
+        <translation>搜索</translation>
     </message>
 </context>
 <context>
@@ -131,87 +148,87 @@
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="63"/>
         <source>Example MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>示例主窗口</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="144"/>
         <source>File(&amp;F)</source>
-        <translation type="unfinished"></translation>
+        <translation>文件 (&amp;F)</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="145"/>
         <source>New(&amp;N)</source>
-        <translation type="unfinished"></translation>
+        <translation>新建 (&amp;N)</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="146"/>
         <source>Open(&amp;O)</source>
-        <translation type="unfinished"></translation>
+        <translation>打开 （&amp;O）</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="149"/>
         <source>Edit(&amp;E)</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑 (&amp;E)</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="150"/>
         <source>Undo(&amp;U)</source>
-        <translation type="unfinished"></translation>
+        <translation>撤销 （&amp;U）</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="151"/>
         <source>Redo(&amp;R)</source>
-        <translation type="unfinished"></translation>
+        <translation>重做 (&amp;R)</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="154"/>
         <source>Enable dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>开启深色主题</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="164"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="169"/>
         <source>Enable DWM blur</source>
-        <translation type="unfinished"></translation>
+        <translation>开启DEM模糊</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="173"/>
         <source>Enable acrylic material</source>
-        <translation type="unfinished"></translation>
+        <translation>开启亚克力材质</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="177"/>
         <source>Enable mica</source>
-        <translation type="unfinished"></translation>
+        <translation>开启Mica特效</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="181"/>
         <source>Enable mica alt</source>
-        <translation type="unfinished"></translation>
+        <translation>开启Mica Alt特效</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="218"/>
         <source>Dark blur</source>
-        <translation type="unfinished"></translation>
+        <translation>深色模糊</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="230"/>
         <source>Light blur</source>
-        <translation type="unfinished"></translation>
+        <translation>浅色模糊</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="242"/>
         <source>No blur</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭模糊</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/mainwindow/mainwindow.cpp" line="261"/>
         <source>Settings(&amp;S)</source>
-        <translation type="unfinished"></translation>
+        <translation>设置 (&amp;S)</translation>
     </message>
 </context>
 <context>
@@ -219,12 +236,12 @@
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/main.qml" line="33"/>
         <source>Open Child Window</source>
-        <translation type="unfinished"></translation>
+        <translation>打开子窗体</translation>
     </message>
     <message>
         <location filename="../lib/3rdparty/qwindowkit/examples/qml/main.qml" line="38"/>
         <source>Open Drawer</source>
-        <translation type="unfinished"></translation>
+        <translation>打开抽屉</translation>
     </message>
 </context>
 <context>
@@ -294,34 +311,28 @@
 <context>
     <name>panel::frontend::MainWindow</name>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="277"/>
         <source>Form</source>
-        <translation>顶栏</translation>
+        <translation type="vanished">顶栏</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="279"/>
         <source>User Profile 1</source>
-        <translation>用户资料1</translation>
+        <translation type="vanished">用户资料1</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="280"/>
         <source>Apps</source>
-        <translation>应用程序</translation>
+        <translation type="vanished">应用程序</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="281"/>
         <source>KRunner</source>
-        <translation>搜索</translation>
+        <translation type="vanished">搜索</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="282"/>
         <source>KDESU</source>
-        <translation>以SU身份执行</translation>
+        <translation type="vanished">以SU身份执行</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/mainwindow/ui_mainwindow.h" line="286"/>
         <source>CLOCK INITIALIZING</source>
-        <translation>时钟正在初始化</translation>
+        <translation type="vanished">时钟正在初始化</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cc" line="39"/>
@@ -329,27 +340,23 @@
         <translation>顶栏</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="57"/>
         <source>Failed to get native window handle. Please check your session,</source>
-        <translation>无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
+        <translation type="vanished">无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
     </message>
 </context>
 <context>
     <name>panel::frontend::QuickKDESU</name>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="147"/>
         <source>Form</source>
-        <translation>KDESU快速面板</translation>
+        <translation type="vanished">KDESU快速面板</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="148"/>
         <source>Dolphin</source>
-        <translation>文件管理</translation>
+        <translation type="vanished">文件管理</translation>
     </message>
     <message>
-        <location filename="../build/HuskyPanel_autogen/include/src/quick_kde_su/ui_quick_kde_su.h" line="149"/>
         <source>Konsole</source>
-        <translation>终端</translation>
+        <translation type="vanished">终端</translation>
     </message>
 </context>
 </TS>

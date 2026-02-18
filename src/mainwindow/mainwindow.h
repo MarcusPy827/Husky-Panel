@@ -29,6 +29,7 @@
 #include "src/components/wlan_indicator/wlan_indicator.h"
 #include "src/components/battery_indicator/battery_indicator.h"
 #include "src/components/clock_btn/clock_btn.h"
+#include "src/components/calendar/calendar.h"
 #include "src/theme_loader/theme_loader.h"
 
 namespace panel {
@@ -61,6 +62,7 @@ class MainWindow : public QWidget {
   WLANIndicator * wlan_indicator_ = nullptr;
   BatteryIndicator * battery_indicator_ = nullptr;
   ClockBtn * clock_btn_ = nullptr;
+  Calendar * calendar_ = nullptr;
   loader::ThemeLoader * theme_loader_ = nullptr;
 
  private slots:
