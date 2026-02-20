@@ -36,9 +36,16 @@ AppDrawerBtn::AppDrawerBtn(QWidget *parent) : QWidget(parent) {
   if (btn_ == nullptr) {
     btn_ = new QPushButton();
     btn_->setProperty("class", "common_bar_btn");
+    QObject::connect(btn_, &QPushButton::clicked, this,
+      &AppDrawerBtn::ToggleAppDrawer);
   }
   btn_->setText(tr("Applications"));
   layout_gen->addWidget(btn_);
+
+  if (app_drawer_ == nullptr) {
+    app_drawer_ = new AppDrawer();
+    app_drawer_->setVisible(false);
+  }
 }
 
 AppDrawerBtn::~AppDrawerBtn() {
@@ -51,6 +58,22 @@ QPushButton* AppDrawerBtn::GetBtn() {
       "a nullptr passing in!");
   }
   return btn_;
+}
+
+void AppDrawerBtn::ToggleAppDrawer() {
+  if (app_drawer_ == nullptr) {
+    LOG(ERROR) << absl::StrCat(
+      "App drawer is NOT initialized, now aborting...");
+    return;
+  }
+
+  if (!app_drawer_->isHidden()) {
+    LOG(INFO) << absl::StrCat("Hiding application drawer...");
+    app_drawer_->hide();
+  } else {
+    LOG(INFO) << absl::StrCat("Showing application drawer...");
+    app_drawer_->show();
+  }
 }
 
 }  // namespace frontend

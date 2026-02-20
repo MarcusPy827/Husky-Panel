@@ -15,34 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_SIDE_PANE_ITEM_H_
+#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_SIDE_PANE_ITEM_H_
 
 #include <QWidget>
-#include <QPushButton>
-
-#include "src/components/app_drawer/app_drawer.h"
+#include <QString>
+#include <QLabel>
 
 namespace panel {
 namespace frontend {
 
-class AppDrawerBtn : public QWidget {
+class AppDrawerSidePaneItem : public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppDrawerBtn(QWidget *parent = nullptr);
-  ~AppDrawerBtn();
-  QPushButton * GetBtn();
+  explicit AppDrawerSidePaneItem(QString icon, QString name,
+    QString group_identifer, QString id, bool is_default = false,
+    QWidget * parent = nullptr);
+  ~AppDrawerSidePaneItem();
 
  private:
-  QPushButton * btn_ = nullptr;
-  AppDrawer * app_drawer_ = nullptr;
-
- private slots:
-  void ToggleAppDrawer();
+  QLabel * icon_ = nullptr;
+  QLabel * label_ = nullptr;
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_SIDE_PANE_ITEM_H_
