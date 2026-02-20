@@ -30,6 +30,7 @@
 #include "src/utils/colors/colors.h"
 #include "src/components/app_indicator/app_indicator_style.h"
 #include "src/components/calendar/calendar_style.h"
+#include "src/components/app_drawer/app_drawer_style.h"
 #include "lib/3rdparty/material-color-utilities/cpp/dynamiccolor/dynamic_scheme.h"
 
 namespace panel {
@@ -313,6 +314,141 @@ static QString GetSmallAppBarBaseStyle(
       })"""), QList<QString>{bg_hex});
 }
 
+static QString GetAppBarIconBtnStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb text_color = palette->GetOnSurface();
+  QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.08);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.1);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QToolButton[class='app_bar_icon_button'] {
+        color: %t1%;
+        background: transparent;
+        height: 48px;
+        width: 48px;
+        border: 0px solid transparent;
+        border-radius: 24px;
+        font-size: 24px;
+        outline: none;
+      }
+        
+      QToolButton[class='app_bar_icon_button']:hover {
+        border: 0px solid %t2%;
+        background: %t2%;
+        outline: none;
+      }
+        
+      QToolButton[class='app_bar_icon_button']:pressed {
+        border: 0px solid %t3%;
+        background: %t3%;
+        outline: none;
+      })"""), QList<QString>{text_hex, state_layer_hex_hover,
+                             state_layer_hex_pressed});
+}
+
+static QString GetAppBarSearchBarStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb on_surface_variant_color = palette
+    ->GetOnSurfaceVariant();
+  QString on_surface_variant_hex = utils::ColorPaletteWrapper::Argb2Hex(
+    on_surface_variant_color);
+  material_color_utilities::Argb surface_container_highest_color = palette
+    ->GetSurfaceContainerHighest();
+  QString surface_container_highest_hex = utils::ColorPaletteWrapper::Argb2Hex(
+    surface_container_highest_color);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QLineEdit[class='app_bar_search_bar'] {
+        color: %t1%;
+        background: %t2%;
+        border: 0px solid %t2%;
+        border-radius: 24px;
+        height: 48px;
+        padding-left: 24px;
+        padding-right: 24px;
+        font-size: 16px;
+        })"""), QList<QString>{on_surface_variant_hex,
+                               surface_container_highest_hex});
+}
+
+static QString Get48PxFABStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb text_color = palette->GetOnPrimaryContainer();
+  QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
+  material_color_utilities::Argb bg_color = palette->GetPrimaryContainer();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    bg_hex, 0.8);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    bg_hex, 0.9);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QToolButton[class='fab_48px'] {
+        color: %t1%;
+        background: %t4%;
+        height: 48px;
+        width: 48px;
+        border: 0px solid %t4%;
+        border-radius: 12px;
+        font-size: 24px;
+        outline: none;
+      }
+        
+      QToolButton[class='fab_48px']:hover {
+        color: %t1%;
+        border: 0px solid %t2%;
+        background: %t2%;
+        outline: none;
+      }
+        
+      QToolButton[class='fab_48px']:pressed {
+        color: %t1%;
+        border: 0px solid %t3%;
+        background: %t3%;
+        outline: none;
+      })"""), QList<QString>{text_hex, state_layer_hex_hover,
+                             state_layer_hex_pressed, bg_hex});
+}
+
+static QString GetNavigationDrawerStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb bg_color = palette->GetSurfaceContainerLow();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='navigation_drawer'] {
+        background: %t1%;
+        width: 360px;
+        border: 0px solid %t1%;
+        outline: none;
+      })"""), QList<QString>{bg_hex});
+}
+
+static QString GetNavigationDrawerCompactStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb bg_color = palette->GetSurfaceContainerLow();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='navigation_drawer_compact'] {
+        background: %t1%;
+        width: 180px;
+        border: 0px solid %t1%;
+        outline: none;
+      })"""), QList<QString>{bg_hex});
+}
+
 static StyleTuple GetThemeMap(const SchemeTuple& conf) {
   return {
     GetAppBackground(conf.dark)
@@ -321,16 +457,28 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetCommonIconBtnStyle(conf.dark)
       + GetCommonSmallIconBtnStyle(conf.dark)
       + GetCommonExtraSmallIconBtnStyle(conf.dark)
+      + GetSmallAppBarBaseStyle(conf.light)
+      + GetAppBarIconBtnStyle(conf.light)
+      + GetAppBarSearchBarStyle(conf.light)
+      + Get48PxFABStyle(conf.light)
+      + GetNavigationDrawerStyle(conf.light)
+      + GetNavigationDrawerCompactStyle(conf.light)
       + GetCalendarStyle(conf.light)
-      + GetSmallAppBarBaseStyle(conf.light),
+      + GetAppDrawerStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetAppIndicatorStyle(conf.dark)
       + GetCommonBtnStyle(conf.dark)
       + GetCommonIconBtnStyle(conf.dark)
       + GetCommonSmallIconBtnStyle(conf.dark)
       + GetCommonExtraSmallIconBtnStyle(conf.dark)
-      + GetCalendarStyle(conf.dark)
       + GetSmallAppBarBaseStyle(conf.dark)
+      + GetAppBarIconBtnStyle(conf.dark)
+      + GetAppBarSearchBarStyle(conf.dark)
+      + Get48PxFABStyle(conf.dark)
+      + GetNavigationDrawerStyle(conf.dark)
+      + GetNavigationDrawerCompactStyle(conf.dark)
+      + GetCalendarStyle(conf.dark)
+      + GetAppDrawerStyle(conf.dark)
   };
 }
 

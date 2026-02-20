@@ -91,6 +91,8 @@ set(WIDGET_SOURCES
 
 set(UTIL_SOURCES
   src/utils/dbus_def.h
+  src/utils/misc/misc.h
+  src/utils/misc/misc.cc
 )
 
 set(BACKEND_SOURCES
@@ -124,6 +126,11 @@ set(FRONTEND_SOURCES
   src/components/clock_btn/clock_btn.cc
   src/components/app_drawer/app_drawer_btn.h
   src/components/app_drawer/app_drawer_btn.cc
+  src/components/app_drawer/app_drawer_side_pane_item.h
+  src/components/app_drawer/app_drawer_side_pane_item.cc
+  src/components/app_drawer/app_drawer_style.h
+  src/components/app_drawer/app_drawer.h
+  src/components/app_drawer/app_drawer.cc
   src/components/krunner_btn/krunner_btn.h
   src/components/krunner_btn/krunner_btn.cc
   src/components/battery_indicator/battery_indicator.h
