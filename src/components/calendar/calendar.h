@@ -23,6 +23,7 @@
 
 #include "src/info_server/clock/clock.h"
 #include "src/theme_loader/theme_loader.h"
+#include "src/translation_loader/translation_loader.h"
 
 namespace panel {
 namespace frontend {
@@ -37,6 +38,7 @@ class Calendar : public QWidget {
  private:
   QCalendarWidget * cal_ = nullptr;
   loader::ThemeLoader * theme_loader_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
 };
 
 }  // namespace frontend

@@ -33,11 +33,22 @@ ClockBtn::ClockBtn(Calendar * calandar_in, QWidget *parent) : QWidget(parent) {
   layout_gen->setSpacing(0);
   setLayout(layout_gen);
 
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
+  }
+
   if (btn_ == nullptr) {
     btn_ = new QPushButton();
     btn_->setProperty("class", "common_bar_btn");
   }
-  btn_->setText(tr("INITIALIZING CLOCK..."));
+  
+  if (translator_ != nullptr) {
+    btn_->setText(translator_->GetTranslation("INITIALIZING CLOCK..."));
+  } else {
+    btn_->setText("INITIALIZING CLOCK...");
+  }
+
   QObject::connect(btn_, &QPushButton::clicked, this,
     &ClockBtn::ToggleCalendar);
   layout_gen->addWidget(btn_);

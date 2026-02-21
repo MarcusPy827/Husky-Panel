@@ -31,6 +31,11 @@ Clock::Clock(QPushButton * target) {
     return;
   }
 
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
+  }
+
   qInfo() << "[INFO] Clock: Installing clock updater...";
   install_target_ = target;
   clock_timer_ = new QTimer;
@@ -79,8 +84,8 @@ void Clock::UpdateTime() {
   }
 
   QString time_str_gen = current_hrs_str + ":" + current_timer.toString("mm")
-    + " " + is_afternoon_desc + "  " + current_timer.toString(tr("yyyy-M-"))
-    + GetOptimizedDateString(current_timer.toString(tr("dd")))
+    + " " + is_afternoon_desc + "  " + current_timer.toString(Tr("yyyy-M-"))
+    + GetOptimizedDateString(current_timer.toString(Tr("dd")))
     + " " + GetTranslatedTheDayOfTheWeek(current_timer.toString("ddd"));
   if (install_target_ != nullptr) {
     install_target_->setText(time_str_gen);
@@ -89,13 +94,13 @@ void Clock::UpdateTime() {
 
 QString Clock::GetTranslatedTheDayOfTheWeek(QString in) {
   static const QMap<QString, QString> translated = {
-    {"mon", tr("Mon.")},
-    {"tue", tr("Tue.")},
-    {"wed", tr("Wed.")},
-    {"thu", tr("Thu.")},
-    {"fri", tr("Fri.")},
-    {"sat", tr("Sat.")},
-    {"sun", tr("Sun.")}
+    {"mon", Tr("Mon")},
+    {"tue", Tr("Tue")},
+    {"wed", Tr("Wed")},
+    {"thu", Tr("Thu")},
+    {"fri", Tr("Fri")},
+    {"sat", Tr("Sat")},
+    {"sun", Tr("Sun")}
   };
   return translated.value(in.toLower(), in);
 }
@@ -106,6 +111,14 @@ QString Clock::GetOptimizedDateString(QString in) {
     result = result.mid(1);
   }
   return result;
+}
+
+QString Clock::Tr(const QString& msg) {
+  if (translator_ == nullptr) {
+    return msg;
+  } else {
+    return translator_->GetTranslation(msg);
+  }
 }
 
 }  // namespace backend

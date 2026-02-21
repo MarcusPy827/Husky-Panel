@@ -34,13 +34,23 @@ KRunnerBtn::KRunnerBtn(QWidget *parent) : QWidget(parent) {
   layout_gen->setSpacing(0);
   setLayout(layout_gen);
 
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
+  }
+
   if (btn_ == nullptr) {
     btn_ = new QPushButton();
     btn_->setProperty("class", "common_bar_btn");
     QObject::connect(btn_, &QPushButton::clicked, this,
       &KRunnerBtn::ToggleKRunner);
   }
-  btn_->setText(tr("Search"));
+
+  if (translator_ != nullptr) {
+    btn_->setText(translator_->GetTranslation("Search"));
+  } else {
+    btn_->setText("Search");
+  }
   layout_gen->addWidget(btn_);
 }
 
