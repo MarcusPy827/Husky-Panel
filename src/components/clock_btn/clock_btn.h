@@ -24,6 +24,7 @@
 
 #include "src/info_server/clock/clock.h"
 #include "src/components/calendar/calendar.h"
+#include "src/translation_loader/translation_loader.h"
 
 namespace panel {
 namespace frontend {
@@ -40,6 +41,7 @@ class ClockBtn : public QWidget {
   QPushButton * btn_ = nullptr;
   backend::Clock * clock_updater_ = nullptr;
   Calendar * calendar_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
 
  private slots:
   void ToggleCalendar();

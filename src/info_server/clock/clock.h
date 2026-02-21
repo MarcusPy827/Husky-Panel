@@ -22,6 +22,8 @@
 #include <QPushButton>
 #include <QTimer>
 
+#include "src/translation_loader/translation_loader.h"
+
 namespace panel {
 namespace backend {
 
@@ -37,6 +39,8 @@ class Clock : public QObject {
   QString GetOptimizedDateString(QString in);
   QTimer * clock_timer_ = nullptr;
   QPushButton * install_target_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
+  QString Tr(const QString& msg);
 
  private slots:
   void UpdateTime();

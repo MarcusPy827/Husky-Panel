@@ -38,7 +38,18 @@ namespace panel {
 namespace frontend {
 
 Calendar::Calendar(QWidget *parent) : QWidget(parent) {
-  setWindowTitle(tr("Calendar"));
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/calendar.locale",
+      loader::LanguageType::EN_US);
+  }
+
+  if (translator_ == nullptr) {
+    setWindowTitle("Calendar");
+  } else {
+    setWindowTitle(translator_->GetTranslation("Calendar"));
+  }
+
   setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
   setAttribute(Qt::WA_TranslucentBackground);
 
@@ -88,7 +99,11 @@ Calendar::Calendar(QWidget *parent) : QWidget(parent) {
 
   QLabel * window_title = new QLabel();
   window_title->setProperty("class", "calendar_window_title");
-  window_title->setText(tr("Calendar"));
+  if (translator_ == nullptr) {
+    window_title->setText("Calendar");
+  } else {
+    window_title->setText(translator_->GetTranslation("Calendar"));
+  }
   title_bar_layout->addWidget(window_title);
 
   if (cal_ == nullptr) {

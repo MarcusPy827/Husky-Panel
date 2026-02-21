@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QPushButton>
 
+#include "src/translation_loader/translation_loader.h"
+
 namespace panel {
 namespace frontend {
 
@@ -34,6 +36,7 @@ class KRunnerBtn : public QWidget {
 
  private:
   QPushButton * btn_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
 
  private slots:
   void ToggleKRunner();
