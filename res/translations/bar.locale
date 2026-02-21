@@ -1,0 +1,47 @@
+[Applications]
+zh_cn = "应用程序"
+en_us = "Applications"
+
+[Search]
+zh_cn = "搜索"
+en_us = "Search"
+
+[CLOCK_INIT]
+zh_cn = "时钟正在初始化"
+en_us = "CLOCK INITIALIZING"
+
+[yyyy-M-]
+zh_cn = "yyyy年M月"
+en_us = "yyyy-M-"
+
+[dd]
+zh_cn = "dd日"
+en_us = "dd"
+
+[Mon]
+zh_cn = "星期一"
+en_us = "Mon."
+
+[Tue]
+zh_cn = "星期二"
+en_us = "Tue."
+
+[Wed]
+zh_cn = "星期三"
+en_us = "Wed."
+
+[Thu]
+zh_cn = "星期四"
+en_us = "Thu."
+
+[Fri]
+zh_cn = "星期五"
+en_us = "Fri."
+
+[Sat]
+zh_cn = "星期六"
+en_us = "Sat."
+
+[Sun]
+zh_cn = "星期日"
+en_us = "Sun."

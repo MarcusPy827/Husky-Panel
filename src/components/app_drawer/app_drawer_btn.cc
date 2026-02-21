@@ -33,11 +33,21 @@ AppDrawerBtn::AppDrawerBtn(QWidget *parent) : QWidget(parent) {
   layout_gen->setSpacing(0);
   setLayout(layout_gen);
 
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
+  }
+
   if (btn_ == nullptr) {
     btn_ = new QPushButton();
     btn_->setProperty("class", "common_bar_btn");
   }
-  btn_->setText(tr("Applications"));
+  if (translator_ != nullptr) {
+    btn_->setText(translator_->GetTranslation("Applications"));
+  } else {
+    btn_->setText("Applications");
+  }
+  
   layout_gen->addWidget(btn_);
 }
 

@@ -139,6 +139,11 @@ set(FRONTEND_SOURCES
   src/components/calendar/calendar.cc
 )
 
+set(I18N_SOURCES
+  src/translation_loader/translation_loader.h
+  src/translation_loader/translation_loader.cc
+)
+
 set(COMMON_SOURCES
   ${TS_FILES}
   ${MATERIAL_DESIGN_DEPS}
@@ -146,6 +151,7 @@ set(COMMON_SOURCES
   ${UTIL_SOURCES}
   ${BACKEND_SOURCES}
   ${FRONTEND_SOURCES}
+  ${I18N_SOURCES}
 )
 
 set(PROJECT_SOURCES
