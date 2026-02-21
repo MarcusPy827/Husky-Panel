@@ -105,14 +105,8 @@
 <context>
     <name>Calendar</name>
     <message>
-        <source>Top Panel</source>
-        <translation type="obsolete">顶栏</translation>
-    </message>
-    <message>
-        <source>Failed to get native window handle. Please check your session,</source>
-        <translation type="obsolete">无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
-    </message>
-    <message>
+        <location filename="../src/components/calendar/calendar.cc" line="41"/>
+        <location filename="../src/components/calendar/calendar.cc" line="91"/>
         <source>Calendar</source>
         <translation type="vanished">日历</translation>
     </message>
@@ -121,10 +115,11 @@
     <name>Clock</name>
     <message>
         <source>yyyy-M-</source>
-        <translation type="vanished">yyyy年M月</translation>
+        <translation type="vanished" type="vanished">yyyy年M月</translation>
     </message>
     <message>
         <source>dd</source>
+        <translation type="vanished">dd日</translation>
         <translation type="vanished">dd日</translation>
     </message>
     <message>
@@ -133,7 +128,7 @@
     </message>
     <message>
         <source>Tue.</source>
-        <translation type="vanished">星期二</translation>
+        <translation type="vanished" type="vanished">星期二</translation>
     </message>
     <message>
         <source>Wed.</source>
