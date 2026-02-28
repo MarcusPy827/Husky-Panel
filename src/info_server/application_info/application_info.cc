@@ -49,5 +49,17 @@ QList<AppInfo> ApplicationInfo::GetAllAppications() {
   return result;
 }
 
+AppInfo ApplicationInfo::KService2AppInfo(const KService::Ptr &service) {
+  AppInfo app;
+  app.id = service->storageId();
+  app.name = service->name();
+  app.generic_name = service->genericName();
+  app.comment = service->comment();
+  app.icon_name = service->icon();
+  app.exec = service->exec();
+  app.categories = service->categories();
+  return app;
+}
+
 }  // namespace backend
 }  // namespace panel
