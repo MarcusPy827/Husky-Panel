@@ -24,6 +24,7 @@
 
 #include "src/theme_loader/theme_loader.h"
 #include "src/components/app_drawer/app_drawer_side_pane_item.h"
+#include "src/translation_loader/translation_loader.h"
 
 namespace panel {
 namespace frontend {
@@ -59,6 +60,9 @@ class AppDrawer : public QWidget {
   AppDrawerSidePaneItem * utility_apps_btn_ = nullptr;
 
   loader::ThemeLoader * theme_loader_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
+
+  QString Tr(const QString& msg);
 };
 
 }  // namespace frontend

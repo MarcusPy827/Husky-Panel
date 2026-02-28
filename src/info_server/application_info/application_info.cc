@@ -15,37 +15,39 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#include <algorithm>
 
-#include <QWidget>
-#include <QPushButton>
+#include <KService>
+#include <KServiceGroup>
 
-#include "src/translation_loader/translation_loader.h"
-
-#include "src/components/app_drawer/app_drawer.h"
+#include "src/info_server/application_info/application_info.h"
 
 namespace panel {
-namespace frontend {
+namespace backend {
 
-class AppDrawerBtn : public QWidget {
-  Q_OBJECT
+QList<AppInfo> ApplicationInfo::GetAllAppications() {
+  QList<AppInfo> result;
+  const QList<KService::Ptr> services = KService::allServices();
 
- public:
-  explicit AppDrawerBtn(QWidget *parent = nullptr);
-  ~AppDrawerBtn();
-  QPushButton * GetBtn();
+  for (const auto& cur : services) {
+    if (!cur->isApplication()) {
+      continue;
+    }
 
- private:
-  QPushButton * btn_ = nullptr;
-  AppDrawer * app_drawer_ = nullptr;
-  loader::TranslationLoader * translator_ = nullptr;
+    if (cur->noDisplay()) {
+      continue;
+    }
 
- private slots:
-  void ToggleAppDrawer();
-};
+    result.append(KService2AppInfo(cur));
+  }
 
-}  // namespace frontend
+  std::sort(result.begin(), result.end(), [] (const AppInfo& a,
+      const AppInfo& b) {
+    return a.name.localeAwareCompare(b.name) < 0;
+  });
+
+  return result;
+}
+
+}  // namespace backend
 }  // namespace panel
-
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_

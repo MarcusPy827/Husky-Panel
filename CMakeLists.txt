@@ -116,6 +116,8 @@ set(BACKEND_SOURCES
   src/info_server/tray_handler/tray_def.h
   src/info_server/tray_handler/tray_handler.h
   src/info_server/tray_handler/tray_handler.cc
+  src/info_server/application_info/application_info.h
+  src/info_server/application_info/application_info.cc
 )
 
 set(FRONTEND_SOURCES

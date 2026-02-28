@@ -4,92 +4,79 @@
 <context>
     <name>AppDrawer</name>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="42"/>
         <source>App Drawer</source>
-        <translation type="unfinished">应用抽屉</translation>
+        <translation type="obsolete">应用抽屉</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="107"/>
         <source>Search...</source>
-        <translation type="unfinished">搜索</translation>
+        <translation type="obsolete">搜索</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="165"/>
         <source>All applications</source>
-        <translation type="unfinished">所有程序</translation>
+        <translation type="obsolete">所有程序</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="171"/>
         <source>Multimedia</source>
-        <translation type="unfinished">多媒体</translation>
+        <translation type="obsolete">多媒体</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="178"/>
         <source>Development</source>
-        <translation type="unfinished">开发</translation>
+        <translation type="obsolete">开发</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="184"/>
         <source>Education</source>
-        <translation type="unfinished">教育</translation>
+        <translation type="obsolete">教育</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="190"/>
         <source>Games</source>
-        <translation type="unfinished">游戏</translation>
+        <translation type="obsolete">游戏</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="196"/>
         <source>Graphics</source>
-        <translation type="unfinished">图形</translation>
+        <translation type="obsolete">图形</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="202"/>
         <source>Network</source>
-        <translation type="unfinished">网络</translation>
+        <translation type="obsolete">网络</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="208"/>
         <source>Office</source>
-        <translation type="unfinished">办公</translation>
+        <translation type="obsolete">办公</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="214"/>
         <source>Settings</source>
-        <translation type="unfinished">设置</translation>
+        <translation type="obsolete">设置</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="220"/>
         <source>System</source>
-        <translation type="unfinished">系统</translation>
+        <translation type="obsolete">系统</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="226"/>
         <source>Utilities</source>
-        <translation type="unfinished">工具</translation>
+        <translation type="obsolete">工具</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="245"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="263"/>
         <source>Sleep</source>
         <translation type="unfinished">睡眠</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="255"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="273"/>
         <source>Hibernate</source>
         <translation type="unfinished">休眠</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="265"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="283"/>
         <source>Reboot</source>
         <translation type="unfinished">重启</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="275"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="293"/>
         <source>Shut down</source>
         <translation type="unfinished">关机</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="289"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="307"/>
         <source>Session</source>
         <translation type="unfinished">会话选项</translation>
     </message>
@@ -97,7 +84,6 @@
 <context>
     <name>AppDrawerBtn</name>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer_btn.cc" line="42"/>
         <source>Applications</source>
         <translation type="vanished">应用程序</translation>
     </message>
