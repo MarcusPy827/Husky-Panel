@@ -39,7 +39,13 @@ namespace panel {
 namespace frontend {
 
 AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
-  setWindowTitle(tr("App Drawer"));
+  if (translator_ == nullptr) {
+    translator_ = new loader::TranslationLoader(
+      ":/translations/translations/app_drawer.locale",
+    loader::LanguageType::EN_US);
+  }
+
+  setWindowTitle(Tr("AppDrawer"));
   setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
   setAttribute(Qt::WA_TranslucentBackground);
 
@@ -104,7 +110,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     search_bar_internal_ = new QLineEdit();
     search_bar_internal_->setProperty("class", "app_bar_search_bar");
   }
-  search_bar_internal_->setPlaceholderText(tr("Search..."));
+  search_bar_internal_->setPlaceholderText(Tr("SearchHere"));
   search_bar_internal_->setVisible(true);
   search_bar_layout_internal->addWidget(search_bar_internal_, 0, 0);
 
@@ -145,9 +151,21 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   drawer_menu_content_view->setSpacing(0);
   base_layout->addLayout(drawer_menu_content_view);
 
+  QWidget * side_pane_view_base_layer = new QWidget();
+  side_pane_view_base_layer->setProperty("class", "side_pane_view_base_layer");
+  drawer_menu_content_view->addWidget(side_pane_view_base_layer);
+
+  QHBoxLayout * side_pane_view_base_layer_layout = new QHBoxLayout();
+  side_pane_view_base_layer_layout->setContentsMargins(0, 0, 0, 0);
+  side_pane_view_base_layer_layout->setSpacing(0);
+  side_pane_view_base_layer->setLayout(side_pane_view_base_layer_layout);
+
   QScrollArea * side_pane_view_container = new QScrollArea();
   side_pane_view_container->setWidgetResizable(true);
-  drawer_menu_content_view->addWidget(side_pane_view_container);
+  side_pane_view_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  side_pane_view_container->setHorizontalScrollBarPolicy(
+    Qt::ScrollBarAlwaysOff);
+  side_pane_view_base_layer_layout->addWidget(side_pane_view_container);
 
   if (side_pane_ == nullptr) {
     side_pane_ = new QWidget();
@@ -162,68 +180,68 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   side_pane_->setLayout(side_pane_layout);
 
   if (all_apps_btn_ == nullptr) {
-    all_apps_btn_ = new AppDrawerSidePaneItem("apps", tr("All applications"),
+    all_apps_btn_ = new AppDrawerSidePaneItem("apps", Tr("AllApps"),
       "app_drawer_side_pane", "all_apps", true);
   }
   side_pane_layout->addWidget(all_apps_btn_);
 
   if (audio_video_apps_btn_ == nullptr) {
-    audio_video_apps_btn_ = new AppDrawerSidePaneItem("movie", tr("Multimedia"),
+    audio_video_apps_btn_ = new AppDrawerSidePaneItem("movie", Tr("Multimedia"),
       "app_drawer_side_pane", "multimedia", false);
   }
   side_pane_layout->addWidget(audio_video_apps_btn_);
 
   if (development_apps_btn_ == nullptr) {
     development_apps_btn_ = new AppDrawerSidePaneItem("construction",
-      tr("Development"), "app_drawer_side_pane", "development", false);
+      Tr("Development"), "app_drawer_side_pane", "development", false);
   }
   side_pane_layout->addWidget(development_apps_btn_);
 
   if (education_apps_btn_ == nullptr) {
     education_apps_btn_ = new AppDrawerSidePaneItem("school",
-      tr("Education"), "app_drawer_side_pane", "education", false);
+      Tr("Education"), "app_drawer_side_pane", "education", false);
   }
   side_pane_layout->addWidget(education_apps_btn_);
 
   if (game_apps_btn_ == nullptr) {
     game_apps_btn_ = new AppDrawerSidePaneItem("stadia_controller",
-      tr("Games"), "app_drawer_side_pane", "game", false);
+      Tr("Games"), "app_drawer_side_pane", "game", false);
   }
   side_pane_layout->addWidget(game_apps_btn_);
 
   if (graphics_apps_btn_ == nullptr) {
     graphics_apps_btn_ = new AppDrawerSidePaneItem("photo",
-      tr("Graphics"), "app_drawer_side_pane", "graphics", false);
+      Tr("Graphics"), "app_drawer_side_pane", "graphics", false);
   }
   side_pane_layout->addWidget(graphics_apps_btn_);
 
   if (network_apps_btn_== nullptr) {
     network_apps_btn_ = new AppDrawerSidePaneItem("lan",
-      tr("Network"), "app_drawer_side_pane", "network", false);
+      Tr("Network"), "app_drawer_side_pane", "network", false);
   }
   side_pane_layout->addWidget(network_apps_btn_);
 
   if (office_apps_btn_ == nullptr) {
     office_apps_btn_ = new AppDrawerSidePaneItem("domain",
-      tr("Office"), "app_drawer_side_pane", "office", false);
+      Tr("Office"), "app_drawer_side_pane", "office", false);
   }
   side_pane_layout->addWidget(office_apps_btn_);
 
   if (settings_apps_btn_ == nullptr) {
     settings_apps_btn_ = new AppDrawerSidePaneItem("settings",
-      tr("Settings"), "app_drawer_side_pane", "settings", false);
+      Tr("Settings"), "app_drawer_side_pane", "settings", false);
   }
   side_pane_layout->addWidget(settings_apps_btn_);
 
   if (system_apps_btn_ == nullptr) {
     system_apps_btn_ = new AppDrawerSidePaneItem("computer",
-      tr("System"), "app_drawer_side_pane", "system", false);
+      Tr("System"), "app_drawer_side_pane", "system", false);
   }
   side_pane_layout->addWidget(system_apps_btn_);
 
   if (utility_apps_btn_ == nullptr) {
     utility_apps_btn_ = new AppDrawerSidePaneItem("service_toolbox",
-      tr("Utilities"), "app_drawer_side_pane", "utility", false);
+      Tr("Utilities"), "app_drawer_side_pane", "utility", false);
   }
   side_pane_layout->addWidget(utility_apps_btn_);
 
@@ -300,6 +318,14 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
 
 AppDrawer::~AppDrawer() {
   LOG(INFO) << absl::StrCat("AppDrawer is being deleted.");
+}
+
+QString AppDrawer::Tr(const QString& msg) {
+  if (translator_ == nullptr) {
+    return msg;
+  } else {
+    return translator_->GetTranslation(msg);
+  }
 }
 
 }  // namespace frontend

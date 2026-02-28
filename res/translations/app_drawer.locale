@@ -1,0 +1,51 @@
+[AppDrawer]
+zh_cn = "应用抽屉"
+en_us = "App Drawer"
+
+[SearchHere]
+zh_cn = "搜索..."
+en_us = "Search..."
+
+[AllApps]
+zh_cn = "所有应用"
+en_us = "All Applications"
+
+[Multimedia]
+zh_cn = "多媒体"
+en_us = "Multimedia"
+
+[Development]
+zh_cn = "开发"
+en_us = "Development"
+
+[Education]
+zh_cn = "教育"
+en_us = "Education"
+
+[Games]
+zh_cn = "游戏"
+en_us = "Games"
+
+[Graphics]
+zh_cn = "图像"
+en_us = "Graphics"
+
+[Network]
+zh_cn = "网络"
+en_us = "Network"
+
+[Office]
+zh_cn = "办公"
+en_us = "Office"
+
+[Settings]
+zh_cn = "设置"
+en_us = "Settings"
+
+[System]
+zh_cn = "系统"
+en_us = "System"
+
+[Utilities]
+zh_cn = "工具"
+en_us = "Utilities"

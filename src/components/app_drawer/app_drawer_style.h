@@ -54,6 +54,10 @@ static QString GetAppDarwerAppBarBaseStyle(
     const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
   material_color_utilities::Argb bg_color = palette->GetSurfaceContainer();
   QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  material_color_utilities::Argb container_low_color = palette
+    ->GetSurfaceContainerLow();
+  QString container_low_hex = utils::ColorPaletteWrapper::Argb2Hex(
+    container_low_color);
   return utils::Strings::TemplateCat(
     QStringLiteral(R"""(
       QWidget[class='app_bar_container_app_drawer'] {
@@ -67,7 +71,13 @@ static QString GetAppDarwerAppBarBaseStyle(
         border-bottom-right-radius: 0px;
         margin: 0px;
         padding: 0px;
-      })"""), QList<QString>{bg_hex});
+      }
+        
+      QWidget[class='side_pane_view_base_layer'] {
+        background: %t2%;
+        border: 0px solid %t1%;
+        outline: none;
+      })"""), QList<QString>{bg_hex, container_low_hex});
 }
 
 static QString GetAppDarwerToolBarStyle(

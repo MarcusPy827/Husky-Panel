@@ -449,6 +449,53 @@ static QString GetNavigationDrawerCompactStyle(
       })"""), QList<QString>{bg_hex});
 }
 
+static QString GetScrollAreaStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb bg_color = palette->GetSurfaceContainerLow();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString handler_hex = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.7);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.08);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.1);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QScrollArea {
+        background: transparent;
+        border: 0px solid %t1%;
+        outline: none;
+      }
+
+      QScrollArea QScrollBar {
+        background: transparent;
+        background-color: transparent;
+        border: none;
+        outline: none;
+      }
+
+      QScrollArea QScrollBar:vertical {
+        background: transparent;
+        border: none;
+        outline: none;
+        max-width: 8px;
+      }
+        
+      QScrollArea QScrollBar::handle:vertical {
+        background: %t2%;
+        max-width: 8px;
+        border-radius: 4px;
+      }
+        
+      QScrollArea QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        height: 0px;
+      })"""), QList<QString>{bg_hex, handler_hex});
+}
+
 static StyleTuple GetThemeMap(const SchemeTuple& conf) {
   return {
     GetAppBackground(conf.dark)
@@ -464,7 +511,8 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetNavigationDrawerStyle(conf.light)
       + GetNavigationDrawerCompactStyle(conf.light)
       + GetCalendarStyle(conf.light)
-      + GetAppDrawerStyle(conf.light),
+      + GetAppDrawerStyle(conf.light)
+      + GetScrollAreaStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetAppIndicatorStyle(conf.dark)
       + GetCommonBtnStyle(conf.dark)
@@ -479,6 +527,7 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetNavigationDrawerCompactStyle(conf.dark)
       + GetCalendarStyle(conf.dark)
       + GetAppDrawerStyle(conf.dark)
+      + GetScrollAreaStyle(conf.dark)
   };
 }
 

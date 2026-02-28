@@ -40,6 +40,11 @@ class AppDrawerBtn : public QWidget {
 
  private:
   QPushButton * btn_ = nullptr;
+  AppDrawer * app_drawer_ = nullptr;
+  loader::TranslationLoader * translator_ = nullptr;
+
+ private slots:
+  void ToggleAppDrawer();
   loader::TranslationLoader * translator_ = nullptr;
 };
 
