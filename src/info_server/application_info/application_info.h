@@ -22,6 +22,7 @@
 #include <QStringList>
 #include <QList>
 #include <QMap>
+#include <KService>
 
 struct AppInfo {
   QString id;
