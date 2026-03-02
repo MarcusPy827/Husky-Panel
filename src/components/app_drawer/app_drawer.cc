@@ -31,6 +31,7 @@
 #include "src/components/app_drawer/app_drawer.h"
 #include "src/font_loader/font_loader.h"
 #include "src/info_server/user_info/user_info.h"
+#include "src/info_server/application_info/application_info.h"
 #include "src/utils/misc/misc.h"
 
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
@@ -245,6 +246,33 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   }
   side_pane_layout->addWidget(utility_apps_btn_);
 
+  QWidget * drawer_base_layer = new QWidget();
+  drawer_base_layer->setProperty("class", "side_pane_view_base_layer");
+  drawer_menu_content_view->addWidget(drawer_base_layer);
+
+  QHBoxLayout * drawer_base_layer_layout = new QHBoxLayout();
+  drawer_base_layer_layout->setContentsMargins(0, 0, 0, 0);
+  drawer_base_layer_layout->setSpacing(0);
+  drawer_base_layer->setLayout(drawer_base_layer_layout);
+
+  QScrollArea * drawer_container = new QScrollArea();
+  drawer_container->setWidgetResizable(true);
+  drawer_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  drawer_container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  drawer_base_layer_layout->addWidget(drawer_container);
+
+  QWidget * actual_drawer = new QWidget();
+  actual_drawer->setProperty("class", "navigation_drawer_compact");
+  drawer_container->setMaximumHeight(400);
+  drawer_container->setWidget(actual_drawer);
+
+  if (drawer_layout_ == nullptr) {
+    drawer_layout_ = new QGridLayout();
+    drawer_layout_->setContentsMargins(16, 16, 16, 16);
+    drawer_layout_->setSpacing(8);
+  }
+  actual_drawer->setLayout(drawer_layout_);
+
   QWidget * tool_bar = new QWidget();
   tool_bar->setProperty("class", "tool_bar_app_drawer");
   base_layout->addWidget(tool_bar);
@@ -297,7 +325,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
 
   QSpacerItem * tool_bar_spacer = new QSpacerItem(8, 8, QSizePolicy::Expanding,
     QSizePolicy::Expanding);
-  // tool_bar_layout->addSpacerItem(tool_bar_spacer);
+  tool_bar_layout->addSpacerItem(tool_bar_spacer);
 
   if (session_btn_ == nullptr) {
     session_btn_ = new QToolButton();
@@ -309,10 +337,13 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   session_btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
   tool_bar_layout->addWidget(session_btn_);
 
-  QString highlight_color = utils::ColorPaletteWrapper::
+  if (UpdateAppDrawerItems(drawer_layout_) == 0) {
+    QString highlight_color = utils::ColorPaletteWrapper::
     GetSystemHighlightColor().name();
-  if (theme_loader_ == nullptr) {
-    theme_loader_ = new loader::ThemeLoader(base_layer, highlight_color, this);
+    if (theme_loader_ == nullptr) {
+      theme_loader_ = new loader::ThemeLoader(base_layer, highlight_color,
+        this);
+    }
   }
 }
 
@@ -326,6 +357,30 @@ QString AppDrawer::Tr(const QString& msg) {
   } else {
     return translator_->GetTranslation(msg);
   }
+}
+
+int AppDrawer::UpdateAppDrawerItems(QGridLayout * target_layout) {
+  LOG(INFO) << absl::StrCat("Cleaning old buttons...");
+  for (auto old : target_layout->findChildren<QWidget*> ({},
+      Qt::FindDirectChildrenOnly)) {
+    delete old;
+  }
+
+  LOG(INFO) << absl::StrCat("Pulling installed application info...");
+  int cur_col = 0;
+  int cur_row = 0;
+  QList<AppInfo> app_infos_ = backend::ApplicationInfo::GetAllAppications();
+  for (const auto& app : app_infos_) {
+    AppDrawerItem * item_gen = new AppDrawerItem(app);
+    target_layout->addWidget(item_gen, cur_row, cur_col);
+    cur_col += 1;
+    if (cur_col > 3) {
+      cur_col = 0;
+      cur_row += 1;
+    }
+  }
+
+  return 0;
 }
 
 }  // namespace frontend

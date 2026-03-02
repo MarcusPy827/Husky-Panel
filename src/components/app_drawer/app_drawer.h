@@ -21,9 +21,12 @@
 #include <QWidget>
 #include <QToolButton>
 #include <QLineEdit>
+#include <QGridLayout>
 
 #include "src/theme_loader/theme_loader.h"
 #include "src/components/app_drawer/app_drawer_side_pane_item.h"
+#include "src/components/app_drawer/app_drawer_item.h"
+#include "src/info_server/application_info/application_info.h"
 #include "src/translation_loader/translation_loader.h"
 
 namespace panel {
@@ -58,11 +61,15 @@ class AppDrawer : public QWidget {
   AppDrawerSidePaneItem * settings_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * system_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * utility_apps_btn_ = nullptr;
+  QGridLayout * drawer_layout_ = nullptr;
+
+  AppDrawerItem** application_btns_ = {};
 
   loader::ThemeLoader * theme_loader_ = nullptr;
   loader::TranslationLoader * translator_ = nullptr;
 
   QString Tr(const QString& msg);
+  int UpdateAppDrawerItems(QGridLayout * target_layout);
 };
 
 }  // namespace frontend

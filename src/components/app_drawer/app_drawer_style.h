@@ -149,12 +149,72 @@ static QString GetAppDarwerSidePaneItemStyle(
       })"""), QList<QString>{bg_hex, icon_hex, active_icon_hex});
 }
 
+static QString GetAppDrawerItemStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QWidget[class='app_drawer_item'] {
+        min-width: 128px;
+        max-width: 128px;
+      })"""), QList<QString>{});
+}
+
+static QString GetDrawerItemBtnStyle(
+    const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
+  material_color_utilities::Argb text_color = palette->GetOnSecondaryContainer();
+  QString text_hex = utils::ColorPaletteWrapper::Argb2Hex(text_color);
+  material_color_utilities::Argb bg_color = palette->GetPrimaryContainer();
+  QString bg_hex = utils::ColorPaletteWrapper::Argb2Hex(bg_color);
+  material_color_utilities::Argb state_layer_color = palette
+    ->GetOnSurfaceVariant();
+  QString state_layer_hex_raw = utils::ColorPaletteWrapper::Argb2Hex(
+    state_layer_color, true);
+  QString state_layer_hex_hover = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.8);
+  QString state_layer_hex_pressed = utils::Colors::ApplyOpacityToHexColor(
+    state_layer_hex_raw, 0.9);
+  return utils::Strings::TemplateCat(
+    QStringLiteral(R"""(
+      QToolButton[class='drawer_item_btn'] {
+        color: %t1%;
+        background: transparent;
+        height: 64px;
+        width: 64px;
+        border: 0px solid #FFFFFF;
+        border-radius: 12px;
+        outline: none;
+      }
+        
+      QToolButton[class='drawer_item_btn']:hover {
+        color: %t1%;
+        background: transparent;
+        border: 0px solid %t2%;
+        border-radius: 12px;
+        outline: none;
+      }
+        
+      QToolButton[class='drawer_item_btn']:pressed {
+        color: %t1%;
+        border: 0px solid %t3%;
+        background: transparent;
+        outline: none;
+      }
+        
+      QLabel[class='app_drawer_item_label'] {
+        color: %t1%;
+        font-size: 14px;
+      })"""), QList<QString>{text_hex, state_layer_hex_hover,
+                             state_layer_hex_pressed});
+}
+
 static QString GetAppDrawerStyle(
     const std::unique_ptr<material_color_utilities::DynamicScheme>& palette) {
   return GetAppDrawerBackground(palette)
     + GetAppDarwerAppBarBaseStyle(palette)
     + GetAppDarwerToolBarStyle(palette)
-    + GetAppDarwerSidePaneItemStyle(palette);
+    + GetAppDarwerSidePaneItemStyle(palette)
+    + GetAppDrawerItemStyle(palette)
+    + GetDrawerItemBtnStyle(palette);
 }
 
 }  // namespace loader
