@@ -22,6 +22,7 @@
 #include <QToolButton>
 #include <QLineEdit>
 #include <QGridLayout>
+#include <QStackedWidget>
 
 #include "src/theme_loader/theme_loader.h"
 #include "src/components/app_drawer/app_drawer_side_pane_item.h"
@@ -62,7 +63,13 @@ class AppDrawer : public QWidget {
   AppDrawerSidePaneItem * settings_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * system_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * utility_apps_btn_ = nullptr;
+  QList<AppDrawerSidePaneItem*> side_pane_items_ = {};
+
+  QStackedWidget * drawer_stack_ = nullptr;
+  QWidget * actual_drawer_ = nullptr;
   QGridLayout * drawer_layout_ = nullptr;
+  QWidget * audio_video_drawer_ = nullptr;
+  QGridLayout * audio_video_layout_ = nullptr;
 
   AppDrawerItem** application_btns_ = {};
 
@@ -71,6 +78,7 @@ class AppDrawer : public QWidget {
 
   QString Tr(const QString& msg);
   int UpdateAppDrawerItems(QGridLayout * target_layout);
+  void UpdatePaneContent(const QString& id);
 
  private slots:
   void OnSearchBarTextChanged(const QString& text);
