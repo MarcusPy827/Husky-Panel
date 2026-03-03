@@ -21,6 +21,7 @@
 #include <QWidget>
 #include <QString>
 #include <QLabel>
+#include <QHBoxLayout>
 
 namespace panel {
 namespace frontend {
@@ -34,9 +35,23 @@ class AppDrawerSidePaneItem : public QWidget {
     QWidget * parent = nullptr);
   ~AppDrawerSidePaneItem();
 
+ public slots:
+  void OnGroupUpdated(const QString& group_identifier, const QString& id);
+
+ protected:
+  void mousePressEvent(QMouseEvent *event) override;
+
  private:
+  QWidget * container_ = nullptr;
+  QWidget * container_active_ = nullptr;
+  QHBoxLayout * layout_gen_ = nullptr;
   QLabel * icon_ = nullptr;
   QLabel * label_ = nullptr;
+  QString id_ = "unknown";
+  QString group_identifier_ = "unknown";
+
+ signals:
+  void GroupSelected(const QString& group_identifier, const QString& id);
 };
 
 }  // namespace frontend

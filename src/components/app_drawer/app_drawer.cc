@@ -185,74 +185,100 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (all_apps_btn_ == nullptr) {
     all_apps_btn_ = new AppDrawerSidePaneItem("apps", Tr("AllApps"),
       "app_drawer_side_pane", "all_apps", true);
+    side_pane_items_.append(all_apps_btn_);
   }
   side_pane_layout->addWidget(all_apps_btn_);
 
   if (search_apps_btn_ == nullptr) {
     search_apps_btn_ = new AppDrawerSidePaneItem("search", Tr("SearchApps"),
       "app_drawer_side_pane", "search_apps", false);
+    side_pane_items_.append(search_apps_btn_);
   }
   side_pane_layout->addWidget(search_apps_btn_);
 
   if (audio_video_apps_btn_ == nullptr) {
     audio_video_apps_btn_ = new AppDrawerSidePaneItem("movie", Tr("Multimedia"),
       "app_drawer_side_pane", "multimedia", false);
+    side_pane_items_.append(audio_video_apps_btn_);
   }
   side_pane_layout->addWidget(audio_video_apps_btn_);
 
   if (development_apps_btn_ == nullptr) {
     development_apps_btn_ = new AppDrawerSidePaneItem("construction",
       Tr("Development"), "app_drawer_side_pane", "development", false);
+    side_pane_items_.append(development_apps_btn_);
   }
   side_pane_layout->addWidget(development_apps_btn_);
 
   if (education_apps_btn_ == nullptr) {
     education_apps_btn_ = new AppDrawerSidePaneItem("school",
       Tr("Education"), "app_drawer_side_pane", "education", false);
+    side_pane_items_.append(education_apps_btn_);
   }
   side_pane_layout->addWidget(education_apps_btn_);
 
   if (game_apps_btn_ == nullptr) {
     game_apps_btn_ = new AppDrawerSidePaneItem("stadia_controller",
       Tr("Games"), "app_drawer_side_pane", "game", false);
+    side_pane_items_.append(game_apps_btn_);
   }
   side_pane_layout->addWidget(game_apps_btn_);
 
   if (graphics_apps_btn_ == nullptr) {
     graphics_apps_btn_ = new AppDrawerSidePaneItem("photo",
       Tr("Graphics"), "app_drawer_side_pane", "graphics", false);
+    side_pane_items_.append(graphics_apps_btn_);
   }
   side_pane_layout->addWidget(graphics_apps_btn_);
 
   if (network_apps_btn_== nullptr) {
     network_apps_btn_ = new AppDrawerSidePaneItem("lan",
       Tr("Network"), "app_drawer_side_pane", "network", false);
+    side_pane_items_.append(network_apps_btn_);
   }
   side_pane_layout->addWidget(network_apps_btn_);
 
   if (office_apps_btn_ == nullptr) {
     office_apps_btn_ = new AppDrawerSidePaneItem("domain",
       Tr("Office"), "app_drawer_side_pane", "office", false);
+    side_pane_items_.append(office_apps_btn_);
   }
   side_pane_layout->addWidget(office_apps_btn_);
 
   if (settings_apps_btn_ == nullptr) {
     settings_apps_btn_ = new AppDrawerSidePaneItem("settings",
       Tr("Settings"), "app_drawer_side_pane", "settings", false);
+    side_pane_items_.append(settings_apps_btn_);
   }
   side_pane_layout->addWidget(settings_apps_btn_);
 
   if (system_apps_btn_ == nullptr) {
     system_apps_btn_ = new AppDrawerSidePaneItem("computer",
       Tr("System"), "app_drawer_side_pane", "system", false);
+    side_pane_items_.append(system_apps_btn_);
   }
   side_pane_layout->addWidget(system_apps_btn_);
 
   if (utility_apps_btn_ == nullptr) {
     utility_apps_btn_ = new AppDrawerSidePaneItem("service_toolbox",
       Tr("Utilities"), "app_drawer_side_pane", "utility", false);
+    side_pane_items_.append(utility_apps_btn_);
   }
   side_pane_layout->addWidget(utility_apps_btn_);
+
+  for (auto item : side_pane_items_) {
+    if (item != nullptr) {
+      QObject::connect(item, &AppDrawerSidePaneItem::GroupSelected, this,
+          [this](const QString& group_identifier, const QString& id) {
+        for (auto* target : side_pane_items_) {
+          if (target != nullptr) {
+            target->OnGroupUpdated(group_identifier, id);
+            UpdatePaneContent(id);
+          }
+        }
+      });
+    }
+  }
 
   QWidget * drawer_base_layer = new QWidget();
   drawer_base_layer->setProperty("class", "side_pane_view_base_layer");
@@ -393,6 +419,29 @@ int AppDrawer::UpdateAppDrawerItems(QGridLayout * target_layout) {
 
 void AppDrawer::OnSearchBarTextChanged(const QString& text) {
   emit DrawerItemFilterUpdated(text);
+}
+
+void AppDrawer::UpdatePaneContent(const QString& id) {
+  if (actual_drawer_ == nullptr) {
+    LOG(ERROR) << absl::StrCat(
+      "Target drawer is null pointer, now aborting...");
+    return;
+  }
+
+  if (drawer_stack_ == nullptr) {
+    LOG(ERROR) << absl::StrCat(
+      "Drawer stack is null pointer, now aborting...");
+    return;
+  }
+
+  if (id == "all_apps") {
+    // drawer_stack_->setCurrentIndex(0);
+  } else if (id == "multimedia") {
+    // drawer_stack_->setCurrentIndex(1);
+  } else {
+    LOG(INFO) << absl::StrCat("Unknown id defaulting to all_apps...");
+    // drawer_stack_->setCurrentIndex(0);
+  }
 }
 
 }  // namespace frontend

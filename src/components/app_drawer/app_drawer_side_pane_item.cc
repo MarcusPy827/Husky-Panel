@@ -37,20 +37,35 @@ AppDrawerSidePaneItem::AppDrawerSidePaneItem(QString icon, QString name,
   internal_layout->setSpacing(0);
   this->setLayout(internal_layout);
 
-  QWidget * container = new QWidget();
-  internal_layout->addWidget(container);
+  if (container_ == nullptr) {
+    container_ = new QWidget();
+    container_->setProperty("class", "app_drawer_side_pane_item");
+  }
+  internal_layout->addWidget(container_);
 
-  if (is_default) {
-    container->setProperty("class", "app_drawer_side_pane_item_active");
-  } else {
-    container->setProperty("class", "app_drawer_side_pane_item");
+  if (container_active_ == nullptr) {
+    container_active_ = new QWidget();
+    container_active_->setProperty("class", "app_drawer_side_pane_item_active");
+  }
+  internal_layout->addWidget(container_active_);
+
+  if (layout_gen_ == nullptr) {
+    layout_gen_ = new QHBoxLayout();
   }
 
-  QHBoxLayout * layout_gen = new QHBoxLayout();
-  layout_gen->setContentsMargins(24, 0, 24, 0);
-  layout_gen->setSpacing(12);
-  layout_gen->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-  container->setLayout(layout_gen);
+  layout_gen_->setContentsMargins(24, 0, 24, 0);
+  layout_gen_->setSpacing(12);
+  layout_gen_->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+  if (is_default) {
+    container_->setVisible(false);
+    container_active_->setVisible(true);
+    container_active_->setLayout(layout_gen_);
+  } else {
+    container_active_->setVisible(false);
+    container_->setVisible(true);
+    container_->setLayout(layout_gen_);
+  }
 
   if (icon_ == nullptr) {
     icon_ = new QLabel();
@@ -64,7 +79,7 @@ AppDrawerSidePaneItem::AppDrawerSidePaneItem(QString icon, QString name,
   icon_->setText(icon);
   icon_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
   icon_->setVisible(true);
-  layout_gen->addWidget(icon_);
+  layout_gen_->addWidget(icon_);
 
   if (label_== nullptr) {
     label_ = new QLabel();
@@ -76,11 +91,31 @@ AppDrawerSidePaneItem::AppDrawerSidePaneItem(QString icon, QString name,
   }
   label_->setText(name);
   label_->setVisible(true);
-  layout_gen->addWidget(label_);
+  layout_gen_->addWidget(label_);
+
+  this->group_identifier_ = group_identifier;
+  this->id_ = id;
 }
 
 AppDrawerSidePaneItem::~AppDrawerSidePaneItem() {
   LOG(INFO) << absl::StrCat("AppDrawerSidePaneItem is being deleted.");
+}
+
+void AppDrawerSidePaneItem::OnGroupUpdated(const QString& group_identifier,
+    const QString& id) {
+  if (group_identifier == this->group_identifier_ && id == this->id_) {
+    container_->setVisible(false);
+    container_active_->setVisible(true);
+    container_active_->setLayout(layout_gen_);
+  } else {
+    container_active_->setVisible(false);
+    container_->setVisible(true);
+    container_->setLayout(layout_gen_);
+  }
+}
+
+void AppDrawerSidePaneItem::mousePressEvent(QMouseEvent *event) {
+  emit GroupSelected(this->group_identifier_, this->id_);
 }
 
 }  // namespace frontend
