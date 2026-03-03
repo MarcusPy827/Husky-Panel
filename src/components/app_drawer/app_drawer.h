@@ -51,6 +51,7 @@ class AppDrawer : public QWidget {
   QToolButton * session_btn_ = nullptr;
   QWidget * side_pane_ = nullptr;
   AppDrawerSidePaneItem * all_apps_btn_ = nullptr;
+  AppDrawerSidePaneItem * search_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * audio_video_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * development_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * education_apps_btn_ = nullptr;
@@ -70,6 +71,12 @@ class AppDrawer : public QWidget {
 
   QString Tr(const QString& msg);
   int UpdateAppDrawerItems(QGridLayout * target_layout);
+
+ private slots:
+  void OnSearchBarTextChanged(const QString& text);
+
+ signals:
+  void DrawerItemFilterUpdated(const QString& keyword);
 };
 
 }  // namespace frontend

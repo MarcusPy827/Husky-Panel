@@ -54,6 +54,7 @@ namespace backend {
 class ApplicationInfo {
  public:
   static QList<AppInfo> GetAllAppications();
+  static QList<AppInfo> GetApplicationsByCategory(QString category);
 
  private:
   static AppInfo KService2AppInfo(const KService::Ptr &service);

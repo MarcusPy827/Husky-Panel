@@ -32,9 +32,13 @@ class AppDrawerItem : public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppDrawerItem(const AppInfo& info, QWidget * parent = nullptr);
+  explicit AppDrawerItem(const AppInfo& info, bool is_search_layout = false,
+    QWidget * parent = nullptr);
   ~AppDrawerItem();
   AppInfo GetAppInfo();
+
+ public slots:
+  void UpdateFilter(const QString& keyword);
 
  private:
   QToolButton * btn_ = nullptr;
