@@ -110,6 +110,8 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (search_bar_internal_ == nullptr) {
     search_bar_internal_ = new QLineEdit();
     search_bar_internal_->setProperty("class", "app_bar_search_bar");
+    QObject::connect(search_bar_internal_, &QLineEdit::textChanged, this,
+      &AppDrawer::OnSearchBarTextChanged);
   }
   search_bar_internal_->setPlaceholderText(Tr("SearchHere"));
   search_bar_internal_->setVisible(true);
@@ -185,6 +187,12 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
       "app_drawer_side_pane", "all_apps", true);
   }
   side_pane_layout->addWidget(all_apps_btn_);
+
+  if (search_apps_btn_ == nullptr) {
+    search_apps_btn_ = new AppDrawerSidePaneItem("search", Tr("SearchApps"),
+      "app_drawer_side_pane", "search_apps", false);
+  }
+  side_pane_layout->addWidget(search_apps_btn_);
 
   if (audio_video_apps_btn_ == nullptr) {
     audio_video_apps_btn_ = new AppDrawerSidePaneItem("movie", Tr("Multimedia"),
@@ -381,6 +389,10 @@ int AppDrawer::UpdateAppDrawerItems(QGridLayout * target_layout) {
   }
 
   return 0;
+}
+
+void AppDrawer::OnSearchBarTextChanged(const QString& text) {
+  emit DrawerItemFilterUpdated(text);
 }
 
 }  // namespace frontend

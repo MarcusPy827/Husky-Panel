@@ -10,6 +10,10 @@ en_us = "Search..."
 zh_cn = "所有应用"
 en_us = "All Applications"
 
+[SearchApps]
+zh_cn = "搜索"
+en_us = "Search"
+
 [Multimedia]
 zh_cn = "多媒体"
 en_us = "Multimedia"

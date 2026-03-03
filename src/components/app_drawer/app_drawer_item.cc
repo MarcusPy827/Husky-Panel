@@ -34,7 +34,7 @@ namespace panel {
 namespace frontend {
 
 AppDrawerItem::AppDrawerItem(const AppInfo& info,
-    QWidget *parent) : QWidget(parent) {
+    bool is_search_layout, QWidget *parent) : QWidget(parent) {
   this->info_ = info;
   this->setProperty("class", "app_drawer_item");
   this->setMinimumHeight(128);
@@ -105,6 +105,27 @@ void AppDrawerItem::Launch() {
     LOG(ERROR) << absl::StrCat(
       "Failed to launch application: ", info_.name.toStdString(),
       " with command: ", clean_exec.toStdString());
+  }
+}
+
+void AppDrawerItem::UpdateFilter(const QString& keyword) {
+  bool should_show = false;
+  if (info_.name.contains(keyword, Qt::CaseInsensitive)) {
+    should_show = true;
+  } else if (info_.generic_name.contains(keyword, Qt::CaseInsensitive)) {
+    should_show = true;
+  } else if (info_.comment.contains(keyword, Qt::CaseInsensitive)) {
+    should_show = true;
+  }
+
+  if (should_show) {
+    if (!this->isVisible()) {
+      this->setVisible(true);
+    }
+  } else {
+    if (this->isVisible()) {
+      this->setVisible(false);
+    }
   }
 }
 

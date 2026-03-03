@@ -49,6 +49,18 @@ QList<AppInfo> ApplicationInfo::GetAllAppications() {
   return result;
 }
 
+QList<AppInfo> ApplicationInfo::GetApplicationsByCategory(QString category) {
+  QList<AppInfo> raw = GetAllAppications();
+  QList<AppInfo> result;
+
+  for (const auto& app : raw) {
+    if (app.categories.contains(category)) {
+      result.append(app);
+    }
+  }
+  return result;
+}
+
 AppInfo ApplicationInfo::KService2AppInfo(const KService::Ptr &service) {
   AppInfo app;
   app.id = service->storageId();
