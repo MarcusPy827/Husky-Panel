@@ -40,6 +40,9 @@ class AppDrawerItem : public QWidget {
   QToolButton * btn_ = nullptr;
   QLabel * title_ = nullptr;
   AppInfo info_ = {};
+
+ private slots:
+  void Launch();
 };
 
 }  // namespace frontend

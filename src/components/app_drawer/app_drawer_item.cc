@@ -18,6 +18,10 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSpacerItem>
+#include <QProcess>
+#include <QRegularExpression>
+
+#include <string>
 
 #include "absl/log/log.h"
 #include "absl/log/check.h"
@@ -56,6 +60,7 @@ AppDrawerItem::AppDrawerItem(const AppInfo& info,
     btn_->setIconSize(QSize(64, 64));
     btn_->setMinimumSize(QSize(64, 64));
   }
+  QObject::connect(btn_, &QToolButton::clicked, this, &AppDrawerItem::Launch);
   btn_->setIcon(QIcon::fromTheme(info_.icon_name));
   btn_layout->addWidget(btn_);
 
@@ -76,6 +81,31 @@ AppDrawerItem::AppDrawerItem(const AppInfo& info,
 
 AppDrawerItem::~AppDrawerItem() {
   LOG(INFO) << absl::StrCat("AppDrawerItem is being deleted.");
+}
+
+void AppDrawerItem::Launch() {
+  LOG(INFO) << absl::StrFormat("Launching application: %s",
+    info_.name.toStdString());
+
+  if (info_.exec.isEmpty()) {
+    LOG(ERROR) << absl::StrCat(
+      "No executable command found for application: ",
+      info_.name.toStdString(), ". Launch aborted.");
+    return;
+  }
+
+  QString raw_exec = info_.exec;
+  static const QRegularExpression field_regex(
+    QStringLiteral("\\s%[fFuUdDnNickvm]"));
+  QString clean_exec = raw_exec.replace(field_regex, QString());
+
+  std::string cmd = "(" + info_.exec.toStdString() + ") &";
+  int state = std::system(cmd.c_str());
+  if (state != 0) {
+    LOG(ERROR) << absl::StrCat(
+      "Failed to launch application: ", info_.name.toStdString(),
+      " with command: ", clean_exec.toStdString());
+  }
 }
 
 }  // namespace frontend
