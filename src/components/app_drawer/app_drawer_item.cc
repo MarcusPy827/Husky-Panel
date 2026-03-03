@@ -99,7 +99,7 @@ void AppDrawerItem::Launch() {
     QStringLiteral("\\s%[fFuUdDnNickvm]"));
   QString clean_exec = raw_exec.replace(field_regex, QString());
 
-  std::string cmd = "(" + info_.exec.toStdString() + ") &";
+  std::string cmd = "(" + clean_exec.toStdString() + ") &";
   int state = std::system(cmd.c_str());
   if (state != 0) {
     LOG(ERROR) << absl::StrCat(
