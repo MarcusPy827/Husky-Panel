@@ -23,6 +23,7 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QStackedWidget>
+#include <QScrollArea>
 
 #include "src/theme_loader/theme_loader.h"
 #include "src/components/app_drawer/app_drawer_side_pane_item.h"
@@ -68,8 +69,50 @@ class AppDrawer : public QWidget {
   QStackedWidget * drawer_stack_ = nullptr;
   QWidget * actual_drawer_ = nullptr;
   QGridLayout * drawer_layout_ = nullptr;
-  QWidget * audio_video_drawer_ = nullptr;
+
+  QScrollArea * search_drawer_ = nullptr;
+  QWidget * actual_search_drawer_ = nullptr;
+  QGridLayout * search_layout_ = nullptr;
+
+  QScrollArea * audio_video_drawer_ = nullptr;
+  QWidget * actual_audio_video_drawer_ = nullptr;
   QGridLayout * audio_video_layout_ = nullptr;
+
+  QScrollArea * development_drawer_ = nullptr;
+  QWidget * actual_development_drawer_ = nullptr;
+  QGridLayout * development_layout_ = nullptr;
+
+  QScrollArea * education_drawer_ = nullptr;
+  QWidget * actual_education_drawer_ = nullptr;
+  QGridLayout * education_layout_ = nullptr;
+
+  QScrollArea * game_drawer_ = nullptr;
+  QWidget * actual_game_drawer_ = nullptr;
+  QGridLayout * game_layout_ = nullptr;
+
+  QScrollArea * graphics_drawer_ = nullptr;
+  QWidget * actual_graphics_drawer_ = nullptr;
+  QGridLayout * graphics_layout_ = nullptr;
+
+  QScrollArea * network_drawer_ = nullptr;
+  QWidget * actual_network_drawer_ = nullptr;
+  QGridLayout * network_layout_ = nullptr;
+
+  QScrollArea * office_drawer_ = nullptr;
+  QWidget * actual_office_drawer_ = nullptr;
+  QGridLayout * office_layout_ = nullptr;
+
+  QScrollArea * settings_drawer_ = nullptr;
+  QWidget * actual_settings_drawer_ = nullptr;
+  QGridLayout * settings_layout_ = nullptr;
+
+  QScrollArea * system_drawer_ = nullptr;
+  QWidget * actual_system_drawer_ = nullptr;
+  QGridLayout * system_layout_ = nullptr;
+
+  QScrollArea * utility_drawer_ = nullptr;
+  QWidget * actual_utility_drawer_ = nullptr;
+  QGridLayout * utility_layout_ = nullptr;
 
   AppDrawerItem** application_btns_ = {};
 
@@ -77,7 +120,7 @@ class AppDrawer : public QWidget {
   loader::TranslationLoader * translator_ = nullptr;
 
   QString Tr(const QString& msg);
-  int UpdateAppDrawerItems(QGridLayout * target_layout);
+  int UpdateAppDrawerItems();
   void UpdatePaneContent(const QString& id);
 
  private slots:
