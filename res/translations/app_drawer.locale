@@ -11,8 +11,8 @@ zh_cn = "所有应用"
 en_us = "All Applications"
 
 [SearchApps]
-zh_cn = "搜索"
-en_us = "Search"
+zh_cn = "搜索结果"
+en_us = "Search Result"
 
 [Multimedia]
 zh_cn = "多媒体"

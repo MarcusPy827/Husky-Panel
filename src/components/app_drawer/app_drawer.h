@@ -51,6 +51,7 @@ class AppDrawer : public QWidget {
   QToolButton * restart_btn_ = nullptr;
   QToolButton * shut_down_btn_ = nullptr;
   QToolButton * session_btn_ = nullptr;
+  QScrollArea * side_pane_view_container = nullptr;
   QWidget * side_pane_ = nullptr;
   AppDrawerSidePaneItem * all_apps_btn_ = nullptr;
   AppDrawerSidePaneItem * search_apps_btn_ = nullptr;
@@ -125,6 +126,7 @@ class AppDrawer : public QWidget {
 
  private slots:
   void OnSearchBarTextChanged(const QString& text);
+  void ToggleSidePane();
 
  signals:
   void DrawerItemFilterUpdated(const QString& keyword);
