@@ -40,6 +40,7 @@
     <a style="display: none;" href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     -->
     <img src="./docs/screenshots/screenshot.png" />
+    <span>(<i>Icon from <a href="https://github.com/vinceliuice/Colloid-icon-theme.git">Colloid Icon Theme</a>, which is NOT related, and NOT included with this project.</i>)</span>
     <br />
     <br />
     <!--
