@@ -178,7 +178,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   side_pane_view_container->setWidget(side_pane_);
 
   QVBoxLayout * side_pane_layout = new QVBoxLayout();
-  side_pane_layout->setContentsMargins(16, 16, 16, 16);
+  side_pane_layout->setContentsMargins(16, 0, 16, 16);
   side_pane_layout->setSpacing(6);
   side_pane_->setLayout(side_pane_layout);
 
@@ -289,11 +289,17 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   drawer_base_layer_layout->setSpacing(0);
   drawer_base_layer->setLayout(drawer_base_layer_layout);
 
+  if (drawer_stack_ == nullptr) {
+    drawer_stack_ = new QStackedWidget();
+    drawer_stack_->setProperty("class", "side_pane_view_base_layer");
+  }
+  drawer_base_layer_layout->addWidget(drawer_stack_);
+
   QScrollArea * drawer_container = new QScrollArea();
   drawer_container->setWidgetResizable(true);
   drawer_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   drawer_container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  drawer_base_layer_layout->addWidget(drawer_container);
+  drawer_stack_->insertWidget(0, drawer_container);
 
   QWidget * actual_drawer = new QWidget();
   actual_drawer->setProperty("class", "navigation_drawer_compact");
@@ -306,6 +312,294 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     drawer_layout_->setSpacing(8);
   }
   actual_drawer->setLayout(drawer_layout_);
+
+  // Search drawer (index 1)
+  if (search_drawer_ == nullptr) {
+    search_drawer_ = new QScrollArea();
+    search_drawer_->setWidgetResizable(true);
+    search_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    search_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(1, search_drawer_);
+
+  if (actual_search_drawer_ == nullptr) {
+    actual_search_drawer_ = new QWidget();
+    actual_search_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_search_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  search_drawer_->setMaximumHeight(400);
+  search_drawer_->setWidget(actual_search_drawer_);
+
+  if (search_layout_ == nullptr) {
+    search_layout_ = new QGridLayout();
+    search_layout_->setContentsMargins(16, 16, 16, 16);
+    search_layout_->setSpacing(8);
+    search_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_search_drawer_->setLayout(search_layout_);
+
+  // Audio/Video drawer (index 2)
+  if (audio_video_drawer_ == nullptr) {
+    audio_video_drawer_ = new QScrollArea();
+    audio_video_drawer_->setWidgetResizable(true);
+    audio_video_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    audio_video_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(2, audio_video_drawer_);
+
+  if (actual_audio_video_drawer_ == nullptr) {
+    actual_audio_video_drawer_ = new QWidget();
+    actual_audio_video_drawer_->setProperty("class",
+      "navigation_drawer_compact");
+    actual_audio_video_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  audio_video_drawer_->setMaximumHeight(400);
+  audio_video_drawer_->setWidget(actual_audio_video_drawer_);
+
+  if (audio_video_layout_ == nullptr) {
+    audio_video_layout_ = new QGridLayout();
+    audio_video_layout_->setContentsMargins(16, 16, 16, 16);
+    audio_video_layout_->setSpacing(8);
+    audio_video_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_audio_video_drawer_->setLayout(audio_video_layout_);
+
+  // Development drawer (index 3)
+  if (development_drawer_ == nullptr) {
+    development_drawer_ = new QScrollArea();
+    development_drawer_->setWidgetResizable(true);
+    development_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    development_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(3, development_drawer_);
+
+  if (actual_development_drawer_ == nullptr) {
+    actual_development_drawer_ = new QWidget();
+    actual_development_drawer_->setProperty("class",
+      "navigation_drawer_compact");
+    actual_development_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  development_drawer_->setMaximumHeight(400);
+  development_drawer_->setWidget(actual_development_drawer_);
+
+  if (development_layout_ == nullptr) {
+    development_layout_ = new QGridLayout();
+    development_layout_->setContentsMargins(16, 16, 16, 16);
+    development_layout_->setSpacing(8);
+    development_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_development_drawer_->setLayout(development_layout_);
+
+  // Education drawer (index 4)
+  if (education_drawer_ == nullptr) {
+    education_drawer_ = new QScrollArea();
+    education_drawer_->setWidgetResizable(true);
+    education_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    education_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(4, education_drawer_);
+
+  if (actual_education_drawer_ == nullptr) {
+    actual_education_drawer_ = new QWidget();
+    actual_education_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_education_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  education_drawer_->setMaximumHeight(400);
+  education_drawer_->setWidget(actual_education_drawer_);
+
+  if (education_layout_ == nullptr) {
+    education_layout_ = new QGridLayout();
+    education_layout_->setContentsMargins(16, 16, 16, 16);
+    education_layout_->setSpacing(8);
+    education_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_education_drawer_->setLayout(education_layout_);
+
+  // Game drawer (index 5)
+  if (game_drawer_ == nullptr) {
+    game_drawer_ = new QScrollArea();
+    game_drawer_->setWidgetResizable(true);
+    game_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    game_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(5, game_drawer_);
+
+  if (actual_game_drawer_ == nullptr) {
+    actual_game_drawer_ = new QWidget();
+    actual_game_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_game_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  game_drawer_->setMaximumHeight(400);
+  game_drawer_->setWidget(actual_game_drawer_);
+
+  if (game_layout_ == nullptr) {
+    game_layout_ = new QGridLayout();
+    game_layout_->setContentsMargins(16, 16, 16, 16);
+    game_layout_->setSpacing(8);
+    game_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_game_drawer_->setLayout(game_layout_);
+
+  // Graphics drawer (index 6)
+  if (graphics_drawer_ == nullptr) {
+    graphics_drawer_ = new QScrollArea();
+    graphics_drawer_->setWidgetResizable(true);
+    graphics_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    graphics_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(6, graphics_drawer_);
+
+  if (actual_graphics_drawer_ == nullptr) {
+    actual_graphics_drawer_ = new QWidget();
+    actual_graphics_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_graphics_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  graphics_drawer_->setMaximumHeight(400);
+  graphics_drawer_->setWidget(actual_graphics_drawer_);
+
+  if (graphics_layout_ == nullptr) {
+    graphics_layout_ = new QGridLayout();
+    graphics_layout_->setContentsMargins(16, 16, 16, 16);
+    graphics_layout_->setSpacing(8);
+    graphics_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_graphics_drawer_->setLayout(graphics_layout_);
+
+  // Network drawer (index 7)
+  if (network_drawer_ == nullptr) {
+    network_drawer_ = new QScrollArea();
+    network_drawer_->setWidgetResizable(true);
+    network_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    network_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(7, network_drawer_);
+
+  if (actual_network_drawer_ == nullptr) {
+    actual_network_drawer_ = new QWidget();
+    actual_network_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_network_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  network_drawer_->setMaximumHeight(400);
+  network_drawer_->setWidget(actual_network_drawer_);
+
+  if (network_layout_ == nullptr) {
+    network_layout_ = new QGridLayout();
+    network_layout_->setContentsMargins(16, 16, 16, 16);
+    network_layout_->setSpacing(8);
+    network_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_network_drawer_->setLayout(network_layout_);
+
+  // Office drawer (index 8)
+  if (office_drawer_ == nullptr) {
+    office_drawer_ = new QScrollArea();
+    office_drawer_->setWidgetResizable(true);
+    office_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    office_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(8, office_drawer_);
+
+  if (actual_office_drawer_ == nullptr) {
+    actual_office_drawer_ = new QWidget();
+    actual_office_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_office_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  office_drawer_->setMaximumHeight(400);
+  office_drawer_->setWidget(actual_office_drawer_);
+
+  if (office_layout_ == nullptr) {
+    office_layout_ = new QGridLayout();
+    office_layout_->setContentsMargins(16, 16, 16, 16);
+    office_layout_->setSpacing(8);
+    office_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_office_drawer_->setLayout(office_layout_);
+
+  // Settings drawer (index 9)
+  if (settings_drawer_ == nullptr) {
+    settings_drawer_ = new QScrollArea();
+    settings_drawer_->setWidgetResizable(true);
+    settings_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    settings_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(9, settings_drawer_);
+
+  if (actual_settings_drawer_ == nullptr) {
+    actual_settings_drawer_ = new QWidget();
+    actual_settings_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_settings_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  settings_drawer_->setMaximumHeight(400);
+  settings_drawer_->setWidget(actual_settings_drawer_);
+
+  if (settings_layout_ == nullptr) {
+    settings_layout_ = new QGridLayout();
+    settings_layout_->setContentsMargins(16, 16, 16, 16);
+    settings_layout_->setSpacing(8);
+    settings_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_settings_drawer_->setLayout(settings_layout_);
+
+  // System drawer (index 10)
+  if (system_drawer_ == nullptr) {
+    system_drawer_ = new QScrollArea();
+    system_drawer_->setWidgetResizable(true);
+    system_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    system_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(10, system_drawer_);
+
+  if (actual_system_drawer_ == nullptr) {
+    actual_system_drawer_ = new QWidget();
+    actual_system_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_system_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  system_drawer_->setMaximumHeight(400);
+  system_drawer_->setWidget(actual_system_drawer_);
+
+  if (system_layout_ == nullptr) {
+    system_layout_ = new QGridLayout();
+    system_layout_->setContentsMargins(16, 16, 16, 16);
+    system_layout_->setSpacing(8);
+    system_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_system_drawer_->setLayout(system_layout_);
+
+  // Utility drawer (index 11)
+  if (utility_drawer_ == nullptr) {
+    utility_drawer_ = new QScrollArea();
+    utility_drawer_->setWidgetResizable(true);
+    utility_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    utility_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  }
+  drawer_stack_->insertWidget(11, utility_drawer_);
+
+  if (actual_utility_drawer_ == nullptr) {
+    actual_utility_drawer_ = new QWidget();
+    actual_utility_drawer_->setProperty("class", "navigation_drawer_compact");
+    actual_utility_drawer_->setSizePolicy(QSizePolicy::Expanding,
+      QSizePolicy::Expanding);
+  }
+  utility_drawer_->setMaximumHeight(400);
+  utility_drawer_->setWidget(actual_utility_drawer_);
+
+  if (utility_layout_ == nullptr) {
+    utility_layout_ = new QGridLayout();
+    utility_layout_->setContentsMargins(16, 16, 16, 16);
+    utility_layout_->setSpacing(8);
+    utility_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+  }
+  actual_utility_drawer_->setLayout(utility_layout_);
 
   QWidget * tool_bar = new QWidget();
   tool_bar->setProperty("class", "tool_bar_app_drawer");
@@ -371,7 +665,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   session_btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
   tool_bar_layout->addWidget(session_btn_);
 
-  if (UpdateAppDrawerItems(drawer_layout_) == 0) {
+  if (UpdateAppDrawerItems() == 0) {
     QString highlight_color = utils::ColorPaletteWrapper::
     GetSystemHighlightColor().name();
     if (theme_loader_ == nullptr) {
@@ -393,24 +687,296 @@ QString AppDrawer::Tr(const QString& msg) {
   }
 }
 
-int AppDrawer::UpdateAppDrawerItems(QGridLayout * target_layout) {
+int AppDrawer::UpdateAppDrawerItems() {
   LOG(INFO) << absl::StrCat("Cleaning old buttons...");
-  for (auto old : target_layout->findChildren<QWidget*> ({},
-      Qt::FindDirectChildrenOnly)) {
-    delete old;
+
+  // Clean all layouts
+  if (drawer_layout_ != nullptr) {
+    for (auto old : drawer_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (search_layout_ != nullptr) {
+    for (auto old : search_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (audio_video_layout_ != nullptr) {
+    for (auto old : audio_video_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (development_layout_ != nullptr) {
+    for (auto old : development_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (education_layout_ != nullptr) {
+    for (auto old : education_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (game_layout_ != nullptr) {
+    for (auto old : game_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (graphics_layout_ != nullptr) {
+    for (auto old : graphics_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (network_layout_ != nullptr) {
+    for (auto old : network_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (office_layout_ != nullptr) {
+    for (auto old : office_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (settings_layout_ != nullptr) {
+    for (auto old : settings_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (system_layout_ != nullptr) {
+    for (auto old : system_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
+  }
+
+  if (utility_layout_ != nullptr) {
+    for (auto old : utility_layout_->findChildren<QWidget*> ({},
+        Qt::FindDirectChildrenOnly)) {
+      delete old;
+    }
   }
 
   LOG(INFO) << absl::StrCat("Pulling installed application info...");
+  QList<AppInfo> app_infos_ = backend::ApplicationInfo::GetAllAppications();
   int cur_col = 0;
   int cur_row = 0;
-  QList<AppInfo> app_infos_ = backend::ApplicationInfo::GetAllAppications();
-  for (const auto& app : app_infos_) {
-    AppDrawerItem * item_gen = new AppDrawerItem(app);
-    target_layout->addWidget(item_gen, cur_row, cur_col);
-    cur_col += 1;
-    if (cur_col > 3) {
-      cur_col = 0;
-      cur_row += 1;
+
+  // All apps drawer
+  if (drawer_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    for (const auto& app : app_infos_) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      drawer_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Search drawer (uses all apps)
+  if (search_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    for (const auto& app : app_infos_) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      search_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // AudioVideo drawer
+  if (audio_video_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> audio_video_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("AudioVideo");
+    for (const auto& app : audio_video_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      audio_video_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Development drawer
+  if (development_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> development_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Development");
+    for (const auto& app : development_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      development_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Education drawer
+  if (education_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> education_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Education");
+    for (const auto& app : education_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      education_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Game drawer
+  if (game_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> game_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Game");
+    for (const auto& app : game_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      game_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Graphics drawer
+  if (graphics_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> graphics_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Graphics");
+    for (const auto& app : graphics_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      graphics_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Network drawer
+  if (network_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> network_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Network");
+    for (const auto& app : network_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      network_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Office drawer
+  if (office_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> office_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Office");
+    for (const auto& app : office_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      office_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Settings drawer
+  if (settings_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> settings_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Settings");
+    for (const auto& app : settings_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      settings_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // System drawer
+  if (system_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> system_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("System");
+    for (const auto& app : system_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      system_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
+    }
+  }
+
+  // Utility drawer
+  if (utility_layout_ != nullptr) {
+    cur_col = 0;
+    cur_row = 0;
+    QList<AppInfo> utility_app_infos =
+      backend::ApplicationInfo::GetApplicationsByCategory("Utility");
+    for (const auto& app : utility_app_infos) {
+      AppDrawerItem * item_gen = new AppDrawerItem(app);
+      utility_layout_->addWidget(item_gen, cur_row, cur_col);
+      cur_col += 1;
+      if (cur_col > 3) {
+        cur_col = 0;
+        cur_row += 1;
+      }
     }
   }
 
@@ -422,12 +988,6 @@ void AppDrawer::OnSearchBarTextChanged(const QString& text) {
 }
 
 void AppDrawer::UpdatePaneContent(const QString& id) {
-  if (actual_drawer_ == nullptr) {
-    LOG(ERROR) << absl::StrCat(
-      "Target drawer is null pointer, now aborting...");
-    return;
-  }
-
   if (drawer_stack_ == nullptr) {
     LOG(ERROR) << absl::StrCat(
       "Drawer stack is null pointer, now aborting...");
@@ -435,12 +995,33 @@ void AppDrawer::UpdatePaneContent(const QString& id) {
   }
 
   if (id == "all_apps") {
-    // drawer_stack_->setCurrentIndex(0);
+    drawer_stack_->setCurrentIndex(0);
+  } else if (id == "search_apps") {
+    drawer_stack_->setCurrentIndex(1);
   } else if (id == "multimedia") {
-    // drawer_stack_->setCurrentIndex(1);
+    drawer_stack_->setCurrentIndex(2);
+  } else if (id == "development") {
+    drawer_stack_->setCurrentIndex(3);
+  } else if (id == "education") {
+    drawer_stack_->setCurrentIndex(4);
+  } else if (id == "game") {
+    drawer_stack_->setCurrentIndex(5);
+  } else if (id == "graphics") {
+    drawer_stack_->setCurrentIndex(6);
+  } else if (id == "network") {
+    drawer_stack_->setCurrentIndex(7);
+  } else if (id == "office") {
+    drawer_stack_->setCurrentIndex(8);
+  } else if (id == "settings") {
+    drawer_stack_->setCurrentIndex(9);
+  } else if (id == "system") {
+    drawer_stack_->setCurrentIndex(10);
+  } else if (id == "utility") {
+    drawer_stack_->setCurrentIndex(11);
   } else {
-    LOG(INFO) << absl::StrCat("Unknown id defaulting to all_apps...");
-    // drawer_stack_->setCurrentIndex(0);
+    LOG(INFO) << absl::StrCat("Unknown id '",
+      id.toStdString(), "' defaulting to all_apps...");
+    drawer_stack_->setCurrentIndex(0);
   }
 }
 
