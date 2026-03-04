@@ -100,6 +100,8 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   }
   menu_btn_->setText("menu");
   menu_btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
+  QObject::connect(menu_btn_, &QToolButton::clicked, this,
+    &AppDrawer::ToggleSidePane);
   title_bar_layout->addWidget(menu_btn_);
 
   QGridLayout * search_bar_layout_internal = new QGridLayout();
@@ -163,11 +165,13 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   side_pane_view_base_layer_layout->setSpacing(0);
   side_pane_view_base_layer->setLayout(side_pane_view_base_layer_layout);
 
-  QScrollArea * side_pane_view_container = new QScrollArea();
-  side_pane_view_container->setWidgetResizable(true);
-  side_pane_view_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-  side_pane_view_container->setHorizontalScrollBarPolicy(
-    Qt::ScrollBarAlwaysOff);
+  if (side_pane_view_container == nullptr) {
+    side_pane_view_container = new QScrollArea();
+    side_pane_view_container->setWidgetResizable(true);
+    side_pane_view_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    side_pane_view_container->setHorizontalScrollBarPolicy(
+      Qt::ScrollBarAlwaysOff);
+  }
   side_pane_view_base_layer_layout->addWidget(side_pane_view_container);
 
   if (side_pane_ == nullptr) {
@@ -1022,6 +1026,20 @@ void AppDrawer::UpdatePaneContent(const QString& id) {
     LOG(INFO) << absl::StrCat("Unknown id '",
       id.toStdString(), "' defaulting to all_apps...");
     drawer_stack_->setCurrentIndex(0);
+  }
+}
+
+void AppDrawer::ToggleSidePane() {
+  if (side_pane_view_container == nullptr) {
+    LOG(ERROR) << absl::StrCat("Side pane is null pointer, ",
+      "now aborting...");
+    return;
+  }
+
+  if (side_pane_view_container->isVisible()) {
+    side_pane_view_container->hide();
+  } else {
+    side_pane_view_container->show();
   }
 }
 
