@@ -91,8 +91,6 @@
 <context>
     <name>Calendar</name>
     <message>
-        <location filename="../src/components/calendar/calendar.cc" line="41"/>
-        <location filename="../src/components/calendar/calendar.cc" line="91"/>
         <source>Calendar</source>
         <translation type="vanished">日历</translation>
     </message>
@@ -101,11 +99,10 @@
     <name>Clock</name>
     <message>
         <source>yyyy-M-</source>
-        <translation type="vanished" type="vanished">yyyy年M月</translation>
+        <translation type="vanished">yyyy年M月</translation>
     </message>
     <message>
         <source>dd</source>
-        <translation type="vanished">dd日</translation>
         <translation type="vanished">dd日</translation>
     </message>
     <message>
@@ -114,7 +111,7 @@
     </message>
     <message>
         <source>Tue.</source>
-        <translation type="vanished" type="vanished">星期二</translation>
+        <translation type="vanished">星期二</translation>
     </message>
     <message>
         <source>Wed.</source>
