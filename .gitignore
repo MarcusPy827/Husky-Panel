@@ -6,4 +6,4 @@ lib/3rdparty/layershell-qt/build/*
 lib/3rdparty/layershell-qt/.reuse/*
 
 # Clang-Tidy
-
+.cache/*
