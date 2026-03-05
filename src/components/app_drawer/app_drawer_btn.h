@@ -22,10 +22,7 @@
 #include <QPushButton>
 
 #include "src/translation_loader/translation_loader.h"
-
 #include "src/components/app_drawer/app_drawer.h"
-
-#include "src/translation_loader/translation_loader.h"
 
 namespace panel {
 namespace frontend {
@@ -45,7 +42,6 @@ class AppDrawerBtn : public QWidget {
 
  private slots:
   void ToggleAppDrawer();
-  loader::TranslationLoader * translator_ = nullptr;
 };
 
 }  // namespace frontend
