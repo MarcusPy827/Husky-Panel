@@ -2,6 +2,86 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AppDrawer</name>
+    <message>
+        <source>App Drawer</source>
+        <translation type="obsolete">应用抽屉</translation>
+    </message>
+    <message>
+        <source>Search...</source>
+        <translation type="obsolete">搜索</translation>
+    </message>
+    <message>
+        <source>All applications</source>
+        <translation type="obsolete">所有程序</translation>
+    </message>
+    <message>
+        <source>Multimedia</source>
+        <translation type="obsolete">多媒体</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation type="obsolete">开发</translation>
+    </message>
+    <message>
+        <source>Education</source>
+        <translation type="obsolete">教育</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation type="obsolete">游戏</translation>
+    </message>
+    <message>
+        <source>Graphics</source>
+        <translation type="obsolete">图形</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="obsolete">网络</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="obsolete">办公</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="obsolete">设置</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="obsolete">系统</translation>
+    </message>
+    <message>
+        <source>Utilities</source>
+        <translation type="obsolete">工具</translation>
+    </message>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="623"/>
+        <source>Sleep</source>
+        <translation type="unfinished">睡眠</translation>
+    </message>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="633"/>
+        <source>Hibernate</source>
+        <translation type="unfinished">休眠</translation>
+    </message>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="643"/>
+        <source>Reboot</source>
+        <translation type="unfinished">重启</translation>
+    </message>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="653"/>
+        <source>Shut down</source>
+        <translation type="unfinished">关机</translation>
+    </message>
+    <message>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="667"/>
+        <source>Session</source>
+        <translation type="unfinished">会话选项</translation>
+    </message>
+</context>
+<context>
     <name>AppDrawerBtn</name>
     <message>
         <source>Applications</source>
@@ -11,14 +91,8 @@
 <context>
     <name>Calendar</name>
     <message>
-        <source>Top Panel</source>
-        <translation type="obsolete">顶栏</translation>
-    </message>
-    <message>
-        <source>Failed to get native window handle. Please check your session,</source>
-        <translation type="obsolete">无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
-    </message>
-    <message>
+        <location filename="../src/components/calendar/calendar.cc" line="41"/>
+        <location filename="../src/components/calendar/calendar.cc" line="91"/>
         <source>Calendar</source>
         <translation type="vanished">日历</translation>
     </message>
@@ -27,10 +101,11 @@
     <name>Clock</name>
     <message>
         <source>yyyy-M-</source>
-        <translation type="vanished">yyyy年M月</translation>
+        <translation type="vanished" type="vanished">yyyy年M月</translation>
     </message>
     <message>
         <source>dd</source>
+        <translation type="vanished">dd日</translation>
         <translation type="vanished">dd日</translation>
     </message>
     <message>
@@ -39,7 +114,7 @@
     </message>
     <message>
         <source>Tue.</source>
-        <translation type="vanished">星期二</translation>
+        <translation type="vanished" type="vanished">星期二</translation>
     </message>
     <message>
         <source>Wed.</source>
@@ -274,10 +349,264 @@
     </message>
 </context>
 <context>
+    <name>panel::fronted::AppDrawer</name>
+    <message>
+        <source>App Drawer</source>
+        <translation type="vanished">应用抽屉</translation>
+    </message>
+    <message>
+        <source>Search...</source>
+        <translation type="vanished">搜索</translation>
+    </message>
+    <message>
+        <source>All applications</source>
+        <translation type="vanished">所有程序</translation>
+    </message>
+    <message>
+        <source>Multimedia</source>
+        <translation type="vanished">多媒体</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation type="vanished">开发</translation>
+    </message>
+    <message>
+        <source>Education</source>
+        <translation type="vanished">教育</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation type="vanished">游戏</translation>
+    </message>
+    <message>
+        <source>Graphics</source>
+        <translation type="vanished">图形</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="vanished">网络</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="vanished">办公</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="vanished">设置</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="vanished">系统</translation>
+    </message>
+    <message>
+        <source>Utilities</source>
+        <translation type="vanished">工具</translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="vanished">睡眠</translation>
+    </message>
+    <message>
+        <source>Hibernate</source>
+        <translation type="vanished">休眠</translation>
+    </message>
+    <message>
+        <source>Reboot</source>
+        <translation type="vanished">重启</translation>
+    </message>
+    <message>
+        <source>Shut down</source>
+        <translation type="vanished">关机</translation>
+    </message>
+    <message>
+        <source>Session</source>
+        <translation type="vanished">会话选项</translation>
+    </message>
+</context>
+<context>
+    <name>panel::fronted::AppDrawerBtn</name>
+    <message>
+        <source>Applications</source>
+        <translation type="vanished">应用程序</translation>
+    </message>
+</context>
+<context>
+    <name>panel::fronted::Clock</name>
+    <message>
+        <source>yyyy-M-</source>
+        <translation type="vanished">yyyy年M月</translation>
+    </message>
+    <message>
+        <source>dd</source>
+        <translation type="vanished">dd日</translation>
+    </message>
+    <message>
+        <source>Mon.</source>
+        <translation type="vanished">星期一</translation>
+    </message>
+    <message>
+        <source>Tue.</source>
+        <translation type="vanished">星期二</translation>
+    </message>
+    <message>
+        <source>Wed.</source>
+        <translation type="vanished">星期三</translation>
+    </message>
+    <message>
+        <source>Thu.</source>
+        <translation type="vanished">星期四</translation>
+    </message>
+    <message>
+        <source>Fri.</source>
+        <translation type="vanished">星期五</translation>
+    </message>
+    <message>
+        <source>Sat.</source>
+        <translation type="vanished">星期六</translation>
+    </message>
+    <message>
+        <source>Sun.</source>
+        <translation type="vanished">星期日</translation>
+    </message>
+</context>
+<context>
+    <name>panel::frontend::AppDrawer</name>
+    <message>
+        <source>App Drawer</source>
+        <translation type="vanished">应用抽屉</translation>
+    </message>
+    <message>
+        <source>Search...</source>
+        <translation type="vanished">搜索</translation>
+    </message>
+    <message>
+        <source>All applications</source>
+        <translation type="vanished">所有程序</translation>
+    </message>
+    <message>
+        <source>Multimedia</source>
+        <translation type="vanished">多媒体</translation>
+    </message>
+    <message>
+        <source>Development</source>
+        <translation type="vanished">开发</translation>
+    </message>
+    <message>
+        <source>Education</source>
+        <translation type="vanished">教育</translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation type="vanished">游戏</translation>
+    </message>
+    <message>
+        <source>Graphics</source>
+        <translation type="vanished">图形</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="vanished">网络</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="vanished">办公</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="vanished">设置</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="vanished">系统</translation>
+    </message>
+    <message>
+        <source>Utilities</source>
+        <translation type="vanished">工具</translation>
+    </message>
+    <message>
+        <source>Sleep</source>
+        <translation type="vanished">睡眠</translation>
+    </message>
+    <message>
+        <source>Hibernate</source>
+        <translation type="vanished">休眠</translation>
+    </message>
+    <message>
+        <source>Reboot</source>
+        <translation type="vanished">重启</translation>
+    </message>
+    <message>
+        <source>Shut down</source>
+        <translation type="vanished">关机</translation>
+    </message>
+    <message>
+        <source>Session</source>
+        <translation type="vanished">会话选项</translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="obsolete">日历</translation>
+    </message>
+</context>
+<context>
     <name>panel::frontend::AppDrawerBtn</name>
     <message>
         <source>Applications</source>
         <translation type="vanished">应用程序</translation>
+    </message>
+</context>
+<context>
+    <name>panel::frontend::Calendar</name>
+    <message>
+        <source>Calendar</source>
+        <translation type="vanished">日历</translation>
+    </message>
+    <message>
+        <source>Top Panel</source>
+        <translation type="obsolete">顶栏</translation>
+    </message>
+    <message>
+        <source>Failed to get native window handle. Please check your session,</source>
+        <translation type="obsolete">无法获取原生窗体句柄，请检查您是否在Wayland会话下。</translation>
+    </message>
+</context>
+<context>
+    <name>panel::frontend::Clock</name>
+    <message>
+        <source>yyyy-M-</source>
+        <translation type="vanished">yyyy年M月</translation>
+    </message>
+    <message>
+        <source>dd</source>
+        <translation type="vanished">dd日</translation>
+    </message>
+    <message>
+        <source>Mon.</source>
+        <translation type="vanished">星期一</translation>
+    </message>
+    <message>
+        <source>Tue.</source>
+        <translation type="vanished">星期二</translation>
+    </message>
+    <message>
+        <source>Wed.</source>
+        <translation type="vanished">星期三</translation>
+    </message>
+    <message>
+        <source>Thu.</source>
+        <translation type="vanished">星期四</translation>
+    </message>
+    <message>
+        <source>Fri.</source>
+        <translation type="vanished">星期五</translation>
+    </message>
+    <message>
+        <source>Sat.</source>
+        <translation type="vanished">星期六</translation>
+    </message>
+    <message>
+        <source>Sun.</source>
+        <translation type="vanished">星期日</translation>
     </message>
 </context>
 <context>

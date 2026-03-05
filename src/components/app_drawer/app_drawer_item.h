@@ -15,40 +15,41 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
+#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
 
 #include <QWidget>
-#include <QPushButton>
+#include <QString>
+#include <QLabel>
+#include <QToolButton>
 
-#include "src/translation_loader/translation_loader.h"
-
-#include "src/components/app_drawer/app_drawer.h"
-
-#include "src/translation_loader/translation_loader.h"
+#include "src/info_server/application_info/application_info.h"
 
 namespace panel {
 namespace frontend {
 
-class AppDrawerBtn : public QWidget {
+class AppDrawerItem : public QWidget {
   Q_OBJECT
 
  public:
-  explicit AppDrawerBtn(QWidget *parent = nullptr);
-  ~AppDrawerBtn();
-  QPushButton * GetBtn();
+  explicit AppDrawerItem(const AppInfo& info, bool is_search_layout = false,
+    QWidget * parent = nullptr);
+  ~AppDrawerItem();
+  AppInfo GetAppInfo();
+
+ public slots:
+  void UpdateFilter(const QString& keyword);
 
  private:
-  QPushButton * btn_ = nullptr;
-  AppDrawer * app_drawer_ = nullptr;
-  loader::TranslationLoader * translator_ = nullptr;
+  QToolButton * btn_ = nullptr;
+  QLabel * title_ = nullptr;
+  AppInfo info_ = {};
 
  private slots:
-  void ToggleAppDrawer();
-  loader::TranslationLoader * translator_ = nullptr;
+  void Launch();
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
