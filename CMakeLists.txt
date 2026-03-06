@@ -219,7 +219,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     res/resources.qrc
   )
 
-  target_include_directories(HuskyPanel PRIVATE
+  target_include_directories(HuskyPanel PRIVATE STATIC
     "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
     "${CMAKE_CURRENT_BINARY_DIR}/lib/3rdparty/libdbusmenu/src"
   )
