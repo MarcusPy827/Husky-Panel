@@ -245,7 +245,7 @@ if(COMMAND qt_add_lupdate)
 endif()
 
 target_link_libraries(HuskyPanel 
-  PRIVATE 
+  PRIVATE STATIC
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
