@@ -13,19 +13,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND CMAKE_PREFIX_PATH
-  ${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules
+list(PREPEND CMAKE_PREFIX_PATH
+    ${CMAKE_BINARY_DIR}/ecm-install
 )
-
-set(CMAKE_MODULE_PATH
-  ${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules/modules
-  ${CMAKE_MODULE_PATH}
-)
-
-add_subdirectory(lib/3rdparty/extra-cmake-modules)
-
-include(ECMOptionalAddSubdirectory)
-include(GNUInstallDirs)
 
 find_package(PkgConfig 
   REQUIRED
@@ -51,12 +41,6 @@ find_package(
   REQUIRED
 )
 
-add_subdirectory(lib/3rdparty/abseil-cpp)
-add_subdirectory(lib/3rdparty/gtest)
-add_subdirectory(lib/3rdparty/qwindowkit)
-add_subdirectory(lib/3rdparty/libdbusmenu)
-add_subdirectory(cmake/material-color-utils)
-
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
   Widgets 
@@ -64,6 +48,14 @@ find_package(Qt${QT_VERSION_MAJOR}
   WaylandClient
   DBus
 )
+
+find_package(ECM REQUIRED NO_MODULE)
+
+add_subdirectory(lib/3rdparty/abseil-cpp)
+add_subdirectory(lib/3rdparty/gtest)
+add_subdirectory(lib/3rdparty/qwindowkit)
+add_subdirectory(lib/3rdparty/libdbusmenu)
+add_subdirectory(cmake/material-color-utils)
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
   add_library(Wayland::Client 

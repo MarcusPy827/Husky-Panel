@@ -119,6 +119,68 @@ VERSION 0.9.3
 当前本项目仅支持Plasma 6桌面，我们推荐的版本是Plasma 6.5。Wlroots系的窗口管理器支持在规划之中。
 
 ### 前置条件
+#### 安装工具链
+在构建本项目之前，请确保您已经安装好了如下必需的工具链：
+
+在基于Archlinux的发行版上：
+```bash
+sudo pacman -S cmake base-devel
+```
+
+#### 构建ECM
+ECM (Extra CMake Modules) 被我们的依赖`layer-shell-qt`所依赖。我们集成了一个最近版本的`layer-shell-qt`，然而这带来了一个问题：这个版本依赖的ECM版本非常新，截止我正在写这篇文档的时候很多非滚动发行的发行版都没有能满足最小要求版本的情况。为了解决这个问题，我集成了ECM模块，在构建本项目之前请先按照如下说明来构建ECM模块：
+
+首先，请打开终端，确保自己的终端上的位置在**项目根目录上**。
+
+然后执行：
+```bash
+chmod a+x ./scripts/configure_ecm.sh
+./scripts/configure_ecm.sh
+```
+
+运行脚本的时候脚本可能会询问一些问题，这些问题如下：
+
+```
+[WARN] The build directory "/XXXXX/husky-panel/build/ecm-build" is NOT found in your system.
+Do you want to create it?\n    (y/n) >> 
+```
+
+> 也有可能询问的目录是`"/XXXXX/husky-panel/build/ecm-install"`，其与`ecm-build`的区别是前者是安装目录，后者是构建目录。
+
+此问题报告：构建/安装目录不存在，是否创建？
+
+首先，请检查问题打印出来的目录`"/XXXXXX/husky-panel/build/ecm-build"`是否就是`"<项目根目录>/build/ecm-build"`，如果不是则代表您的终端不在项目根目录上，输入`n`并按下回车取消执行脚本。
+
+> 如果询问的是`"/XXXXX/husky-panel/build/ecm-install"`，那就是确认请检查问题打印出来的目录`"/XXXXXX/husky-panel/build/ecm-install"`是否就是`"<项目根目录>/build/ecm-install"`
+
+> 输入`y`或`n`之外的任何内容都会打断脚本。
+
+如果上一步中打印目录就是`"<项目根目录>/build/ecm-build"`，您需要输入`y`，然后按回车，脚本会自动创建这个构建路径。
+
+<hr/>
+
+```
+[WARN] The build directory "/XXXXXX/build/ecm-build" already exists and is NOT empty.
+Do you want to clean it?\nI mean... to delete everything in it?\n    (y/n) >> 
+```
+
+> 也有可能询问的目录是`"/XXXXX/husky-panel/build/ecm-install"`，其与`ecm-build`的区别是前者是安装目录，后者是构建目录。
+
+此问题报告：构建目录/安装已经存在且不为空，是否清空？
+* 输入`y`，按下回车会清空这个目录下一切内容。
+* 输入`n`，按下回车会跳过目录清理。
+* 输入任何其他奇奇怪怪的东西也会跳过目录清理。
+
+<hr/>
+
+如果看到如下输出：
+```
+[ OK ] ECM should be built and available in "/home/marcus/Desktop/Repository/Private/husky-panel/build/ecm-build/" now.
+```
+
+...则证明您的ECM模块已经构建好了。
+
+#### 安装依赖
 您需要安装以下依赖：
 
 在OpenSUSE上：

@@ -119,6 +119,33 @@ Ensure that you have Qt version 6.5+ avaliable in your system. This bar uses a n
 Currently only Plasma 6 is supported, we recommend you to login a Plasma 6.5 session to use this bar. Wlroots WM support is planned.
 
 ### Prerequisites
+#### Installing Toolchains
+Before building the project, makesure you have installed the required toolchains:
+
+On Archlinux-based distros:
+```bash
+sudo pacman -S cmake base-devel
+```
+
+#### Building ECM
+ECM (Extra CMake Modules) is required by the dependency `layer-shell-qt`. We are using a recent version of `layer-shell-qt`, and this presents a problem: this version depends on a very new ECM version, and as of the time of writing this writeup, many non-rolling releases do not meet the minimum version requirement. To solve this problem, I have vendored the ECM module. Please build the ECM module according to the following instructions before building this project:
+
+First, open a terminal, make sure you are **on project root**.
+
+Then execute the following: 
+```bash
+chmod a+x ./scripts/configure_ecm.sh
+./scripts/configure_ecm.sh
+```
+
+If you see the log output:
+```
+[ OK ] ECM should be built and available in "/home/marcus/Desktop/Repository/Private/husky-panel/build/ecm-build/" now.
+```
+
+... then ECM modules are ready to use for next steps!!
+
+#### Install Dependencies
 You will need to install the dependencies.
 
 On OpenSUSE: 
