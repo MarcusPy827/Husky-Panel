@@ -165,26 +165,21 @@ You will also need to use a Wayland session, otherwise the bar will NOT attach p
 
 Other third-party libraries has been vendored, so you do NOT need to install them.
 
-### Installation
-#### Build the Bar Itself & The Locale Files
+### Build & Installation
+#### Build the Bar Itself
 ```bash
-mkdir build
-cd build
+mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+cmake --build
 ```
 
-#### Copy the Locale Files
-Copy `build/locales/HuskyPanel_zh_CN.qm` to `res/translations/HuskyPanel_zh_CN.qm`.
+The process could lasts for minutes...
 
-Then, you will need to re-compile the bar.
+#### (Optional) Install to System
 ```bash
-rm -rf build
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+sudo cmake --install .
 ```
+> **Note**: Currently HuskyPanel does NOT autostart itself after you login, you may want to add it to your destop environment's autostart settings MANUALLY.
 
 #### (KWin Only) Install the Plugin
 Before installing, do read the README on `plugins/kde/app-bridge`.
