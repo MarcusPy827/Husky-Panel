@@ -15,6 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(ECM_DIR "${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules/cmake")
 
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules")
+
 find_package(PkgConfig 
   REQUIRED
 )
