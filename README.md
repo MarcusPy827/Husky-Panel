@@ -1,3 +1,7 @@
+[简体中文](./README.zh.md) | English
+
+VERSION 0.9.3
+
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 <!--
@@ -87,7 +91,7 @@
 ## About The Project
 `HuskyPanel` is another shell bar panel for Linux Wayland session. This is an experimental project that trys to utilize QWidget to bring a Material design 3 styled UI to your desktop environment.
 
-Currenty we are focusing on KWin/KDE Plasma.
+Currenty we are focusing on KWin/KDE Plasma 6.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,6 +105,8 @@ Currenty we are focusing on KWin/KDE Plasma.
 * Libdbusmenu
 * Material-Color-Utilities
 * QWindowKit
+* KDE Framework 6
+* KServices
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
