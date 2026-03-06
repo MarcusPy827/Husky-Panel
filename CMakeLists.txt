@@ -13,9 +13,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(ECM_DIR "${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules/cmake")
+set(CMAKE_MODULE_PATH
+    ${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules/modules
+    ${CMAKE_MODULE_PATH}
+)
 
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib/3rdparty/extra-cmake-modules")
+find_package(ECM REQUIRED NO_MODULE)
 
 find_package(PkgConfig 
   REQUIRED
