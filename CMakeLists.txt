@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_SHARED_LIBS OFF)
 set(ABSL_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(CMAKE_SKIP_INSTALL_RULES TRUE)
+# set(CMAKE_SKIP_INSTALL_RULES TRUE)
 
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -58,11 +58,11 @@ find_package(Qt${QT_VERSION_MAJOR}
 
 find_package(ECM REQUIRED NO_MODULE)
 
-add_subdirectory(lib/3rdparty/abseil-cpp)
-add_subdirectory(lib/3rdparty/gtest)
-add_subdirectory(lib/3rdparty/qwindowkit)
-add_subdirectory(lib/3rdparty/libdbusmenu)
-add_subdirectory(cmake/material-color-utils)
+add_subdirectory(lib/3rdparty/abseil-cpp EXCLUDE_FROM_ALL)
+add_subdirectory(lib/3rdparty/gtest EXCLUDE_FROM_ALL)
+add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
+add_subdirectory(lib/3rdparty/libdbusmenu EXCLUDE_FROM_ALL)
+add_subdirectory(cmake/material-color-utils EXCLUDE_FROM_ALL)
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
   add_library(Wayland::Client 
