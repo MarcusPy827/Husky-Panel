@@ -22,7 +22,10 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH}
 )
 
-find_package(ECM REQUIRED NO_MODULE)
+add_subdirectory(lib/3rdparty/extra-cmake-modules)
+
+include(ECMOptionalAddSubdirectory)
+include(GNUInstallDirs)
 
 find_package(PkgConfig 
   REQUIRED
@@ -52,7 +55,6 @@ add_subdirectory(lib/3rdparty/abseil-cpp)
 add_subdirectory(lib/3rdparty/gtest)
 add_subdirectory(lib/3rdparty/qwindowkit)
 add_subdirectory(lib/3rdparty/libdbusmenu)
-add_subdirectory(lib/3rdparty/extra-cmake-modules)
 add_subdirectory(cmake/material-color-utils)
 
 find_package(Qt${QT_VERSION_MAJOR} 
