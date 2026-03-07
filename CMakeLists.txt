@@ -219,7 +219,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     res/resources.qrc
   )
 
-  target_include_directories(HuskyPanel PRIVATE STATIC
+  target_include_directories(HuskyPanel PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
     "${CMAKE_CURRENT_BINARY_DIR}/lib/3rdparty/libdbusmenu/src"
   )
@@ -245,11 +245,8 @@ if(COMMAND qt_add_lupdate)
 endif()
 
 target_link_libraries(HuskyPanel 
-  PRIVATE STATIC
-  Qt${QT_VERSION_MAJOR}::Widgets
-  Qt${QT_VERSION_MAJOR}::WaylandClient
-  Qt${QT_VERSION_MAJOR}::DBus
-  KF6::Service
+  PRIVATE
+  -Wl,-Bstatic
   absl::strings
   absl::flat_hash_map
   absl::raw_logging_internal
@@ -259,6 +256,12 @@ target_link_libraries(HuskyPanel
   dbusmenu-lxqt
   LayerShellQtInterface
   MaterialColorUtils
+
+  -Wl,-Bdynamic
+  Qt${QT_VERSION_MAJOR}::Widgets
+  Qt${QT_VERSION_MAJOR}::WaylandClient
+  Qt${QT_VERSION_MAJOR}::DBus
+  KF6::Service
 )
 
 target_link_libraries(HuskyPanel
