@@ -224,7 +224,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
   target_include_directories(HuskyPanel PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
-    "${CMAKE_CURRENT_BINARY_DIR}/lib/3rdparty/libdbusmenu/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake/libdbusmenu/dbusmenu-build/src"
   )
 else()
   if(ANDROID)
