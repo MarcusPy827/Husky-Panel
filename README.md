@@ -1,3 +1,7 @@
+[简体中文](./README.zh.md) | English
+
+VERSION 0.9.3
+
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 <!--
@@ -87,7 +91,7 @@
 ## About The Project
 `HuskyPanel` is another shell bar panel for Linux Wayland session. This is an experimental project that trys to utilize QWidget to bring a Material design 3 styled UI to your desktop environment.
 
-Currenty we are focusing on KWin/KDE Plasma.
+Currenty we are focusing on KWin/KDE Plasma 6.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,6 +105,8 @@ Currenty we are focusing on KWin/KDE Plasma.
 * Libdbusmenu
 * Material-Color-Utilities
 * QWindowKit
+* KDE Framework 6
+* KServices
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,48 +119,71 @@ Ensure that you have Qt version 6.5+ avaliable in your system. This bar uses a n
 Currently only Plasma 6 is supported, we recommend you to login a Plasma 6.5 session to use this bar. Wlroots WM support is planned.
 
 ### Prerequisites
-You will need to install the dependencies.
+#### Installing Toolchains
+Before building the project, makesure you have installed the required toolchains:
 
-On OpenSUSE: 
+On Archlinux-based distros:
 ```bash
-sudo zypper in wayland-devel \
-  wayland-protocols-devel \
-  kf6-extra-cmake-modules \
-  libxkbcommon-devel
+sudo pacman -S cmake base-devel
 ```
+
+#### Building ECM
+ECM (Extra CMake Modules) is required by the dependency `layer-shell-qt`. We are using a recent version of `layer-shell-qt`, and this presents a problem: this version depends on a very new ECM version, and as of the time of writing this writeup, many non-rolling releases do not meet the minimum version requirement. To solve this problem, I have vendored the ECM module. Please build the ECM module according to the following instructions before building this project:
+
+First, open a terminal, make sure you are **on project root**.
+
+Then execute the following: 
+```bash
+chmod a+x ./scripts/configure_ecm.sh
+./scripts/configure_ecm.sh
+```
+
+If you see the log output:
+```
+[ OK ] ECM should be built and available in "/home/marcus/Desktop/Repository/Private/husky-panel/build/ecm-build/" now.
+```
+
+... then ECM modules are ready to use for next steps!!
+
+#### Install Dependencies
+You will need to install the dependencies.
 
 On Archlinux: 
 ```bash
-sudo pacman -S wayland wayland-protocols extra-cmake-modules libxkbcommon
+sudo pacman -S wayland wayland-protocols libxkbcommon
+```
+
+On OpenSUSE: 
+```bash
+sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
 ```
 
 You will also need to use a Wayland session, otherwise the bar will NOT attach properly to the top of the screen.
 
+> ⚠️ **Note**: This panel is NOT compactiable with Mutter, hence there is no way to run this panel on GNOME.
+
 Other third-party libraries has been vendored, so you do NOT need to install them.
 
-### Installation
-#### Build the Bar Itself & The Locale Files
+### Build & Installation
+#### Build the Bar Itself
 ```bash
-mkdir build
-cd build
+mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+cmake --build
 ```
 
-#### Copy the Locale Files
-Copy `build/locales/HuskyPanel_zh_CN.qm` to `res/translations/HuskyPanel_zh_CN.qm`.
+The process could lasts for minutes...
 
-Then, you will need to re-compile the bar.
+#### (Optional) Install to System
 ```bash
-rm -rf build
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+sudo cmake --install .
 ```
+> **Note**: Currently HuskyPanel does NOT autostart itself after you login, you may want to add it to your destop environment's autostart settings MANUALLY.
 
 #### (KWin Only) Install the Plugin
 Before installing, do read the README on `plugins/kde/app-bridge`.
+
+Open up a terminal at project root.
 
 ```bash
 cd ./plugins/kde/app-bridge/
@@ -199,8 +228,6 @@ chmod a+x ./uninstall.sh
 - [ ] Bluetooth manager
 - [ ] App drawer (WIP)
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -209,14 +236,13 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
+### Top contributors
 
 <a href="https://github.com/github_username/MarcusPy827/Husky-Panel/contributors">
   <img src="https://contrib.rocks/image?repo=MarcusPy827/Husky-Panel" alt="contrib.rocks image" />
 </a>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- LICENSE -->
@@ -240,9 +266,23 @@ To contact me, please utilize the issue.
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+### Authors of Third Party Libraries Used
+* **Layershell-Qt**: KDE.
+* **Material Color Utility**: Material Foundation.
+* **Abseil**: Google Inc.
+* **Google Test**: Google Inc.
+* **QWindowKit**: Stdware Collections.
+* **Qmsetup**: Stdware Collections.
+* **Syscmdline**: SineStriker.
+* **libdbusmenu-lxqt**: lxqt.
+* **Extra CMake Modules**: KDE.
+* **KDE Frameworks 6**: KDE.
+
+(*To get full third party library information, please refer [this document](./lib/3rdparty/VERSION.md)*)
+
+### Template & Reference
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template.git)
 * [LXQt-Panel](https://github.com/lxqt/lxqt-panel.git)
-* All the author of the libraries we depended (see [HERE](./lib/3rdparty/VERSION.md) for a detailed list!)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

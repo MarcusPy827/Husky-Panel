@@ -671,4 +671,21 @@
         <translation type="vanished">终端</translation>
     </message>
 </context>
+<context>
+    <name>testcontext</name>
+    <message>
+        <location filename="../lib/3rdparty/extra-cmake-modules/tests/ECMPoQmToolsTest/tr_test.cpp" line="18"/>
+        <location filename="../lib/3rdparty/extra-cmake-modules/tests/ECMPoQmToolsTest/tr_thread_test_module.cpp" line="16"/>
+        <source>test string</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../lib/3rdparty/extra-cmake-modules/tests/ECMPoQmToolsTest/tr_test.cpp" line="19"/>
+        <location filename="../lib/3rdparty/extra-cmake-modules/tests/ECMPoQmToolsTest/tr_thread_test_module.cpp" line="17"/>
+        <source>test plural %n</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
 </TS>
