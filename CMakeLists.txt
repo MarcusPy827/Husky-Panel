@@ -259,17 +259,13 @@ target_link_libraries(HuskyPanel
   dbusmenu-lxqt
   LayerShellQtInterface
   MaterialColorUtils
+  QWindowKit::Widgets
 
   -Wl,-Bdynamic
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
-)
-
-target_link_libraries(HuskyPanel
-  PUBLIC 
-  QWindowKit::Widgets
 )
 
 include(GNUInstallDirs)
