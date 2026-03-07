@@ -73,15 +73,15 @@ VERSION 0.9.3
       <a href="#快速上手">快速上手</a>
       <ul>
         <li><a href="#前置条件">前置条件</a></li>
-        <li><a href="#installation">安装</a></li>
+        <li><a href="#安装">安装</a></li>
       </ul>
     </li>
-    <li><a href="#usage">如何使用</a></li>
-    <li><a href="#roadmap">里程碑</a></li>
-    <li><a href="#contributing">贡献者</a></li>
-    <li><a href="#license">许可证</a></li>
-    <li><a href="#contact">联系我们</a></li>
-    <li><a href="#acknowledgments">特别鸣谢</a></li>
+    <li><a href="#如何使用">如何使用</a></li>
+    <li><a href="#里程碑">里程碑</a></li>
+    <li><a href="#贡献者">贡献者</a></li>
+    <li><a href="#许可证">许可证</a></li>
+    <li><a href="#联系我们">联系我们</a></li>
+    <li><a href="#特别鸣谢">特别鸣谢</a></li>
   </ol>
 </details>
 
@@ -183,135 +183,142 @@ Do you want to clean it?\nI mean... to delete everything in it?\n    (y/n) >>
 #### 安装依赖
 您需要安装以下依赖：
 
+在基于Archlinux的发行版上：
+
+```bash
+sudo pacman -S wayland wayland-protocols libxkbcommon
+```
+
 在OpenSUSE上：
 ```bash
-sudo zypper in wayland-devel \
-  wayland-protocols-devel \
-  kf6-extra-cmake-modules \
-  libxkbcommon-devel
+sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
 ```
 
-On Archlinux: 
-```bash
-sudo pacman -S wayland wayland-protocols extra-cmake-modules libxkbcommon
-```
+你能还需要一个Wayland会话，否则面板将**不会显示**。
 
-You will also need to use a Wayland session, otherwise the bar will NOT attach properly to the top of the screen.
+> ⚠️ **注意**：本面板不适用于Mutter，故无法在GNOME上运行。
 
-Other third-party libraries has been vendored, so you do NOT need to install them.
+余下的第三方库源码已经集成，无需安装额外的包。
 
-### Installation
-#### Build the Bar Itself & The Locale Files
+### 构建与安装
+#### 构建状态栏
 ```bash
 mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+cmake --build
 ```
 
-#### Copy the Locale Files
-Copy `build/locales/HuskyPanel_zh_CN.qm` to `res/translations/HuskyPanel_zh_CN.qm`.
+整个过程可能持续数分钟...
 
-Then, you will need to re-compile the bar.
+#### (可选) 安装到系统
 ```bash
-rm -rf build
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=Release ..
-cd ..
+sudo cmake --install .
 ```
+> ⚠️ **注意**：当前HuskyPanel**不会**自动启动。要在登录时自动拉起HuskyPanel，请在您的桌面环境中手动为HuskyPanel配置自动启动。
 
-#### (KWin Only) Install the Plugin
-Before installing, do read the README on `plugins/kde/app-bridge`.
+#### (仅限KWin/Plasma) 安装KWin脚本
+在安装前，请参阅位于`plugins/kde/app-bridge`的README文件。
 
+在项目根目录打开一个终端：
 ```bash
 cd ./plugins/kde/app-bridge/
 chmod a+x ./install.sh
 ./install.sh
 ```
 
-(To uninstall the plugin, please execute: )
+(如果是要卸载的话，指令如下)
 ```bash
 cd ./plugins/kde/app-bridge/
 chmod a+x ./uninstall.sh
 ./uninstall.sh
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
-(*Documentation work in progress...*)
+## 如何使用
+(*文档正在施工中...*)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 
 <!-- ROADMAP -->
-## Roadmap
+## 里程碑
 
-- [X] Search bar
-- [X] Clock
-- [ ] System tray
-    - [X] Simple tray
-    - [ ] Icon folding
-- [ ] App indicator
-    - [X] KWin support (via KWin script)
-    - [ ] Niri/Hyprland support
-- [ ] Notification manager
-- [ ] Network manager
-- [ ] Battery manager
-- [ ] Volume manager
-- [ ] Bluetooth manager
-- [ ] App drawer (WIP)
+- [X] 搜索框
+- [X] 时钟
+- [ ] 系统托盘
+    - [X] 简易托盘
+    - [ ] 图标折叠
+- [ ] 应用程序指示器
+    - [X] KWin支持（通过KWin脚本）
+    - [ ] Niri/Hyprland支持
+- [ ] 通知管理器
+- [ ] 网络管理器
+- [ ] 电量管理器
+- [ ] 音量管理器
+- [ ] 蓝牙管理器
+- [ ] 应用抽屉（正在施工中）
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 
 <!-- CONTRIBUTING -->
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md).
+## 贡献者
+请参阅[CONTRIBUTING.md](CONTRIBUTING.md).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
+### 最活跃的贡献者
 
 <a href="https://github.com/github_username/MarcusPy827/Husky-Panel/contributors">
   <img src="https://contrib.rocks/image?repo=MarcusPy827/Husky-Panel" alt="contrib.rocks image" />
 </a>
 
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 <!-- LICENSE -->
-## License
+## 许可证
+本项目以GNU GENERAL PUBLIC LICENSE Version 3许可发行，请参阅`COPYING`以获取更多许可证信息。
 
-Distributed under the GNU GENERAL PUBLIC LICENSE Version 3. See `COPYING` for more information.
+对于所有集成的第三方库的许可证，请参阅`lib/3rdparty/VERSION.md`。
 
-For all the vendored libraries' version, please read `lib/3rdparty/VERSION.md`.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 
 <!-- CONTACT -->
-## Contact
-To contact me, please utilize the issue.
+## 联系我们
+请善用Issue功能。
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## 特别鸣谢
+### 第三方库作者
+* **Layershell-Qt**: KDE.
+* **Material Color Utility**: Material Foundation.
+* **Abseil**: Google Inc.
+* **Google Test**: Google Inc.
+* **QWindowKit**: Stdware Collections.
+* **Qmsetup**: Stdware Collections.
+* **Syscmdline**: SineStriker.
+* **libdbusmenu-lxqt**: lxqt.
+* **Extra CMake Modules**: KDE.
+* **KDE Frameworks 6**: KDE.
+
+(*要获取完整的第三方库信息，请参阅[这里](./lib/3rdparty/VERSION.md)*)
+
+### 模板与参考
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template.git)
 * [LXQt-Panel](https://github.com/lxqt/lxqt-panel.git)
-* All the author of the libraries we depended (see [HERE](./lib/3rdparty/VERSION.md) for a detailed list!)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
 
 

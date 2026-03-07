@@ -148,20 +148,19 @@ If you see the log output:
 #### Install Dependencies
 You will need to install the dependencies.
 
-On OpenSUSE: 
-```bash
-sudo zypper in wayland-devel \
-  wayland-protocols-devel \
-  kf6-extra-cmake-modules \
-  libxkbcommon-devel
-```
-
 On Archlinux: 
 ```bash
-sudo pacman -S wayland wayland-protocols extra-cmake-modules libxkbcommon
+sudo pacman -S wayland wayland-protocols libxkbcommon
+```
+
+On OpenSUSE: 
+```bash
+sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
 ```
 
 You will also need to use a Wayland session, otherwise the bar will NOT attach properly to the top of the screen.
+
+> ⚠️ **Note**: This panel is NOT compactiable with Mutter, hence there is no way to run this panel on GNOME.
 
 Other third-party libraries has been vendored, so you do NOT need to install them.
 
@@ -183,6 +182,8 @@ sudo cmake --install .
 
 #### (KWin Only) Install the Plugin
 Before installing, do read the README on `plugins/kde/app-bridge`.
+
+Open up a terminal at project root.
 
 ```bash
 cd ./plugins/kde/app-bridge/
@@ -227,8 +228,6 @@ chmod a+x ./uninstall.sh
 - [ ] Bluetooth manager
 - [ ] App drawer (WIP)
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -237,14 +236,13 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
+### Top contributors
 
 <a href="https://github.com/github_username/MarcusPy827/Husky-Panel/contributors">
   <img src="https://contrib.rocks/image?repo=MarcusPy827/Husky-Panel" alt="contrib.rocks image" />
 </a>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- LICENSE -->
@@ -268,9 +266,23 @@ To contact me, please utilize the issue.
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+### Authors of Third Party Libraries Used
+* **Layershell-Qt**: KDE.
+* **Material Color Utility**: Material Foundation.
+* **Abseil**: Google Inc.
+* **Google Test**: Google Inc.
+* **QWindowKit**: Stdware Collections.
+* **Qmsetup**: Stdware Collections.
+* **Syscmdline**: SineStriker.
+* **libdbusmenu-lxqt**: lxqt.
+* **Extra CMake Modules**: KDE.
+* **KDE Frameworks 6**: KDE.
+
+(*To get full third party library information, please refer [this document](./lib/3rdparty/VERSION.md)*)
+
+### Template & Reference
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template.git)
 * [LXQt-Panel](https://github.com/lxqt/lxqt-panel.git)
-* All the author of the libraries we depended (see [HERE](./lib/3rdparty/VERSION.md) for a detailed list!)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
