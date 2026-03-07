@@ -61,7 +61,10 @@ find_package(ECM REQUIRED NO_MODULE)
 add_subdirectory(lib/3rdparty/abseil-cpp EXCLUDE_FROM_ALL)
 add_subdirectory(lib/3rdparty/gtest EXCLUDE_FROM_ALL)
 add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
-add_subdirectory(lib/3rdparty/libdbusmenu EXCLUDE_FROM_ALL)
+
+# Force dbusmenu-lxqt static by wrapper subdirectory
+add_subdirectory(cmake/libdbusmenu)
+
 add_subdirectory(cmake/material-color-utils EXCLUDE_FROM_ALL)
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
