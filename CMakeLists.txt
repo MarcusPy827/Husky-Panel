@@ -60,6 +60,9 @@ find_package(ECM REQUIRED NO_MODULE)
 
 add_subdirectory(lib/3rdparty/abseil-cpp EXCLUDE_FROM_ALL)
 add_subdirectory(lib/3rdparty/gtest EXCLUDE_FROM_ALL)
+
+# Force QWindowKit static build
+set(QWINDOWKIT_BUILD_STATIC ON CACHE BOOL "" FORCE)
 add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
 
 # Force dbusmenu-lxqt static by wrapper subdirectory
