@@ -13,6 +13,17 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(BUILD_SHARED_LIBS OFF)
+set(ABSL_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+# set(CMAKE_SKIP_INSTALL_RULES TRUE)
+
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+list(PREPEND CMAKE_PREFIX_PATH
+    ${CMAKE_BINARY_DIR}/ecm-install
+)
+
 find_package(PkgConfig 
   REQUIRED
 )
@@ -37,12 +48,6 @@ find_package(
   REQUIRED
 )
 
-add_subdirectory(lib/3rdparty/abseil-cpp)
-add_subdirectory(lib/3rdparty/gtest)
-add_subdirectory(lib/3rdparty/qwindowkit)
-add_subdirectory(lib/3rdparty/libdbusmenu)
-add_subdirectory(cmake/material-color-utils)
-
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
   Widgets 
@@ -50,6 +55,22 @@ find_package(Qt${QT_VERSION_MAJOR}
   WaylandClient
   DBus
 )
+
+find_package(ECM REQUIRED NO_MODULE)
+
+add_subdirectory(lib/3rdparty/abseil-cpp EXCLUDE_FROM_ALL)
+add_subdirectory(lib/3rdparty/gtest EXCLUDE_FROM_ALL)
+
+# Force QWindowKit static build
+set(QWINDOWKIT_BUILD_STATIC ON CACHE BOOL "" FORCE)
+set(QWINDOWKIT_BUILD_STATIC ON)
+set(QWINDOWKIT_INSTALL OFF CACHE BOOL "" FORCE)
+add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
+
+# Force dbusmenu-lxqt static by wrapper subdirectory
+add_subdirectory(cmake/libdbusmenu)
+
+add_subdirectory(cmake/material-color-utils EXCLUDE_FROM_ALL)
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
   add_library(Wayland::Client 
@@ -208,7 +229,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
   target_include_directories(HuskyPanel PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
-    "${CMAKE_CURRENT_BINARY_DIR}/lib/3rdparty/libdbusmenu/src"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake/libdbusmenu/dbusmenu-build/src"
   )
 else()
   if(ANDROID)
@@ -232,11 +253,8 @@ if(COMMAND qt_add_lupdate)
 endif()
 
 target_link_libraries(HuskyPanel 
-  PRIVATE 
-  Qt${QT_VERSION_MAJOR}::Widgets
-  Qt${QT_VERSION_MAJOR}::WaylandClient
-  Qt${QT_VERSION_MAJOR}::DBus
-  KF6::Service
+  PRIVATE
+  -Wl,-Bstatic
   absl::strings
   absl::flat_hash_map
   absl::raw_logging_internal
@@ -246,11 +264,13 @@ target_link_libraries(HuskyPanel
   dbusmenu-lxqt
   LayerShellQtInterface
   MaterialColorUtils
-)
-
-target_link_libraries(HuskyPanel
-  PUBLIC 
   QWindowKit::Widgets
+
+  -Wl,-Bdynamic
+  Qt${QT_VERSION_MAJOR}::Widgets
+  Qt${QT_VERSION_MAJOR}::WaylandClient
+  Qt${QT_VERSION_MAJOR}::DBus
+  KF6::Service
 )
 
 include(GNUInstallDirs)
