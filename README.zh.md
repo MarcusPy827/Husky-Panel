@@ -193,8 +193,15 @@ sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu
 ```
 
 在Fedora上：
-> ⚠️ **严重警告**：Fedora 自带其构建的 Qt。**请勿从第三方源（COPR、RPM Fusion、手动 RPM 等）手动安装或升级 `qt6-*` 包。** 混用不同版本的 Qt **会**导致 ABI 不匹配，可能损坏你的桌面会话，严重时甚至无法进入图形界面。下面的命令只会为系统已有的库安装 `-devel` 头文件，**不会**更改你的 Qt 运行时版本。
+> ⚠️ **严重警告**：Fedora 自带其构建的 Qt。**请勿从第三方源（COPR、RPM Fusion、手动 RPM 等）手动安装或升级 `qt6-*` 包。** 混用不同版本的 Qt **会**导致 ABI 不匹配，可能损坏你的桌面会话，严重时甚至无法进入图形界面。
 
+**在安装任何依赖之前**，请先执行一次完整的系统升级并重启，以确保所有包（尤其是 Qt 和 KDE Frameworks）版本一致：
+```bash
+sudo dnf upgrade --refresh
+sudo reboot
+```
+
+然后安装依赖：
 ```bash
 sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel \
     layer-shell-qt-devel libdbusmenu-lxqt-devel \
@@ -217,6 +224,24 @@ rpm -qa 'qt6*' --qf '%{NAME}-%{VERSION}\n' | awk -F- '{print $NF}' | sort -u
 在OpenSUSE上：
 ```bash
 sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
+```
+
+在 Ubuntu / Kubuntu 上：
+> ⚠️ **注意**：Ubuntu LTS 版本（如 24.04）自带的 Qt 版本为 6.4，**过于陈旧**——本项目要求 Qt 6.5+。你至少需要 **Ubuntu 24.10** 或 **Kubuntu 24.10**（或更新版本）才能构建。如果你使用的是 LTS 版本，建议考虑 [KDE Neon](https://neon.kde.org/)，它提供最新的 Qt 和 KDE Frameworks。
+
+> Ubuntu / Kubuntu **没有**提供 `layer-shell-qt` 和 `libdbusmenu-lxqt` 的开发包，因此你**必须**使用 `-DUSE_VENDORED_LIBS=ON`，并且需要先构建 ECM（参见上方的[构建 ECM](#构建ecm仅在-use_vendored_libson-时需要) 章节）。
+
+```bash
+sudo apt install build-essential cmake \
+    libwayland-dev wayland-protocols libxkbcommon-dev \
+    qt6-base-private-dev qt6-base-dev qt6-wayland-dev qt6-tools-dev \
+    libkf6service-dev extra-cmake-modules
+```
+
+然后使用 vendored 库配置构建：
+```bash
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
 ```
 
 你还需要一个Wayland会话，否则面板将**不会显示**。

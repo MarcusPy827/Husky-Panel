@@ -157,8 +157,15 @@ sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu
 ```
 
 On Fedora:
-> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. **Do NOT manually install or upgrade `qt6-*` packages from third-party repos (COPR, RPM Fusion, manual RPMs, etc.).** Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment. The command below only installs `-devel` headers for libraries already on your system — it will **not** change your Qt runtime version.
+> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. **Do NOT manually install or upgrade `qt6-*` packages from third-party repos (COPR, RPM Fusion, manual RPMs, etc.).** Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment.
 
+**Before installing any dependencies**, perform a full system upgrade and reboot to ensure all packages (especially Qt and KDE Frameworks) are at consistent versions:
+```bash
+sudo dnf upgrade --refresh
+sudo reboot
+```
+
+Then install the dependencies:
 ```bash
 sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel \
     layer-shell-qt-devel libdbusmenu-lxqt-devel \
@@ -181,6 +188,24 @@ If more than one version is printed, your system is at risk of ABI breakage — 
 On OpenSUSE: 
 ```bash
 sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
+```
+
+On Ubuntu / Kubuntu:
+> ⚠️ **Note**: Ubuntu LTS releases (e.g. 24.04) ship Qt 6.4, which is **too old** — this project requires Qt 6.5+. You need at least **Ubuntu 24.10** or **Kubuntu 24.10** (or newer) to build. If you are on an LTS release, consider using [KDE Neon](https://neon.kde.org/) which ships up-to-date Qt and KDE Frameworks.
+
+> Ubuntu / Kubuntu do **not** ship `layer-shell-qt` or `libdbusmenu-lxqt` development packages. You **must** use `-DUSE_VENDORED_LIBS=ON` and build ECM first (see the [Building ECM](#building-ecm-only-needed-when-use_vendored_libson) section above).
+
+```bash
+sudo apt install build-essential cmake \
+    libwayland-dev wayland-protocols libxkbcommon-dev \
+    qt6-base-private-dev qt6-base-dev qt6-wayland-dev qt6-tools-dev \
+    libkf6service-dev extra-cmake-modules
+```
+
+Then configure with vendored libraries:
+```bash
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
 ```
 
 You will also need to use a Wayland session, otherwise the bar will NOT attach properly to the top of the screen.
