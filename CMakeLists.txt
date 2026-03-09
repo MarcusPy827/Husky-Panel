@@ -221,6 +221,9 @@ if(USE_VENDORED_LIBS)
 
   set(VENDORED_STATIC_SWITCHABLE_LIBS  dbusmenu-lxqt LayerShellQtInterface)
   set(SYSTEM_DYNAMIC_SWITCHABLE_LIBS)
+
+  # Let source files know to use vendored layer-shell-qt headers
+  add_compile_definitions(HUSKY_USE_VENDORED_LAYERSHELLQT)
 else()
   message(STATUS "USE_VENDORED_LIBS=OFF: using system dbusmenu-lxqt and LayerShellQt")
   find_package(dbusmenu-lxqt REQUIRED)

@@ -193,14 +193,24 @@ sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu
 ```
 
 在Fedora上：
-> **严重警告**：Fedora 自带其构建的 Qt。**请勿安装与系统 Qt 版本不一致的 Qt 包。** 混用不同版本的 Qt **会**导致 ABI 不匹配，可能损坏你的桌面会话，严重时甚至无法进入图形界面。请始终使用你的 Fedora 版本自带的 Qt。
+> ⚠️ **严重警告**：Fedora 自带其构建的 Qt。**请勿从第三方源（COPR、RPM Fusion、手动 RPM 等）手动安装或升级 `qt6-*` 包。** 混用不同版本的 Qt **会**导致 ABI 不匹配，可能损坏你的桌面会话，严重时甚至无法进入图形界面。下面的命令只会为系统已有的库安装 `-devel` 头文件，**不会**更改你的 Qt 运行时版本。
 
 ```bash
 sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel \
     layer-shell-qt-devel libdbusmenu-lxqt-devel \
-    qt6-qtbase-devel qt6-qtwayland-devel qt6-qttools-devel \
-    kf6-kservice-devel extra-cmake-modules
+    kf6-kservice-devel extra-cmake-modules \
+    qt6-qtbase-private-devel
 ```
+
+> `qt6-qtbase-private-devel` 是必需的，因为 QWindowKit 使用了 Qt 私有头文件。这个包只包含头文件，**不会**更改你的 Qt 运行时版本。
+
+KF6 和 layer-shell-qt 的 devel 包会自动拉入**版本匹配**的 Qt 6 公共开发头文件作为依赖——请**不要**手动安装 `qt6-qtbase-devel` 等包，否则可能解析到不同的 Qt 版本从而破坏你的 Plasma 会话。
+
+安装完成后，请验证所有 Qt 包来自**同一个版本**：
+```bash
+rpm -qa 'qt6*' --qf '%{NAME}-%{VERSION}\n' | awk -F- '{print $NF}' | sort -u
+```
+如果输出了多个版本号，说明系统存在 ABI 不匹配的风险——执行 `sudo dnf distro-sync 'qt6*'` 修复。
 
 > Fedora 的 KDE Frameworks 包中已经包含 `layer-shell-qt` 和 ECM，因此通常**不需要**传入 `-DUSE_VENDORED_LIBS=ON`，也不需要手动构建 ECM。
 

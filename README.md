@@ -157,14 +157,24 @@ sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu
 ```
 
 On Fedora:
-> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. **Do NOT install Qt packages that differ from the system Qt version.** Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment. Always use the Qt that comes with your Fedora release.
+> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. **Do NOT manually install or upgrade `qt6-*` packages from third-party repos (COPR, RPM Fusion, manual RPMs, etc.).** Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment. The command below only installs `-devel` headers for libraries already on your system — it will **not** change your Qt runtime version.
 
 ```bash
 sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel \
     layer-shell-qt-devel libdbusmenu-lxqt-devel \
-    qt6-qtbase-devel qt6-qtwayland-devel qt6-qttools-devel \
-    kf6-kservice-devel extra-cmake-modules
+    kf6-kservice-devel extra-cmake-modules \
+    qt6-qtbase-private-devel
 ```
+
+> `qt6-qtbase-private-devel` is required because QWindowKit uses Qt private headers. This package only contains headers and will **not** change your Qt runtime version.
+
+The KF6 and layer-shell-qt devel packages will automatically pull in the **matching** Qt 6 public development headers as dependencies — do **not** install `qt6-qtbase-devel` etc. by hand, as that may resolve to a different Qt version and break your Plasma session.
+
+After installation, verify that all Qt packages are from the **same version**:
+```bash
+rpm -qa 'qt6*' --qf '%{NAME}-%{VERSION}\n' | awk -F- '{print $NF}' | sort -u
+```
+If more than one version is printed, your system is at risk of ABI breakage — run `sudo dnf distro-sync 'qt6*'` to fix it.
 
 > Fedora packages `layer-shell-qt` and ECM from KDE Frameworks, so you generally do **not** need `-DUSE_VENDORED_LIBS=ON` or the manual ECM build step.
 
