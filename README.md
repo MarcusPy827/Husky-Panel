@@ -127,8 +127,11 @@ On Archlinux-based distros:
 sudo pacman -S cmake base-devel
 ```
 
-#### Building ECM
-ECM (Extra CMake Modules) is required by the dependency `layer-shell-qt`. We are using a recent version of `layer-shell-qt`, and this presents a problem: this version depends on a very new ECM version, and as of the time of writing this writeup, many non-rolling releases do not meet the minimum version requirement. To solve this problem, I have vendored the ECM module. Please build the ECM module according to the following instructions before building this project:
+#### Building ECM (only needed when `USE_VENDORED_LIBS=ON`)
+
+> **If you are using system `layer-shell-qt` and `libdbusmenu-lxqt` (the default), you can skip this step entirely** — the system ECM is sufficient.
+
+ECM (Extra CMake Modules) is required by the vendored `layer-shell-qt`. The vendored version depends on a very new ECM, and many non-rolling distros do not meet the minimum version requirement. To solve this, we have vendored the ECM module as well. **If you pass `-DUSE_VENDORED_LIBS=ON`**, please build the ECM module first:
 
 First, open a terminal, make sure you are **on project root**.
 
@@ -150,8 +153,20 @@ You will need to install the dependencies.
 
 On Archlinux: 
 ```bash
-sudo pacman -S wayland wayland-protocols libxkbcommon
+sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt
 ```
+
+On Fedora:
+> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. **Do NOT install Qt packages that differ from the system Qt version.** Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment. Always use the Qt that comes with your Fedora release.
+
+```bash
+sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel \
+    layer-shell-qt-devel libdbusmenu-lxqt-devel \
+    qt6-qtbase-devel qt6-qtwayland-devel qt6-qttools-devel \
+    kf6-kservice-devel extra-cmake-modules
+```
+
+> Fedora packages `layer-shell-qt` and ECM from KDE Frameworks, so you generally do **not** need `-DUSE_VENDORED_LIBS=ON` or the manual ECM build step.
 
 On OpenSUSE: 
 ```bash
@@ -162,7 +177,13 @@ You will also need to use a Wayland session, otherwise the bar will NOT attach p
 
 > ⚠️ **Note**: This panel is NOT compactiable with Mutter, hence there is no way to run this panel on GNOME.
 
-Other third-party libraries has been vendored, so you do NOT need to install them.
+Some third-party libraries (abseil, gtest, material-color-utilities, qwindowkit) are always vendored and do NOT need to be installed separately.
+
+By default, `layer-shell-qt` and `libdbusmenu-lxqt` are linked from the **system**. If your distro does not ship these packages (or ships an incompatible version), you can fall back to the vendored copies by passing `-DUSE_VENDORED_LIBS=ON` at configure time:
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
+```
 
 ### Build & Installation
 #### Build the Bar Itself

@@ -20,9 +20,20 @@ set(ABSL_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-list(PREPEND CMAKE_PREFIX_PATH
-    ${CMAKE_BINARY_DIR}/ecm-install
+option(USE_VENDORED_LIBS
+  "Use vendored dbusmenu-lxqt and layer-shell-qt instead of system packages. \
+   (abseil, gtest, material-color-utils, qwindowkit are always vendored.)"
+  OFF
 )
+
+# The vendored layer-shell-qt requires a newer ECM than most non-rolling
+# distros ship. When USE_VENDORED_LIBS is ON we prepend the locally-built ECM
+# so that find_package(ECM) picks it up; otherwise the system ECM suffices.
+if(USE_VENDORED_LIBS)
+  list(PREPEND CMAKE_PREFIX_PATH
+      ${CMAKE_BINARY_DIR}/ecm-install
+  )
+endif()
 
 find_package(PkgConfig 
   REQUIRED
@@ -67,10 +78,13 @@ set(QWINDOWKIT_BUILD_STATIC ON)
 set(QWINDOWKIT_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
 
-# Force dbusmenu-lxqt static by wrapper subdirectory
-add_subdirectory(cmake/libdbusmenu)
-
 add_subdirectory(cmake/material-color-utils EXCLUDE_FROM_ALL)
+
+# ---------- Switchable vendored / system libraries ----------
+if(USE_VENDORED_LIBS)
+  # Force dbusmenu-lxqt static by wrapper subdirectory
+  add_subdirectory(cmake/libdbusmenu)
+endif()
 
 if(TARGET PkgConfig::WaylandClient AND NOT TARGET Wayland::Client)
   add_library(Wayland::Client 
@@ -191,16 +205,30 @@ set(PROJECT_SOURCES
   src/main.cc
 )
 
-# Switch off testing to accelerate 3rdparty builds
-set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
-set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(OLD_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+if(USE_VENDORED_LIBS)
+  message(STATUS "USE_VENDORED_LIBS=ON: building vendored dbusmenu-lxqt and layer-shell-qt")
 
-# No, we need to expclitly prevent layershell-qt from installing to system 
-# paths to avoid possible ABI mismatches...
-set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dummy_install_path")
-add_subdirectory(lib/3rdparty/layer-shell-qt EXCLUDE_FROM_ALL)
-set(CMAKE_INSTALL_PREFIX ${OLD_INSTALL_PREFIX})
+  # Switch off testing to accelerate 3rdparty builds
+  set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+  set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+  set(OLD_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+
+  # No, we need to explicitly prevent layershell-qt from installing to system
+  # paths to avoid possible ABI mismatches...
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dummy_install_path")
+  add_subdirectory(lib/3rdparty/layer-shell-qt EXCLUDE_FROM_ALL)
+  set(CMAKE_INSTALL_PREFIX ${OLD_INSTALL_PREFIX})
+
+  set(VENDORED_STATIC_SWITCHABLE_LIBS  dbusmenu-lxqt LayerShellQtInterface)
+  set(SYSTEM_DYNAMIC_SWITCHABLE_LIBS)
+else()
+  message(STATUS "USE_VENDORED_LIBS=OFF: using system dbusmenu-lxqt and LayerShellQt")
+  find_package(dbusmenu-lxqt REQUIRED)
+  find_package(LayerShellQt REQUIRED)
+
+  set(VENDORED_STATIC_SWITCHABLE_LIBS)
+  set(SYSTEM_DYNAMIC_SWITCHABLE_LIBS  dbusmenu-lxqt LayerShellQt::Interface)
+endif()
 
 set_source_files_properties(${TS_FILES}
   PROPERTIES OUTPUT_LOCATION "${CMAKE_BINARY_DIR}/locales"
@@ -227,10 +255,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     res/resources.qrc
   )
 
-  target_include_directories(HuskyPanel PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake/libdbusmenu/dbusmenu-build/src"
-  )
+  if(USE_VENDORED_LIBS)
+    target_include_directories(HuskyPanel PRIVATE
+      "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
+      "${CMAKE_CURRENT_BINARY_DIR}/cmake/libdbusmenu/dbusmenu-build/src"
+    )
+  endif()
 else()
   if(ANDROID)
     message(FATAL_ERROR "Ewwww... This will never work in Android...")
@@ -261,12 +291,12 @@ target_link_libraries(HuskyPanel
   absl::optional
   absl::log
   absl::log_initialize
-  dbusmenu-lxqt
-  LayerShellQtInterface
+  ${VENDORED_STATIC_SWITCHABLE_LIBS}
   MaterialColorUtils
   QWindowKit::Widgets
 
   -Wl,-Bdynamic
+  ${SYSTEM_DYNAMIC_SWITCHABLE_LIBS}
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
