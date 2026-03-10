@@ -7,6 +7,12 @@
     "workspaceFolder": "/workspace",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
     "remoteUser": "vscode",
+
+    // ── Forward host Git / SSH / GPG into the container ─────────────────────
+    "mounts": [
+        "source=${localEnv:HOME}/.gnupg,target=/home/vscode/.gnupg,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,readonly,consistency=cached"
+    ],
     "customizations": {
         "vscode": {
             "settings": {
