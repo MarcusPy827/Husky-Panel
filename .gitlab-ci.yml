@@ -1,0 +1,87 @@
+# ---------------------------------------------------------------
+# GitLab CI — Build RPM packages for Fedora
+# ---------------------------------------------------------------
+
+variables:
+  APP_NAME: "husky-panel"
+  APP_VERSION: "0.9.3"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - build
+
+# ======================== RPM Build (Fedora) ========================
+
+build:rpm:fedora:
+  stage: build
+  image: fedora:latest
+  tags: []
+
+  before_script:
+    # ---- System update & install build dependencies ----
+    - dnf upgrade -y --refresh
+    - dnf install -y
+        rpm-build
+        rpmdevtools
+        cmake
+        gcc-c++
+        git
+        wayland-devel
+        wayland-protocols-devel
+        libxkbcommon-devel
+        qt6-qtbase-devel
+        qt6-qtbase-private-devel
+        qt6-qtwayland-devel
+        qt6-qttools-devel
+        layer-shell-qt-devel
+        libdbusmenu-lxqt-devel
+        kf6-kservice-devel
+        extra-cmake-modules
+
+  script:
+    # ---- Create source tarball using git archive ----
+    - TARBALL_NAME="${APP_NAME}-${APP_VERSION}"
+
+    - git archive
+        --format=tar.gz
+        --prefix="${TARBALL_NAME}/"
+        -o "${TARBALL_NAME}.tar.gz"
+        HEAD
+
+    # If the repo has submodules, layer them into the tarball.
+    - |
+      if [[ -f .gitmodules ]]; then
+        echo "Packing submodules into tarball..."
+        TMPDIR_SUB="$(mktemp -d)"
+        mkdir -p "${TMPDIR_SUB}/${TARBALL_NAME}"
+        tar xzf "${TARBALL_NAME}.tar.gz" -C "${TMPDIR_SUB}"
+        git submodule foreach --quiet --recursive \
+          "git archive --prefix=\"${TARBALL_NAME}/\${sm_path}/\" HEAD | tar xf - -C \"${TMPDIR_SUB}\""
+        tar czf "${TARBALL_NAME}.tar.gz" -C "${TMPDIR_SUB}" "${TARBALL_NAME}"
+        rm -rf "${TMPDIR_SUB}"
+      fi
+
+    # ---- Set up rpmbuild tree ----
+    - rpmdev-setuptree
+    - cp "${TARBALL_NAME}.tar.gz"        ~/rpmbuild/SOURCES/
+    - cp packages/${APP_NAME}.spec       ~/rpmbuild/SPECS/
+
+    # ---- Build RPM & SRPM ----
+    - rpmbuild -ba ~/rpmbuild/SPECS/${APP_NAME}.spec
+
+    # ---- Collect artifacts ----
+    - mkdir -p rpms
+    - find ~/rpmbuild/RPMS  -name '*.rpm' -exec cp {} rpms/ \;
+    - find ~/rpmbuild/SRPMS -name '*.rpm' -exec cp {} rpms/ \;
+
+  artifacts:
+    name: "${APP_NAME}-${APP_VERSION}-rpms"
+    paths:
+      - rpms/
+    expire_in: 30 days
+
+  rules:
+    # Run on default branch, tags, and merge requests
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

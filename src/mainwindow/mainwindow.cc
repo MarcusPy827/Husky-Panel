@@ -30,7 +30,11 @@
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 #include "src/application_services/application_services.h"
 
+#ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
+#else
+#include <LayerShellQt/window.h>
+#endif
 
 namespace panel {
 namespace frontend {

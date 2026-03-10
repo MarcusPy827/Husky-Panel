@@ -32,7 +32,11 @@
 #include "src/components/calendar/calendar.h"
 #include "src/font_loader/font_loader.h"
 
+#ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
+#else
+#include <LayerShellQt/window.h>
+#endif
 
 namespace panel {
 namespace frontend {

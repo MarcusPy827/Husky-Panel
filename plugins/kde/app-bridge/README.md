@@ -14,26 +14,21 @@ Plasma 6 is **REQUIRED** and Plasma 5 is **UNSUPPORTED**!!
 
 此脚本**需要Plasma 6**，**不支持Plasma5**！！
 
-## Installation
+## Installation | 安装
+This plugin is installed automatically when you run `sudo cmake --install .` from the project build directory. It is controlled by the `INSTALL_KWIN_PLUGIN` CMake option (ON by default).
+
+此插件会在项目构建目录下运行 `sudo cmake --install .` 时自动安装，由 `INSTALL_KWIN_PLUGIN` CMake 选项控制（默认开启）。
+
+After installation, navigate to *KDE Settings*, search "*KWin*", and enable the script named "*Husky-Panel App Bridge*" in the *KWin Script* section. You may need to restart KWin or log out and back in.
+
+安装完成后，打开*KDE 设置*，搜索「*KWin*」，在*KWin 脚本*栏中启用名为「*Husky-Panel App Bridge*」的脚本。您可能需要重启 KWin 或重新登录。
+
+## Uninstallation | 卸载
+Remove the installed files:
+
+删除已安装的文件：
 ```bash
-cd ./plugins/kde/app-bridge
-chmod a+x ./install.sh
-./install.sh
-```
-
-Do NOT run as a super user.
-
-请不要以超级用户身份安装。
-
-After that, navigate to *KDE Settings*, Search "*KWin*", enable this KWin Script in the *KWin Script* section. Its name should be "*Husky-Panel App Bridge 0.9*", you may need a restart.
-
-执行脚本后，打开*KDE设置*，搜索「*KWin*」，在*KWin脚本*栏启用此脚本。KWin脚本名称应为「*Husky-Panel App Bridge 0.9*」，您可能需要在完成后重启。
-
-## Uninstallation
-```bash
-cd ./plugins/kde/app-bridge
-chmod a+x ./uninstall.sh
-./uninstall.sh
+sudo rm -rf /usr/share/kwin/scripts/marcus-app-bridge
 ```
 
 ## License | 许可证

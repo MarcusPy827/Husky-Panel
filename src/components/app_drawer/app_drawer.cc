@@ -34,7 +34,11 @@
 #include "src/info_server/application_info/application_info.h"
 #include "src/utils/misc/misc.h"
 
+#ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
+#else
+#include <LayerShellQt/window.h>
+#endif
 
 namespace panel {
 namespace frontend {
