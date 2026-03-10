@@ -196,7 +196,7 @@ sudo reboot
 
 然后安装依赖：
 ```bash
-sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel
+sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel
 ```
 
 > `qt6-qtbase-private-devel` 是必需的，因为 QWindowKit 使用了 Qt 私有头文件。

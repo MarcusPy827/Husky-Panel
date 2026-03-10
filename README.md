@@ -161,7 +161,7 @@ sudo reboot
 
 Then install the dependencies:
 ```bash
-sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel
+sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel
 ```
 
 > `qt6-qtbase-private-devel` is required because QWindowKit uses Qt private headers. This package only contains headers.

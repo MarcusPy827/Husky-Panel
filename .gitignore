@@ -7,3 +7,7 @@ lib/3rdparty/layershell-qt/.reuse/*
 
 # Clang-Tidy
 .cache/*
+
+# CI Pipelines
+ci_build/*
+!ci_build/README.md
