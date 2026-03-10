@@ -59,6 +59,8 @@ export PS1="\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\0
 # Colour ls / grep\n\
 alias ls="ls --color=auto"\n\
 alias grep="grep --color=auto"\n\
+# GPG TTY (required for GPG signing in terminal)\n\
+export GPG_TTY=$(tty)\n\
 ' >> ~/.bashrc
 
 WORKDIR /workspace
