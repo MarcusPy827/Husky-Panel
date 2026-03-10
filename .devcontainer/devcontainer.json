@@ -1,0 +1,29 @@
+{
+    "name": "HuskyPanel (Fedora 43)",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "cmake.sourceDirectory": "/workspace",
+                "cmake.generator": "Ninja",
+                "cpplint.cpplintPath": "/usr/local/bin/cpplint"
+            },
+            "extensions": [
+                "mine.cpplint",
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake",
+                "eamodio.gitlens",
+                "danielatanasov.todo",
+                "gruntfuggly.todo-tree"
+            ]
+        }
+    },
+    "postCreateCommand": "cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+}
