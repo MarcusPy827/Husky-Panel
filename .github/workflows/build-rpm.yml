@@ -1,0 +1,96 @@
+# ---------------------------------------------------------------
+# GitHub Actions — Build RPM packages for Fedora
+# ---------------------------------------------------------------
+
+name: Build RPM
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-rpm-fedora:
+    name: RPM (Fedora)
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+
+    steps:
+      - name: Install build dependencies
+        run: |
+          dnf upgrade -y --refresh
+          dnf install -y \
+            rpm-build \
+            rpmdevtools \
+            cmake \
+            gcc-c++ \
+            git \
+            wayland-devel \
+            wayland-protocols-devel \
+            libxkbcommon-devel \
+            qt6-qtbase-devel \
+            qt6-qtbase-private-devel \
+            qt6-qtwayland-devel \
+            qt6-qttools-devel \
+            layer-shell-qt-devel \
+            libdbusmenu-lxqt-devel \
+            kf6-kservice-devel \
+            extra-cmake-modules
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Create source tarball
+        run: |
+          APP_NAME="husky-panel"
+          APP_VERSION="0.9.3"
+          TARBALL_NAME="${APP_NAME}-${APP_VERSION}"
+
+          # Mark the workspace safe for git (container runs as root)
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          git archive \
+            --format=tar.gz \
+            --prefix="${TARBALL_NAME}/" \
+            -o "${TARBALL_NAME}.tar.gz" \
+            HEAD
+
+          # Layer submodule contents if present
+          if [[ -f .gitmodules ]]; then
+            echo "Packing submodules into tarball..."
+            TMPDIR_SUB="$(mktemp -d)"
+            mkdir -p "${TMPDIR_SUB}/${TARBALL_NAME}"
+            tar xzf "${TARBALL_NAME}.tar.gz" -C "${TMPDIR_SUB}"
+            git submodule foreach --quiet --recursive \
+              "git archive --prefix=\"${TARBALL_NAME}/\${sm_path}/\" HEAD | tar xf - -C \"${TMPDIR_SUB}\""
+            tar czf "${TARBALL_NAME}.tar.gz" -C "${TMPDIR_SUB}" "${TARBALL_NAME}"
+            rm -rf "${TMPDIR_SUB}"
+          fi
+
+          echo "TARBALL_NAME=${TARBALL_NAME}" >> "$GITHUB_ENV"
+          echo "APP_NAME=${APP_NAME}" >> "$GITHUB_ENV"
+
+      - name: Build RPM
+        run: |
+          rpmdev-setuptree
+          cp "${TARBALL_NAME}.tar.gz"          ~/rpmbuild/SOURCES/
+          cp "packages/${APP_NAME}.spec"       ~/rpmbuild/SPECS/
+
+          rpmbuild -ba ~/rpmbuild/SPECS/${APP_NAME}.spec
+
+          mkdir -p rpms
+          find ~/rpmbuild/RPMS  -name '*.rpm' -exec cp {} rpms/ \;
+          find ~/rpmbuild/SRPMS -name '*.rpm' -exec cp {} rpms/ \;
+
+      - name: Upload RPM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.TARBALL_NAME }}-rpms
+          path: rpms/
+          retention-days: 30
