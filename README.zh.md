@@ -264,21 +264,13 @@ sudo cmake --install .
 > ⚠️ **注意**：当前HuskyPanel**不会**自动启动。要在登录时自动拉起HuskyPanel，请在您的桌面环境中手动为HuskyPanel配置自动启动。
 
 #### (仅限KWin/Plasma) 安装KWin脚本
-在安装前，请参阅位于`plugins/kde/app-bridge`的README文件。
+KWin app-bridge 脚本插件会在执行 `cmake --install .`（见上方）时自动安装，默认通过 `INSTALL_KWIN_PLUGIN` CMake 选项启用。
 
-在项目根目录打开一个终端：
-```bash
-cd ./plugins/kde/app-bridge/
-chmod a+x ./install.sh
-./install.sh
-```
+如果你**不需要**此插件，可以在配置时传入 `-DINSTALL_KWIN_PLUGIN=OFF`。
 
-(如果是要卸载的话，指令如下)
-```bash
-cd ./plugins/kde/app-bridge/
-chmod a+x ./uninstall.sh
-./uninstall.sh
-```
+安装完成后，打开*KDE 设置*，搜索「*KWin*」，在*KWin 脚本*栏中启用名为「*Husky-Panel App Bridge*」的脚本。你可能需要重启 KWin 或重新登录。
+
+有关此插件的更多信息，请参阅 `plugins/kde/app-bridge` 中的 README。
 
 <p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 

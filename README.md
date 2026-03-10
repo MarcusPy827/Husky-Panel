@@ -229,22 +229,13 @@ sudo cmake --install .
 > **Note**: Currently HuskyPanel does NOT autostart itself after you login, you may want to add it to your destop environment's autostart settings MANUALLY.
 
 #### (KWin Only) Install the Plugin
-Before installing, do read the README on `plugins/kde/app-bridge`.
+The KWin app-bridge script plugin is installed automatically by `cmake --install .` (see above). It is enabled by default via the `INSTALL_KWIN_PLUGIN` CMake option.
 
-Open up a terminal at project root.
+If you do **not** want the plugin, pass `-DINSTALL_KWIN_PLUGIN=OFF` at configure time.
 
-```bash
-cd ./plugins/kde/app-bridge/
-chmod a+x ./install.sh
-./install.sh
-```
+After installation, navigate to *KDE Settings*, search "*KWin*", and enable the script named "*Husky-Panel App Bridge*" in the *KWin Script* section. You may need to restart KWin or log out and back in.
 
-(To uninstall the plugin, please execute: )
-```bash
-cd ./plugins/kde/app-bridge/
-chmod a+x ./uninstall.sh
-./uninstall.sh
-```
+For more details about the plugin, read the README in `plugins/kde/app-bridge`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

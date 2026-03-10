@@ -314,6 +314,26 @@ install(TARGETS
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# ---------- KWin script plugin ----------
+option(INSTALL_KWIN_PLUGIN
+  "Install the KWin app-bridge script plugin to the system kwin/scripts directory."
+  ON
+)
+
+if(INSTALL_KWIN_PLUGIN)
+  set(_KWIN_PLUGIN_ID "marcus-app-bridge")
+  set(_KWIN_SCRIPTS_DIR "${CMAKE_INSTALL_DATADIR}/kwin/scripts/${_KWIN_PLUGIN_ID}")
+
+  install(FILES
+    plugins/kde/app-bridge/metadata.json
+    DESTINATION "${_KWIN_SCRIPTS_DIR}"
+  )
+  install(DIRECTORY
+    plugins/kde/app-bridge/contents
+    DESTINATION "${_KWIN_SCRIPTS_DIR}"
+  )
+endif()
+
 if(QT_VERSION_MAJOR EQUAL 6)
   qt_finalize_executable(HuskyPanel)
 endif()
