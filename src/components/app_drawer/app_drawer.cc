@@ -336,8 +336,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_search_drawer_ == nullptr) {
     actual_search_drawer_ = new QWidget();
     actual_search_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_search_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   search_drawer_->setMaximumHeight(400);
   search_drawer_->setWidget(actual_search_drawer_);
@@ -346,7 +344,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     search_layout_ = new QGridLayout();
     search_layout_->setContentsMargins(16, 16, 16, 16);
     search_layout_->setSpacing(8);
-    search_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_search_drawer_->setLayout(search_layout_);
 
@@ -364,8 +361,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     actual_audio_video_drawer_ = new QWidget();
     actual_audio_video_drawer_->setProperty("class",
       "navigation_drawer_compact");
-    actual_audio_video_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   audio_video_drawer_->setMaximumHeight(400);
   audio_video_drawer_->setWidget(actual_audio_video_drawer_);
@@ -374,7 +369,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     audio_video_layout_ = new QGridLayout();
     audio_video_layout_->setContentsMargins(16, 16, 16, 16);
     audio_video_layout_->setSpacing(8);
-    audio_video_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_audio_video_drawer_->setLayout(audio_video_layout_);
 
@@ -392,8 +386,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     actual_development_drawer_ = new QWidget();
     actual_development_drawer_->setProperty("class",
       "navigation_drawer_compact");
-    actual_development_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   development_drawer_->setMaximumHeight(400);
   development_drawer_->setWidget(actual_development_drawer_);
@@ -402,7 +394,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     development_layout_ = new QGridLayout();
     development_layout_->setContentsMargins(16, 16, 16, 16);
     development_layout_->setSpacing(8);
-    development_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_development_drawer_->setLayout(development_layout_);
 
@@ -419,8 +410,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_education_drawer_ == nullptr) {
     actual_education_drawer_ = new QWidget();
     actual_education_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_education_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   education_drawer_->setMaximumHeight(400);
   education_drawer_->setWidget(actual_education_drawer_);
@@ -429,7 +418,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     education_layout_ = new QGridLayout();
     education_layout_->setContentsMargins(16, 16, 16, 16);
     education_layout_->setSpacing(8);
-    education_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_education_drawer_->setLayout(education_layout_);
 
@@ -446,8 +434,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_game_drawer_ == nullptr) {
     actual_game_drawer_ = new QWidget();
     actual_game_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_game_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   game_drawer_->setMaximumHeight(400);
   game_drawer_->setWidget(actual_game_drawer_);
@@ -456,7 +442,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     game_layout_ = new QGridLayout();
     game_layout_->setContentsMargins(16, 16, 16, 16);
     game_layout_->setSpacing(8);
-    game_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_game_drawer_->setLayout(game_layout_);
 
@@ -473,8 +458,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_graphics_drawer_ == nullptr) {
     actual_graphics_drawer_ = new QWidget();
     actual_graphics_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_graphics_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   graphics_drawer_->setMaximumHeight(400);
   graphics_drawer_->setWidget(actual_graphics_drawer_);
@@ -483,7 +466,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     graphics_layout_ = new QGridLayout();
     graphics_layout_->setContentsMargins(16, 16, 16, 16);
     graphics_layout_->setSpacing(8);
-    graphics_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_graphics_drawer_->setLayout(graphics_layout_);
 
@@ -500,8 +482,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_network_drawer_ == nullptr) {
     actual_network_drawer_ = new QWidget();
     actual_network_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_network_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   network_drawer_->setMaximumHeight(400);
   network_drawer_->setWidget(actual_network_drawer_);
@@ -510,7 +490,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     network_layout_ = new QGridLayout();
     network_layout_->setContentsMargins(16, 16, 16, 16);
     network_layout_->setSpacing(8);
-    network_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_network_drawer_->setLayout(network_layout_);
 
@@ -527,8 +506,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_office_drawer_ == nullptr) {
     actual_office_drawer_ = new QWidget();
     actual_office_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_office_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   office_drawer_->setMaximumHeight(400);
   office_drawer_->setWidget(actual_office_drawer_);
@@ -537,7 +514,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     office_layout_ = new QGridLayout();
     office_layout_->setContentsMargins(16, 16, 16, 16);
     office_layout_->setSpacing(8);
-    office_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_office_drawer_->setLayout(office_layout_);
 
@@ -554,8 +530,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_settings_drawer_ == nullptr) {
     actual_settings_drawer_ = new QWidget();
     actual_settings_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_settings_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   settings_drawer_->setMaximumHeight(400);
   settings_drawer_->setWidget(actual_settings_drawer_);
@@ -564,7 +538,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     settings_layout_ = new QGridLayout();
     settings_layout_->setContentsMargins(16, 16, 16, 16);
     settings_layout_->setSpacing(8);
-    settings_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_settings_drawer_->setLayout(settings_layout_);
 
@@ -581,8 +554,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_system_drawer_ == nullptr) {
     actual_system_drawer_ = new QWidget();
     actual_system_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_system_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   system_drawer_->setMaximumHeight(400);
   system_drawer_->setWidget(actual_system_drawer_);
@@ -591,7 +562,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     system_layout_ = new QGridLayout();
     system_layout_->setContentsMargins(16, 16, 16, 16);
     system_layout_->setSpacing(8);
-    system_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_system_drawer_->setLayout(system_layout_);
 
@@ -608,8 +578,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   if (actual_utility_drawer_ == nullptr) {
     actual_utility_drawer_ = new QWidget();
     actual_utility_drawer_->setProperty("class", "navigation_drawer_compact");
-    actual_utility_drawer_->setSizePolicy(QSizePolicy::Expanding,
-      QSizePolicy::Expanding);
   }
   utility_drawer_->setMaximumHeight(400);
   utility_drawer_->setWidget(actual_utility_drawer_);
@@ -618,7 +586,6 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     utility_layout_ = new QGridLayout();
     utility_layout_->setContentsMargins(16, 16, 16, 16);
     utility_layout_->setSpacing(8);
-    utility_layout_->setAlignment(Qt::AlignTop | Qt::AlignLeft);
   }
   actual_utility_drawer_->setLayout(utility_layout_);
 
