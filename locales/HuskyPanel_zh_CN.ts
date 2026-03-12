@@ -56,27 +56,27 @@
         <translation type="obsolete">工具</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="623"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="640"/>
         <source>Sleep</source>
         <translation type="unfinished">睡眠</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="633"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="650"/>
         <source>Hibernate</source>
         <translation type="unfinished">休眠</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="643"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="660"/>
         <source>Reboot</source>
         <translation type="unfinished">重启</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="653"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="670"/>
         <source>Shut down</source>
         <translation type="unfinished">关机</translation>
     </message>
     <message>
-        <location filename="../src/components/app_drawer/app_drawer.cc" line="667"/>
+        <location filename="../src/components/app_drawer/app_drawer.cc" line="684"/>
         <source>Session</source>
         <translation type="unfinished">会话选项</translation>
     </message>
@@ -647,7 +647,7 @@
         <translation type="vanished">时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="39"/>
+        <location filename="../src/mainwindow/mainwindow.cc" line="43"/>
         <source>Top Panel</source>
         <translation>顶栏</translation>
     </message>

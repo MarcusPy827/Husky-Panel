@@ -175,6 +175,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     side_pane_view_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     side_pane_view_container->setHorizontalScrollBarPolicy(
       Qt::ScrollBarAlwaysOff);
+    side_pane_view_container->setProperty("class", "side_pane_view_base_layer");
   }
   side_pane_view_base_layer_layout->addWidget(side_pane_view_container);
 
@@ -307,6 +308,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   drawer_container->setWidgetResizable(true);
   drawer_container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   drawer_container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  drawer_container->setProperty("class", "side_pane_view_base_layer");
   drawer_stack_->insertWidget(0, drawer_container);
 
   QWidget * actual_drawer = new QWidget();
@@ -327,6 +329,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     search_drawer_->setWidgetResizable(true);
     search_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     search_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    search_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(1, search_drawer_);
 
@@ -353,6 +356,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     audio_video_drawer_->setWidgetResizable(true);
     audio_video_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     audio_video_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    audio_video_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(2, audio_video_drawer_);
 
@@ -380,6 +384,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     development_drawer_->setWidgetResizable(true);
     development_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     development_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    development_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(3, development_drawer_);
 
@@ -407,6 +412,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     education_drawer_->setWidgetResizable(true);
     education_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     education_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    education_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(4, education_drawer_);
 
@@ -433,6 +439,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     game_drawer_->setWidgetResizable(true);
     game_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     game_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    game_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(5, game_drawer_);
 
@@ -459,6 +466,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     graphics_drawer_->setWidgetResizable(true);
     graphics_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     graphics_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    graphics_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(6, graphics_drawer_);
 
@@ -485,6 +493,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     network_drawer_->setWidgetResizable(true);
     network_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     network_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    network_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(7, network_drawer_);
 
@@ -511,6 +520,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     office_drawer_->setWidgetResizable(true);
     office_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     office_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    office_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(8, office_drawer_);
 
@@ -537,6 +547,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     settings_drawer_->setWidgetResizable(true);
     settings_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     settings_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    settings_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(9, settings_drawer_);
 
@@ -563,6 +574,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     system_drawer_->setWidgetResizable(true);
     system_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     system_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    system_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(10, system_drawer_);
 
@@ -589,6 +601,7 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
     utility_drawer_->setWidgetResizable(true);
     utility_drawer_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     utility_drawer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    utility_drawer_->setProperty("class", "side_pane_view_base_layer");
   }
   drawer_stack_->insertWidget(11, utility_drawer_);
 

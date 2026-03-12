@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/workspace"
+    "cmake.sourceDirectory": "/home/marcus/Desktop/Repository/Public/husky-panel",
+    "C_Cpp.default.compilerPath": "/usr/sbin/gcc"
 }
