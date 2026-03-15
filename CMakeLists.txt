@@ -170,6 +170,8 @@ set(FRONTEND_SOURCES
   src/components/app_drawer/app_drawer.cc
   src/components/app_drawer/app_drawer_item.h
   src/components/app_drawer/app_drawer_item.cc
+  src/components/app_drawer/app_drawer_search_item.h
+  src/components/app_drawer/app_drawer_search_item.cc
   src/components/krunner_btn/krunner_btn.h
   src/components/krunner_btn/krunner_btn.cc
   src/components/battery_indicator/battery_indicator.h

@@ -341,9 +341,10 @@ AppDrawer::AppDrawer(QWidget *parent) : QWidget(parent) {
   search_drawer_->setWidget(actual_search_drawer_);
 
   if (search_layout_ == nullptr) {
-    search_layout_ = new QGridLayout();
+    search_layout_ = new QVBoxLayout();
     search_layout_->setContentsMargins(16, 16, 16, 16);
     search_layout_->setSpacing(8);
+    search_layout_->setAlignment(Qt::AlignTop);
   }
   actual_search_drawer_->setLayout(search_layout_);
 
@@ -783,18 +784,13 @@ int AppDrawer::UpdateAppDrawerItems() {
     }
   }
 
-  // Search drawer (uses all apps)
+  // Search drawer
   if (search_layout_ != nullptr) {
-    cur_col = 0;
-    cur_row = 0;
     for (const auto& app : app_infos_) {
-      AppDrawerItem * item_gen = new AppDrawerItem(app);
-      search_layout_->addWidget(item_gen, cur_row, cur_col);
-      cur_col += 1;
-      if (cur_col > 3) {
-        cur_col = 0;
-        cur_row += 1;
-      }
+      AppDrawerSearchItem * item_gen = new AppDrawerSearchItem(app);
+      QObject::connect(this, &AppDrawer::DrawerItemFilterUpdated, item_gen,
+        &AppDrawerSearchItem::UpdateFilter);
+      search_layout_->addWidget(item_gen);
     }
   }
 
@@ -972,6 +968,12 @@ int AppDrawer::UpdateAppDrawerItems() {
 }
 
 void AppDrawer::OnSearchBarTextChanged(const QString& text) {
+  if (drawer_stack_ != nullptr && drawer_stack_->currentIndex() != 1 &&
+      search_apps_btn_ != nullptr && !text.isEmpty()) {
+    QMetaObject::invokeMethod(search_apps_btn_, "GroupSelected",
+      Q_ARG(QString, "app_drawer_side_pane"), Q_ARG(QString, "search_apps"));
+  }
+
   emit DrawerItemFilterUpdated(text);
 }
 
