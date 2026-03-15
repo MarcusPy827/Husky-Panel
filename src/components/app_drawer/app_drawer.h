@@ -28,6 +28,7 @@
 #include "src/theme_loader/theme_loader.h"
 #include "src/components/app_drawer/app_drawer_side_pane_item.h"
 #include "src/components/app_drawer/app_drawer_item.h"
+#include "src/components/app_drawer/app_drawer_search_item.h"
 #include "src/info_server/application_info/application_info.h"
 #include "src/translation_loader/translation_loader.h"
 
@@ -73,7 +74,7 @@ class AppDrawer : public QWidget {
 
   QScrollArea * search_drawer_ = nullptr;
   QWidget * actual_search_drawer_ = nullptr;
-  QGridLayout * search_layout_ = nullptr;
+  QVBoxLayout * search_layout_ = nullptr;
 
   QScrollArea * audio_video_drawer_ = nullptr;
   QWidget * actual_audio_video_drawer_ = nullptr;
