@@ -1,15 +1,17 @@
-<!DOCTYPE RCC>
 <RCC>
-  <qresource prefix="/m3qw/fonts">
-    <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
-    <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
-    <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
-    <file>translations/bar.locale</file>
-  </qresource>
-  <qresource prefix="/translations">
-    <file>translations/HuskyPanel_zh_CN.qm</file>
-    <file>translations/bar.locale</file>
-    <file>translations/calendar.locale</file>
-    <file>translations/app_drawer.locale</file>
-  </qresource>
+    <qresource prefix="/m3qw/fonts">
+        <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
+        <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
+        <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
+        <file>translations/bar.locale</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file>translations/HuskyPanel_zh_CN.qm</file>
+        <file>translations/bar.locale</file>
+        <file>translations/calendar.locale</file>
+        <file>translations/app_drawer.locale</file>
+    </qresource>
+    <qresource prefix="/ui">
+        <file>interfaces/MainWindow.qml</file>
+    </qresource>
 </RCC>

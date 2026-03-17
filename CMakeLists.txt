@@ -49,6 +49,7 @@ find_package(QT
   NAMES Qt6 
   REQUIRED COMPONENTS 
   Widgets 
+  Quick 
   LinguistTools
   WaylandClient
   DBus
@@ -62,6 +63,7 @@ find_package(
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
   Widgets 
+  Quick 
   LinguistTools
   WaylandClient
   DBus
@@ -115,6 +117,8 @@ set(MATERIAL_DESIGN_DEPS
   src/theme_loader/theme_conf.h
   src/theme_loader/theme_loader.h
   src/theme_loader/theme_loader.cc
+  src/theme_loader/quick_theme_provider.h
+  src/theme_loader/quick_theme_provider.cc
   src/font_loader/font_loader.h
   src/font_loader/font_loader.cc
 )
@@ -303,6 +307,7 @@ target_link_libraries(HuskyPanel
   -Wl,-Bdynamic
   ${SYSTEM_DYNAMIC_SWITCHABLE_LIBS}
   Qt${QT_VERSION_MAJOR}::Widgets
+  Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
@@ -347,7 +352,8 @@ if(BUILD_TESTING)
     src/utils/color_palette_wrapper/color_palette_wrapper_test.cc
   )
   target_link_libraries(HuskyPanelTest PRIVATE
-    Qt${QT_VERSION_MAJOR}::Widgets 
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Quick
     QWindowKit::Widgets
     absl::base
     absl::log
