@@ -32,10 +32,25 @@ class QuickThemeProvider : public QObject {
   Q_PROPERTY(QColor status_bar_bg
     READ GetStatusBarBg
     NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor status_bar_primary
+    READ GetStatusBarPrimary
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor status_bar_surface_fg
+    READ GetStatusBarSurfaceFg
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor status_bar_state_layer_hover
+    READ GetStatusBarStateLayerHover
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor status_bar_state_layer_pressed
+    READ GetStatusBarStateLayerPressed
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor primary
+    READ GetPrimary
+    NOTIFY SchemeUpdated)
   Q_PROPERTY(QColor surface_container
     READ GetSurfaceContainer
     NOTIFY SchemeUpdated)
-  Q_PROPERTY(QColor on_surface
+  Q_PROPERTY(QColor surface_fg
     READ GetOnSurface
     NOTIFY SchemeUpdated)
   Q_PROPERTY(QColor state_layer_hover
@@ -51,13 +66,23 @@ class QuickThemeProvider : public QObject {
 
   void RefreshTheme();
   const QColor GetStatusBarBg();
+  const QColor GetStatusBarPrimary();
+  const QColor GetStatusBarSurfaceFg();
+  const QColor GetStatusBarStateLayerHover();
+  const QColor GetStatusBarStateLayerPressed();
+  const QColor GetPrimary();
   const QColor GetSurfaceContainer();
   const QColor GetOnSurface();
   const QColor GetStateLayerHover();
   const QColor GetStateLayerPressed();
-
+  
  private:
   QColor status_bar_bg_;
+  QColor status_bar_primary_;
+  QColor status_bar_surface_fg_;
+  QColor status_bar_state_layer_hover_;
+  QColor status_bar_state_layer_pressed_;
+  QColor primary_;
   QColor surface_container_;
   QColor on_surface_;
   QColor state_layer_hover_;

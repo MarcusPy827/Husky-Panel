@@ -136,8 +136,8 @@ void MainWindow::HandleTheme() {
 void MainWindow::LoadLeftSlot() {
   if (app_indicator_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading application indicator...");
-    app_indicator_ = new AppIndicator();
-    slot_left_->addWidget(app_indicator_);
+    // app_indicator_ = new AppIndicator();
+    // slot_left_->addWidget(app_indicator_);
   }
 
   if (app_drawer_btn_ == nullptr) {

@@ -27,6 +27,7 @@
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
+#include "src/components/app_indicator/app_indicator.h"
 #include "src/info_server/tray_handler/tray_def.h"
 #include "src/mainwindow/mainwindow.h"
 #include "src/theme_loader/quick_theme_provider.h"
@@ -65,9 +66,13 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << absl::StrCat("Initializing QML scheme provider...");
   auto* theme = new panel::loader::QuickThemeProvider(&a);
 
+  LOG(INFO) << absl::StrCat("Initializing QML app indicator...");
+  auto* current_window = new panel::frontend::AppIndicator(&a);
+
   LOG(INFO) << absl::StrCat("Loading panel window...");
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("Theme", theme);
+  engine.rootContext()->setContextProperty("CurrentWindow", current_window);
 
   engine.load(QUrl(QStringLiteral("qrc:/ui/interfaces/MainWindow.qml")));
   if (engine.rootObjects().isEmpty()) {

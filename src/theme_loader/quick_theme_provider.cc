@@ -55,6 +55,10 @@ void QuickThemeProvider::RefreshTheme() {
         highlight_color, utils::ColorSchemeType::kTonalSpot, true);
     if (WriteSchemeForStatusBar(*temp_dark_scheme) == 0) {
       WriteScheme(*scheme_gen);
+      // Status bar always has a dark background; use dark scheme's on_surface
+      // so text contrasts correctly (light text on dark background).
+      on_surface_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+        temp_dark_scheme->GetOnSurface()));
     }
   } else {
     if (WriteSchemeForStatusBar(*scheme_gen) == 0) {
@@ -65,6 +69,8 @@ void QuickThemeProvider::RefreshTheme() {
 
 void QuickThemeProvider::WriteScheme(const
     material_color_utilities::DynamicScheme & scheme) {
+  primary_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetPrimary()));
   surface_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetSurfaceContainer()));
   on_surface_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
@@ -84,11 +90,41 @@ int QuickThemeProvider::WriteSchemeForStatusBar(const
     material_color_utilities::DynamicScheme & scheme) {
   status_bar_bg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetSurfaceContainer()));
+  status_bar_primary_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetPrimary()));
+  status_bar_surface_fg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetOnSurface()));
+  QColor state_layer_base = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetOnSurfaceVariant()));
+  status_bar_state_layer_hover_ = QColor(utils::Colors::ApplyOpacityToHexColor(
+    state_layer_base.name(), 0.08f));
+  status_bar_state_layer_pressed_ = QColor(utils::Colors::ApplyOpacityToHexColor(
+    state_layer_base.name(), 0.10f));
   return 0;
 }
 
 const QColor QuickThemeProvider::GetStatusBarBg() {
   return status_bar_bg_;
+}
+
+const QColor QuickThemeProvider::GetStatusBarPrimary() {
+  return status_bar_primary_;
+}
+
+const QColor QuickThemeProvider::GetStatusBarSurfaceFg() {
+  return status_bar_surface_fg_;
+}
+
+const QColor QuickThemeProvider::GetStatusBarStateLayerHover() {
+  return status_bar_state_layer_hover_;
+}
+
+const QColor QuickThemeProvider::GetStatusBarStateLayerPressed() {
+  return status_bar_state_layer_pressed_;
+}
+
+const QColor QuickThemeProvider::GetPrimary() {
+  return primary_;
 }
 
 const QColor QuickThemeProvider::GetSurfaceContainer() {

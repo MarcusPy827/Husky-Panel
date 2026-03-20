@@ -13,5 +13,6 @@
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
+        <file>interfaces/AppIndicator.qml</file>
     </qresource>
 </RCC>

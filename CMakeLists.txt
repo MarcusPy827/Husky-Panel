@@ -160,7 +160,6 @@ set(BACKEND_SOURCES
 )
 
 set(FRONTEND_SOURCES
-  src/components/app_indicator/app_indicator_style.h
   src/components/app_indicator/app_indicator.h
   src/components/app_indicator/app_indicator.cc
   src/components/clock_btn/clock_btn.h
