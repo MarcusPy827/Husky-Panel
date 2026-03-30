@@ -23,6 +23,7 @@ import QtQuick.Window
 
 import "app_drawer"
 import "app_indicator"
+import "krunner_btn"
 
 Window {
   id: root
@@ -355,107 +356,17 @@ Window {
           spacing: 4
           Layout.fillHeight: true
 
+          // App indicator
           AppIndicator {}
 
-          // Applications toggle button
-          Rectangle {
-            id: appsBtnBg
-            implicitWidth: appsBtn.implicitWidth + 16
-            Layout.fillHeight: true
-            radius: 6
-            color: "transparent"
+          // App drawer button
+          AppsBtn {
+            onClicked: root.appDrawerOpen = !root.appDrawerOpen
+          }
 
-            readonly property color stateHover: Theme.status_bar_state_layer_hover
-            readonly property color statePressed: Theme.status_bar_state_layer_pressed
-
-            Rectangle {
-              id: appsBtnStateLayer
-              anchors.fill: parent
-              radius: parent.radius
-              color: "transparent"
-            }
-
-            Canvas {
-              id: appsBtnRipple
-              anchors.fill: parent
-              opacity: 0
-
-              property real centerX: width / 2
-              property real centerY: height / 2
-              property real rippleRadius: 0
-
-              onPaint: {
-                var ctx = getContext("2d")
-                ctx.clearRect(0, 0, width, height)
-                ctx.save()
-                var r = appsBtnBg.radius
-                ctx.beginPath()
-                ctx.moveTo(r, 0)
-                ctx.lineTo(width - r, 0)
-                ctx.arcTo(width, 0, width, r, r)
-                ctx.lineTo(width, height - r)
-                ctx.arcTo(width, height, width - r, height, r)
-                ctx.lineTo(r, height)
-                ctx.arcTo(0, height, 0, height - r, r)
-                ctx.lineTo(0, r)
-                ctx.arcTo(0, 0, r, 0, r)
-                ctx.closePath()
-                ctx.clip()
-                var c = appsBtnBg.statePressed
-                ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
-                ctx.beginPath()
-                ctx.arc(centerX, centerY, rippleRadius, 0, 2 * Math.PI)
-                ctx.fill()
-                ctx.restore()
-              }
-
-              onOpacityChanged: requestPaint()
-              onRippleRadiusChanged: requestPaint()
-
-              ParallelAnimation {
-                id: appsBtnRippleAnim
-                NumberAnimation {
-                  target: appsBtnRipple; property: "rippleRadius"
-                  from: 0
-                  to: Math.sqrt(appsBtnRipple.width * appsBtnRipple.width
-                                + appsBtnRipple.height * appsBtnRipple.height)
-                  duration: 400; easing.type: Easing.OutCubic
-                }
-                SequentialAnimation {
-                  PropertyAction { target: appsBtnRipple; property: "opacity"; value: 0.3 }
-                  PauseAnimation { duration: 150 }
-                  NumberAnimation {
-                    target: appsBtnRipple; property: "opacity"
-                    from: 0.3; to: 0
-                    duration: 250; easing.type: Easing.OutCubic
-                  }
-                }
-              }
-            }
-
-            Text {
-              id: appsBtn
-              anchors.centerIn: parent
-              text: StatusBarTranslator.Tr("Applications")
-              color: Theme.status_bar_surface_fg
-              font.pixelSize: 16
-            }
-
-            MouseArea {
-              anchors.fill: parent
-              hoverEnabled: true
-              onEntered:  appsBtnStateLayer.color = appsBtnBg.stateHover
-              onExited:   appsBtnStateLayer.color = "transparent"
-              onPressed: (mouse) => {
-                appsBtnStateLayer.color = appsBtnBg.statePressed
-                appsBtnRipple.centerX = mouse.x
-                appsBtnRipple.centerY = mouse.y
-                appsBtnRippleAnim.restart()
-              }
-              onReleased: appsBtnStateLayer.color =
-                containsMouse ? appsBtnBg.stateHover : "transparent"
-              onClicked: root.appDrawerOpen = !root.appDrawerOpen
-            }
+          // KRunner button
+          KRunnerBtn {
+            onClicked: KRunnerToggler.toggleKRunner()
           }
         }
 
@@ -495,4 +406,5 @@ Window {
       }
     }
   }
+
 }

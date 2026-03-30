@@ -21,7 +21,9 @@
         <file>interfaces/app_drawer/AppDrawerSearchPage.qml</file>
         <file>interfaces/app_drawer/AppDrawerSessionMenu.qml</file>
         <file>interfaces/app_drawer/AppDrawerSessionBtn.qml</file>
+        <file>interfaces/app_drawer/AppsBtn.qml</file>
         <file>HuskyPanel/qmldir</file>
         <file>HuskyPanel/Theme.qmltypes</file>
+        <file>interfaces/krunner_btn/KRunnerBtn.qml</file>
     </qresource>
 </RCC>

@@ -57,8 +57,8 @@ QString UserInfo::GetUserName() {
     }
   }
 
-  qWarning() << "[WARN] User Info: Failed to get user display name from"
-    << "D-Bus. Now falling back to login name...";
+  LOG(WARNING) << absl::StrCat("Failed to get user display name from D-Bus. ",
+    "Now falling back to login name...");
   result = QString::fromLocal8Bit(qgetenv("USER"));
   return result;
 }
@@ -74,25 +74,27 @@ QString UserInfo::GetUserAvatarPath() {
     if (avatar_read.isValid() && !avatar_read.toString().isEmpty()) {
       result = avatar_read.toString();
       if (QFile::exists(result)) {
-        qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
-          << "D-Bus.";
+        LOG(INFO) << absl::StrCat(absl::StrFormat(
+          "Successfully got user avatar path from D-Bus: %s.",
+          result.toStdString()));
         return result;
       }
     }
   }
 
-  qWarning() << "[WARN] User Info: Failed to get user avatar path from"
-    << "D-Bus. Now falling back to ~/.face.icon...";
+  LOG(WARNING) << absl::StrCat("Failed to get user avatar path from D-Bus. ",
+    "Now falling back to ~/.face.icon...");
   QString user_home = QDir::homePath();
   result = user_home + "/.face.icon";
   if (QFile::exists(result)) {
-    qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
-      << "~/.face.icon.";
+    LOG(INFO) << absl::StrCat(absl::StrFormat(
+      "Successfully got user avatar path from ~/.face.icon: %s.",
+      result.toStdString()));
     return result;
   }
 
-  qCritical() << "[ERROR] User Info: Failed to get user avatar path from"
-    << "D-Bus and ~/.face.icon does not exist either, returning empty string.";
+  LOG(ERROR) << absl::StrCat("Failed to get user avatar path from D-Bus and ",
+    "~/.face.icon does not exist either, returning empty string.");
   result = "";
   return result;
 }

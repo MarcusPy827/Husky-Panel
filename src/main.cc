@@ -36,11 +36,11 @@
 #include "src/font_loader/font_loader.h"
 #include "src/components/app_drawer/app_info_wrapper.h"
 #include "src/components/app_drawer/app_launcher.h"
+#include "src/components/krunner_btn/krunner_btn.h"
 #include "src/info_server/power_options/power_options.h"
 #include "src/info_server/session_handler/session_handler.h"
 #include "src/info_server/user_info/user_info.h"
 #include "src/info_server/tray_handler/tray_def.h"
-#include "src/mainwindow/mainwindow.h"
 #include "src/theme_loader/quick_theme_provider.h"
 #include "src/translation_loader/translation_loader.h"
 #include "src/utils/misc/misc.h"
@@ -123,6 +123,11 @@ void InjectEngineContext(QGuiApplication& application,
   auto* current_window = new panel::frontend::AppIndicator(&application);
   target.rootContext()->setContextProperty("CurrentWindow", current_window);
   LOG(INFO) << absl::StrCat("Successfully injected app indicator!!");
+
+  LOG(INFO) << absl::StrCat("Initializing KRunner toggler...");
+  auto* krunner_btn = new panel::frontend::KRunnerBtn(&application);
+  target.rootContext()->setContextProperty("KRunnerToggler", krunner_btn);
+  LOG(INFO) << absl::StrCat("Successfully injected KRunner toggler!!");
 }
 
 void InjectImageProviders(QQmlApplicationEngine& target) {

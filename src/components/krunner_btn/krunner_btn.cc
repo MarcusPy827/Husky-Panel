@@ -15,8 +15,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QHBoxLayout>
-
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 #include "absl/strings/str_format.h"
@@ -28,46 +26,16 @@
 namespace panel {
 namespace frontend {
 
-KRunnerBtn::KRunnerBtn(QWidget *parent) : QWidget(parent) {
-  QHBoxLayout * layout_gen = new QHBoxLayout();
-  layout_gen->setContentsMargins(0, 0, 0, 0);
-  layout_gen->setSpacing(0);
-  setLayout(layout_gen);
-
-  if (translator_ == nullptr) {
-    translator_ = new loader::TranslationLoader(
-      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
-  }
-
-  if (btn_ == nullptr) {
-    btn_ = new QPushButton();
-    btn_->setProperty("class", "common_bar_btn");
-    QObject::connect(btn_, &QPushButton::clicked, this,
-      &KRunnerBtn::ToggleKRunner);
-  }
-
-  if (translator_ != nullptr) {
-    btn_->setText(translator_->GetTranslation("Search"));
-  } else {
-    btn_->setText("Search");
-  }
-  layout_gen->addWidget(btn_);
-}
-
-KRunnerBtn::~KRunnerBtn() {
-  LOG(INFO) << absl::StrCat("KRunnerBtn is being deleted.");
-}
-
-QPushButton* KRunnerBtn::GetBtn() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Search button is a null pointer, except ",
-      "a nullptr passing in!");
-  }
-  return btn_;
+KRunnerBtn::KRunnerBtn(QObject *parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("KRunnerBtn constructer invoked!!");
 }
 
 void KRunnerBtn::ToggleKRunner() {
   backend::ApplicationServices::GetKRunner();
+}
+
+void KRunnerBtn::toggleKRunner() {
+  ToggleKRunner();
 }
 
 }  // namespace frontend

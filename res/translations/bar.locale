@@ -34,7 +34,7 @@ en_us = "Power off"
 zh_cn = "锁定"
 en_us = "Lock"
 
-[Action_Logout]
+[Action_Log Out]
 zh_cn = "注销"
 en_us = "Logout"
 
