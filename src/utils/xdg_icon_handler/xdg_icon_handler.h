@@ -15,30 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
-#define SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
-
-#include <QString>
+#include <QQuickImageProvider>
 #include <QObject>
+#include <QIcon>
+#include <QPixmap>
+#include <QSize>
+
+#ifndef SRC_UTILS_XDG_ICON_HANDLER_XDG_ICON_HANDLER_H_
+#define SRC_UTILS_XDG_ICON_HANDLER_XDG_ICON_HANDLER_H_
 
 namespace panel {
-namespace backend {
+namespace utils {
 
-class UserInfo : public QObject {
-  Q_OBJECT
-
-  Q_PROPERTY(QString userName READ GetUserName CONSTANT)
-  Q_PROPERTY(QString avatarPath READ GetUserAvatarPath CONSTANT)
-
+class XdgIconHandler : public QQuickImageProvider {
  public:
-  explicit UserInfo(QObject* parent = nullptr);
-  ~UserInfo() = default;
-
-  static QString GetUserName();
-  static QString GetUserAvatarPath();
+  explicit XdgIconHandler();
+  QPixmap requestPixmap(const QString& id, QSize* size,
+    const QSize& requested) override;
 };
 
-}  // namespace backend
+}  // namespace utils
 }  // namespace panel
 
-#endif  // SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
+#endif  // SRC_UTILS_XDG_ICON_HANDLER_XDG_ICON_HANDLER_H_

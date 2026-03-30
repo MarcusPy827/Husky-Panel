@@ -132,6 +132,12 @@ set(UTIL_SOURCES
   src/utils/dbus_def.h
   src/utils/misc/misc.h
   src/utils/misc/misc.cc
+  src/utils/xdg_icon_handler/xdg_icon_handler.h
+  src/utils/xdg_icon_handler/xdg_icon_handler.cc
+  src/utils/user_avatar_handler/user_avatar_handler.h
+  src/utils/user_avatar_handler/user_avatar_handler.cc
+  src/utils/layer_shell_helper/layer_shell_helper.h
+  src/utils/layer_shell_helper/layer_shell_helper.cc
 )
 
 set(BACKEND_SOURCES
@@ -157,6 +163,10 @@ set(BACKEND_SOURCES
   src/info_server/tray_handler/tray_handler.cc
   src/info_server/application_info/application_info.h
   src/info_server/application_info/application_info.cc
+  src/info_server/power_options/power_options.h
+  src/info_server/power_options/power_options.cc
+  src/info_server/session_handler/session_handler.h
+  src/info_server/session_handler/session_handler.cc
 )
 
 set(FRONTEND_SOURCES
@@ -164,17 +174,10 @@ set(FRONTEND_SOURCES
   src/components/app_indicator/app_indicator.cc
   src/components/clock_btn/clock_btn.h
   src/components/clock_btn/clock_btn.cc
-  src/components/app_drawer/app_drawer_btn.h
-  src/components/app_drawer/app_drawer_btn.cc
-  src/components/app_drawer/app_drawer_side_pane_item.h
-  src/components/app_drawer/app_drawer_side_pane_item.cc
-  src/components/app_drawer/app_drawer_style.h
-  src/components/app_drawer/app_drawer.h
-  src/components/app_drawer/app_drawer.cc
-  src/components/app_drawer/app_drawer_item.h
-  src/components/app_drawer/app_drawer_item.cc
-  src/components/app_drawer/app_drawer_search_item.h
-  src/components/app_drawer/app_drawer_search_item.cc
+  src/components/app_drawer/app_info_wrapper.h
+  src/components/app_drawer/app_info_wrapper.cc
+  src/components/app_drawer/app_launcher.h
+  src/components/app_drawer/app_launcher.cc
   src/components/krunner_btn/krunner_btn.h
   src/components/krunner_btn/krunner_btn.cc
   src/components/battery_indicator/battery_indicator.h

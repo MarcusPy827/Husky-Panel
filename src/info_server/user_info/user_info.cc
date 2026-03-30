@@ -23,11 +23,23 @@
 #include <unistd.h>
 #include <pwd.h>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/user_info/user_info.h"
 #include "src/utils/dbus_def.h"
 
 namespace panel {
 namespace backend {
+
+UserInfo::UserInfo(QObject* parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("UserInfo constructer invoked!!");
+  LOG(WARNING) << absl::StrCat("Only invoke this constructor in main.cc while ",
+    "injecting this class to QML. Otherwise there is NO NEED to create an ",
+    "instance as all methods in this class are static.");
+}
 
 QString UserInfo::GetUserName() {
   uid_t uid = getuid();

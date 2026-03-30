@@ -1,0 +1,13 @@
+cd /home/marcus/Desktop/Repository/Public/husky-panel
+
+# 生成和 PKGBUILD 期望一致的源码包名 + 目录前缀
+git archive \
+  --format=tar.gz \
+  --prefix=Husky-Panel-0.9.3/ \
+  -o packages/husky-panel-0.9.3.tar.gz \
+  HEAD
+
+# 本地打包（会优先使用这个本地文件）
+cd packages
+makepkg --syncdeps --cleanbuild --noconfirm
+sudo pacman -S --noconfirm pacman libarchive openssl

@@ -15,41 +15,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
+#ifndef SRC_INFO_SERVER_SESSION_HANDLER_SESSION_HANDLER_H_
+#define SRC_INFO_SERVER_SESSION_HANDLER_SESSION_HANDLER_H_
 
-#include <QWidget>
-#include <QString>
-#include <QLabel>
-#include <QToolButton>
-
-#include "src/info_server/application_info/application_info.h"
+#include <QObject>
+#include <QDBusObjectPath>
 
 namespace panel {
-namespace frontend {
+namespace backend {
 
-class AppDrawerItem : public QWidget {
+class SessionHandler : public QObject {
   Q_OBJECT
 
  public:
-  explicit AppDrawerItem(const AppInfo& info, bool is_search_layout = false,
-    QWidget * parent = nullptr);
-  ~AppDrawerItem();
-  AppInfo GetAppInfo();
+  explicit SessionHandler(QObject* parent = nullptr);
 
- public slots:
-  void UpdateFilter(const QString& keyword);
+  /* ---------- For backend usage ---------- */
+  void Lock();
+  void Logout();
+  void SwitchUser();
+
+  /* ---------- For QML usage ---------- */
+  Q_INVOKABLE void lock();
+  Q_INVOKABLE void logout();
+  Q_INVOKABLE void switchUser();
 
  private:
-  QToolButton * btn_ = nullptr;
-  QLabel * title_ = nullptr;
-  AppInfo info_ = {};
-
- private slots:
-  void Launch();
+  // Returns the D-Bus object path of the current logind session,
+  // or an empty path on failure.
+  QDBusObjectPath CurrentSessionPath() const;
 };
 
-}  // namespace frontend
+}  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_ITEM_H_
+#endif  // SRC_INFO_SERVER_SESSION_HANDLER_SESSION_HANDLER_H_

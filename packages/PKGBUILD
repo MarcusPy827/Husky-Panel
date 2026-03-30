@@ -1,0 +1,40 @@
+# Maintainer: MarcusPy827 <https://github.com/MarcusPy827>
+
+pkgname=husky-panel
+pkgver=0.9.3
+pkgrel=1
+pkgdesc="(WIP) Yet another bar for Linux on Wayland session..."
+arch=('x86_64')
+url="https://github.com/MarcusPy827/Husky-Panel"
+license=('GPL-3.0-only')
+depends=(
+    'qt6-base'
+    'qt6-wayland'
+    'qt6-declarative'
+    'layer-shell-qt'
+    'kservice'
+    'libdbusmenu-lxqt'
+)
+makedepends=(
+    'cmake'
+    'extra-cmake-modules'
+    'qt6-tools'
+    'wayland-protocols'
+    'libxkbcommon'
+    'git'
+)
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cmake -B build -S "Husky-Panel-$pkgver" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DINSTALL_KWIN_PLUGIN=ON
+    cmake --build build
+}
+
+package() {
+    DESTDIR="$pkgdir" cmake --install build
+    install -Dm644 "Husky-Panel-$pkgver/COPYING" "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}

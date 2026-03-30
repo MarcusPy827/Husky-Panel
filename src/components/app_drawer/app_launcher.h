@@ -15,36 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
-#define SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#ifndef SRC_COMPONENTS_APP_DRAWER_APP_LAUNCHER_H_
+#define SRC_COMPONENTS_APP_DRAWER_APP_LAUNCHER_H_
 
-#include <QWidget>
-#include <QPushButton>
-
-#include "src/translation_loader/translation_loader.h"
-#include "src/components/app_drawer/app_drawer.h"
+#include <QObject>
+#include <QString>
 
 namespace panel {
 namespace frontend {
 
-class AppDrawerBtn : public QWidget {
+class AppLauncher : public QObject {
   Q_OBJECT
 
  public:
-  explicit AppDrawerBtn(QWidget *parent = nullptr);
-  ~AppDrawerBtn();
-  QPushButton * GetBtn();
+  /* ---------- For backend usage ---------- */
+  explicit AppLauncher(QObject* parent = nullptr);
 
- private:
-  QPushButton * btn_ = nullptr;
-  AppDrawer * app_drawer_ = nullptr;
-  loader::TranslationLoader * translator_ = nullptr;
-
- private slots:
-  void ToggleAppDrawer();
+  /* ---------- For QML usage ---------- */
+  Q_INVOKABLE void launch(const QString& exec);
 };
 
 }  // namespace frontend
 }  // namespace panel
 
-#endif  // SRC_COMPONENTS_APP_DRAWER_APP_DRAWER_BTN_H_
+#endif  // SRC_COMPONENTS_APP_DRAWER_APP_LAUNCHER_H_

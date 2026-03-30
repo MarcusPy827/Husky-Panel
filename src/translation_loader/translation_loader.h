@@ -44,6 +44,7 @@ class TranslationLoader: public QObject {
   QString GetLocaleSuffix(const LanguageType& type);
   QString GetLocaleDisplayName(const LanguageType& type);
   QString GetTranslation(const QString& message);
+  Q_INVOKABLE QString Tr(const QString& message);
 
  private:
   void RecordCurrentLanguage(const QString& lng);

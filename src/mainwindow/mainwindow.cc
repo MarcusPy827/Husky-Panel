@@ -139,18 +139,6 @@ void MainWindow::LoadLeftSlot() {
     // app_indicator_ = new AppIndicator();
     // slot_left_->addWidget(app_indicator_);
   }
-
-  if (app_drawer_btn_ == nullptr) {
-    LOG(INFO) << absl::StrCat("Now loading application drawer...");
-    app_drawer_btn_ = new AppDrawerBtn();
-    slot_left_->addWidget(app_drawer_btn_);
-  }
-
-  if (krunner_btn_ == nullptr) {
-    LOG(INFO) << absl::StrCat("Now loading KRunner toggler...");
-    krunner_btn_ = new KRunnerBtn();
-    slot_left_->addWidget(krunner_btn_);
-  }
 }
 
 void MainWindow::LoadMiddleSlot() {
@@ -179,12 +167,6 @@ void MainWindow::LoadRightSlot() {
   if (calendar_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading calendar...");
     calendar_ = new Calendar();
-  }
-
-  if (clock_btn_ == nullptr) {
-    LOG(INFO) << absl::StrCat("Now loading clock...");
-    clock_btn_ = new ClockBtn(calendar_);
-    slot_right_->addWidget(clock_btn_);
   }
 }
 

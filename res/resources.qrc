@@ -13,6 +13,15 @@
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
-        <file>interfaces/AppIndicator.qml</file>
+        <file>interfaces/app_indicator/AppIndicator.qml</file>
+        <file>interfaces/app_drawer/AppDrawer.qml</file>
+        <file>interfaces/app_drawer/AppDrawerIconButton.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSidePaneItem.qml</file>
+        <file>interfaces/app_drawer/AppDrawerGridPage.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSearchPage.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSessionMenu.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSessionBtn.qml</file>
+        <file>HuskyPanel/qmldir</file>
+        <file>HuskyPanel/Theme.qmltypes</file>
     </qresource>
 </RCC>

@@ -29,7 +29,6 @@
 #include "src/utils/color_palette_wrapper/color_palette_wrapper.h"
 #include "src/utils/colors/colors.h"
 #include "src/components/calendar/calendar_style.h"
-#include "src/components/app_drawer/app_drawer_style.h"
 #include "lib/3rdparty/material-color-utilities/cpp/dynamiccolor/dynamic_scheme.h"
 
 namespace panel {
@@ -509,7 +508,6 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetNavigationDrawerStyle(conf.light)
       + GetNavigationDrawerCompactStyle(conf.light)
       + GetCalendarStyle(conf.light)
-      + GetAppDrawerStyle(conf.light)
       + GetScrollAreaStyle(conf.light),
     GetAppBackground(conf.dark)
       + GetCommonBtnStyle(conf.dark)
@@ -523,7 +521,6 @@ static StyleTuple GetThemeMap(const SchemeTuple& conf) {
       + GetNavigationDrawerStyle(conf.dark)
       + GetNavigationDrawerCompactStyle(conf.dark)
       + GetCalendarStyle(conf.dark)
-      + GetAppDrawerStyle(conf.dark)
       + GetScrollAreaStyle(conf.dark)
   };
 }

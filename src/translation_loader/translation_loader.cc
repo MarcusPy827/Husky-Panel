@@ -135,5 +135,9 @@ QString TranslationLoader::GetTranslation(const QString& message) {
   return message;
 }
 
+QString TranslationLoader::Tr(const QString& message) {
+  return GetTranslation(message);
+}
+
 }  // namespace loader
 }  // namespace panel

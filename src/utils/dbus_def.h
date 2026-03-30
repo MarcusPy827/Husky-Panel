@@ -66,4 +66,27 @@
 #define DBUS_STATUS_NOTIFIER_WATCHER_GET_REGISTERED_METHOD \
   "RegisteredStatusNotifierItems"
 
+// Session Handler
+#define DBUS_LOGIND_SERVICE "org.freedesktop.login1"
+#define DBUS_LOGIND_PATH "/org/freedesktop/login1"
+#define DBUS_LOGIND_MANAGER_INTERFACE "org.freedesktop.login1.Manager"
+#define DBUS_LOGIND_SESSION_INTERFACE "org.freedesktop.login1.Session"
+#define DBUS_GNOME_SESSION_MANAGER_SERVICE "org.gnome.SessionManager"
+#define DBUS_GNOME_SESSION_MANAGER_PATH "/org/gnome/SessionManager"
+#define DBUS_GNOME_SESSION_MANAGER_INTERFACE "org.gnome.SessionManager"
+#define DBUS_KDE_SHUTDOWN_SERVICE "org.kde.Shutdown"
+#define DBUS_KDE_SHUTDOWN_PATH "/Shutdown"
+#define DBUS_KDE_SHUTDOWN_INTERFACE "org.kde.Shutdown"
+#define DBUS_KDE_SHUTDOWN_LOGOUT_METHOD "logout"
+#define DBUS_XFCE_SESSION_MANAGER_SERVICE "org.xfce.SessionManager"
+#define DBUS_XFCE_SESSION_MANAGER_PATH "/org/xfce/SessionManager"
+#define DBUS_XFCE_SESSION_MANAGER_INTERFACE "org.xfce.Session.Manager"
+#define DBUS_MATE_SESSION_MANAGER_SERVICE "org.mate.SessionManager"
+#define DBUS_MATE_SESSION_MANAGER_PATH "/org/mate/SessionManager"
+#define DBUS_MATE_SESSION_MANAGER_INTERFACE "org.mate.SessionManager"
+#define DBUS_DISPLAY_MANAGER_SEAT_PATH "/org/freedesktop/DisplayManager"
+#define DBUS_DISPLAY_MANAGER_SERVICE "org.freedesktop.DisplayManager"
+#define DBUS_DISPLAY_MANAGER_SEAT_INTERFACE \
+  "org.freedesktop.DisplayManager.Seat"
+
 #endif  // SRC_UTILS_DBUS_DEF_H_

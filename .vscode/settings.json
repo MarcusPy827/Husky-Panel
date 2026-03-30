@@ -1,4 +1,12 @@
 {
     "cmake.sourceDirectory": "/home/marcus/Desktop/Repository/Public/husky-panel",
-    "C_Cpp.default.compilerPath": "/usr/sbin/gcc"
+    "C_Cpp.default.compilerPath": "/usr/sbin/gcc",
+    "qmlls.customImportPaths": [
+        "/home/marcus/Desktop/Repository/Public/husky-panel/build/qml",
+        "/home/marcus/Desktop/Repository/Public/husky-panel/res"
+    ],
+    "qt-official.qmlls.customImportPaths": [
+        "/home/marcus/Desktop/Repository/Public/husky-panel/build/qml",
+        "/home/marcus/Desktop/Repository/Public/husky-panel/res"
+    ]
 }

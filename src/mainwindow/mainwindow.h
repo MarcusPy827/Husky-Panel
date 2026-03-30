@@ -23,12 +23,9 @@
 #include <QHBoxLayout>
 
 #include "src/components/app_indicator/app_indicator.h"
-#include "src/components/app_drawer/app_drawer_btn.h"
-#include "src/components/krunner_btn/krunner_btn.h"
 #include "src/components/system_tray/system_tray.h"
 #include "src/components/wlan_indicator/wlan_indicator.h"
 #include "src/components/battery_indicator/battery_indicator.h"
-#include "src/components/clock_btn/clock_btn.h"
 #include "src/components/calendar/calendar.h"
 #include "src/theme_loader/theme_loader.h"
 
@@ -56,12 +53,9 @@ class MainWindow : public QWidget {
   QHBoxLayout * slot_right_ = nullptr;
 
   AppIndicator * app_indicator_ = nullptr;
-  AppDrawerBtn * app_drawer_btn_ = nullptr;
-  KRunnerBtn * krunner_btn_ = nullptr;
   SystemTray * system_tray_ = nullptr;
   WLANIndicator * wlan_indicator_ = nullptr;
   BatteryIndicator * battery_indicator_ = nullptr;
-  ClockBtn * clock_btn_ = nullptr;
   Calendar * calendar_ = nullptr;
   loader::ThemeLoader * theme_loader_ = nullptr;
 

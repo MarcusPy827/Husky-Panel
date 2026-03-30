@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,30 +15,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
-#define SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
+#ifndef SRC_INFO_SERVER_POWER_OPTIONS_POWER_OPTIONS_H_
+#define SRC_INFO_SERVER_POWER_OPTIONS_POWER_OPTIONS_H_
 
-#include <QString>
 #include <QObject>
 
 namespace panel {
 namespace backend {
 
-class UserInfo : public QObject {
+class PowerOptions : public QObject {
   Q_OBJECT
 
-  Q_PROPERTY(QString userName READ GetUserName CONSTANT)
-  Q_PROPERTY(QString avatarPath READ GetUserAvatarPath CONSTANT)
-
  public:
-  explicit UserInfo(QObject* parent = nullptr);
-  ~UserInfo() = default;
+  explicit PowerOptions(QObject* parent = nullptr);
+  ~PowerOptions() override = default;
 
-  static QString GetUserName();
-  static QString GetUserAvatarPath();
+  /* ---------- For backend useage ---------- */
+  void Suspend();
+  void Hibernate();
+  void Reboot();
+  void PowerOff();
+
+  /* ---------- For QML useage ---------- */
+  Q_INVOKABLE void suspend();
+  Q_INVOKABLE void hibernate();
+  Q_INVOKABLE void reboot();
+  Q_INVOKABLE void powerOff();
+
+ private:
+  void CallLogind(const QString& method);
 };
 
 }  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
+#endif  // SRC_INFO_SERVER_POWER_OPTIONS_POWER_OPTIONS_H_

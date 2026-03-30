@@ -11,3 +11,9 @@ lib/3rdparty/layershell-qt/.reuse/*
 # CI Pipelines
 ci_build/*
 !ci_build/README.md
+
+# QML Config
+.qmlls.ini
+
+# IDE Config
+.vscode/settings.json

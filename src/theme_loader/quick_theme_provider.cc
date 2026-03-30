@@ -55,10 +55,6 @@ void QuickThemeProvider::RefreshTheme() {
         highlight_color, utils::ColorSchemeType::kTonalSpot, true);
     if (WriteSchemeForStatusBar(*temp_dark_scheme) == 0) {
       WriteScheme(*scheme_gen);
-      // Status bar always has a dark background; use dark scheme's on_surface
-      // so text contrasts correctly (light text on dark background).
-      on_surface_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
-        temp_dark_scheme->GetOnSurface()));
     }
   } else {
     if (WriteSchemeForStatusBar(*scheme_gen) == 0) {
@@ -73,15 +69,29 @@ void QuickThemeProvider::WriteScheme(const
     scheme.GetPrimary()));
   surface_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetSurfaceContainer()));
-  on_surface_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+  surface_fg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetOnSurface()));
 
   QColor state_layer_base = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetOnSurfaceVariant()));
-  state_layer_hover_ = QColor(utils::Colors::ApplyOpacityToHexColor(
-    state_layer_base.name(), 0.08f));
-  state_layer_pressed_ = QColor(utils::Colors::ApplyOpacityToHexColor(
-    state_layer_base.name(), 0.10f));
+  state_layer_hover_ = state_layer_base;
+  state_layer_hover_.setAlphaF(0.08f);
+  state_layer_pressed_ = state_layer_base;
+  state_layer_pressed_.setAlphaF(0.10f);
+
+  surface_bg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSurface()));
+  surface_container_low_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSurfaceContainerLow()));
+  surface_variant_fg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetOnSurfaceVariant()));
+  primary_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetPrimaryContainer()));
+  secondary_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSecondaryContainer()));
+  secondary_container_fg_ = QColor(
+    utils::ColorPaletteWrapper::Argb2Hex(
+      scheme.GetOnSecondaryContainer()));
 
   emit SchemeUpdated();
 }
@@ -96,10 +106,10 @@ int QuickThemeProvider::WriteSchemeForStatusBar(const
     scheme.GetOnSurface()));
   QColor state_layer_base = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetOnSurfaceVariant()));
-  status_bar_state_layer_hover_ = QColor(utils::Colors::ApplyOpacityToHexColor(
-    state_layer_base.name(), 0.08f));
-  status_bar_state_layer_pressed_ = QColor(utils::Colors::ApplyOpacityToHexColor(
-    state_layer_base.name(), 0.10f));
+  status_bar_state_layer_hover_ = state_layer_base;
+  status_bar_state_layer_hover_.setAlphaF(0.08f);
+  status_bar_state_layer_pressed_ = state_layer_base;
+  status_bar_state_layer_pressed_.setAlphaF(0.10f);
   return 0;
 }
 
@@ -131,8 +141,8 @@ const QColor QuickThemeProvider::GetSurfaceContainer() {
   return surface_container_;
 }
 
-const QColor QuickThemeProvider::GetOnSurface() {
-  return on_surface_;
+const QColor QuickThemeProvider::GetSurfaceFg() {
+  return surface_fg_;
 }
 
 const QColor QuickThemeProvider::GetStateLayerHover() {
@@ -141,6 +151,30 @@ const QColor QuickThemeProvider::GetStateLayerHover() {
 
 const QColor QuickThemeProvider::GetStateLayerPressed() {
   return state_layer_pressed_;
+}
+
+const QColor QuickThemeProvider::GetSurfaceBg() {
+  return surface_bg_;
+}
+
+const QColor QuickThemeProvider::GetSurfaceContainerLow() {
+  return surface_container_low_;
+}
+
+const QColor QuickThemeProvider::GetSurfaceVariantFg() {
+  return surface_variant_fg_;
+}
+
+const QColor QuickThemeProvider::GetPrimaryContainer() {
+  return primary_container_;
+}
+
+const QColor QuickThemeProvider::GetSecondaryContainer() {
+  return secondary_container_;
+}
+
+const QColor QuickThemeProvider::GetSecondaryContainerFg() {
+  return secondary_container_fg_;
 }
 
 }  // namespace loader

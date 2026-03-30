@@ -51,13 +51,31 @@ class QuickThemeProvider : public QObject {
     READ GetSurfaceContainer
     NOTIFY SchemeUpdated)
   Q_PROPERTY(QColor surface_fg
-    READ GetOnSurface
+    READ GetSurfaceFg
     NOTIFY SchemeUpdated)
   Q_PROPERTY(QColor state_layer_hover
     READ GetStateLayerHover
     NOTIFY SchemeUpdated)
   Q_PROPERTY(QColor state_layer_pressed
     READ GetStateLayerPressed
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor surface_bg
+    READ GetSurfaceBg
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor surface_container_low
+    READ GetSurfaceContainerLow
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor surface_variant_fg
+    READ GetSurfaceVariantFg
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor primary_container
+    READ GetPrimaryContainer
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor secondary_container
+    READ GetSecondaryContainer
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor secondary_container_fg
+    READ GetSecondaryContainerFg
     NOTIFY SchemeUpdated)
 
  public:
@@ -72,10 +90,16 @@ class QuickThemeProvider : public QObject {
   const QColor GetStatusBarStateLayerPressed();
   const QColor GetPrimary();
   const QColor GetSurfaceContainer();
-  const QColor GetOnSurface();
+  const QColor GetSurfaceFg();
   const QColor GetStateLayerHover();
   const QColor GetStateLayerPressed();
-  
+  const QColor GetSurfaceBg();
+  const QColor GetSurfaceContainerLow();
+  const QColor GetSurfaceVariantFg();
+  const QColor GetPrimaryContainer();
+  const QColor GetSecondaryContainer();
+  const QColor GetSecondaryContainerFg();
+
  private:
   QColor status_bar_bg_;
   QColor status_bar_primary_;
@@ -84,9 +108,15 @@ class QuickThemeProvider : public QObject {
   QColor status_bar_state_layer_pressed_;
   QColor primary_;
   QColor surface_container_;
-  QColor on_surface_;
+  QColor surface_fg_;
   QColor state_layer_hover_;
   QColor state_layer_pressed_;
+  QColor surface_bg_;
+  QColor surface_container_low_;
+  QColor surface_variant_fg_;
+  QColor primary_container_;
+  QColor secondary_container_;
+  QColor secondary_container_fg_;
 
   void WriteScheme(const material_color_utilities::DynamicScheme & scheme);
   int WriteSchemeForStatusBar(
