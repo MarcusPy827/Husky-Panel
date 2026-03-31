@@ -25,5 +25,6 @@
         <file>HuskyPanel/qmldir</file>
         <file>HuskyPanel/Theme.qmltypes</file>
         <file>interfaces/krunner_btn/KRunnerBtn.qml</file>
+         <file>interfaces/clock_btn/ClockBtn.qml</file>
     </qresource>
 </RCC>

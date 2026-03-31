@@ -23,6 +23,7 @@ import QtQuick.Window
 
 import "app_drawer"
 import "app_indicator"
+import "clock_btn"
 import "krunner_btn"
 
 Window {
@@ -382,6 +383,11 @@ Window {
         RowLayout {
           spacing: 4
           Layout.alignment: Qt.AlignVCenter
+
+          // Clock button
+          ClockBtn {
+            onClicked: ClockProvider.toggleCalendar()
+          }
         }
       }
     }

@@ -53,6 +53,9 @@ QString UserInfo::GetUserName() {
       result = name_read.toString();
       qInfo() << "[ OK ] User Info: Successfully got user display name from"
         << "D-Bus.";
+      LOG(INFO) << absl::StrCat(absl::StrFormat(
+        "Successfully got user display name from D-Bus: %s.",
+        result.toStdString()));
       return result;
     }
   }

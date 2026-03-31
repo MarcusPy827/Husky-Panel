@@ -27,6 +27,8 @@
 #include <QtQml>
 #include <QWindow>
 
+#include "absl/log/initialize.h"
+#include "absl/log/globals.h"
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 #include "absl/strings/str_format.h"
@@ -36,6 +38,7 @@
 #include "src/font_loader/font_loader.h"
 #include "src/components/app_drawer/app_info_wrapper.h"
 #include "src/components/app_drawer/app_launcher.h"
+#include "src/components/clock_btn/clock_btn.h"
 #include "src/components/krunner_btn/krunner_btn.h"
 #include "src/info_server/power_options/power_options.h"
 #include "src/info_server/session_handler/session_handler.h"
@@ -124,6 +127,11 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("CurrentWindow", current_window);
   LOG(INFO) << absl::StrCat("Successfully injected app indicator!!");
 
+  LOG(INFO) << absl::StrCat("Initializing clock button...");
+  auto* clock_btn = new panel::frontend::ClockBtn(nullptr, &application);
+  target.rootContext()->setContextProperty("ClockProvider", clock_btn);
+  LOG(INFO) << absl::StrCat("Successfully injected clock button!!");
+
   LOG(INFO) << absl::StrCat("Initializing KRunner toggler...");
   auto* krunner_btn = new panel::frontend::KRunnerBtn(&application);
   target.rootContext()->setContextProperty("KRunnerToggler", krunner_btn);
@@ -176,6 +184,10 @@ void LoadIconFonts() {
 }
 
 int main(int argc, char *argv[]) {
+  // Initialize logging
+  absl::InitializeLog();
+  absl::SetMinLogLevel(absl::LogSeverityAtLeast::kInfo);
+
   LOG(INFO) << absl::StrCat("Initializing SNI types...");
   panel::backend::InitSystemTrayTypes();
 
@@ -203,7 +215,8 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  LOG(INFO) << absl::StrCat("Now setting up layer shell for the panel window...");
+  LOG(INFO) << absl::StrCat(
+    "Now setting up layer shell for the panel window...");
   QObject* root = engine.rootObjects().first();
   QQuickWindow* window = qobject_cast<QQuickWindow*>(root);
   if (window) {

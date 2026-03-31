@@ -18,33 +18,35 @@
 #ifndef SRC_COMPONENTS_CLOCK_BTN_CLOCK_BTN_H_
 #define SRC_COMPONENTS_CLOCK_BTN_CLOCK_BTN_H_
 
-#include <memory>
-#include <QWidget>
-#include <QPushButton>
+#include <QString>
+#include <QObject>
 
 #include "src/info_server/clock/clock.h"
 #include "src/components/calendar/calendar.h"
-#include "src/translation_loader/translation_loader.h"
 
 namespace panel {
 namespace frontend {
 
-class ClockBtn : public QWidget {
+class ClockBtn : public QObject {
   Q_OBJECT
 
+  Q_PROPERTY(QString clock_text READ GetClockText NOTIFY ClockTextChanged)
+
  public:
-  explicit ClockBtn(Calendar * calandar_in, QWidget *parent = nullptr);
-  ~ClockBtn();
-  QPushButton * GetBtn();
+  explicit ClockBtn(Calendar * calendar_in, QObject *parent = nullptr);
+  ~ClockBtn() = default;
+
+  QString GetClockText() const;
+
+  /* ---------- For QML usage ---------- */
+  Q_INVOKABLE void toggleCalendar();
+
+ signals:
+  void ClockTextChanged();
 
  private:
-  QPushButton * btn_ = nullptr;
-  backend::Clock * clock_updater_ = nullptr;
+  backend::Clock * clock_ = nullptr;
   Calendar * calendar_ = nullptr;
-  loader::TranslationLoader * translator_ = nullptr;
-
- private slots:
-  void ToggleCalendar();
 };
 
 }  // namespace frontend
