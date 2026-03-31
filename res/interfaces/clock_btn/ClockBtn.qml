@@ -107,6 +107,7 @@ Rectangle {
       text: ClockProvider.clock_text
       color: Theme.status_bar_surface_fg
       font.pixelSize: 16
+      font.bold: true
       Layout.alignment: Qt.AlignLeft
     }
   }

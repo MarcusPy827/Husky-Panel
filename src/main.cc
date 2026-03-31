@@ -46,6 +46,8 @@
 #include "src/info_server/session_handler/session_handler.h"
 #include "src/info_server/user_info/user_info.h"
 #include "src/info_server/tray_handler/tray_def.h"
+#include "src/components/system_tray/system_tray_handler.h"
+#include "src/components/system_tray/tray_icon_image_handler.h"
 #include "src/theme_loader/quick_theme_provider.h"
 #include "src/translation_loader/translation_loader.h"
 #include "src/utils/misc/misc.h"
@@ -148,6 +150,13 @@ void InjectEngineContext(QGuiApplication& application,
   auto* wlan_indicator = new panel::frontend::WLANIndicator(&application);
   target.rootContext()->setContextProperty("WLANProvider", wlan_indicator);
   LOG(INFO) << absl::StrCat("Successfully injected WLAN indicator!!");
+
+  LOG(INFO) << absl::StrCat("Initializing system tray handler...");
+  auto* tray_handler = new panel::frontend::SystemTrayHandler(&application);
+  target.rootContext()->setContextProperty("TrayHandler", tray_handler);
+  target.addImageProvider("trayicon",
+    new panel::frontend::TrayIconImageHandler(tray_handler));
+  LOG(INFO) << absl::StrCat("Successfully injected system tray handler!!");
 }
 
 void InjectImageProviders(QQmlApplicationEngine& target) {
@@ -204,7 +213,7 @@ int main(int argc, char *argv[]) {
   panel::backend::InitSystemTrayTypes();
 
   LOG(INFO) << absl::StrCat("Now initializing panel...");
-  QGuiApplication a(argc, argv);
+  QApplication a(argc, argv);
   InitializedDepreciatedTranslator(a);
 
   LOG(INFO) << absl::StrCat("Loading fonts...");

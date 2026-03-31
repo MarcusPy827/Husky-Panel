@@ -27,6 +27,7 @@ import "battery_indicator"
 import "clock_btn"
 import "krunner_btn"
 import "wlan_indicator"
+import "system_tray"
 
 Window {
   id: root
@@ -386,6 +387,9 @@ Window {
         RowLayout {
           spacing: 4
           Layout.alignment: Qt.AlignVCenter
+
+          // System tray
+          SystemTray {}
 
           // WLAN indicator
           WLANIndicator {}
