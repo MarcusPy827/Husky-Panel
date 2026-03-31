@@ -18,25 +18,32 @@
 #ifndef SRC_COMPONENTS_WLAN_INDICATOR_WLAN_INDICATOR_H_
 #define SRC_COMPONENTS_WLAN_INDICATOR_WLAN_INDICATOR_H_
 
-#include <QWidget>
-#include <QPushButton>
+#include <QObject>
+#include <QString>
+
+#include "src/info_server/wlan_info/wlan_info.h"
 
 namespace panel {
 namespace frontend {
 
-class WLANIndicator : public QWidget {
+class WLANIndicator : public QObject {
   Q_OBJECT
 
+  Q_PROPERTY(QString wlan_icon
+    READ GetWlanIcon
+    NOTIFY WlanStatusChanged)
+
  public:
-  explicit WLANIndicator(QWidget *parent = nullptr);
-  ~WLANIndicator();
-  QPushButton * GetBtn();
+  explicit WLANIndicator(QObject *parent = nullptr);
+  ~WLANIndicator() = default;
+
+  QString GetWlanIcon() const;
+
+ signals:
+  void WlanStatusChanged();
 
  private:
-  QPushButton * btn_ = nullptr;
-
- public slots:
-  void UpdateWLANStrength();
+  backend::WlanInfo * wlan_info_ = nullptr;
 };
 
 }  // namespace frontend

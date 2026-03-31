@@ -36,6 +36,7 @@
 
 #include "src/components/app_indicator/app_indicator.h"
 #include "src/components/battery_indicator/battery_indicator.h"
+#include "src/components/wlan_indicator/wlan_indicator.h"
 #include "src/font_loader/font_loader.h"
 #include "src/components/app_drawer/app_info_wrapper.h"
 #include "src/components/app_drawer/app_launcher.h"
@@ -142,6 +143,11 @@ void InjectEngineContext(QGuiApplication& application,
   auto* battery_indicator = new panel::frontend::BatteryIndicator(&application);
   target.rootContext()->setContextProperty("BatteryProvider", battery_indicator);
   LOG(INFO) << absl::StrCat("Successfully injected battery indicator!!");
+
+  LOG(INFO) << absl::StrCat("Initializing WLAN indicator...");
+  auto* wlan_indicator = new panel::frontend::WLANIndicator(&application);
+  target.rootContext()->setContextProperty("WLANProvider", wlan_indicator);
+  LOG(INFO) << absl::StrCat("Successfully injected WLAN indicator!!");
 }
 
 void InjectImageProviders(QQmlApplicationEngine& target) {

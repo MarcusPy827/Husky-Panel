@@ -679,9 +679,8 @@
         <translation type="vanished">时钟正在初始化</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cc" line="43"/>
         <source>Top Panel</source>
-        <translation>顶栏</translation>
+        <translation type="vanished">顶栏</translation>
     </message>
     <message>
         <source>Failed to get native window handle. Please check your session,</source>

@@ -124,8 +124,7 @@ set(MATERIAL_DESIGN_DEPS
 )
 
 set(WIDGET_SOURCES
-  src/mainwindow/mainwindow.cc
-  src/mainwindow/mainwindow.h
+  # SHouldn't be any here as we migrate to QML
 )
 
 set(UTIL_SOURCES
