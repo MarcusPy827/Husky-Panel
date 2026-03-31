@@ -23,6 +23,7 @@ import QtQuick.Window
 
 import "app_drawer"
 import "app_indicator"
+import "battery_indicator"
 import "clock_btn"
 import "krunner_btn"
 
@@ -373,6 +374,7 @@ Window {
 
         Item { Layout.fillWidth: true }
 
+        // Middle slot (reserved for future use)
         RowLayout {
           spacing: 4
           Layout.alignment: Qt.AlignVCenter
@@ -383,6 +385,9 @@ Window {
         RowLayout {
           spacing: 4
           Layout.alignment: Qt.AlignVCenter
+
+          // Battery indicator
+          BatteryIndicator {}
 
           // Clock button
           ClockBtn {

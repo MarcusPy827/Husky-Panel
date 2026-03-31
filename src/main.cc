@@ -35,6 +35,7 @@
 #include "absl/strings/str_cat.h"
 
 #include "src/components/app_indicator/app_indicator.h"
+#include "src/components/battery_indicator/battery_indicator.h"
 #include "src/font_loader/font_loader.h"
 #include "src/components/app_drawer/app_info_wrapper.h"
 #include "src/components/app_drawer/app_launcher.h"
@@ -136,6 +137,11 @@ void InjectEngineContext(QGuiApplication& application,
   auto* krunner_btn = new panel::frontend::KRunnerBtn(&application);
   target.rootContext()->setContextProperty("KRunnerToggler", krunner_btn);
   LOG(INFO) << absl::StrCat("Successfully injected KRunner toggler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing battery indicator...");
+  auto* battery_indicator = new panel::frontend::BatteryIndicator(&application);
+  target.rootContext()->setContextProperty("BatteryProvider", battery_indicator);
+  LOG(INFO) << absl::StrCat("Successfully injected battery indicator!!");
 }
 
 void InjectImageProviders(QQmlApplicationEngine& target) {

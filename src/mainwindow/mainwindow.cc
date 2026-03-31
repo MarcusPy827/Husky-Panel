@@ -160,8 +160,6 @@ void MainWindow::LoadRightSlot() {
 
   if (battery_indicator_ == nullptr) {
     LOG(INFO) << absl::StrCat("Now loading battery indicator...");
-    battery_indicator_ = new BatteryIndicator();
-    slot_right_->addWidget(battery_indicator_);
   }
 
   if (calendar_ == nullptr) {

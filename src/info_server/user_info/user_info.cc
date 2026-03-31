@@ -51,8 +51,6 @@ QString UserInfo::GetUserName() {
     QVariant name_read = interface.property("RealName");
     if (name_read.isValid() && !name_read.toString().isEmpty()) {
       result = name_read.toString();
-      qInfo() << "[ OK ] User Info: Successfully got user display name from"
-        << "D-Bus.";
       LOG(INFO) << absl::StrCat(absl::StrFormat(
         "Successfully got user display name from D-Bus: %s.",
         result.toStdString()));
