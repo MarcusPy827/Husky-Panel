@@ -24,6 +24,8 @@ Module {
     Property { name: "primary_container"; type: "color"; isReadonly: true }
     Property { name: "secondary_container"; type: "color"; isReadonly: true }
     Property { name: "secondary_container_fg"; type: "color"; isReadonly: true }
+    Property { name: "surface_container_lowest"; type: "color"; isReadonly: true }
+    Property { name: "surface_container_high"; type: "color"; isReadonly: true }
     Signal { name: "SchemeUpdated" }
   }
 }

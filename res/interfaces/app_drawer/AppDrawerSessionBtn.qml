@@ -29,14 +29,14 @@ Item {
 
   function closeMenu() { sessionMenu.close() }
 
-  ToolTip.text: qsTr("Session")
+  ToolTip.text: StatusBarTranslator.Tr("SessionOptions")
   ToolTip.visible: mouseArea.containsMouse && !sessionMenu.visible
   ToolTip.delay: 500
 
   Rectangle {
     id: bg
     anchors.fill: parent
-    radius: 24
+    radius: 12
     color: Theme.primary_container
 
     Rectangle {
@@ -59,8 +59,14 @@ Item {
         var ctx = getContext("2d");
         ctx.clearRect(0, 0, width, height);
         ctx.save();
+        var r = 12;
         ctx.beginPath();
-        ctx.arc(width / 2, height / 2, width / 2, 0, 2 * Math.PI);
+        ctx.moveTo(r, 0);
+        ctx.arcTo(width, 0, width, height, r);
+        ctx.arcTo(width, height, 0, height, r);
+        ctx.arcTo(0, height, 0, 0, r);
+        ctx.arcTo(0, 0, width, 0, r);
+        ctx.closePath();
         ctx.clip();
         var c = Theme.state_layer_pressed;
         ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0);

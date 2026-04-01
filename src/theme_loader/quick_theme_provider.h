@@ -77,6 +77,12 @@ class QuickThemeProvider : public QObject {
   Q_PROPERTY(QColor secondary_container_fg
     READ GetSecondaryContainerFg
     NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor surface_container_lowest
+    READ GetSurfaceContainerLowest
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor surface_container_high
+    READ GetSurfaceContainerHigh
+    NOTIFY SchemeUpdated)
 
  public:
   explicit QuickThemeProvider(QObject* parent = nullptr);
@@ -95,6 +101,8 @@ class QuickThemeProvider : public QObject {
   const QColor GetStateLayerPressed();
   const QColor GetSurfaceBg();
   const QColor GetSurfaceContainerLow();
+  const QColor GetSurfaceContainerLowest();
+  const QColor GetSurfaceContainerHigh();
   const QColor GetSurfaceVariantFg();
   const QColor GetPrimaryContainer();
   const QColor GetSecondaryContainer();
@@ -113,6 +121,8 @@ class QuickThemeProvider : public QObject {
   QColor state_layer_pressed_;
   QColor surface_bg_;
   QColor surface_container_low_;
+  QColor surface_container_lowest_;
+  QColor surface_container_high_;
   QColor surface_variant_fg_;
   QColor primary_container_;
   QColor secondary_container_;

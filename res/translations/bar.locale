@@ -30,6 +30,10 @@ en_us = "Reboot"
 zh_cn = "关机"
 en_us = "Power off"
 
+[Action_shut_down]
+zh_cn = "关机"
+en_us = "Power off"
+
 [Action_Lock]
 zh_cn = "锁定"
 en_us = "Lock"
@@ -40,11 +44,23 @@ en_us = "Lock"
 
 [Action_Log Out]
 zh_cn = "注销"
-en_us = "Logout"
+en_us = "Log out"
+
+[Action_logout]
+zh_cn = "注销"
+en_us = "Log out"
 
 [Action_Switch User]
 zh_cn = "切换用户"
 en_us = "Switch user"
+
+[Action_switch_user]
+zh_cn = "切换用户"
+en_us = "Switch user"
+
+[SessionOptions]
+zh_cn = "会话选项"
+en_us = "Session options"
 
 [Search]
 zh_cn = "搜索"

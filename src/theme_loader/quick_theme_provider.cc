@@ -83,6 +83,10 @@ void QuickThemeProvider::WriteScheme(const
     scheme.GetSurface()));
   surface_container_low_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetSurfaceContainerLow()));
+  surface_container_lowest_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSurfaceContainerLowest()));
+  surface_container_high_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSurfaceContainerHigh()));
   surface_variant_fg_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
     scheme.GetOnSurfaceVariant()));
   primary_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
@@ -159,6 +163,14 @@ const QColor QuickThemeProvider::GetSurfaceBg() {
 
 const QColor QuickThemeProvider::GetSurfaceContainerLow() {
   return surface_container_low_;
+}
+
+const QColor QuickThemeProvider::GetSurfaceContainerLowest() {
+  return surface_container_lowest_;
+}
+
+const QColor QuickThemeProvider::GetSurfaceContainerHigh() {
+  return surface_container_high_;
 }
 
 const QColor QuickThemeProvider::GetSurfaceVariantFg() {

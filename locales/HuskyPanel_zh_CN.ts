@@ -56,24 +56,20 @@
         <translation type="obsolete">工具</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="491"/>
         <source>Sleep</source>
-        <translation type="unfinished">睡眠</translation>
+        <translation type="obsolete">睡眠</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="492"/>
         <source>Hibernate</source>
-        <translation type="unfinished">休眠</translation>
+        <translation type="obsolete">休眠</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="493"/>
         <source>Reboot</source>
-        <translation type="unfinished">重启</translation>
+        <translation type="obsolete">重启</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="494"/>
         <source>Shut down</source>
-        <translation type="unfinished">关机</translation>
+        <translation type="obsolete">关机</translation>
     </message>
     <message>
         <source>Session</source>
@@ -90,28 +86,24 @@
 <context>
     <name>AppDrawerSessionBtn</name>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionBtn.qml" line="32"/>
         <source>Session</source>
-        <translation type="unfinished">会话选项</translation>
+        <translation type="obsolete">会话选项</translation>
     </message>
 </context>
 <context>
     <name>AppDrawerSessionMenu</name>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="110"/>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="128"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="129"/>
         <source>Lock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="186"/>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="204"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="206"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="264"/>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="282"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="285"/>
         <source>Switch User</source>
         <translation type="unfinished"></translation>
     </message>

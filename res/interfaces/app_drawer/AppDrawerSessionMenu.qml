@@ -105,9 +105,10 @@ Popup {
           text: "lock"
           color: Theme.surface_fg
         }
+
         Text {
           anchors.verticalCenter: parent.verticalCenter
-          text: qsTr("Lock")
+          text: StatusBarTranslator.Tr("Action_lock")
           font.pixelSize: 14
           color: Theme.surface_fg
         }
@@ -181,9 +182,10 @@ Popup {
           text: "logout"
           color: Theme.surface_fg
         }
+
         Text {
           anchors.verticalCenter: parent.verticalCenter
-          text: qsTr("Log Out")
+          text: StatusBarTranslator.Tr("Action_logout")
           font.pixelSize: 14
           color: Theme.surface_fg
         }
@@ -259,9 +261,10 @@ Popup {
           text: "switch_account"
           color: Theme.surface_fg
         }
+
         Text {
           anchors.verticalCenter: parent.verticalCenter
-          text: qsTr("Switch User")
+          text: StatusBarTranslator.Tr("Action_switch_user")
           font.pixelSize: 14
           color: Theme.surface_fg
         }

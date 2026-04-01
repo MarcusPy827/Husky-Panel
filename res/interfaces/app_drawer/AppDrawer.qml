@@ -157,64 +157,25 @@ Item {
           spacing: 8
 
           // Menu button
-          ToolButton {
-            id: menuBtn
-            font.family: "Material Symbols Rounded"
-            font.pixelSize: 24
-            text: "\ue5d2"  // "menu"
-            onClicked: root.sidePaneVisible = !root.sidePaneVisible
-
-            background: Rectangle { color: "transparent" }
-            contentItem: Text {
-              text: parent.text
-              font: parent.font
-              color: Theme.surface_variant_fg
-              horizontalAlignment: Text.AlignHCenter
-              verticalAlignment: Text.AlignVCenter
-            }
-          }
-
-          // Search bar
-          TextField {
-            id: searchBar
-            Layout.fillWidth: true
-            placeholderText: DrawerTranslator.Tr("SearchHere")
-            color: Theme.surface_variant_fg
-            placeholderTextColor: Qt.lighter(Theme.surface_variant_fg, 1.4)
-            font.pixelSize: 16
-
-            background: Rectangle {
-              color: "transparent"
-            }
-
-            onTextChanged: {
-              root.searchText = text;
-              if (text.length > 0 && root.currentCategoryId !== "search_apps") {
-                root.currentCategoryId = "search_apps";
-              }
-            }
-          }
-
-          // Search / clear icon button
           Item {
-            implicitWidth: 40
-            implicitHeight: 40
+            implicitWidth: 48
+            implicitHeight: 48
 
             Rectangle {
-              id: searchIconBg
+              id: menuBtnBg
               anchors.fill: parent
-              radius: 20
+              radius: 24
               color: "transparent"
 
               Rectangle {
-                id: searchIconStateLayer
+                id: menuBtnStateLayer
                 anchors.fill: parent
                 radius: parent.radius
                 color: "transparent"
               }
 
               Canvas {
-                id: searchIconRipple
+                id: menuBtnRipple
                 anchors.fill: parent
                 opacity: 0
 
@@ -241,17 +202,17 @@ Item {
                 onRippleRadiusChanged: requestPaint()
 
                 ParallelAnimation {
-                  id: searchIconRippleAnim
+                  id: menuBtnRippleAnim
                   NumberAnimation {
-                    target: searchIconRipple; property: "rippleRadius"
-                    from: 0; to: searchIconBg.width * 1.25
+                    target: menuBtnRipple; property: "rippleRadius"
+                    from: 0; to: menuBtnBg.width * 1.25
                     duration: 400; easing.type: Easing.OutCubic
                   }
                   SequentialAnimation {
-                    PropertyAction { target: searchIconRipple; property: "opacity"; value: 0.3 }
+                    PropertyAction { target: menuBtnRipple; property: "opacity"; value: 0.3 }
                     PauseAnimation { duration: 150 }
                     NumberAnimation {
-                      target: searchIconRipple; property: "opacity"
+                      target: menuBtnRipple; property: "opacity"
                       from: 0.3; to: 0
                       duration: 250; easing.type: Easing.OutCubic
                     }
@@ -264,7 +225,7 @@ Item {
               anchors.centerIn: parent
               font.family: "Material Symbols Rounded"
               font.pixelSize: 24
-              text: searchBar.text.length > 0 ? "close" : "search"
+              text: "\ue5d2"  // "menu"
               color: Theme.surface_variant_fg
               horizontalAlignment: Text.AlignHCenter
               verticalAlignment: Text.AlignVCenter
@@ -273,27 +234,235 @@ Item {
             MouseArea {
               anchors.fill: parent
               hoverEnabled: true
-              onEntered: searchIconStateLayer.color = Theme.state_layer_hover
-              onExited:  searchIconStateLayer.color = "transparent"
+              onEntered: menuBtnStateLayer.color = Theme.state_layer_hover
+              onExited:  menuBtnStateLayer.color = "transparent"
               onPressed: (mouse) => {
-                searchIconStateLayer.color = Theme.state_layer_pressed
-                searchIconRipple.centerX = mouse.x
-                searchIconRipple.centerY = mouse.y
-                searchIconRippleAnim.restart()
+                menuBtnStateLayer.color = Theme.state_layer_pressed
+                menuBtnRipple.centerX = mouse.x
+                menuBtnRipple.centerY = mouse.y
+                menuBtnRippleAnim.restart()
               }
-              onReleased: searchIconStateLayer.color =
+              onReleased: menuBtnStateLayer.color =
                 containsMouse ? Theme.state_layer_hover : "transparent"
-              onClicked: { if (searchBar.text.length > 0) searchBar.text = "" }
+              onClicked: root.sidePaneVisible = !root.sidePaneVisible
+            }
+          }
+
+          // Search bar
+          TextField {
+            id: searchBar
+            Layout.fillWidth: true
+            placeholderText: DrawerTranslator.Tr("SearchHere")
+            color: Theme.surface_variant_fg
+            placeholderTextColor: Qt.lighter(Theme.surface_variant_fg, 1.4)
+            font.pixelSize: 16
+            leftPadding: 24
+            rightPadding: 52  // room for icon inside
+
+            background: Rectangle {
+              color: Theme.surface_container_high
+              width: parent.width   // qmllint disable unqualified
+              height: 48
+              radius: 24
+              y: (parent.height - height) / 2  // qmllint disable unqualified
+
+              Rectangle {
+                id: searchBarStateLayer
+                anchors.fill: parent
+                radius: parent.radius
+                color: "transparent"
+              }
+
+              Canvas {
+                id: searchBarRipple
+                anchors.fill: parent
+                opacity: 0
+
+                property real centerX: width / 2
+                property real centerY: height / 2
+                property real rippleRadius: 0
+
+                onPaint: {
+                  var ctx = getContext("2d")
+                  ctx.clearRect(0, 0, width, height)
+                  ctx.save()
+                  // Clip to pill shape
+                  var r = 24
+                  ctx.beginPath()
+                  ctx.moveTo(r, 0)
+                  ctx.lineTo(width - r, 0)
+                  ctx.arcTo(width, 0, width, r, r)
+                  ctx.lineTo(width, height - r)
+                  ctx.arcTo(width, height, width - r, height, r)
+                  ctx.lineTo(r, height)
+                  ctx.arcTo(0, height, 0, height - r, r)
+                  ctx.lineTo(0, r)
+                  ctx.arcTo(0, 0, r, 0, r)
+                  ctx.closePath()
+                  ctx.clip()
+                  var c = Theme.state_layer_pressed
+                  ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
+                  ctx.beginPath()
+                  ctx.arc(centerX, centerY, rippleRadius, 0, 2 * Math.PI)
+                  ctx.fill()
+                  ctx.restore()
+                }
+
+                onOpacityChanged: requestPaint()
+                onRippleRadiusChanged: requestPaint()
+
+                ParallelAnimation {
+                  id: searchBarRippleAnim
+                  NumberAnimation {
+                    target: searchBarRipple; property: "rippleRadius"
+                    from: 0; to: searchBarRipple.width * 0.75
+                    duration: 400; easing.type: Easing.OutCubic
+                  }
+                  SequentialAnimation {
+                    PropertyAction { target: searchBarRipple; property: "opacity"; value: 0.3 }
+                    PauseAnimation { duration: 150 }
+                    NumberAnimation {
+                      target: searchBarRipple; property: "opacity"
+                      from: 0.3; to: 0
+                      duration: 250; easing.type: Easing.OutCubic
+                    }
+                  }
+                }
+              }
+            }
+
+            HoverHandler { id: searchBarHover }
+
+            TapHandler {
+              onActiveChanged: {
+                if (active) {
+                  searchBarStateLayer.color = Theme.state_layer_pressed
+                  // point.position is the press location in TextField coordinates
+                  var pos = point.position  // qmllint disable unqualified
+                  if (pos.x <= searchBar.width - 52) {  // qmllint disable unqualified
+                    var bgOffsetY = (searchBar.height - 48) / 2  // qmllint disable unqualified
+                    searchBarRipple.centerX = pos.x  // qmllint disable unqualified
+                    searchBarRipple.centerY = pos.y - bgOffsetY
+                    searchBarRippleAnim.restart()  // qmllint disable unqualified
+                  }
+                } else {
+                  searchBarStateLayer.color = searchBarHover.hovered  // qmllint disable unqualified
+                    ? Theme.state_layer_hover : "transparent"
+                }
+              }
+            }
+
+            // Search / clear icon pinned to the right end of the search bar
+            Item {
+              width: 40
+              height: 40
+              anchors.right: parent.right          // qmllint disable unqualified
+              anchors.rightMargin: 4
+              anchors.verticalCenter: parent.verticalCenter  // qmllint disable unqualified
+              z: 1
+
+              Rectangle {
+                id: searchIconBg
+                anchors.fill: parent
+                radius: 20
+                color: "transparent"
+
+                Rectangle {
+                  id: searchIconStateLayer
+                  anchors.fill: parent
+                  radius: parent.radius
+                  color: "transparent"
+                }
+
+                Canvas {
+                  id: searchIconRipple
+                  anchors.fill: parent
+                  opacity: 0
+
+                  property real centerX: parent.width / 2
+                  property real centerY: parent.height / 2
+                  property real rippleRadius: 0
+
+                  onPaint: {
+                    var ctx = getContext("2d")
+                    ctx.clearRect(0, 0, width, height)
+                    ctx.save()
+                    ctx.beginPath()
+                    ctx.arc(width / 2, height / 2, width / 2, 0, 2 * Math.PI)
+                    ctx.clip()
+                    var c = Theme.state_layer_pressed
+                    ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
+                    ctx.beginPath()
+                    ctx.arc(centerX, centerY, rippleRadius, 0, 2 * Math.PI)
+                    ctx.fill()
+                    ctx.restore()
+                  }
+
+                  onOpacityChanged: requestPaint()
+                  onRippleRadiusChanged: requestPaint()
+
+                  ParallelAnimation {
+                    id: searchIconRippleAnim
+                    NumberAnimation {
+                      target: searchIconRipple; property: "rippleRadius"
+                      from: 0; to: searchIconBg.width * 1.25
+                      duration: 400; easing.type: Easing.OutCubic
+                    }
+                    SequentialAnimation {
+                      PropertyAction { target: searchIconRipple; property: "opacity"; value: 0.3 }
+                      PauseAnimation { duration: 150 }
+                      NumberAnimation {
+                        target: searchIconRipple; property: "opacity"
+                        from: 0.3; to: 0
+                        duration: 250; easing.type: Easing.OutCubic
+                      }
+                    }
+                  }
+                }
+              }
+
+              Text {
+                anchors.centerIn: parent
+                font.family: "Material Symbols Rounded"
+                font.pixelSize: 24
+                text: searchBar.text.length > 0 ? "close" : "search"
+                color: Theme.surface_variant_fg
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+              }
+
+              MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: searchIconStateLayer.color = Theme.state_layer_hover
+                onExited:  searchIconStateLayer.color = "transparent"
+                onPressed: (mouse) => {
+                  searchIconStateLayer.color = Theme.state_layer_pressed
+                  searchIconRipple.centerX = mouse.x
+                  searchIconRipple.centerY = mouse.y
+                  searchIconRippleAnim.restart()
+                }
+                onReleased: searchIconStateLayer.color =
+                  containsMouse ? Theme.state_layer_hover : "transparent"
+                onClicked: { if (searchBar.text.length > 0) searchBar.text = "" }
+              }
+            }
+
+            onTextChanged: {
+              root.searchText = text;
+              if (text.length > 0 && root.currentCategoryId !== "search_apps") {
+                root.currentCategoryId = "search_apps";
+              }
             }
           }
 
           // Avatar button
           Image {
             id: avatarBtn
-            Layout.preferredWidth: 32
-            Layout.preferredHeight: 32
+            Layout.preferredWidth: 48
+            Layout.preferredHeight: 48
             source: "image://useravatar/"
-            sourceSize: Qt.size(32, 32)
+            sourceSize: Qt.size(48, 48)
             fillMode: Image.PreserveAspectFit
             smooth: true
 
@@ -488,10 +657,10 @@ Item {
 
           Repeater {
             model: [
-              { icon: "bedtime",             tooltip: qsTr("Sleep"),      action: "suspend" },
-              { icon: "ac_unit",             tooltip: qsTr("Hibernate"),  action: "hibernate" },
-              { icon: "restart_alt",         tooltip: qsTr("Reboot"),     action: "reboot" },
-              { icon: "power_settings_new",  tooltip: qsTr("Shut down"),  action: "powerOff" }
+              { icon: "bedtime", tooltip: StatusBarTranslator.Tr("Action_Sleep"), action: "suspend" },
+              { icon: "ac_unit", tooltip: StatusBarTranslator.Tr("Action_Hibernate"), action: "hibernate" },
+              { icon: "restart_alt", tooltip: StatusBarTranslator.Tr("Action_Reboot"), action: "reboot" },
+              { icon: "power_settings_new", tooltip: StatusBarTranslator.Tr("Action_shut_down"), action: "powerOff" }
             ]
 
             delegate: AppDrawerIconButton {
