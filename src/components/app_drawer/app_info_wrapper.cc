@@ -17,6 +17,8 @@
 
 #include <QVariantMap>
 
+#include <KSycoca>
+
 #include "absl/log/log.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_format.h"
@@ -42,11 +44,19 @@ static QVariantMap AppInfoToMap(const AppInfo& app) {
 }  // namespace
 
 AppInfoWrapper::AppInfoWrapper(QObject* parent) : QObject(parent) {
+  Refresh();
+  connect(KSycoca::self(), &KSycoca::databaseChanged, this,
+    &AppInfoWrapper::Refresh);
+}
+
+void AppInfoWrapper::Refresh() {
   const QList<AppInfo> apps = backend::ApplicationInfo::GetAllAppications();
+  all_apps_.clear();
   all_apps_.reserve(apps.size());
   for (const auto& app : apps) {
     all_apps_.append(AppInfoToMap(app));
   }
+  emit appsChanged();
 }
 
 QVariantList AppInfoWrapper::GetAllApps() const {

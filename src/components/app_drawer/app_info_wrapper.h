@@ -28,7 +28,7 @@ namespace frontend {
 class AppInfoWrapper : public QObject {
   Q_OBJECT
 
-  Q_PROPERTY(QVariantList allApps READ GetAllApps CONSTANT)
+  Q_PROPERTY(QVariantList allApps READ GetAllApps NOTIFY appsChanged)
 
  public:
   /* ---------- For backend usage ---------- */
@@ -37,6 +37,12 @@ class AppInfoWrapper : public QObject {
 
   /* ---------- For QML usage ---------- */
   Q_INVOKABLE QVariantList appsByCategory(const QString& category) const;
+
+ signals:
+  void appsChanged();
+
+ private slots:
+  void Refresh();
 
  private:
   QVariantList all_apps_;

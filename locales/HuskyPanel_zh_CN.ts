@@ -56,22 +56,22 @@
         <translation type="obsolete">工具</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="486"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="491"/>
         <source>Sleep</source>
         <translation type="unfinished">睡眠</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="487"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="492"/>
         <source>Hibernate</source>
         <translation type="unfinished">休眠</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="488"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="493"/>
         <source>Reboot</source>
         <translation type="unfinished">重启</translation>
     </message>
     <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="489"/>
+        <location filename="../res/interfaces/app_drawer/AppDrawer.qml" line="494"/>
         <source>Shut down</source>
         <translation type="unfinished">关机</translation>
     </message>

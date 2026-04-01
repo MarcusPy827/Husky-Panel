@@ -75,6 +75,11 @@ Item {
 
   property string currentCategoryId: "all_apps"
   property string searchText: ""
+
+  // Incremented whenever the app list refreshes; used by category bindings to re-evaluate.
+  property int appRevision: 0
+  readonly property var watchAllApps: typeof AppProvider !== "undefined" ? AppProvider.allApps : [] // qmllint disable unqualified
+  onWatchAllAppsChanged: appRevision++
   readonly property var categories: [
     { id: "all_apps", icon: "apps", label: DrawerTranslator.Tr("AllApps") },
     { id: "search_apps", icon: "search", label: DrawerTranslator.Tr("SearchApps") },
@@ -448,7 +453,7 @@ Item {
               delegate: AppDrawerGridPage {
                 appModel: {
                   var catKey = root.categoryKeyMap[modelData.id];
-                  if (typeof AppProvider !== "undefined" && catKey) {
+                  if (typeof AppProvider !== "undefined" && catKey && root.appRevision >= 0) { // qmllint disable unqualified
                     return AppProvider.appsByCategory(catKey);
                   }
                   return [];
