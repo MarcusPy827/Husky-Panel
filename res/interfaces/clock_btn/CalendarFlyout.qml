@@ -18,17 +18,27 @@
 
 pragma ComponentBehavior: Bound
 
-import QtQuick
-import QtQuick.Layouts
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 
 Item {
   id: root
   opacity: 0
   implicitHeight: layout.implicitHeight
 
+  Behavior on implicitHeight {
+    NumberAnimation {
+      duration: 200
+      easing.type: Easing.OutCubic
+    }
+  }
+
   readonly property int slideOffset: 24
   readonly property int headerH: 108
   readonly property int cellSize: 44
+  readonly property int _rowCount: Math.ceil(
+    ((new Date(_viewYear, _viewMonth, 1).getDay() + 6) % 7
+      + new Date(_viewYear, _viewMonth + 1, 0).getDate()) / 7)
 
   transform: Translate {
     id: slideTransform
@@ -357,7 +367,7 @@ Item {
         columnSpacing: 2; rowSpacing: 2
 
         Repeater {
-          model: 42
+          model: root._rowCount * 7
 
           delegate: Item {
             id: dayCell
