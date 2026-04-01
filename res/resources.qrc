@@ -1,15 +1,37 @@
-<!DOCTYPE RCC>
 <RCC>
-  <qresource prefix="/m3qw/fonts">
-    <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
-    <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
-    <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
-    <file>translations/bar.locale</file>
-  </qresource>
-  <qresource prefix="/translations">
-    <file>translations/HuskyPanel_zh_CN.qm</file>
-    <file>translations/bar.locale</file>
-    <file>translations/calendar.locale</file>
-    <file>translations/app_drawer.locale</file>
-  </qresource>
+    <qresource prefix="/m3qw/fonts">
+        <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
+        <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
+        <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
+        <file>translations/bar.locale</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file>translations/HuskyPanel_zh_CN.qm</file>
+        <file>translations/bar.locale</file>
+        <file>translations/calendar.locale</file>
+        <file>translations/app_drawer.locale</file>
+    </qresource>
+    <qresource prefix="/ui">
+        <file>interfaces/MainWindow.qml</file>
+        <file>interfaces/app_indicator/AppIndicator.qml</file>
+        <file>interfaces/app_drawer/AppDrawer.qml</file>
+        <file>interfaces/app_drawer/AppDrawerIconButton.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSidePaneItem.qml</file>
+        <file>interfaces/app_drawer/AppDrawerGridPage.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSearchPage.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSessionMenu.qml</file>
+        <file>interfaces/app_drawer/AppDrawerSessionBtn.qml</file>
+        <file>interfaces/app_drawer/AppsBtn.qml</file>
+        <file>HuskyPanel/qmldir</file>
+        <file>HuskyPanel/Theme.qmltypes</file>
+        <file>interfaces/krunner_btn/KRunnerBtn.qml</file>
+        <file>interfaces/clock_btn/qmldir</file>
+        <file>interfaces/clock_btn/ClockBtn.qml</file>
+        <file>interfaces/clock_btn/CalendarFlyout.qml</file>
+        <file>interfaces/battery_indicator/BatteryIndicator.qml</file>
+        <file>interfaces/wlan_indicator/WLANIndicator.qml</file>
+        <file>interfaces/system_tray/SystemTray.qml</file>
+        <file>interfaces/system_tray/SystemTrayIcon.qml</file>
+        <file>interfaces/system_tray/qmldir</file>
+    </qresource>
 </RCC>

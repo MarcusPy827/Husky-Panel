@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 MarcusPy827
+ * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +19,40 @@
 #define SRC_WLAN_INFO_WLAN_INFO_H_
 #define WI_WIFI_TYPE 2
 
+#include <QObject>
 #include <QString>
+#include <QStringList>
+#include <QVariantMap>
 
 namespace panel {
 namespace backend {
 
-class WlanInfo {
+class WlanInfo : public QObject {
+  Q_OBJECT
+
  public:
+  explicit WlanInfo(QObject* parent = nullptr);
+  ~WlanInfo() = default;
+
   static int GetWlanSignalStrength();
+
+ signals:
+  void WlanStatusChanged();
+
+ private:
+  QString wifi_device_path_;
+  QString active_ap_path_;
+
+  void FindAndSubscribeToWifiDevice();
+  void SubscribeToAp(const QString& ap_path);
+  void UnsubscribeFromAp(const QString& ap_path);
+
+ private slots:
+  void OnDevicePropertiesChanged(const QString& interface,
+    const QVariantMap& changed, const QStringList& invalidated);
+  void OnApPropertiesChanged(const QString& interface,
+    const QVariantMap& changed, const QStringList& invalidated);
+  void OnNmStateChanged(uint state);
 };
 
 }  // namespace backend

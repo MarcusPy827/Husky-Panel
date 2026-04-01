@@ -2,6 +2,66 @@
 zh_cn = "应用程序"
 en_us = "Applications"
 
+[ActionCannotBeUndone]
+zh_cn = "警告: 此操作无法撤销"
+en_us = "Warning: This action cannot be undone"
+
+[Cancel]
+zh_cn = "取消"
+en_us = "Cancel"
+
+[ConfirmAndExecute]
+zh_cn = "仍要执行"
+en_us = "Execute"
+
+[Action_Sleep]
+zh_cn = "挂起"
+en_us = "Sleep"
+
+[Action_Hibernate]
+zh_cn = "休眠"
+en_us = "Hibernate"
+
+[Action_Reboot]
+zh_cn = "重启"
+en_us = "Reboot"
+
+[Action_Shut down]
+zh_cn = "关机"
+en_us = "Power off"
+
+[Action_shut_down]
+zh_cn = "关机"
+en_us = "Power off"
+
+[Action_Lock]
+zh_cn = "锁定"
+en_us = "Lock"
+
+[Action_lock]
+zh_cn = "锁定"
+en_us = "Lock"
+
+[Action_Log Out]
+zh_cn = "注销"
+en_us = "Log out"
+
+[Action_logout]
+zh_cn = "注销"
+en_us = "Log out"
+
+[Action_Switch User]
+zh_cn = "切换用户"
+en_us = "Switch user"
+
+[Action_switch_user]
+zh_cn = "切换用户"
+en_us = "Switch user"
+
+[SessionOptions]
+zh_cn = "会话选项"
+en_us = "Session options"
+
 [Search]
 zh_cn = "搜索"
 en_us = "Search"
@@ -45,3 +105,31 @@ en_us = "Sat."
 [Sun]
 zh_cn = "星期日"
 en_us = "Sun."
+
+[M]
+zh_cn = "一"
+en_us = "M"
+
+[T]
+zh_cn = "二"
+en_us = "T"
+
+[W]
+zh_cn = "三"
+en_us = "W"
+
+[Th]
+zh_cn = "四"
+en_us = "Th"
+
+[F]
+zh_cn = "五"
+en_us = "F"
+
+[S]
+zh_cn = "六"
+en_us = "S"
+
+[Su]
+zh_cn = "日"
+en_us = "Su"

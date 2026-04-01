@@ -15,11 +15,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QGridLayout>
-#include <QVBoxLayout>
-#include <QSpacerItem>
-#include <QStackedWidget>
-
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 #include "absl/strings/str_format.h"
@@ -30,46 +25,35 @@
 namespace panel {
 namespace frontend {
 
-AppIndicator::AppIndicator(QWidget *parent) : QWidget(parent) {
-  QVBoxLayout * layout_gen = new QVBoxLayout();
-  layout_gen->setContentsMargins(0, 4, 0, 4);
-  layout_gen->setSpacing(0);
-  setLayout(layout_gen);
-
-  if (app_package_name_ == nullptr) {
-    app_package_name_ = new QLabel();
-    app_package_name_->setProperty("class", "app_indicator_package_name_desc");
-  }
-  layout_gen->addWidget(app_package_name_);
-
-  if (app_name_ == nullptr) {
-    app_name_ = new QLabel();
-    app_name_->setProperty("class", "app_indicator_app_name_desc");
-  }
-  layout_gen->addWidget(app_name_);
-
-  if (current_window_info_ == nullptr) {
-    current_window_info_ = backend::InitCurrentWindowInfoServer(this);
-    app_name_->setText(current_window_info_->GetApplicationName());
-    app_package_name_->setText(current_window_info_->GetPackageName());
-    connect(current_window_info_.get(), SIGNAL(CurrentWindowChanged()), this,
-      SLOT(OnCurrentWindowChanged()));
-  }
+AppIndicator::AppIndicator(QObject *parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("Initializing AppIndicator...");
+  current_window_info_ = backend::InitCurrentWindowInfoServer(this);
+  app_name_ = current_window_info_->GetApplicationName();
+  package_name_ = current_window_info_->GetPackageName();
+  connect(current_window_info_.get(),
+    &backend::CurrentWindowProvider::CurrentWindowChanged,
+    this, &AppIndicator::OnCurrentWindowChanged);
+  LOG(INFO) << absl::StrCat("AppIndicator should be up!!");
 }
 
 AppIndicator::~AppIndicator() {
-  if (current_window_info_ != nullptr) {
-    current_window_info_ = nullptr;
-  }
+  current_window_info_ = nullptr;
+  LOG(INFO) << absl::StrCat("AppIndicatorProvider is being deleted.");
+}
 
-  LOG(INFO) << absl::StrCat("AppIndicator is being deleted.");
+QString AppIndicator::GetAppName() const {
+  return app_name_;
+}
+
+QString AppIndicator::GetPackageName() const {
+  return package_name_;
 }
 
 void AppIndicator::OnCurrentWindowChanged() {
-  LOG(INFO) << absl::StrCat("Current window has been changed, ",
-    "updating AppIndicator labels...");
-  app_name_->setText(current_window_info_->GetApplicationName());
-  app_package_name_->setText(current_window_info_->GetPackageName());
+  LOG(INFO) << absl::StrCat("Current window changed, updating AppIndicator...");
+  app_name_ = current_window_info_->GetApplicationName();
+  package_name_ = current_window_info_->GetPackageName();
+  emit DataChanged();
 }
 
 }  // namespace frontend

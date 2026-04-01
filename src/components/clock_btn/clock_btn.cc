@@ -15,11 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QHBoxLayout>
-
 #include "absl/log/log.h"
-#include "absl/log/check.h"
-#include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
 #include "src/components/clock_btn/clock_btn.h"
@@ -27,59 +23,26 @@
 namespace panel {
 namespace frontend {
 
-ClockBtn::ClockBtn(Calendar * calandar_in, QWidget *parent) : QWidget(parent) {
-  QHBoxLayout * layout_gen = new QHBoxLayout();
-  layout_gen->setContentsMargins(0, 0, 0, 0);
-  layout_gen->setSpacing(0);
-  setLayout(layout_gen);
-
-  if (translator_ == nullptr) {
-    translator_ = new loader::TranslationLoader(
-      ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
-  }
-
-  if (btn_ == nullptr) {
-    btn_ = new QPushButton();
-    btn_->setProperty("class", "common_bar_btn");
-  }
-  
-  if (translator_ != nullptr) {
-    btn_->setText(translator_->GetTranslation("INITIALIZING CLOCK..."));
-  } else {
-    btn_->setText("INITIALIZING CLOCK...");
-  }
-
-  QObject::connect(btn_, &QPushButton::clicked, this,
-    &ClockBtn::ToggleCalendar);
-  layout_gen->addWidget(btn_);
-
+ClockBtn::ClockBtn(Calendar * calendar_in, QObject *parent) : QObject(parent) {
   LOG(INFO) << absl::StrCat("Initializing clock...");
-  if (clock_updater_ == nullptr) {
-    clock_updater_ = new backend::Clock(btn_);
-  }
+  clock_ = new backend::Clock(this);
+  connect(clock_, &backend::Clock::ClockTextChanged,
+    this, &ClockBtn::ClockTextChanged);
 
   LOG(INFO) << absl::StrCat("Initializing calendar...");
-  if (calandar_in == nullptr) {
+  if (calendar_in == nullptr) {
     LOG(ERROR) << absl::StrCat("Calendar widget is null pointer, calendar ",
       "widget will NOT show.");
   } else {
-    calendar_ = calandar_in;
+    calendar_ = calendar_in;
   }
 }
 
-ClockBtn::~ClockBtn() {
-  LOG(INFO) << absl::StrCat("ClockBtn is being deleted.");
+QString ClockBtn::GetClockText() const {
+  return clock_ ? clock_->GetClockText() : QString();
 }
 
-QPushButton* ClockBtn::GetBtn() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Clock button is a null pointer, except a ",
-      "nullptr passing in!");
-  }
-  return btn_;
-}
-
-void ClockBtn::ToggleCalendar() {
+void ClockBtn::toggleCalendar() {
   if (calendar_ == nullptr) {
     LOG(ERROR) << absl::StrCat(
       "Calendar widget is NOT initialized, aborting...");

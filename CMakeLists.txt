@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(HuskyPanel VERSION 0.1 LANGUAGES CXX)
+project(HuskyPanel VERSION 0.9.4 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -49,6 +49,7 @@ find_package(QT
   NAMES Qt6 
   REQUIRED COMPONENTS 
   Widgets 
+  Quick 
   LinguistTools
   WaylandClient
   DBus
@@ -62,6 +63,7 @@ find_package(
 find_package(Qt${QT_VERSION_MAJOR} 
   REQUIRED COMPONENTS 
   Widgets 
+  Quick 
   LinguistTools
   WaylandClient
   DBus
@@ -115,19 +117,26 @@ set(MATERIAL_DESIGN_DEPS
   src/theme_loader/theme_conf.h
   src/theme_loader/theme_loader.h
   src/theme_loader/theme_loader.cc
+  src/theme_loader/quick_theme_provider.h
+  src/theme_loader/quick_theme_provider.cc
   src/font_loader/font_loader.h
   src/font_loader/font_loader.cc
 )
 
 set(WIDGET_SOURCES
-  src/mainwindow/mainwindow.cc
-  src/mainwindow/mainwindow.h
+  # SHouldn't be any here as we migrate to QML
 )
 
 set(UTIL_SOURCES
   src/utils/dbus_def.h
   src/utils/misc/misc.h
   src/utils/misc/misc.cc
+  src/utils/xdg_icon_handler/xdg_icon_handler.h
+  src/utils/xdg_icon_handler/xdg_icon_handler.cc
+  src/utils/user_avatar_handler/user_avatar_handler.h
+  src/utils/user_avatar_handler/user_avatar_handler.cc
+  src/utils/layer_shell_helper/layer_shell_helper.h
+  src/utils/layer_shell_helper/layer_shell_helper.cc
 )
 
 set(BACKEND_SOURCES
@@ -153,35 +162,33 @@ set(BACKEND_SOURCES
   src/info_server/tray_handler/tray_handler.cc
   src/info_server/application_info/application_info.h
   src/info_server/application_info/application_info.cc
+  src/info_server/power_options/power_options.h
+  src/info_server/power_options/power_options.cc
+  src/info_server/session_handler/session_handler.h
+  src/info_server/session_handler/session_handler.cc
 )
 
 set(FRONTEND_SOURCES
-  src/components/app_indicator/app_indicator_style.h
   src/components/app_indicator/app_indicator.h
   src/components/app_indicator/app_indicator.cc
   src/components/clock_btn/clock_btn.h
   src/components/clock_btn/clock_btn.cc
-  src/components/app_drawer/app_drawer_btn.h
-  src/components/app_drawer/app_drawer_btn.cc
-  src/components/app_drawer/app_drawer_side_pane_item.h
-  src/components/app_drawer/app_drawer_side_pane_item.cc
-  src/components/app_drawer/app_drawer_style.h
-  src/components/app_drawer/app_drawer.h
-  src/components/app_drawer/app_drawer.cc
-  src/components/app_drawer/app_drawer_item.h
-  src/components/app_drawer/app_drawer_item.cc
-  src/components/app_drawer/app_drawer_search_item.h
-  src/components/app_drawer/app_drawer_search_item.cc
+  src/components/app_drawer/app_info_wrapper.h
+  src/components/app_drawer/app_info_wrapper.cc
+  src/components/app_drawer/app_launcher.h
+  src/components/app_drawer/app_launcher.cc
   src/components/krunner_btn/krunner_btn.h
   src/components/krunner_btn/krunner_btn.cc
   src/components/battery_indicator/battery_indicator.h
   src/components/battery_indicator/battery_indicator.cc
   src/components/wlan_indicator/wlan_indicator.h
   src/components/wlan_indicator/wlan_indicator.cc
-  src/components/system_tray/system_tray.h
-  src/components/system_tray/system_tray.cc
-  src/components/system_tray/system_tray_icon_render.h
-  src/components/system_tray/system_tray_icon_render.cc
+  src/components/system_tray/tray_icon_item.h
+  src/components/system_tray/tray_icon_item.cc
+  src/components/system_tray/system_tray_handler.h
+  src/components/system_tray/system_tray_handler.cc
+  src/components/system_tray/tray_icon_image_handler.h
+  src/components/system_tray/tray_icon_image_handler.cc
   src/components/calendar/calendar_style.h
   src/components/calendar/calendar.h
   src/components/calendar/calendar.cc
@@ -303,6 +310,7 @@ target_link_libraries(HuskyPanel
   -Wl,-Bdynamic
   ${SYSTEM_DYNAMIC_SWITCHABLE_LIBS}
   Qt${QT_VERSION_MAJOR}::Widgets
+  Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
@@ -347,7 +355,8 @@ if(BUILD_TESTING)
     src/utils/color_palette_wrapper/color_palette_wrapper_test.cc
   )
   target_link_libraries(HuskyPanelTest PRIVATE
-    Qt${QT_VERSION_MAJOR}::Widgets 
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Quick
     QWindowKit::Widgets
     absl::base
     absl::log

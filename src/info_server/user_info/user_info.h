@@ -19,12 +19,21 @@
 #define SRC_INFO_SERVER_USER_INFO_USER_INFO_H_
 
 #include <QString>
+#include <QObject>
 
 namespace panel {
 namespace backend {
 
-class UserInfo {
+class UserInfo : public QObject {
+  Q_OBJECT
+
+  Q_PROPERTY(QString userName READ GetUserName CONSTANT)
+  Q_PROPERTY(QString avatarPath READ GetUserAvatarPath CONSTANT)
+
  public:
+  explicit UserInfo(QObject* parent = nullptr);
+  ~UserInfo() = default;
+
   static QString GetUserName();
   static QString GetUserAvatarPath();
 };
@@ -32,4 +41,4 @@ class UserInfo {
 }  // namespace backend
 }  // namespace panel
 
-#endif  // SRC_USER_INFO_USER_INFO_H_
+#endif  // SRC_INFO_SERVER_USER_INFO_USER_INFO_H_

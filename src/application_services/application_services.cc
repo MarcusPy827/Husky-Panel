@@ -17,12 +17,16 @@
 
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <QDebug>
 #include <QFile>
 #include <QDir>
 #include <sys/types.h>
 #include <unistd.h>
 #include <pwd.h>
+
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
 
 #include "src/application_services/application_services.h"
 #include "src/utils/dbus_def.h"
@@ -35,17 +39,17 @@ void ApplicationServices::GetKRunner() {
     DBUS_KRUNNER_APP_INTERFACE, QDBusConnection::sessionBus());
 
   if (!interface.isValid()) {
-    qWarning() << "[WARN] Application services: Failed to connect to KRunner"
-      << "via D-Bus, doing nothing...";
+    LOG(WARNING) << absl::StrCat("Failed to connect to KRunner via D-Bus. ",
+      "Is KRunner running? Doing nothing...");
     return;
   }
 
   QDBusReply<void> reply = interface.call("toggleDisplay");
   if (reply.isValid()) {
-    qInfo() << "[ OK ] Application services: Successfully triggered KRunner!";
+    LOG(INFO) << absl::StrCat("Successfully triggered KRunner via D-Bus!");
   } else {
-    qCritical() << "[ERROR] Application services: Failed to trigger"
-      << "KRunner:" << reply.error().message();
+    LOG(ERROR) << absl::StrCat("Failed to trigger KRunner:",
+      reply.error().message().toStdString());
   }
 }
 

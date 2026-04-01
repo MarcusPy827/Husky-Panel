@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------
+# GitHub Actions — Build Arch Linux package (.pkg.tar.zst)
+# ---------------------------------------------------------------
+
+name: Build Arch Package
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-arch-pkg:
+    name: Arch Linux (.pkg.tar.zst)
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+
+    steps:
+      - name: Install base dependencies
+        run: |
+          pacman -Syu --noconfirm --needed
+          pacman -S --noconfirm --needed base-devel git
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build package with makepkg
+        run: |
+          useradd -m builder
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+          runuser -u builder -- bash -lc "cd '$GITHUB_WORKSPACE/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: husky-panel-arch-pkg
+          path: |
+            packages/*.pkg.tar.zst
+            packages/*.pkg.tar.zst.sig
+          if-no-files-found: error
+          retention-days: 30

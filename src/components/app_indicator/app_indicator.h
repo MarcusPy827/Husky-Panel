@@ -18,9 +18,10 @@
 #ifndef SRC_COMPONENTS_APP_INDICATOR_APP_INDICATOR_H_
 #define SRC_COMPONENTS_APP_INDICATOR_APP_INDICATOR_H_
 
+#include <QString>
+#include <QObject>
+
 #include <memory>
-#include <QWidget>
-#include <QLabel>
 
 #include "src/info_server/current_window/current_window_provider_factory.h"
 #include "src/info_server/current_window/current_window_provider.h"
@@ -28,21 +29,35 @@
 namespace panel {
 namespace frontend {
 
-class AppIndicator : public QWidget {
+class AppIndicator : public QObject {
   Q_OBJECT
 
+  Q_PROPERTY(QString app_name
+    READ GetAppName
+    NOTIFY DataChanged)
+  Q_PROPERTY(QString package_name
+    READ GetPackageName
+    NOTIFY DataChanged)
+
+
  public:
-  explicit AppIndicator(QWidget *parent = nullptr);
+  explicit AppIndicator(QObject *parent = nullptr);
   ~AppIndicator();
 
+  QString GetAppName() const;
+  QString GetPackageName() const;
+
  private:
-  QLabel * app_name_ = nullptr;
-  QLabel * app_package_name_ = nullptr;
+  QString app_name_;
+  QString package_name_;
   std::unique_ptr<backend::CurrentWindowProvider>
     current_window_info_ = nullptr;
 
  private slots:
   void OnCurrentWindowChanged();
+
+ signals:
+  void DataChanged();
 };
 
 }  // namespace frontend

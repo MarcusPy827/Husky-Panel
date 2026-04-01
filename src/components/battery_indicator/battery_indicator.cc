@@ -15,117 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QHBoxLayout>
-#include <QTimer>
-
 #include "absl/log/log.h"
-#include "absl/log/check.h"
-#include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
 #include "src/components/battery_indicator/battery_indicator.h"
-#include "src/font_loader/font_loader.h"
-#include "src/info_server/battery_info/battery_info.h"
 
 namespace panel {
 namespace frontend {
 
-BatteryIndicator::BatteryIndicator(QWidget *parent) : QWidget(parent) {
-  QHBoxLayout * layout_gen = new QHBoxLayout();
-  layout_gen->setContentsMargins(0, 0, 0, 0);
-  layout_gen->setSpacing(0);
-  setLayout(layout_gen);
-
-  if (btn_ == nullptr) {
-    btn_ = new QPushButton();
-    btn_->setProperty("class", "common_bar_icon_btn");
-  }
-  btn_->setText("battery_android_frame_question");
-  btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
-  layout_gen->addWidget(btn_);
-
-  if (charging_indicator_ == nullptr) {
-    charging_indicator_ = new QPushButton();
-    charging_indicator_->setProperty("class",
-      "common_bar_extra_small_icon_btn");
-    charging_indicator_->setVisible(false);
-    charging_indicator_->setFont(
-      loader::FontLoader::GetRoundedMaterialSymbolFont());
-    charging_indicator_->setText("bolt");
-  }
-  layout_gen->addWidget(charging_indicator_);
-
-  if (battery_info_ == nullptr) {
-    LOG(INFO) << absl::StrCat("Initializing battery Info Server...");
-    battery_info_ = new backend::BatteryInfo();
-  }
-  QObject::connect(battery_info_, &backend::BatteryInfo::StatusChanged, this,
-    &BatteryIndicator::UpdateBatteryStatus);
-  UpdateBatteryStatus();
+BatteryIndicator::BatteryIndicator(QObject *parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("Initializing battery indicator...");
+  battery_info_ = new backend::BatteryInfo();
+  connect(battery_info_, &backend::BatteryInfo::StatusChanged,
+    this, &BatteryIndicator::BatteryStatusChanged);
 }
 
-BatteryIndicator::~BatteryIndicator() {
-  LOG(INFO) << absl::StrCat("Battery indicator is being deleted.");
+QString BatteryIndicator::GetBatteryIcon() const {
+  int level = backend::BatteryInfo::GetBatteryLevel();
+  switch (level) {
+    case 0 ... 20:  return QStringLiteral("battery_android_alert");
+    case 21 ... 30: return QStringLiteral("battery_android_frame_2");
+    case 31 ... 40: return QStringLiteral("battery_android_frame_3");
+    case 41 ... 50: return QStringLiteral("battery_android_frame_4");
+    case 51 ... 75: return QStringLiteral("battery_android_frame_5");
+    case 76 ... 90: return QStringLiteral("battery_android_frame_6");
+    case 91 ... 100: return QStringLiteral("battery_android_full");
+    default:        return QStringLiteral("battery_android_frame_question");
+  }
 }
 
-QPushButton* BatteryIndicator::GetBtn() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Battery indicator button is a null pointer! ",
-      "Except a nullptr passing in!");
-  }
-  return btn_;
-}
-
-void BatteryIndicator::UpdateBatteryStatus() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Battery indicator button is a null pointer! ",
-      "Skipping updating icons...");
-    return;
-  }
-
-  int battery_level = backend::BatteryInfo::GetBatteryLevel();
-  bool is_charging = backend::BatteryInfo::GetIsCharging();
-  QString battery_icon_name = "battery_android_frame_";
-  switch (battery_level) {
-    case 0 ... 20:
-      battery_icon_name = "battery_android_alert";
-      break;
-
-    case 21 ... 30:
-      battery_icon_name += "2";
-      break;
-
-    case 31 ... 40:
-      battery_icon_name += "3";
-      break;
-
-    case 41 ... 50:
-      battery_icon_name += "4";
-      break;
-
-    case 51 ... 75:
-      battery_icon_name += "5";
-      break;
-
-    case 76 ... 90:
-      battery_icon_name += "6";
-      break;
-
-    case 91 ... 100:
-      battery_icon_name = "battery_android_full";
-      break;
-
-    default:
-      battery_icon_name = "battery_android_frame_question";
-      break;
-  }
-  btn_->setText(battery_icon_name);
-
-  if (is_charging) {
-    charging_indicator_->setVisible(true);
-  } else {
-    charging_indicator_->setVisible(false);
-  }
+bool BatteryIndicator::GetIsCharging() const {
+  return backend::BatteryInfo::GetIsCharging();
 }
 
 }  // namespace frontend

@@ -1,0 +1,31 @@
+import QtQuick.tooling
+
+Module {
+  dependencies: []
+  Component {
+    name: "panel::loader::QuickThemeProvider"
+    prototype: "QObject"
+    isSingleton: true
+    exports: ["HuskyPanel/Theme 1.0"]
+    exportMetaObjectRevisions: [0]
+    Property { name: "status_bar_bg"; type: "color"; isReadonly: true }
+    Property { name: "status_bar_primary"; type: "color"; isReadonly: true }
+    Property { name: "status_bar_surface_fg"; type: "color"; isReadonly: true }
+    Property { name: "status_bar_state_layer_hover"; type: "color"; isReadonly: true }
+    Property { name: "status_bar_state_layer_pressed"; type: "color"; isReadonly: true }
+    Property { name: "primary"; type: "color"; isReadonly: true }
+    Property { name: "surface_container"; type: "color"; isReadonly: true }
+    Property { name: "surface_fg"; type: "color"; isReadonly: true }
+    Property { name: "state_layer_hover"; type: "color"; isReadonly: true }
+    Property { name: "state_layer_pressed"; type: "color"; isReadonly: true }
+    Property { name: "surface_bg"; type: "color"; isReadonly: true }
+    Property { name: "surface_container_low"; type: "color"; isReadonly: true }
+    Property { name: "surface_variant_fg"; type: "color"; isReadonly: true }
+    Property { name: "primary_container"; type: "color"; isReadonly: true }
+    Property { name: "secondary_container"; type: "color"; isReadonly: true }
+    Property { name: "secondary_container_fg"; type: "color"; isReadonly: true }
+    Property { name: "surface_container_lowest"; type: "color"; isReadonly: true }
+    Property { name: "surface_container_high"; type: "color"; isReadonly: true }
+    Signal { name: "SchemeUpdated" }
+  }
+}

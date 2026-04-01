@@ -18,8 +18,8 @@
 #ifndef SRC_INFO_SERVER_CLOCK_CLOCK_H_
 #define SRC_INFO_SERVER_CLOCK_CLOCK_H_
 
+#include <QString>
 #include <QObject>
-#include <QPushButton>
 #include <QTimer>
 
 #include "src/translation_loader/translation_loader.h"
@@ -30,15 +30,22 @@ namespace backend {
 class Clock : public QObject {
   Q_OBJECT
 
+  Q_PROPERTY(QString clock_text READ GetClockText NOTIFY ClockTextChanged)
+
  public:
-  explicit Clock(QPushButton * target = nullptr);
+  explicit Clock(QObject * parent = nullptr);
   ~Clock();
+
+  QString GetClockText() const;
+
+ signals:
+  void ClockTextChanged();
 
  private:
   QString GetTranslatedTheDayOfTheWeek(QString in);
   QString GetOptimizedDateString(QString in);
   QTimer * clock_timer_ = nullptr;
-  QPushButton * install_target_ = nullptr;
+  QString clock_text_;
   loader::TranslationLoader * translator_ = nullptr;
   QString Tr(const QString& msg);
 

@@ -4,7 +4,7 @@
 
 variables:
   APP_NAME: "husky-panel"
-  APP_VERSION: "0.9.3"
+  APP_VERSION: "0.9.4"
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
@@ -78,6 +78,37 @@ build:rpm:fedora:
     name: "${APP_NAME}-${APP_VERSION}-rpms"
     paths:
       - rpms/
+    expire_in: 30 days
+
+  rules:
+    # Run on default branch, tags, and merge requests
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# ======================== Arch Build (zstd package) ========================
+
+build:pkg:arch:
+  stage: build
+  image: archlinux:latest
+  tags: []
+
+  before_script:
+    - pacman -Syu --noconfirm --needed
+    - pacman -S --noconfirm --needed base-devel git
+    - useradd -m builder
+    - chown -R builder:builder "$CI_PROJECT_DIR"
+
+  script:
+    - runuser -u builder -- bash -lc "cd '$CI_PROJECT_DIR/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
+    - mkdir -p arch-pkgs
+    - find packages -maxdepth 1 -name '*.pkg.tar.zst' -exec cp {} arch-pkgs/ \;
+    - find packages -maxdepth 1 -name '*.pkg.tar.zst.sig' -exec cp {} arch-pkgs/ \;
+
+  artifacts:
+    name: "${APP_NAME}-${APP_VERSION}-arch-pkg"
+    paths:
+      - arch-pkgs/
     expire_in: 30 days
 
   rules:

@@ -23,11 +23,23 @@
 #include <unistd.h>
 #include <pwd.h>
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/info_server/user_info/user_info.h"
 #include "src/utils/dbus_def.h"
 
 namespace panel {
 namespace backend {
+
+UserInfo::UserInfo(QObject* parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("UserInfo constructer invoked!!");
+  LOG(WARNING) << absl::StrCat("Only invoke this constructor in main.cc while ",
+    "injecting this class to QML. Otherwise there is NO NEED to create an ",
+    "instance as all methods in this class are static.");
+}
 
 QString UserInfo::GetUserName() {
   uid_t uid = getuid();
@@ -39,14 +51,15 @@ QString UserInfo::GetUserName() {
     QVariant name_read = interface.property("RealName");
     if (name_read.isValid() && !name_read.toString().isEmpty()) {
       result = name_read.toString();
-      qInfo() << "[ OK ] User Info: Successfully got user display name from"
-        << "D-Bus.";
+      LOG(INFO) << absl::StrCat(absl::StrFormat(
+        "Successfully got user display name from D-Bus: %s.",
+        result.toStdString()));
       return result;
     }
   }
 
-  qWarning() << "[WARN] User Info: Failed to get user display name from"
-    << "D-Bus. Now falling back to login name...";
+  LOG(WARNING) << absl::StrCat("Failed to get user display name from D-Bus. ",
+    "Now falling back to login name...");
   result = QString::fromLocal8Bit(qgetenv("USER"));
   return result;
 }
@@ -62,25 +75,27 @@ QString UserInfo::GetUserAvatarPath() {
     if (avatar_read.isValid() && !avatar_read.toString().isEmpty()) {
       result = avatar_read.toString();
       if (QFile::exists(result)) {
-        qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
-          << "D-Bus.";
+        LOG(INFO) << absl::StrCat(absl::StrFormat(
+          "Successfully got user avatar path from D-Bus: %s.",
+          result.toStdString()));
         return result;
       }
     }
   }
 
-  qWarning() << "[WARN] User Info: Failed to get user avatar path from"
-    << "D-Bus. Now falling back to ~/.face.icon...";
+  LOG(WARNING) << absl::StrCat("Failed to get user avatar path from D-Bus. ",
+    "Now falling back to ~/.face.icon...");
   QString user_home = QDir::homePath();
   result = user_home + "/.face.icon";
   if (QFile::exists(result)) {
-    qInfo() << "[ OK ] User Info: Successfully got user avatar path from"
-      << "~/.face.icon.";
+    LOG(INFO) << absl::StrCat(absl::StrFormat(
+      "Successfully got user avatar path from ~/.face.icon: %s.",
+      result.toStdString()));
     return result;
   }
 
-  qCritical() << "[ERROR] User Info: Failed to get user avatar path from"
-    << "D-Bus and ~/.face.icon does not exist either, returning empty string.";
+  LOG(ERROR) << absl::StrCat("Failed to get user avatar path from D-Bus and ",
+    "~/.face.icon does not exist either, returning empty string.");
   result = "";
   return result;
 }

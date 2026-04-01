@@ -18,29 +18,37 @@
 #ifndef SRC_COMPONENTS_BATTERY_INDICATOR_BATTERY_INDICATOR_H_
 #define SRC_COMPONENTS_BATTERY_INDICATOR_BATTERY_INDICATOR_H_
 
-#include <QWidget>
-#include <QPushButton>
+#include <QObject>
+#include <QString>
 
 #include "src/info_server/battery_info/battery_info.h"
 
 namespace panel {
 namespace frontend {
 
-class BatteryIndicator : public QWidget {
+class BatteryIndicator : public QObject {
   Q_OBJECT
 
+  Q_PROPERTY(QString battery_icon
+    READ GetBatteryIcon
+    NOTIFY BatteryStatusChanged)
+
+  Q_PROPERTY(bool is_charging
+    READ GetIsCharging
+    NOTIFY BatteryStatusChanged)
+
  public:
-  explicit BatteryIndicator(QWidget *parent = nullptr);
-  ~BatteryIndicator();
-  QPushButton * GetBtn();
+  explicit BatteryIndicator(QObject *parent = nullptr);
+  ~BatteryIndicator() = default;
+
+  QString GetBatteryIcon() const;
+  bool GetIsCharging() const;
+
+ signals:
+  void BatteryStatusChanged();
 
  private:
-  QPushButton * btn_ = nullptr;
-  QPushButton * charging_indicator_ = nullptr;
   backend::BatteryInfo * battery_info_ = nullptr;
-
- private slots:
-  void UpdateBatteryStatus();
 };
 
 }  // namespace frontend

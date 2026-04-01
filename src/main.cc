@@ -18,23 +18,169 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickWindow>
+#include <QQuickImageProvider>
+#include <QIcon>
+#include <QRegion>
+#include <QtQml>
+#include <QWindow>
 
+#include "absl/log/initialize.h"
+#include "absl/log/globals.h"
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 #include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
+#include "src/components/app_indicator/app_indicator.h"
+#include "src/components/battery_indicator/battery_indicator.h"
+#include "src/components/wlan_indicator/wlan_indicator.h"
+#include "src/font_loader/font_loader.h"
+#include "src/components/app_drawer/app_info_wrapper.h"
+#include "src/components/app_drawer/app_launcher.h"
+#include "src/components/clock_btn/clock_btn.h"
+#include "src/components/krunner_btn/krunner_btn.h"
+#include "src/info_server/power_options/power_options.h"
+#include "src/info_server/session_handler/session_handler.h"
+#include "src/info_server/user_info/user_info.h"
 #include "src/info_server/tray_handler/tray_def.h"
-#include "src/mainwindow/mainwindow.h"
+#include "src/components/system_tray/system_tray_handler.h"
+#include "src/components/system_tray/tray_icon_image_handler.h"
+#include "src/theme_loader/quick_theme_provider.h"
+#include "src/translation_loader/translation_loader.h"
+#include "src/utils/misc/misc.h"
+#include "src/utils/xdg_icon_handler/xdg_icon_handler.h"
+#include "src/utils/user_avatar_handler/user_avatar_handler.h"
+#include "src/utils/layer_shell_helper/layer_shell_helper.h"
 
-int main(int argc, char *argv[]) {
-  LOG(INFO) << absl::StrCat("Initializing SNI types...");
-  panel::backend::InitSystemTrayTypes();
+#ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
+#include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
+#else
+#include <LayerShellQt/window.h>
+#endif
 
-  LOG(INFO) << absl::StrCat("Now initializing panel...");
-  QApplication a(argc, argv);
+void InjectEngineContext(QGuiApplication& application,
+    QQmlApplicationEngine& target) {
+  LOG(INFO) << absl::StrCat("Injecting context properties into QML engine...");
 
-  LOG(INFO) << absl::StrCat("Loading locales...");
+  LOG(INFO) << absl::StrCat("Initializing QML scheme provider...");
+  auto* theme = new panel::loader::QuickThemeProvider(&application);
+  target.rootContext()->setContextProperty("Theme", theme);
+  LOG(INFO) << absl::StrCat("Successfully injected QML theme provider.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator via the class \"",
+    "TranslationLoader\"...");
+  LOG(INFO) << absl::StrCat("Initializing translator for status bar...");
+  auto* translation_loader_bar = new panel::loader::TranslationLoader(
+    ":/translations/translations/bar.locale",
+    panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("StatusBarTranslator",
+    translation_loader_bar);
+  LOG(INFO) << absl::StrCat("Successfully injected status bar translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for application ",
+    "drawer...");
+  auto* translation_loader_drawer = new panel::loader::TranslationLoader(
+    ":/translations/translations/app_drawer.locale",
+    panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("DrawerTranslator",
+    translation_loader_drawer);
+  LOG(INFO) << absl::StrCat("Successfully injected application drawer ",
+    "translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for calendar...");
+  auto* translation_loader_calendar = new panel::loader::TranslationLoader(
+    ":/translations/translations/calendar.locale",
+    panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("CalendarTranslator",
+    translation_loader_calendar);
+  LOG(INFO) << absl::StrCat("Successfully injected calendar translator.");
+  LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
+    "injected!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML user info wrapper...");
+  auto* user_info = new panel::backend::UserInfo(&application);
+  target.rootContext()->setContextProperty("UserInfoProvider", user_info);
+  LOG(INFO) << absl::StrCat("Successfully injected user info wrapper!!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML session handler...");
+  auto* session_handler = new panel::backend::SessionHandler(&application);
+  target.rootContext()->setContextProperty("SessionProvider", session_handler);
+  LOG(INFO) << absl::StrCat("Successfully injected session handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML power options handler...");
+  auto* power_options = new panel::backend::PowerOptions(&application);
+  target.rootContext()->setContextProperty("PowerProvider", power_options);
+  LOG(INFO) << absl::StrCat("Successfully injected power options handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML application info wrapper...");
+  auto* app_info_wrapper = new panel::frontend::AppInfoWrapper(&application);
+  target.rootContext()->setContextProperty("AppProvider", app_info_wrapper);
+  LOG(INFO) << absl::StrCat(
+    "Successfully injected application info wrapper!!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML application launcher...");
+  auto* app_launcher = new panel::frontend::AppLauncher(&application);
+  target.rootContext()->setContextProperty("AppLaunchProvider", app_launcher);
+  LOG(INFO) << absl::StrCat("Successfully injected application launcher!!");
+
+  LOG(INFO) << absl::StrCat("Initializing QML app indicator...");
+  auto* current_window = new panel::frontend::AppIndicator(&application);
+  target.rootContext()->setContextProperty("CurrentWindow", current_window);
+  LOG(INFO) << absl::StrCat("Successfully injected app indicator!!");
+
+  LOG(INFO) << absl::StrCat("Initializing clock button...");
+  auto* clock_btn = new panel::frontend::ClockBtn(nullptr, &application);
+  target.rootContext()->setContextProperty("ClockProvider", clock_btn);
+  LOG(INFO) << absl::StrCat("Successfully injected clock button!!");
+
+  LOG(INFO) << absl::StrCat("Initializing KRunner toggler...");
+  auto* krunner_btn = new panel::frontend::KRunnerBtn(&application);
+  target.rootContext()->setContextProperty("KRunnerToggler", krunner_btn);
+  LOG(INFO) << absl::StrCat("Successfully injected KRunner toggler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing battery handler...");
+  auto* battery_indicator = new panel::frontend::BatteryIndicator(&application);
+  target.rootContext()->setContextProperty("BatteryProvider",
+    battery_indicator);
+  LOG(INFO) << absl::StrCat("Successfully injected battery handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing WLAN handler...");
+  auto* wlan_indicator = new panel::frontend::WLANIndicator(&application);
+  target.rootContext()->setContextProperty("WLANProvider", wlan_indicator);
+  LOG(INFO) << absl::StrCat("Successfully injected WLAN handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing system tray handler...");
+  auto* tray_handler = new panel::frontend::SystemTrayHandler(&application);
+  target.rootContext()->setContextProperty("TrayHandler", tray_handler);
+  target.addImageProvider("trayicon",
+    new panel::frontend::TrayIconImageHandler(tray_handler));
+  LOG(INFO) << absl::StrCat("Successfully injected system tray handler!!");
+}
+
+void InjectImageProviders(QQmlApplicationEngine& target) {
+  LOG(INFO) << absl::StrCat("Injecting image handlers into QML engine...");
+
+  LOG(INFO) << absl::StrCat("Initializing XDG icon handler...");
+  target.addImageProvider("icon", new panel::utils::XdgIconHandler());
+  LOG(INFO) << absl::StrCat("Successfully injected XDG icon handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing user avatar image handler...");
+  target.addImageProvider("useravatar", new panel::utils::UserAvatarHandler());
+  LOG(INFO) << absl::StrCat(
+    "Successfully injected user avatar image handler!!");
+
+  LOG(INFO) << absl::StrCat("Successfully injected all image hendlers!!");
+}
+
+void InitializedDepreciatedTranslator(QGuiApplication& application) {
+  LOG(INFO) << absl::StrCat("Loading locales via QTranslator...");
+  LOG(WARNING) << absl::StrCat("For this application, translation via ",
+    "QTranslator is currently being depreciated, please consider using the \"",
+    "TranslationLoader\" class if you want to add a new translation.");
+
   QTranslator translator;
   const QStringList ui_lang = QLocale::system().uiLanguages();
   for (const QString &locale : ui_lang) {
@@ -44,7 +190,7 @@ int main(int argc, char *argv[]) {
     if (translator.load(base_name, ":/translations/translations/")) {
       LOG(INFO) << absl::StrCat("Successfully loaded translation: ",
         base_name.toStdString(), ".");
-      a.installTranslator(&translator);
+      application.installTranslator(&translator);
       break;
     } else {
       LOG(WARNING) << absl::StrCat("Failed to load translation file '",
@@ -52,8 +198,66 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  LOG(INFO) << absl::StrCat("Done loading translations via QTranslator.");
+}
+
+void LoadIconFonts() {
+  panel::loader::FontLoader::GetRoundedMaterialSymbolFont();
+}
+
+int main(int argc, char *argv[]) {
+  // Initialize logging
+  absl::InitializeLog();
+  absl::SetMinLogLevel(absl::LogSeverityAtLeast::kInfo);
+
+  LOG(INFO) << absl::StrCat("Initializing SNI types...");
+  panel::backend::InitSystemTrayTypes();
+
+  LOG(INFO) << absl::StrCat("Now initializing panel...");
+  QApplication a(argc, argv);
+  InitializedDepreciatedTranslator(a);
+
+  LOG(INFO) << absl::StrCat("Loading fonts...");
+  LoadIconFonts();
+
   LOG(INFO) << absl::StrCat("Loading panel window...");
-  panel::frontend::MainWindow w;
-  w.show();
+  QQmlApplicationEngine engine;
+  InjectImageProviders(engine);
+  InjectEngineContext(a, engine);
+
+  LOG(INFO) << absl::StrCat("Initializing layer shell helper...");
+  auto* layer_shell_helper = new panel::utils::LayerShellHelper(&a);
+  engine.rootContext()->setContextProperty(
+    "LayerShellHelper", layer_shell_helper);
+
+  LOG(INFO) << absl::StrCat("Loading main QML file...");
+  engine.load(QUrl(QStringLiteral("qrc:/ui/interfaces/MainWindow.qml")));
+  if (engine.rootObjects().isEmpty()) {
+    LOG(ERROR) << absl::StrCat("Failed to load main panel QML root object.");
+    return -1;
+  }
+
+  LOG(INFO) << absl::StrCat(
+    "Now setting up layer shell for the panel window...");
+  QObject* root = engine.rootObjects().first();
+  QQuickWindow* window = qobject_cast<QQuickWindow*>(root);
+  if (window) {
+    QWindow* native = window;
+    LayerShellQt::Window* layer_shell = LayerShellQt::Window::get(native);
+    layer_shell->setAnchors(static_cast<LayerShellQt::Window::Anchor>(
+      LayerShellQt::Window::Anchor::AnchorTop |
+      LayerShellQt::Window::Anchor::AnchorLeft |
+      LayerShellQt::Window::Anchor::AnchorRight));
+    layer_shell->setLayer(LayerShellQt::Window::LayerTop);
+    layer_shell->setKeyboardInteractivity(
+      LayerShellQt::Window::KeyboardInteractivityOnDemand);
+    layer_shell->setExclusiveZone(32);
+    window->show();
+  } else {
+    LOG(ERROR) << absl::StrCat("Failed to get QQuickWindow. ",
+      "Please check your session.");
+    return -1;
+  }
+
   return a.exec();
 }

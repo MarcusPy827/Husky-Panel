@@ -19,35 +19,37 @@
 #include <QTimer>
 #include <QDateTime>
 
+#include "absl/log/log.h"
+#include "absl/strings/str_cat.h"
+#include "absl/strings/str_format.h"
+
 #include "src/info_server/clock/clock.h"
 
 namespace panel {
 namespace backend {
 
-Clock::Clock(QPushButton * target) {
-  if (target == nullptr) {
-    qCritical() << "[ERROR] Clock: Target pushbutton is null pointer, could"
-      << "not install clock updater, aborting...";
-    return;
-  }
-
+Clock::Clock(QObject * parent) : QObject(parent) {
   if (translator_ == nullptr) {
     translator_ = new loader::TranslationLoader(
       ":/translations/translations/bar.locale", loader::LanguageType::EN_US);
   }
 
-  qInfo() << "[INFO] Clock: Installing clock updater...";
-  install_target_ = target;
-  clock_timer_ = new QTimer;
+  LOG(INFO) << absl::StrCat("Installing clock updater...");
+  clock_timer_ = new QTimer(this);
   connect(clock_timer_, SIGNAL(timeout()), this, SLOT(UpdateTime()));
   clock_timer_->start(1000);
-  qInfo() << "[ OK ] Clock: Clock updater installed successfully!!";
+  UpdateTime();
+  LOG(INFO) << absl::StrCat("Clock updater installed successfully!!");
 }
 
 Clock::~Clock() {
-  qInfo() << "[INFO] Clock: Disconnecting clock signal/slots...";
+  LOG(INFO) << absl::StrCat("Disconnecting clock signal/slots...");
   disconnect(clock_timer_, SIGNAL(timeout()), this, SLOT(UpdateTime()));
-  qInfo() << "[ OK ] Clock: Clock signal/slots disconnected successfully!!";
+  LOG(INFO) << absl::StrCat("Clock signal/slots disconnected successfully!!");
+}
+
+QString Clock::GetClockText() const {
+  return clock_text_;
 }
 
 void Clock::UpdateTime() {
@@ -83,13 +85,11 @@ void Clock::UpdateTime() {
     is_afternoon_desc = "A.M.";
   }
 
-  QString time_str_gen = current_hrs_str + ":" + current_timer.toString("mm")
+  clock_text_ = current_hrs_str + ":" + current_timer.toString("mm")
     + " " + is_afternoon_desc + "  " + current_timer.toString(Tr("yyyy-M-"))
     + GetOptimizedDateString(current_timer.toString(Tr("dd")))
     + " " + GetTranslatedTheDayOfTheWeek(current_timer.toString("ddd"));
-  if (install_target_ != nullptr) {
-    install_target_->setText(time_str_gen);
-  }
+  emit ClockTextChanged();
 }
 
 QString Clock::GetTranslatedTheDayOfTheWeek(QString in) {

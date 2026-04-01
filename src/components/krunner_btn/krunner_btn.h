@@ -18,28 +18,23 @@
 #ifndef SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
 #define SRC_COMPONENTS_KRUNNER_BTN_KRUNNER_BTN_H_
 
-#include <QWidget>
-#include <QPushButton>
-
-#include "src/translation_loader/translation_loader.h"
+#include <QObject>
 
 namespace panel {
 namespace frontend {
 
-class KRunnerBtn : public QWidget {
+class KRunnerBtn : public QObject {
   Q_OBJECT
 
  public:
-  explicit KRunnerBtn(QWidget *parent = nullptr);
-  ~KRunnerBtn();
-  QPushButton * GetBtn();
+  explicit KRunnerBtn(QObject *parent = nullptr);
+  ~KRunnerBtn() = default;
 
- private:
-  QPushButton * btn_ = nullptr;
-  loader::TranslationLoader * translator_ = nullptr;
-
- private slots:
+  /* ---------- For backend usage ---------- */
   void ToggleKRunner();
+
+  /* ---------- For QML usage ---------- */
+  Q_INVOKABLE void toggleKRunner();
 };
 
 }  // namespace frontend

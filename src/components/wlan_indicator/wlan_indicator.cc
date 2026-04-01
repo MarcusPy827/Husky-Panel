@@ -15,92 +15,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QHBoxLayout>
-#include <QTimer>
-
 #include "absl/log/log.h"
-#include "absl/log/check.h"
-#include "absl/strings/str_format.h"
 #include "absl/strings/str_cat.h"
 
 #include "src/components/wlan_indicator/wlan_indicator.h"
-#include "src/font_loader/font_loader.h"
-#include "src/info_server/wlan_info/wlan_info.h"
 
 namespace panel {
 namespace frontend {
 
-WLANIndicator::WLANIndicator(QWidget *parent) : QWidget(parent) {
-  QHBoxLayout * layout_gen = new QHBoxLayout();
-  layout_gen->setContentsMargins(0, 0, 0, 0);
-  layout_gen->setSpacing(0);
-  setLayout(layout_gen);
-
-  if (btn_ == nullptr) {
-    btn_ = new QPushButton();
-    btn_->setProperty("class", "common_bar_small_icon_btn");
-  }
-  btn_->setText("wifi_find");
-  btn_->setFont(loader::FontLoader::GetRoundedMaterialSymbolFont());
-  layout_gen->addWidget(btn_);
-
-  QTimer * timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this,
-    &WLANIndicator::UpdateWLANStrength);
-  timer->start(1000);
+WLANIndicator::WLANIndicator(QObject *parent) : QObject(parent) {
+  LOG(INFO) << absl::StrCat("Initializing WLAN indicator...");
+  wlan_info_ = new backend::WlanInfo(this);
+  connect(wlan_info_, &backend::WlanInfo::WlanStatusChanged,
+    this, &WLANIndicator::WlanStatusChanged);
 }
 
-WLANIndicator::~WLANIndicator() {
-  LOG(INFO) << absl::StrCat("Battery indicator is being deleted.");
-}
-
-QPushButton* WLANIndicator::GetBtn() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Battery indicator button is a null pointer! ",
-      "Except a nullptr passing in!");
-  }
-  return btn_;
-}
-
-void WLANIndicator::UpdateWLANStrength() {
-  if (btn_ == nullptr) {
-    LOG(ERROR) << absl::StrCat("Battery indicator button is a null pointer! ",
-      "Skipping updating icons...");
-    return;
-  }
-
+QString WLANIndicator::GetWlanIcon() const {
   int signal_strength = backend::WlanInfo::GetWlanSignalStrength();
-  QString wlan_icon_name;
   switch (signal_strength) {
-    case -1:
-      wlan_icon_name = "signal_wifi_off";
-      break;
-
-    case 0 ... 10:
-      wlan_icon_name = "signal_wifi_0_bar";
-      break;
-
-    case 11 ... 25:
-      wlan_icon_name = "network_wifi_1_bar";
-      break;
-
-    case 26 ... 50:
-      wlan_icon_name = "network_wifi_2_bar";
-      break;
-
-    case 51 ... 75:
-      wlan_icon_name = "network_wifi";
-      break;
-
-    case 76 ... 100:
-      wlan_icon_name = "signal_wifi_4_bar";
-      break;
-
-    default:
-      wlan_icon_name = "wifi_find";
-      break;
+    case -1:         return QStringLiteral("signal_wifi_off");
+    case 0 ... 10:   return QStringLiteral("signal_wifi_0_bar");
+    case 11 ... 25:  return QStringLiteral("network_wifi_1_bar");
+    case 26 ... 50:  return QStringLiteral("network_wifi_2_bar");
+    case 51 ... 75:  return QStringLiteral("network_wifi");
+    case 76 ... 100: return QStringLiteral("signal_wifi_4_bar");
+    default:         return QStringLiteral("wifi_find");
   }
-  btn_->setText(wlan_icon_name);
 }
 
 }  // namespace frontend
