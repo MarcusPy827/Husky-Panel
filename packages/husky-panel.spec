@@ -1,5 +1,5 @@
 %global app_name    husky-panel
-%global app_version 0.9.3
+%global app_version 0.9.4
 
 Name:           %{app_name}
 Version:        %{app_version}

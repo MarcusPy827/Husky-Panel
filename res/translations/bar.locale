@@ -34,6 +34,10 @@ en_us = "Power off"
 zh_cn = "锁定"
 en_us = "Lock"
 
+[Action_lock]
+zh_cn = "锁定"
+en_us = "Lock"
+
 [Action_Log Out]
 zh_cn = "注销"
 en_us = "Logout"
@@ -85,3 +89,31 @@ en_us = "Sat."
 [Sun]
 zh_cn = "星期日"
 en_us = "Sun."
+
+[M]
+zh_cn = "一"
+en_us = "M"
+
+[T]
+zh_cn = "二"
+en_us = "T"
+
+[W]
+zh_cn = "三"
+en_us = "W"
+
+[Th]
+zh_cn = "四"
+en_us = "Th"
+
+[F]
+zh_cn = "五"
+en_us = "F"
+
+[S]
+zh_cn = "六"
+en_us = "S"
+
+[Su]
+zh_cn = "日"
+en_us = "Su"

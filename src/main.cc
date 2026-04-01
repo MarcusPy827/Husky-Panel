@@ -141,15 +141,16 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("KRunnerToggler", krunner_btn);
   LOG(INFO) << absl::StrCat("Successfully injected KRunner toggler!!");
 
-  LOG(INFO) << absl::StrCat("Initializing battery indicator...");
+  LOG(INFO) << absl::StrCat("Initializing battery handler...");
   auto* battery_indicator = new panel::frontend::BatteryIndicator(&application);
-  target.rootContext()->setContextProperty("BatteryProvider", battery_indicator);
-  LOG(INFO) << absl::StrCat("Successfully injected battery indicator!!");
+  target.rootContext()->setContextProperty("BatteryProvider",
+    battery_indicator);
+  LOG(INFO) << absl::StrCat("Successfully injected battery handler!!");
 
-  LOG(INFO) << absl::StrCat("Initializing WLAN indicator...");
+  LOG(INFO) << absl::StrCat("Initializing WLAN handler...");
   auto* wlan_indicator = new panel::frontend::WLANIndicator(&application);
   target.rootContext()->setContextProperty("WLANProvider", wlan_indicator);
-  LOG(INFO) << absl::StrCat("Successfully injected WLAN indicator!!");
+  LOG(INFO) << absl::StrCat("Successfully injected WLAN handler!!");
 
   LOG(INFO) << absl::StrCat("Initializing system tray handler...");
   auto* tray_handler = new panel::frontend::SystemTrayHandler(&application);

@@ -39,9 +39,12 @@ Window {
   readonly property int drawerTopMargin: 8
   readonly property int drawerW: 960
   readonly property int drawerH: 648
+  readonly property int calendarFlyoutW: 320
 
   property bool appDrawerOpen: false
   property bool drawerExpanded: false
+  property bool calendarFlyoutOpen: false
+  property bool calendarFlyoutExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -49,6 +52,7 @@ Window {
 
   onAppDrawerOpenChanged: {
     if (appDrawerOpen) {
+      calendarFlyoutOpen = false
       drawerExpanded = true
       LayerShellHelper.setFullMask(root)
       appDrawer.open()
@@ -58,16 +62,36 @@ Window {
     }
   }
 
+  onCalendarFlyoutOpenChanged: {
+    if (calendarFlyoutOpen) {
+      appDrawerOpen = false
+      calendarFlyoutExpanded = true
+      LayerShellHelper.setFullMask(root)
+      calendarFlyout.open()
+    } else {
+      calendarFlyout.close()
+      // calendarFlyoutExpanded → false is set by onCloseAnimationFinished below
+    }
+  }
+
   onDrawerExpandedChanged: {
-    if (!drawerExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onCalendarFlyoutExpandedChanged: {
+    if (!calendarFlyoutExpanded && !drawerExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: root.appDrawerOpen && !confirmDialog.visible
-    onClicked: root.appDrawerOpen = false
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen) && !confirmDialog.visible
+    onClicked: {
+      root.appDrawerOpen = false
+      root.calendarFlyoutOpen = false
+    }
   }
 
   // Confirm dialog (standalone layer-shell overlay window)
@@ -399,7 +423,7 @@ Window {
 
           // Clock button
           ClockBtn {
-            onClicked: ClockProvider.toggleCalendar()
+            onClicked: root.calendarFlyoutOpen = !root.calendarFlyoutOpen
           }
         }
       }
@@ -423,6 +447,21 @@ Window {
         confirmDialog.pendingLabel  = label
         confirmDialog.visible = true
       }
+    }
+  }
+
+  // Calendar flyout
+  Item {
+    x: root.width - root.calendarFlyoutW - 8
+    y: root.barHeight + root.drawerTopMargin
+    width: root.calendarFlyoutW
+    height: calendarFlyout.implicitHeight
+    visible: root.calendarFlyoutExpanded
+
+    CalendarFlyout {
+      id: calendarFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.calendarFlyoutExpanded = false
     }
   }
 
