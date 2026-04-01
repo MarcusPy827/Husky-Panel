@@ -51,5 +51,11 @@ Plasma 6 / KWin.
 %{_datadir}/kwin/scripts/marcus-app-bridge/
 
 %changelog
-* Mon Mar 10 2026 MarcusPy827 - 0.9.3-1
+* Tue Mar 10 2026 MarcusPy827 - 0.9.3-1
 - Initial RPM packaging
+
+* Wed Apr 1 2026 MarcusPy827 - 0.9.4-1
+- Re-implemented all elements w/ QML.
+- Made a brand new calendar flyout.
+- Enhanced AppDrawer style.
+- Added tons of animations to the status bar, application drawer, and calendar.

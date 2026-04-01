@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(HuskyPanel VERSION 0.1 LANGUAGES CXX)
+project(HuskyPanel VERSION 0.9.4 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
