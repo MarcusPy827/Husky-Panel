@@ -30,6 +30,10 @@ jobs:
       - name: Build package with makepkg
         run: |
           useradd -m builder
+          
+          echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder
+          chmod 0440 /etc/sudoers.d/builder
+          
           chown -R builder:builder "$GITHUB_WORKSPACE"
           runuser -u builder -- bash -lc "cd '$GITHUB_WORKSPACE/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
 
