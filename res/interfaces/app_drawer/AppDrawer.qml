@@ -521,15 +521,40 @@ Item {
             Rectangle {
               id: sidePaneIndicator
               x: 16
-              // Each item is 48px tall with 6px spacing → stride = 54px
-              y: root.categoryIndexOf(root.currentCategoryId) * 54
               width: sidePaneColumn.width - 32
               height: 48
               radius: 24
               color: Theme.secondary_container
 
-              Behavior on y {
-                NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+              Component.onCompleted: y = root.categoryIndexOf(root.currentCategoryId) * 54
+
+              Connections {
+                target: root
+                function onCurrentCategoryIdChanged() {
+                  indicatorMoveAnim.to = root.categoryIndexOf(root.currentCategoryId) * 54
+                  indicatorAnim.restart()
+                }
+              }
+
+              ParallelAnimation {
+                id: indicatorAnim
+                NumberAnimation {
+                  id: indicatorMoveAnim
+                  target: sidePaneIndicator; property: "y"
+                  duration: 300; easing.type: Easing.OutCubic
+                }
+                SequentialAnimation {
+                  NumberAnimation {
+                    target: sidePaneIndicator; property: "height"
+                    from: 48; to: 64
+                    duration: 120; easing.type: Easing.OutCubic
+                  }
+                  NumberAnimation {
+                    target: sidePaneIndicator; property: "height"
+                    from: 64; to: 48
+                    duration: 250; easing.type: Easing.OutCubic
+                  }
+                }
               }
             }
 

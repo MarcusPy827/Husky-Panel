@@ -1,5 +1,10 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/app_drawer_enhancement_0402
+  * Added missing translations to the session options.
+  * 为「会话选项」补充了缺失的翻译
+  * Added more QML animations to the side menu bar.
+  * 为侧边栏新增了更多QML动画
 * marcus/wlroots_app_indicator_0402
   * Redo the ripple and clip effects of `AppIndicator`.
   * 重做了`AppIndicator`的涟漪与圆角裁剪效果
