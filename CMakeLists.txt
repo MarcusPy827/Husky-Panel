@@ -196,6 +196,11 @@ set(FRONTEND_SOURCES
   src/components/calendar/calendar.cc
 )
 
+set(CONFIG_LOADER_SOURCES
+  src/config_loader/path_finder/path_finder.h
+  src/config_loader/path_finder/path_finder.cc
+)
+
 set(I18N_SOURCES
   src/translation_loader/translation_loader.h
   src/translation_loader/translation_loader.cc
@@ -208,6 +213,7 @@ set(COMMON_SOURCES
   ${UTIL_SOURCES}
   ${BACKEND_SOURCES}
   ${FRONTEND_SOURCES}
+  ${CONFIG_LOADER_SOURCES}
   ${I18N_SOURCES}
 )
 
