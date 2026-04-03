@@ -25,6 +25,7 @@ import "app_drawer"
 import "app_indicator"
 import "battery_indicator"
 import "clock_btn"
+import "config_panel"
 import "krunner_btn"
 import "wlan_indicator"
 import "system_tray"
@@ -45,6 +46,8 @@ Window {
   property bool drawerExpanded: false
   property bool calendarFlyoutOpen: false
   property bool calendarFlyoutExpanded: false
+  property bool configPanelOpen: false
+  property bool configPanelExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -74,23 +77,41 @@ Window {
     }
   }
 
+  onConfigPanelOpenChanged: {
+    if (configPanelOpen) {
+      appDrawerOpen = false
+      calendarFlyoutOpen = false
+      configPanelExpanded = true
+      LayerShellHelper.setFullMask(root)
+      configPanel.open()
+    } else {
+      configPanel.close()
+    }
+  }
+
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded && !configPanelExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded && !configPanelExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onConfigPanelExpandedChanged: {
+    if (!configPanelExpanded && !drawerExpanded && !calendarFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.configPanelOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
+      root.configPanelOpen = false
     }
   }
 
@@ -372,6 +393,15 @@ Window {
       topLeftRadius: 8
       topRightRadius: 8
 
+      // Config menu
+      Menu {
+        id: barContextMenu
+        MenuItem {
+          text: StatusBarTranslator.Tr("Configure...")
+          onTriggered: root.configPanelOpen = true
+        }
+      }
+
       RowLayout {
         anchors {
           fill: parent
@@ -394,11 +424,19 @@ Window {
 
           // KRunner button
           KRunnerBtn {
-            onClicked: KRunnerToggler.toggleKRunner()
+            onClicked: KRunnerToggler.toggleKRunner() // qmllint disable unqualified
           }
         }
 
-        Item { Layout.fillWidth: true }
+        Item {
+          Layout.fillWidth: true
+          Layout.fillHeight: true
+          MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+            onClicked: barContextMenu.popup()
+          }
+        }
 
         // Middle slot (reserved for future use)
         RowLayout {
@@ -406,7 +444,15 @@ Window {
           Layout.alignment: Qt.AlignVCenter
         }
 
-        Item { Layout.fillWidth: true }
+        Item {
+          Layout.fillWidth: true
+          Layout.fillHeight: true
+          MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+            onClicked: barContextMenu.popup()
+          }
+        }
 
         RowLayout {
           spacing: 4
@@ -462,6 +508,21 @@ Window {
       id: calendarFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.calendarFlyoutExpanded = false
+    }
+  }
+
+  // Config panel
+  Item {
+    x: 8
+    y: root.barHeight + root.drawerTopMargin
+    width: root.drawerW
+    height: root.drawerH
+    visible: root.configPanelExpanded
+
+    ConfigPanel {
+      id: configPanel
+      anchors.fill: parent
+      onCloseAnimationFinished: root.configPanelExpanded = false
     }
   }
 

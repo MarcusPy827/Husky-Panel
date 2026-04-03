@@ -257,15 +257,15 @@ For more details about the plugin, read the README in `plugins/kde/app-bridge`.
 - [ ] System tray
     - [X] Simple tray
     - [ ] Icon folding
-- [ ] App indicator
+- [X] App indicator
     - [X] KWin support (via KWin script)
-    - [ ] Niri/Hyprland support
+    - [X] Niri/Hyprland support
 - [ ] Notification manager
 - [ ] Network manager
 - [ ] Battery manager
 - [ ] Volume manager
 - [ ] Bluetooth manager
-- [ ] App drawer (WIP)
+- [X] App drawer
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

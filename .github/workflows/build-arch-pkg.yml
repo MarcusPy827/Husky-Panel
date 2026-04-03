@@ -7,7 +7,7 @@ name: Build Arch Package
 on:
   push:
     branches: [main]
-    tags: ["v*"]
+    tags: ["*"]
   pull_request:
     branches: [main]
 
@@ -26,6 +26,23 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Create source tarball from local checkout
+        run: |
+          PKGVER=0.9.4
+          TARBALL="packages/husky-panel-${PKGVER}.tar.gz"
+          git archive --format=tar.gz --prefix="Husky-Panel-${PKGVER}/" -o "${TARBALL}" HEAD
+          if [[ -f .gitmodules ]]; then
+            TMPDIR_SUB="$(mktemp -d)"
+            mkdir -p "${TMPDIR_SUB}/Husky-Panel-${PKGVER}"
+            tar xzf "${TARBALL}" -C "${TMPDIR_SUB}"
+            git submodule foreach --quiet --recursive \
+              "git archive --prefix=\"Husky-Panel-${PKGVER}/\${sm_path}/\" HEAD | tar xf - -C \"${TMPDIR_SUB}\""
+            tar czf "${TARBALL}" -C "${TMPDIR_SUB}" "Husky-Panel-${PKGVER}"
+            rm -rf "${TMPDIR_SUB}"
+          fi
 
       - name: Build package with makepkg
         run: |

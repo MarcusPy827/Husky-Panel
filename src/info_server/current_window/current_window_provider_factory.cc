@@ -28,6 +28,7 @@
 
 #include "src/info_server/current_window/current_window_provider_factory.h"
 #include "src/info_server/current_window/current_window_kwin_impl.h"
+#include "src/info_server/current_window/current_window_wlroots_impl.h"
 #include "src/info_server/current_window/current_window_null_impl.h"
 #include "src/utils/dbus_def.h"
 
@@ -43,6 +44,13 @@ std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
 
   if (is_kwin) {
     return std::make_unique<CurrentWindowKwinImpl>(parent);
+  }
+
+  bool is_wayland = !qEnvironmentVariable("WAYLAND_DISPLAY").isEmpty();
+  if (is_wayland) {
+    LOG(INFO) << absl::StrCat("Non-KWin Wayland session detected. ",
+      "Using wlr-foreign-toplevel.");
+    return std::make_unique<CurrentWindowWlrootsImpl>(parent);
   }
 
   LOG(ERROR) << absl::StrCat("Current WM is NOT supported. ",

@@ -33,5 +33,7 @@
         <file>interfaces/system_tray/SystemTray.qml</file>
         <file>interfaces/system_tray/SystemTrayIcon.qml</file>
         <file>interfaces/system_tray/qmldir</file>
+        <file>interfaces/config_panel/ConfigPanel.qml</file>
+        <file>interfaces/config_panel/ConfigPanelSidePaneItem.qml</file>
     </qresource>
 </RCC>

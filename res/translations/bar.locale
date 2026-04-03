@@ -133,3 +133,7 @@ en_us = "S"
 [Su]
 zh_cn = "日"
 en_us = "Su"
+
+[Configure...]
+zh_cn = "配置..."
+en_us = "Configure..."
