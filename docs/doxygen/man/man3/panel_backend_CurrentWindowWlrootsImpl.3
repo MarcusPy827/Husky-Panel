@@ -1,0 +1,99 @@
+.TH "panel::backend::CurrentWindowWlrootsImpl" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::CurrentWindowWlrootsImpl
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBpanel::backend::CurrentWindowProvider\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCurrentWindowWlrootsImpl\fP (QObject *parent=nullptr)"
+.br
+.RI "Constructor of \fR\fBCurrentWindowWlrootsImpl\fP\fP\&. "
+.ti -1c
+.RI "QString \fBGetApplicationName\fP () override"
+.br
+.RI "Gets the "friendly" application name of the current active window\&. "
+.ti -1c
+.RI "QString \fBGetPackageName\fP () override"
+.br
+.RI "Gets the application package name of the current active window\&. "
+.in -1c
+
+Public Member Functions inherited from \fBpanel::backend::CurrentWindowProvider\fP
+.in +1c
+.ti -1c
+.RI "\fBCurrentWindowProvider\fP (QObject *parent=nullptr)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Signals inherited from \fBpanel::backend::CurrentWindowProvider\fP
+.in +1c
+.ti -1c
+.RI "void \fBCurrentWindowChanged\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::CurrentWindowWlrootsImpl::CurrentWindowWlrootsImpl (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+Constructor of \fR\fBCurrentWindowWlrootsImpl\fP\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&.
+.RE
+.PP
+Connect the \fRTopLevelActivated\fP signal of the manager\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QString panel::backend::CurrentWindowWlrootsImpl::GetApplicationName ()\fR [override]\fP, \fR [virtual]\fP"
+
+.PP
+Gets the "friendly" application name of the current active window\&. Returns the application name of the top-level window\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fROnTopLevelActivated()\fP for how that name is gathered\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The friendly application name\&. 
+.RE
+.PP
+
+.PP
+Implements \fBpanel::backend::CurrentWindowProvider\fP\&.
+.SS "QString panel::backend::CurrentWindowWlrootsImpl::GetPackageName ()\fR [override]\fP, \fR [virtual]\fP"
+
+.PP
+Gets the application package name of the current active window\&. Returns the package name of the application for the top-level window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The application package name\&. 
+.RE
+.PP
+
+.PP
+Implements \fBpanel::backend::CurrentWindowProvider\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

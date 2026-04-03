@@ -1,0 +1,123 @@
+\doxysection{tray\+\_\+def.\+h}
+\hypertarget{tray__def_8h_source}{}\label{tray__def_8h_source}\index{src/info\_server/tray\_handler/tray\_def.h@{src/info\_server/tray\_handler/tray\_def.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_INFO\_SERVER\_TRAY\_HANDLER\_TRAY\_DEF\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_INFO\_SERVER\_TRAY\_HANDLER\_TRAY\_DEF\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QDBusArgument>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QDBusMetaType>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QVector>}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpanel_1_1backend_1_1SNIImage}{SNIImage}}\ \{}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{int}\ width;}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{int}\ height;}
+\DoxyCodeLine{00032\ \ \ QByteArray\ data;}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpanel_1_1backend_1_1SNIToolTip}{SNIToolTip}}\ \{}
+\DoxyCodeLine{00036\ \ \ QString\ iconName;}
+\DoxyCodeLine{00037\ \ \ QList<SNIImage>\ iconData;}
+\DoxyCodeLine{00038\ \ \ QString\ title;}
+\DoxyCodeLine{00039\ \ \ QString\ description;}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00043\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ Q\_DECLARE\_METATYPE(\mbox{\hyperlink{structpanel_1_1backend_1_1SNIImage}{panel::backend::SNIImage}})}
+\DoxyCodeLine{00046\ Q\_DECLARE\_METATYPE(QList<panel::backend::SNIImage>)}
+\DoxyCodeLine{00047\ Q\_DECLARE\_METATYPE(\mbox{\hyperlink{structpanel_1_1backend_1_1SNIToolTip}{panel::backend::SNIToolTip}})}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00050\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{inline}\ QDBusArgument\ \&operator<<(QDBusArgument\ \&arg,\ \textcolor{keyword}{const}\ SNIImage\ \&img)\ \{}
+\DoxyCodeLine{00053\ \ \ arg.beginStructure();}
+\DoxyCodeLine{00054\ \ \ arg\ <<\ img.width\ <<\ img.height\ <<\ img.data;}
+\DoxyCodeLine{00055\ \ \ arg.endStructure();}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ QDBusArgument\ \&operator>>(\textcolor{keyword}{const}\ QDBusArgument\ \&arg,}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{structpanel_1_1backend_1_1SNIImage}{SNIImage}}\ \&img)\ \{}
+\DoxyCodeLine{00060\ \ \ arg.beginStructure();}
+\DoxyCodeLine{00061\ \ \ arg\ >>\ img.width\ >>\ img.height\ >>\ img.data;}
+\DoxyCodeLine{00062\ \ \ arg.endStructure();}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ QDBusArgument\ \&operator>>(\textcolor{keyword}{const}\ QDBusArgument\ \&arg,}
+\DoxyCodeLine{00067\ \ \ \ \ QList<SNIImage>\ \&list)\ \{}
+\DoxyCodeLine{00068\ \ \ arg.beginArray();}
+\DoxyCodeLine{00069\ \ \ list.clear();}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordflow}{while}\ (!arg.atEnd())\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{structpanel_1_1backend_1_1SNIImage}{SNIImage}}\ item;}
+\DoxyCodeLine{00072\ \ \ \ \ arg\ >>\ item;}
+\DoxyCodeLine{00073\ \ \ \ \ list.append(item);}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ \ \ arg.endArray();}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{inline}\ QDBusArgument\ \&operator<<(QDBusArgument\ \&arg,}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{const}\ QList<SNIImage>\ \&list)\ \{}
+\DoxyCodeLine{00081\ \ \ arg.beginArray(qMetaTypeId<SNIImage>());}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&item\ :\ list)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ arg\ <<\ item;}
+\DoxyCodeLine{00084\ \ \ \}}
+\DoxyCodeLine{00085\ \ \ arg.endArray();}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00087\ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{inline}\ QDBusArgument\ \&operator<<(QDBusArgument\ \&arg,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structpanel_1_1backend_1_1SNIToolTip}{SNIToolTip}}\ \&tt)\ \{}
+\DoxyCodeLine{00090\ \ \ arg.beginStructure();}
+\DoxyCodeLine{00091\ \ \ arg\ <<\ tt.iconName\ <<\ tt.iconData\ <<\ tt.title\ <<\ tt.description;}
+\DoxyCodeLine{00092\ \ \ arg.endStructure();}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00094\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ QDBusArgument\ \&operator>>(\textcolor{keyword}{const}\ QDBusArgument\ \&arg,}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{structpanel_1_1backend_1_1SNIToolTip}{SNIToolTip}}\ \&tt)\ \{}
+\DoxyCodeLine{00098\ \ \ arg.beginStructure();}
+\DoxyCodeLine{00099\ \ \ arg\ >>\ tt.iconName\ >>\ tt.iconData\ >>\ tt.title\ >>\ tt.description;}
+\DoxyCodeLine{00100\ \ \ arg.endStructure();}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordflow}{return}\ arg;}
+\DoxyCodeLine{00102\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ InitSystemTrayTypes()\ \{}
+\DoxyCodeLine{00105\ \ \ qRegisterMetaType<SNIImage>(\textcolor{stringliteral}{"{}SNIImage"{}});}
+\DoxyCodeLine{00106\ \ \ qRegisterMetaType<QList<SNIImage>>(\textcolor{stringliteral}{"{}QList<SNIImage>"{}});}
+\DoxyCodeLine{00107\ \ \ qRegisterMetaType<SNIToolTip>(\textcolor{stringliteral}{"{}SNIToolTip"{}});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ qDBusRegisterMetaType<SNIImage>();}
+\DoxyCodeLine{00110\ \ \ qDBusRegisterMetaType<QList<SNIImage>>();}
+\DoxyCodeLine{00111\ \ \ qDBusRegisterMetaType<SNIToolTip>();}
+\DoxyCodeLine{00112\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00115\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_INFO\_SERVER\_TRAY\_HANDLER\_TRAY\_DEF\_H\_}}
+
+\end{DoxyCode}

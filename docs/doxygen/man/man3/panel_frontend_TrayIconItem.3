@@ -1,0 +1,58 @@
+.TH "panel::frontend::TrayIconItem" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::frontend::TrayIconItem
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBIconChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBTooltipChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBStatusChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTrayIconItem\fP (const QString &service, QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "QImage \fBGetImage\fP () const"
+.br
+.ti -1c
+.RI "QString \fBGetTooltip\fP () const"
+.br
+.ti -1c
+.RI "bool \fBIsVisible\fP () const"
+.br
+.ti -1c
+.RI "bool \fBNeedsAttention\fP () const"
+.br
+.ti -1c
+.RI "void \fBActivate\fP (int x, int y)"
+.br
+.ti -1c
+.RI "void \fBContextMenu\fP (int x, int y)"
+.br
+.ti -1c
+.RI "void \fBSecondaryActivate\fP (int x, int y)"
+.br
+.ti -1c
+.RI "void \fBScroll\fP (int delta)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

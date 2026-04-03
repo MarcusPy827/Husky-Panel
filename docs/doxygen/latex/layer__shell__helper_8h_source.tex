@@ -1,0 +1,60 @@
+\doxysection{layer\+\_\+shell\+\_\+helper.\+h}
+\hypertarget{layer__shell__helper_8h_source}{}\label{layer__shell__helper_8h_source}\index{src/utils/layer\_shell\_helper/layer\_shell\_helper.h@{src/utils/layer\_shell\_helper/layer\_shell\_helper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2025\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QQuickImageProvider>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QIcon>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QPixmap>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QSize>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#ifndef\ SRC\_UTILS\_LAYER\_SHELL\_HELPER\_LAYER\_SHELL\_HELPER\_H\_}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ SRC\_UTILS\_LAYER\_SHELL\_HELPER\_LAYER\_SHELL\_HELPER\_H\_}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }utils\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }LayerShellHelper\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00031\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{explicit}\ LayerShellHelper(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ backend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ SetBarOnlyMask(QObject*\ window\_obj,\ \textcolor{keywordtype}{int}\ bar\_height);}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ SetBarAndDrawerMask(QObject*\ window\_obj,\ \textcolor{keywordtype}{int}\ bar\_height,\ \textcolor{keywordtype}{int}\ drawer\_x,}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ drawer\_w,\ \textcolor{keywordtype}{int}\ drawer\_h);}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ SetFullMask(QObject*\ window\_obj);}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{void}\ SetupOverlayWindow(QObject*\ window\_obj);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ QML\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00044\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ setBarOnlyMask(QObject*\ window\_obj,\ \textcolor{keywordtype}{int}\ bar\_height);}
+\DoxyCodeLine{00045\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ setBarAndDrawerMask(QObject*\ window\_obj,\ \textcolor{keywordtype}{int}\ bar\_height,}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ drawer\_x,\ \textcolor{keywordtype}{int}\ drawer\_w,\ \textcolor{keywordtype}{int}\ drawer\_h);}
+\DoxyCodeLine{00047\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ setFullMask(QObject*\ window\_obj);}
+\DoxyCodeLine{00048\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ setupOverlayWindow(QObject*\ window\_obj);}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \}\ \ \textcolor{comment}{//\ namespace\ utils}}
+\DoxyCodeLine{00052\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_UTILS\_LAYER\_SHELL\_HELPER\_LAYER\_SHELL\_HELPER\_H\_}}
+
+\end{DoxyCode}

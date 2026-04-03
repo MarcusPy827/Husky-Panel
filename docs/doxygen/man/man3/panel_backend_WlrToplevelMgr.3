@@ -1,0 +1,98 @@
+.TH "panel::backend::WlrToplevelMgr" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::WlrToplevelMgr
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QWaylandClientExtensionTemplate< WlrToplevelMgr >, and QtWayland::zwlr_foreign_toplevel_manager_v1\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBTopLevelActivated\fP (const QString &app_id, const QString &title)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWlrToplevelMgr\fP ()"
+.br
+.RI "Constructor of \fBWlrToplevelMgr\fP\&. "
+.ti -1c
+.RI "\fB~WlrToplevelMgr\fP ()"
+.br
+.RI "Destructor of \fBWlrToplevelMgr\fP\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_manager_v1_toplevel\fP (struct ::zwlr_foreign_toplevel_handle_v1 *toplevel) override"
+.br
+.RI "Callback for new toplevel-window handle from WM\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::WlrToplevelMgr::WlrToplevelMgr ()\fR [explicit]\fP"
+
+.PP
+Constructor of \fBWlrToplevelMgr\fP\&. Constructs a wrapper for zwlr_foreign_toplevel_manager_v1, which is responsible for managing the toplevel windows\&. 
+.PP
+\fBNote\fP
+.RS 4
+The binding is using a requested version of 3\&. 
+
+.PP
+Whether the binding is successful can be checked via \fRisActive()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "panel::backend::WlrToplevelMgr::~WlrToplevelMgr ()"
+
+.PP
+Destructor of \fBWlrToplevelMgr\fP\&. If the extension is STILL active, call \fRstop()\fP to disconnect from the global object\&. Then Qt will take care of the rest of the QObject part\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void panel::backend::WlrToplevelMgr::zwlr_foreign_toplevel_manager_v1_toplevel (struct ::zwlr_foreign_toplevel_handle_v1 * toplevel)\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Callback for new toplevel-window handle from WM\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItoplevel\fP (struct ::zwlr_foreign_toplevel_handle_v1*) The handle mentioned above\&.
+.RE
+.PP
+Creates a \fRWlrToplevelHandle\fP and connects the \fRActived/Closed\fP signals to target slots\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_manager_v1\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

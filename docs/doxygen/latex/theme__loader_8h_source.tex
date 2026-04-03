@@ -1,0 +1,54 @@
+\doxysection{theme\+\_\+loader.\+h}
+\hypertarget{theme__loader_8h_source}{}\label{theme__loader_8h_source}\index{src/theme\_loader/theme\_loader.h@{src/theme\_loader/theme\_loader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_THEME\_LOADER\_THEME\_LOADER\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_THEME\_LOADER\_THEME\_LOADER\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}src/theme\_loader/theme\_conf.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }ThemeLoader:\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00031\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{explicit}\ ThemeLoader(QWidget\ *\ base\_layer,\ QString\ base\_color,}
+\DoxyCodeLine{00035\ \ \ \ \ QWidget\ *\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00036\ \ \ \string~ThemeLoader()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ LoadThemeFromMap(\textcolor{keywordtype}{bool}\ use\_dark\_mode\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{bool}\ IsDarkMode();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ QWidget\ *\ install\_target\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{structpanel_1_1loader_1_1StyleTuple}{StyleTuple}}\ theme\_map\_;}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00046\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_THEME\_LOADER\_THEME\_LOADER\_H\_}}
+
+\end{DoxyCode}

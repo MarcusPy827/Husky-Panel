@@ -1,0 +1,64 @@
+.TH "panel::frontend::SystemTrayHandler" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::frontend::SystemTrayHandler
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QAbstractListModel\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBRoles\fP { \fBServiceRole\fP = Qt::UserRole + 1, \fBTooltipRole\fP, \fBIsVisibleRole\fP, \fBNeedsAttentionRole\fP, \fBIconRevisionRole\fP, \fBIconKeyRole\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSystemTrayHandler\fP (QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "int \fBrowCount\fP (const QModelIndex &parent=QModelIndex()) const override"
+.br
+.ti -1c
+.RI "QVariant \fBdata\fP (const QModelIndex &index, int role=Qt::DisplayRole) const override"
+.br
+.ti -1c
+.RI "QHash< int, QByteArray > \fBroleNames\fP () const override"
+.br
+.ti -1c
+.RI "QImage \fBGetIconImage\fP (int key) const"
+.br
+.ti -1c
+.RI "void \fBActivate\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "void \fBContextMenu\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "void \fBSecondaryActivate\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "void \fBScroll\fP (const QString &service, int delta)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBactivate\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBcontextMenu\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBsecondaryActivate\fP (const QString &service, int x, int y)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBscroll\fP (const QString &service, int delta)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

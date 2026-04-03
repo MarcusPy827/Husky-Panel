@@ -1,0 +1,94 @@
+\doxysection{panel\+::backend\+::Wlr\+Toplevel\+Mgr Class Reference}
+\hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr}{}\label{classpanel_1_1backend_1_1WlrToplevelMgr}\index{panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}}
+Inheritance diagram for panel\+::backend\+::Wlr\+Toplevel\+Mgr\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.702128cm]{classpanel_1_1backend_1_1WlrToplevelMgr}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_a81adbacfbd01deee2431015c8e61de84}\label{classpanel_1_1backend_1_1WlrToplevelMgr_a81adbacfbd01deee2431015c8e61de84} 
+void {\bfseries Top\+Level\+Activated} (const QString \&app\+\_\+id, const QString \&title)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1WlrToplevelMgr_ab7cb72667efd87afdeb577f2e1c0ac36}{Wlr\+Toplevel\+Mgr}} ()
+\begin{DoxyCompactList}\small\item\em Constructor of \doxylink{classpanel_1_1backend_1_1WlrToplevelMgr}{Wlr\+Toplevel\+Mgr}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1WlrToplevelMgr_a5ded7b224bbf613abcb55d188a039823}{\texorpdfstring{$\sim$}{\string~}\+Wlr\+Toplevel\+Mgr}} ()
+\begin{DoxyCompactList}\small\item\em Destructor of \doxylink{classpanel_1_1backend_1_1WlrToplevelMgr}{Wlr\+Toplevel\+Mgr}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrToplevelMgr_ae997293725e36bd1692a078bf7c441d6}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+manager\+\_\+v1\+\_\+toplevel}} (struct \+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1 \texorpdfstring{$\ast$}{*}toplevel) override
+\begin{DoxyCompactList}\small\item\em Callback for new toplevel-\/window handle from WM. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_ab7cb72667efd87afdeb577f2e1c0ac36}\index{panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}!WlrToplevelMgr@{WlrToplevelMgr}}
+\index{WlrToplevelMgr@{WlrToplevelMgr}!panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}}
+\doxysubsubsection{\texorpdfstring{WlrToplevelMgr()}{WlrToplevelMgr()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrToplevelMgr_ab7cb72667efd87afdeb577f2e1c0ac36} 
+panel\+::backend\+::\+Wlr\+Toplevel\+Mgr\+::\+Wlr\+Toplevel\+Mgr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor of \doxylink{classpanel_1_1backend_1_1WlrToplevelMgr}{Wlr\+Toplevel\+Mgr}. 
+
+Constructs a wrapper for zwlr\+\_\+foreign\+\_\+toplevel\+\_\+manager\+\_\+v1, which is responsible for managing the toplevel windows. \begin{DoxyNote}{Note}
+The binding is using a requested version of 3. 
+
+Whether the binding is successful can be checked via {\ttfamily is\+Active()}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_a5ded7b224bbf613abcb55d188a039823}\index{panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}!````~WlrToplevelMgr@{\texorpdfstring{$\sim$}{\string~}WlrToplevelMgr}}
+\index{````~WlrToplevelMgr@{\texorpdfstring{$\sim$}{\string~}WlrToplevelMgr}!panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WlrToplevelMgr()}{\string~WlrToplevelMgr()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrToplevelMgr_a5ded7b224bbf613abcb55d188a039823} 
+panel\+::backend\+::\+Wlr\+Toplevel\+Mgr\+::\texorpdfstring{$\sim$}{\string~}\+Wlr\+Toplevel\+Mgr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor of \doxylink{classpanel_1_1backend_1_1WlrToplevelMgr}{Wlr\+Toplevel\+Mgr}. 
+
+If the extension is STILL active, call {\ttfamily stop()} to disconnect from the global object. Then Qt will take care of the rest of the QObject part. \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1backend_1_1WlrToplevelMgr_ae997293725e36bd1692a078bf7c441d6}\index{panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}!zwlr\_foreign\_toplevel\_manager\_v1\_toplevel@{zwlr\_foreign\_toplevel\_manager\_v1\_toplevel}}
+\index{zwlr\_foreign\_toplevel\_manager\_v1\_toplevel@{zwlr\_foreign\_toplevel\_manager\_v1\_toplevel}!panel::backend::WlrToplevelMgr@{panel::backend::WlrToplevelMgr}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_manager\_v1\_toplevel()}{zwlr\_foreign\_toplevel\_manager\_v1\_toplevel()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrToplevelMgr_ae997293725e36bd1692a078bf7c441d6} 
+void panel\+::backend\+::\+Wlr\+Toplevel\+Mgr\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+manager\+\_\+v1\+\_\+toplevel (\begin{DoxyParamCaption}\item[{struct \+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1 \texorpdfstring{$\ast$}{*}}]{toplevel}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Callback for new toplevel-\/window handle from WM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em toplevel} & (struct \+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\texorpdfstring{$\ast$}{*}) The handle mentioned above.\\
+\hline
+\end{DoxyParams}
+Creates a {\ttfamily Wlr\+Toplevel\+Handle} and connects the {\ttfamily Actived/\+Closed} signals to target slots. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+manager\+\_\+v1}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+h\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+cc\end{DoxyCompactItemize}

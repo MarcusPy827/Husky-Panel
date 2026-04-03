@@ -1,0 +1,99 @@
+\doxysection{panel\+::backend\+::Current\+Window\+Wlroots\+Impl Class Reference}
+\hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl}{}\label{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl}\index{panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}}
+Inheritance diagram for panel\+::backend\+::Current\+Window\+Wlroots\+Impl\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_accb9060a76e53e5a9ce603c44bd8993f}{Current\+Window\+Wlroots\+Impl}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor of {\ttfamily \doxylink{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl}{Current\+Window\+Wlroots\+Impl}}. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a28410ec3c7dba17082461a9db28668b7}{Get\+Application\+Name}} () override
+\begin{DoxyCompactList}\small\item\em Gets the "{}friendly"{} application name of the current active window. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a2ef464b381c2f6838908443ff2802d52}{Get\+Package\+Name}} () override
+\begin{DoxyCompactList}\small\item\em Gets the application package name of the current active window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Current\+Window\+Provider} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Signals inherited from \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Current\+Window\+Changed} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_accb9060a76e53e5a9ce603c44bd8993f}\index{panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}!CurrentWindowWlrootsImpl@{CurrentWindowWlrootsImpl}}
+\index{CurrentWindowWlrootsImpl@{CurrentWindowWlrootsImpl}!panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}}
+\doxysubsubsection{\texorpdfstring{CurrentWindowWlrootsImpl()}{CurrentWindowWlrootsImpl()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_accb9060a76e53e5a9ce603c44bd8993f} 
+panel\+::backend\+::\+Current\+Window\+Wlroots\+Impl\+::\+Current\+Window\+Wlroots\+Impl (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor of {\ttfamily \doxylink{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl}{Current\+Window\+Wlroots\+Impl}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject.\\
+\hline
+\end{DoxyParams}
+Connect the {\ttfamily Top\+Level\+Activated} signal of the manager. \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a28410ec3c7dba17082461a9db28668b7}\index{panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}!GetApplicationName@{GetApplicationName}}
+\index{GetApplicationName@{GetApplicationName}!panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}}
+\doxysubsubsection{\texorpdfstring{GetApplicationName()}{GetApplicationName()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a28410ec3c7dba17082461a9db28668b7} 
+QString panel\+::backend\+::\+Current\+Window\+Wlroots\+Impl\+::\+Get\+Application\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the "{}friendly"{} application name of the current active window. 
+
+Returns the application name of the top-\/level window. \begin{DoxySeeAlso}{See also}
+{\ttfamily On\+Top\+Level\+Activated()} for how that name is gathered. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QString) The friendly application name. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}.
+
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a2ef464b381c2f6838908443ff2802d52}\index{panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}!GetPackageName@{GetPackageName}}
+\index{GetPackageName@{GetPackageName}!panel::backend::CurrentWindowWlrootsImpl@{panel::backend::CurrentWindowWlrootsImpl}}
+\doxysubsubsection{\texorpdfstring{GetPackageName()}{GetPackageName()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowWlrootsImpl_a2ef464b381c2f6838908443ff2802d52} 
+QString panel\+::backend\+::\+Current\+Window\+Wlroots\+Impl\+::\+Get\+Package\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the application package name of the current active window. 
+
+Returns the package name of the application for the top-\/level window. \begin{DoxyReturn}{Returns}
+(QString) The application package name. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+h\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+cc\end{DoxyCompactItemize}

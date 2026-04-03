@@ -1,0 +1,106 @@
+\doxysection{system\+\_\+tray\+\_\+handler.\+h}
+\hypertarget{system__tray__handler_8h_source}{}\label{system__tray__handler_8h_source}\index{src/components/system\_tray/system\_tray\_handler.h@{src/components/system\_tray/system\_tray\_handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ system\_tray\_handler.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_SYSTEM\_TRAY\_HANDLER\_H\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_SYSTEM\_TRAY\_HANDLER\_H\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QAbstractListModel>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QHash>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QImage>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QReadWriteLock>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}src/info\_server/tray\_handler/tray\_handler.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}src/components/system\_tray/tray\_icon\_item.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{namespace\ }frontend\ \{}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ QAbstractListModel\ that\ exposes\ the\ set\ of\ StatusNotifierItem\ icons\ to\ QML.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Thread-\/safe\ icon\ image\ access\ for\ the\ rendering\ thread\ is\ handled\ via}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ GetIconImage()\ which\ is\ protected\ by\ a\ QReadWriteLock.}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }SystemTrayHandler\ :\ \textcolor{keyword}{public}\ QAbstractListModel\ \{}
+\DoxyCodeLine{00039\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{enum}\ Roles\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ ServiceRole\ \ \ \ \ \ \ =\ Qt::UserRole\ +\ 1,}
+\DoxyCodeLine{00044\ \ \ \ \ TooltipRole,}
+\DoxyCodeLine{00045\ \ \ \ \ IsVisibleRole,}
+\DoxyCodeLine{00046\ \ \ \ \ NeedsAttentionRole,}
+\DoxyCodeLine{00047\ \ \ \ \ IconRevisionRole,}
+\DoxyCodeLine{00048\ \ \ \ \ IconKeyRole,}
+\DoxyCodeLine{00049\ \ \ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{explicit}\ SystemTrayHandler(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00052\ \ \ \string~SystemTrayHandler()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{int}\ rowCount(\textcolor{keyword}{const}\ QModelIndex\&\ parent\ =\ QModelIndex())\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00055\ \ \ QVariant\ data(\textcolor{keyword}{const}\ QModelIndex\&\ index,}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00057\ \ \ QHash<int,\ QByteArray>\ roleNames()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{comment}{//\ Called\ by\ TrayIconImageProvider\ from\ the\ render\ thread.}}
+\DoxyCodeLine{00060\ \ \ QImage\ GetIconImage(\textcolor{keywordtype}{int}\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ backend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{void}\ Activate(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ ContextMenu(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{void}\ SecondaryActivate(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{void}\ Scroll(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ delta);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ QML\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00069\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ activate(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00070\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ contextMenu(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00071\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ secondaryActivate(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00072\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ scroll(\textcolor{keyword}{const}\ QString\&\ service,\ \textcolor{keywordtype}{int}\ delta);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{int}\ IndexOf(\textcolor{keyword}{const}\ QString\&\ service)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ QList<QString>\ services\_;}
+\DoxyCodeLine{00078\ \ \ QHash<QString,\ TrayIconItem*>\ entries\_;}
+\DoxyCodeLine{00079\ \ \ QHash<QString,\ int>\ icon\_revisions\_;}
+\DoxyCodeLine{00080\ \ \ QHash<QString,\ int>\ icon\_keys\_;}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{int}\ next\_key\_\ =\ 0;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{//\ Thread-\/safe\ image\ cache:\ written\ on\ main\ thread,\ read\ on\ render\ thread.}}
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{mutable}\ QReadWriteLock\ images\_lock\_;}
+\DoxyCodeLine{00085\ \ \ QHash<int,\ QImage>\ icon\_images\_;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{classpanel_1_1backend_1_1TrayHandler}{backend::TrayHandler}}*\ tray\_handler\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}\ OnIconAdded(\textcolor{keyword}{const}\ QString\&\ service);}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ OnIconDeleted(\textcolor{keyword}{const}\ QString\&\ service);}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ OnEntryIconChanged(\textcolor{keyword}{const}\ QString\&\ service);}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ OnEntryTooltipChanged(\textcolor{keyword}{const}\ QString\&\ service);}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ OnEntryStatusChanged(\textcolor{keyword}{const}\ QString\&\ service);}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \}\ \ \textcolor{comment}{//\ namespace\ frontend}}
+\DoxyCodeLine{00098\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_SYSTEM\_TRAY\_HANDLER\_H\_}}
+
+\end{DoxyCode}

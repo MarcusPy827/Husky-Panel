@@ -1,0 +1,67 @@
+\doxysection{wlan\+\_\+info.\+h}
+\hypertarget{wlan__info_8h_source}{}\label{wlan__info_8h_source}\index{src/info\_server/wlan\_info/wlan\_info.h@{src/info\_server/wlan\_info/wlan\_info.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_WLAN\_INFO\_WLAN\_INFO\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_WLAN\_INFO\_WLAN\_INFO\_H\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ WI\_WIFI\_TYPE\ 2}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QStringList>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QVariantMap>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }WlanInfo\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00031\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{explicit}\ WlanInfo(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00035\ \ \ \string~WlanInfo()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ GetWlanSignalStrength();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ signals:}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ WlanStatusChanged();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ QString\ wifi\_device\_path\_;}
+\DoxyCodeLine{00044\ \ \ QString\ active\_ap\_path\_;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ FindAndSubscribeToWifiDevice();}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ SubscribeToAp(\textcolor{keyword}{const}\ QString\&\ ap\_path);}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ UnsubscribeFromAp(\textcolor{keyword}{const}\ QString\&\ ap\_path);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ OnDevicePropertiesChanged(\textcolor{keyword}{const}\ QString\&\ interface,}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ QVariantMap\&\ changed,\ \textcolor{keyword}{const}\ QStringList\&\ invalidated);}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{void}\ OnApPropertiesChanged(\textcolor{keyword}{const}\ QString\&\ interface,}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ QVariantMap\&\ changed,\ \textcolor{keyword}{const}\ QStringList\&\ invalidated);}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ OnNmStateChanged(uint\ state);}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00059\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_WLAN\_INFO\_WLAN\_INFO\_H\_}}
+
+\end{DoxyCode}

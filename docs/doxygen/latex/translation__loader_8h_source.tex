@@ -1,0 +1,66 @@
+\doxysection{translation\+\_\+loader.\+h}
+\hypertarget{translation__loader_8h_source}{}\label{translation__loader_8h_source}\index{src/translation\_loader/translation\_loader.h@{src/translation\_loader/translation\_loader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_TRANSLATION\_LOADER\_TRANSLATION\_LOADER\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_TRANSLATION\_LOADER\_TRANSLATION\_LOADER\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QSettings>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}src/theme\_loader/theme\_conf.h"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{enum\ class}\ LanguageType\ \{}
+\DoxyCodeLine{00032\ \ \ EN\_US,}
+\DoxyCodeLine{00033\ \ \ ZH\_CN}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }TranslationLoader:\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00037\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{explicit}\ TranslationLoader(\textcolor{keyword}{const}\ QString\&\ file,}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ LanguageType\&\ fallback\_lng);}
+\DoxyCodeLine{00042\ \ \ \string~TranslationLoader()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ QString\ GetLocaleSuffix(\textcolor{keyword}{const}\ LanguageType\&\ type);}
+\DoxyCodeLine{00045\ \ \ QString\ GetLocaleDisplayName(\textcolor{keyword}{const}\ LanguageType\&\ type);}
+\DoxyCodeLine{00046\ \ \ QString\ GetTranslation(\textcolor{keyword}{const}\ QString\&\ message);}
+\DoxyCodeLine{00047\ \ \ Q\_INVOKABLE\ QString\ Tr(\textcolor{keyword}{const}\ QString\&\ message);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{void}\ RecordCurrentLanguage(\textcolor{keyword}{const}\ QString\&\ lng);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ LanguageType\ fallback\_lng\_\ =\ LanguageType::EN\_US;}
+\DoxyCodeLine{00053\ \ \ LanguageType\ current\_lng\_\ =\ LanguageType::EN\_US;}
+\DoxyCodeLine{00054\ \ \ QSettings\ *\ translation\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00058\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_TRANSLATION\_LOADER\_TRANSLATION\_LOADER\_H\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\doxysection{log.\+h}
+\hypertarget{log_8h_source}{}\label{log_8h_source}\index{src/utils/log/log.h@{src/utils/log/log.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it\ }}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by\ the\ Free\ }}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Software\ Foundation,\ version\ 3.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT\ }}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or\ }}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ General\ Public\ License\ for\ }}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ more\ details.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License\ along\ with}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ this\ program.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ SRC\_UTILS\_LOG\_LOG\_H\_}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ SRC\_UTILS\_LOG\_LOG\_H\_}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ LOG\_BLUE\_BOLD\ "{}\(\backslash\)033[34;1m"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ LOG\_GREEN\_BOLD\ "{}\(\backslash\)x1b[32;1m"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ LOG\_YELLOW\_BOLD\ "{}\(\backslash\)x1b[33;1m"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ LOG\_RED\_BOLD\ "{}\(\backslash\)x1b[31;1m"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ LOG\_UNDERLINE\ "{}\(\backslash\)x1b[39;4m"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ LOG\_RESET\ "{}\(\backslash\)033[0m"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }utils\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1utils_1_1Log}{Log}}\ \{}
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ QString\ Info(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{static}\ QString\ Info(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ title,}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{static}\ QString\ Ok(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{static}\ QString\ Ok(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ title,}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ QString\ Warn(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{static}\ QString\ Warn(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ title,}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{static}\ QString\ Error(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{static}\ QString\ Error(\textcolor{keyword}{const}\ QString\&\ tag,\ \textcolor{keyword}{const}\ QString\&\ title,}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{const}\ QString\&\ content);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \}\ \ \textcolor{comment}{//\ namespace\ utils}}
+\DoxyCodeLine{00050\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_UTILS\_LOG\_LOG\_H\_}}
+
+\end{DoxyCode}

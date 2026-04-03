@@ -1,0 +1,98 @@
+\doxysection{dbus\+\_\+def.\+h}
+\hypertarget{dbus__def_8h_source}{}\label{dbus__def_8h_source}\index{src/utils/dbus\_def.h@{src/utils/dbus\_def.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2025\ MarcusPy827}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SRC\_UTILS\_DBUS\_DEF\_H\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SRC\_UTILS\_DBUS\_DEF\_H\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Battery\ Info}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ DBUS\_UPOWER\_SERVICE\ "{}org.freedesktop.UPower"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ DBUS\_UPOWER\_DISPLAY\_SERVICE\_PATH\ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ "{}/org/freedesktop/UPower/devices/DisplayDevice"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DBUS\_UPOWER\_DEVICE\_INTERFACE\ "{}org.freedesktop.UPower.Device"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ DBUS\_PROPERTIES\_INTERFACE\ "{}org.freedesktop.DBus.Properties"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ DBUS\_PROP\_UPDTE\_METHOD\ "{}PropertiesChanged"{}}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ KDE\ KRunner}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ DBUS\_KRUNNER\_SERVICE\ "{}org.kde.krunner"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ DBUS\_KRUNNER\_APP\_PATH\ "{}/App"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ DBUS\_KRUNNER\_APP\_INTERFACE\ "{}org.kde.krunner.App"{}}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ User\ Info}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ DBUS\_ACCOUNTS\_SERVICE\ "{}org.freedesktop.Accounts"{}}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ DBUS\_ACCOUNTS\_USER\_INTERFACE\ "{}org.freedesktop.Accounts.User"{}}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ WLAN}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_SERVICE\ "{}org.freedesktop.NetworkManager"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_PATH\ "{}/org/freedesktop/NetworkManager"{}}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_INTERFACE\ "{}org.freedesktop.NetworkManager"{}}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_DEVICE\_INTERFACE\ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ "{}org.freedesktop.NetworkManager.Device"{}}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_WIRELESS\_INTERFACE\ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ "{}org.freedesktop.NetworkManager.Device.Wireless"{}}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ DBUS\_NETWORK\_MANAGER\_ACCESS\_POINT\_INTERFACE\ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ "{}org.freedesktop.NetworkManager.AccessPoint"{}}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ Current\ Window\ Info\ (KWin)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ DBUS\_KWIN\_SERVICE\ "{}org.kde.KWin"{}}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ DBUS\_CUSTOM\_KWIN\_WINDOW\_SERVICE\ "{}marcus.panel.util.AppBridge"{}}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ DBUS\_CUSTOM\_KWIN\_WINDOW\_PATH\ "{}/AppBridge"{}}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ DBUS\_CUSTOM\_KWIN\_WINDOW\_INTERFACE\ "{}marcus.panel.util.AppBridge"{}}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ DBUS\_CUSTOM\_KWIN\_WINDOW\_INFO\_INTERFACE\ "{}UpdateActiveApp"{}}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ System\ Tray}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_SERVICE\ "{}org.kde.StatusNotifierWatcher"{}}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_PATH\ "{}/StatusNotifierWatcher"{}}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_INTERFACE\ "{}org.kde.StatusNotifierWatcher"{}}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_METHOD\ "{}RegisterStatusNotifierHost"{}}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_ICON\_REGISTERED\_METHOD\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ "{}StatusNotifierItemRegistered"{}}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_ICON\_UNREGISTERED\_METHOD\ \(\backslash\)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ "{}StatusNotifierItemUnregistered"{}}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ DBUS\_STATUS\_NOTIFIER\_WATCHER\_GET\_REGISTERED\_METHOD\ \(\backslash\)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ "{}RegisteredStatusNotifierItems"{}}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ Session\ Handler}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ DBUS\_LOGIND\_SERVICE\ "{}org.freedesktop.login1"{}}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ DBUS\_LOGIND\_PATH\ "{}/org/freedesktop/login1"{}}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ DBUS\_LOGIND\_MANAGER\_INTERFACE\ "{}org.freedesktop.login1.Manager"{}}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ DBUS\_LOGIND\_SESSION\_INTERFACE\ "{}org.freedesktop.login1.Session"{}}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ DBUS\_GNOME\_SESSION\_MANAGER\_SERVICE\ "{}org.gnome.SessionManager"{}}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ DBUS\_GNOME\_SESSION\_MANAGER\_PATH\ "{}/org/gnome/SessionManager"{}}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ DBUS\_GNOME\_SESSION\_MANAGER\_INTERFACE\ "{}org.gnome.SessionManager"{}}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ DBUS\_KDE\_SHUTDOWN\_SERVICE\ "{}org.kde.Shutdown"{}}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ DBUS\_KDE\_SHUTDOWN\_PATH\ "{}/Shutdown"{}}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ DBUS\_KDE\_SHUTDOWN\_INTERFACE\ "{}org.kde.Shutdown"{}}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ DBUS\_KDE\_SHUTDOWN\_LOGOUT\_METHOD\ "{}logout"{}}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ DBUS\_XFCE\_SESSION\_MANAGER\_SERVICE\ "{}org.xfce.SessionManager"{}}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ DBUS\_XFCE\_SESSION\_MANAGER\_PATH\ "{}/org/xfce/SessionManager"{}}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ DBUS\_XFCE\_SESSION\_MANAGER\_INTERFACE\ "{}org.xfce.Session.Manager"{}}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ DBUS\_MATE\_SESSION\_MANAGER\_SERVICE\ "{}org.mate.SessionManager"{}}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ DBUS\_MATE\_SESSION\_MANAGER\_PATH\ "{}/org/mate/SessionManager"{}}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ DBUS\_MATE\_SESSION\_MANAGER\_INTERFACE\ "{}org.mate.SessionManager"{}}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ DBUS\_DISPLAY\_MANAGER\_SEAT\_PATH\ "{}/org/freedesktop/DisplayManager"{}}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ DBUS\_DISPLAY\_MANAGER\_SERVICE\ "{}org.freedesktop.DisplayManager"{}}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ DBUS\_DISPLAY\_MANAGER\_SEAT\_INTERFACE\ \(\backslash\)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ "{}org.freedesktop.DisplayManager.Seat"{}}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_UTILS\_DBUS\_DEF\_H\_}}
+
+\end{DoxyCode}

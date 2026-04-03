@@ -1,0 +1,65 @@
+\doxysection{color\+\_\+palette\+\_\+wrapper.\+h}
+\hypertarget{color__palette__wrapper_8h_source}{}\label{color__palette__wrapper_8h_source}\index{src/utils/color\_palette\_wrapper/color\_palette\_wrapper.h@{src/utils/color\_palette\_wrapper/color\_palette\_wrapper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify\ it\ }}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by\ the\ Free\ }}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Software\ Foundation,\ version\ 3.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,\ but\ WITHOUT\ }}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of\ MERCHANTABILITY\ or\ }}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ See\ the\ GNU\ General\ Public\ License\ for\ }}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ more\ details.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License\ along\ with}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ this\ program.\ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ SRC\_UTILS\_COLOR\_PALETTE\_WRAPPER\_COLOR\_PALETTE\_WRAPPER\_H\_}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ SRC\_UTILS\_COLOR\_PALETTE\_WRAPPER\_COLOR\_PALETTE\_WRAPPER\_H\_}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QColor>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/material-\/color-\/utilities/cpp/palettes/core.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/material-\/color-\/utilities/cpp/palettes/tones.h"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/material-\/color-\/utilities/cpp/dynamiccolor/dynamic\_scheme.h"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }utils\ \{}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{enum\ class}\ ColorSchemeType\ \{}
+\DoxyCodeLine{00032\ \ \ kExpressive,}
+\DoxyCodeLine{00033\ \ \ kFidelity,}
+\DoxyCodeLine{00034\ \ \ kFruitSalad,}
+\DoxyCodeLine{00035\ \ \ kMonochrome,}
+\DoxyCodeLine{00036\ \ \ kNeutral,}
+\DoxyCodeLine{00037\ \ \ kVibrant,}
+\DoxyCodeLine{00038\ \ \ kRainbow,}
+\DoxyCodeLine{00039\ \ \ kTonalSpot}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1utils_1_1ColorPaletteWrapper}{ColorPaletteWrapper}}\ \{}
+\DoxyCodeLine{00043\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{static}\ QColor\ GetSystemHighlightColor();}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{static}\ material\_color\_utilities::Argb\ Hex2Rgb(\textcolor{keyword}{const}\ QString\&\ hex);}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{static}\ QString\ Argb2Hex(material\_color\_utilities::Argb\ argb,}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ read\_alpha\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ material\_color\_utilities::CorePalettes\ GenPalette(\textcolor{keyword}{const}\ QString\&\ hex);}
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\ GenScheme(}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ QString\&\ primary\_hex,\ ColorSchemeType\ type,\ \textcolor{keywordtype}{bool}\ is\_dark\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ contrast\_level\ =\ 0.0);}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static}\ QString\ GetTypeName(ColorSchemeType\ type);}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ IsDark();}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \}\ \ \textcolor{comment}{//\ namespace\ utils}}
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_UTILS\_COLOR\_PALETTE\_WRAPPER\_COLOR\_PALETTE\_WRAPPER\_H\_}}
+
+\end{DoxyCode}
