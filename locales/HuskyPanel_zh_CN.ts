@@ -91,24 +91,6 @@
     </message>
 </context>
 <context>
-    <name>AppDrawerSessionMenu</name>
-    <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="129"/>
-        <source>Lock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="206"/>
-        <source>Log Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../res/interfaces/app_drawer/AppDrawerSessionMenu.qml" line="285"/>
-        <source>Switch User</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Calendar</name>
     <message>
         <source>Calendar</source>
