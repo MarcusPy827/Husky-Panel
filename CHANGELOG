@@ -1,5 +1,24 @@
 # Changelog | 更新信息
-## VERSION 0.9.0 - alpha
-(WIP) First release
+## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/wlroots_app_indicator_0402
+  * Redo the ripple and clip effects of `AppIndicator`.
+  * 重做了`AppIndicator`的涟漪与圆角裁剪效果
+  * Added `wlroots` WM support for `AppIndicator`.
+  * 为`AppIndicator`加入了`wlroots`系窗口管理器支持
 
-(施工中) 第一个版本
+## VERSION 0.9.4 (DEMO RELEASE)
+* Re-implemented all elements w/ QML.
+* 使用QML重制了界面
+* Made a brand new calendar flyout.
+* 重做了日历UI
+* Enhanced AppDrawer style.
+* 改进了应用抽屉样式
+* Added tons of animations to the status bar, application drawer, and calendar.
+* 为状态栏、应用抽屉与日历加入了大量动画
+
+* **IMPORTANT**  Updated GitLab CI & GitHub Actions scripts
+* **IMPORTANT**  更新了GitLab CI与GitHub Actions脚本
+
+## VERSION 0.9.3 (DEMO RELEASE)
+* Initial commit with simple QWidget bars.
+* 初次提交，包含一个使用QWidget制作的状态栏。

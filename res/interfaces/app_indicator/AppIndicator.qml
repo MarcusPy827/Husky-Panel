@@ -25,9 +25,10 @@ Rectangle {
   implicitWidth: contentLayout.implicitWidth + 16
   Layout.fillHeight: true
 
-  clip: true
+  radius: 6
   color: "transparent"
-  layer.enabled: true
+
+  readonly property color rippleColor: Theme.status_bar_surface_fg
 
   ColumnLayout {
     id: contentLayout
@@ -54,75 +55,70 @@ Rectangle {
     }
   }
 
-  // Item ripples
-  Item {
-    id: rippleContainer
+  Canvas {
+    id: ripple
     anchors.fill: parent
-    clip: true
+    opacity: 0
 
-    property bool rippleReleased: false
-    property int pressTimestamp: 0
-    readonly property int longPressThreshold: 300
+    property real centerX: width / 2
+    property real centerY: height / 2
+    property real rippleRadius: 0
+    readonly property color rippleColor: Theme.status_bar_surface_fg
 
-    Rectangle {
-      id: ripple
-
-      width: 80
-      height: 80
-      radius: width / 2
-      color: Theme.status_bar_surface_fg
-      opacity: 0
-      transformOrigin: Item.Center
-
-      NumberAnimation {
-        id: rippleExpandAnim
-        target: ripple
-        property: "scale"
-        from: 0
-        to: 3.5
-        duration: 800
-        easing.type: Easing.OutQuad
-
-        onStopped: {
-          if (rippleContainer.rippleReleased) {
-            rippleFadeAnim.restart()
-          }
-        }
-      }
-
-      NumberAnimation {
-        id: rippleFadeAnim
-        target: ripple
-        property: "opacity"
-        to: 0
-        duration: 300
-        easing.type: Easing.OutQuad
-      }
+    onPaint: {
+      var ctx = getContext("2d")
+      ctx.clearRect(0, 0, width, height)
+      ctx.save()
+      var r = root.radius
+      ctx.beginPath()
+      ctx.moveTo(r, 0)
+      ctx.lineTo(width - r, 0)
+      ctx.arcTo(width, 0, width, r, r)
+      ctx.lineTo(width, height - r)
+      ctx.arcTo(width, height, width - r, height, r)
+      ctx.lineTo(r, height)
+      ctx.arcTo(0, height, 0, height - r, r)
+      ctx.lineTo(0, r)
+      ctx.arcTo(0, 0, r, 0, r)
+      ctx.closePath()
+      ctx.clip()
+      var c = rippleColor
+      ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
+      ctx.beginPath()
+      ctx.arc(centerX, centerY, rippleRadius, 0, 2 * Math.PI)
+      ctx.fill()
+      ctx.restore()
     }
 
-    MouseArea {
-      anchors.fill: parent
+    onOpacityChanged: requestPaint()
+    onRippleRadiusChanged: requestPaint()
 
-      onPressed: function(mouse) {
-        rippleContainer.rippleReleased = false
-        rippleContainer.pressTimestamp = Date.now()
-        ripple.x = mouse.x - ripple.width / 2
-        ripple.y = mouse.y - ripple.height / 2
-        ripple.scale = 0
-        ripple.opacity = 0.10
-        rippleFadeAnim.stop()
-        rippleExpandAnim.restart()
+    ParallelAnimation {
+      id: rippleAnim
+      NumberAnimation {
+        target: ripple; property: "rippleRadius"
+        from: 0
+        to: Math.sqrt(ripple.width * ripple.width + ripple.height * ripple.height)
+        duration: 400; easing.type: Easing.OutCubic
       }
-
-      onReleased: {
-        rippleContainer.rippleReleased = true
-        const isLongPress = (Date.now() - rippleContainer.pressTimestamp) >= rippleContainer.longPressThreshold
-        if (!isLongPress || !rippleExpandAnim.running) {
-          // If it is a single on click or ripple finishedexpanding,
-          // fade out immediately.
-          rippleFadeAnim.restart()
+      SequentialAnimation {
+        PropertyAction { target: ripple; property: "opacity"; value: 0.3 }
+        PauseAnimation { duration: 150 }
+        NumberAnimation {
+          target: ripple; property: "opacity"
+          from: 0.3; to: 0
+          duration: 250; easing.type: Easing.OutCubic
         }
       }
+    }
+  }
+
+  MouseArea {
+    anchors.fill: parent
+    onPressed: (mouse) => {
+      ripple.centerX = mouse.x
+      ripple.centerY = mouse.y
+      rippleAnim.restart()
     }
   }
 }
