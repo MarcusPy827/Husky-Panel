@@ -38,6 +38,7 @@ var hierarchy =
       [ "panel::loader::QuickThemeProvider", "classpanel_1_1loader_1_1QuickThemeProvider.html", null ],
       [ "panel::loader::ThemeLoader", "classpanel_1_1loader_1_1ThemeLoader.html", null ],
       [ "panel::loader::TranslationLoader", "classpanel_1_1loader_1_1TranslationLoader.html", null ],
+      [ "panel::loader::TrayConfigHandler", "classpanel_1_1loader_1_1TrayConfigHandler.html", null ],
       [ "panel::utils::LayerShellHelper", "classpanel_1_1utils_1_1LayerShellHelper.html", null ]
     ] ],
     [ "QQuickImageProvider", null, [
@@ -56,6 +57,7 @@ var hierarchy =
     [ "panel::backend::SNIToolTip", "structpanel_1_1backend_1_1SNIToolTip.html", null ],
     [ "panel::utils::Strings", "classpanel_1_1utils_1_1Strings.html", null ],
     [ "panel::loader::StyleTuple", "structpanel_1_1loader_1_1StyleTuple.html", null ],
+    [ "panel::loader::TrayConfig", "structpanel_1_1loader_1_1TrayConfig.html", null ],
     [ "QtWayland::zwlr_foreign_toplevel_handle_v1", null, [
       [ "panel::backend::WlrootsHelper", "classpanel_1_1backend_1_1WlrootsHelper.html", null ]
     ] ],

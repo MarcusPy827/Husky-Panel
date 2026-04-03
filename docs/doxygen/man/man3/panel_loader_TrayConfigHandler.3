@@ -1,0 +1,77 @@
+.TH "panel::loader::TrayConfigHandler" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::loader::TrayConfigHandler
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTrayConfigHandler\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor of the system tray configuration handler\&. "
+.ti -1c
+.RI "\fB~TrayConfigHandler\fP ()"
+.br
+.RI "The destructor of the system tray configuration handler\&. "
+.ti -1c
+.RI "std::vector< \fBTrayConfig\fP > \fBGetTrayConfigs\fP ()"
+.br
+.RI "Get a vector of the configurations for recorded system tray icons\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::loader::TrayConfigHandler::TrayConfigHandler (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor of the system tray configuration handler\&. 
+.PP
+\fBNote\fP
+.RS 4
+It is here so we could register this one to the QML engine providers\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "panel::loader::TrayConfigHandler::~TrayConfigHandler ()"
+
+.PP
+The destructor of the system tray configuration handler\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::vector< \fBTrayConfig\fP > panel::loader::TrayConfigHandler::GetTrayConfigs ()"
+
+.PP
+Get a vector of the configurations for recorded system tray icons\&. 
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(std::vector<TrayConfig>) The vector of the configurations\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

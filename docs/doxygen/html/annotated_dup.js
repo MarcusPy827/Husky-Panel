@@ -41,7 +41,9 @@ var annotated_dup =
         [ "SchemeTuple", "structpanel_1_1loader_1_1SchemeTuple.html", null ],
         [ "StyleTuple", "structpanel_1_1loader_1_1StyleTuple.html", null ],
         [ "ThemeLoader", "classpanel_1_1loader_1_1ThemeLoader.html", null ],
-        [ "TranslationLoader", "classpanel_1_1loader_1_1TranslationLoader.html", null ]
+        [ "TranslationLoader", "classpanel_1_1loader_1_1TranslationLoader.html", null ],
+        [ "TrayConfig", "structpanel_1_1loader_1_1TrayConfig.html", null ],
+        [ "TrayConfigHandler", "classpanel_1_1loader_1_1TrayConfigHandler.html", "classpanel_1_1loader_1_1TrayConfigHandler" ]
       ] ],
       [ "utils", null, [
         [ "ColorPaletteWrapper", "classpanel_1_1utils_1_1ColorPaletteWrapper.html", null ],

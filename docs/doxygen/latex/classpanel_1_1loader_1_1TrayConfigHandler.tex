@@ -1,0 +1,78 @@
+\doxysection{panel\+::loader\+::Tray\+Config\+Handler Class Reference}
+\hypertarget{classpanel_1_1loader_1_1TrayConfigHandler}{}\label{classpanel_1_1loader_1_1TrayConfigHandler}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+Inheritance diagram for panel\+::loader\+::Tray\+Config\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpanel_1_1loader_1_1TrayConfigHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_abb611be5c21110d70fd27118d7026448}{Tray\+Config\+Handler}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor of the system tray configuration handler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_af3821f8ca6d8e369d8fea31e78be26a5}{\texorpdfstring{$\sim$}{\string~}\+Tray\+Config\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em The destructor of the system tray configuration handler. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structpanel_1_1loader_1_1TrayConfig}{Tray\+Config}} $>$ \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_a0081ec49217ab46c220b241e82f6d175}{Get\+Tray\+Configs}} ()
+\begin{DoxyCompactList}\small\item\em Get a vector of the configurations for recorded system tray icons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_abb611be5c21110d70fd27118d7026448}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!TrayConfigHandler@{TrayConfigHandler}}
+\index{TrayConfigHandler@{TrayConfigHandler}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{TrayConfigHandler()}{TrayConfigHandler()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_abb611be5c21110d70fd27118d7026448} 
+panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Tray\+Config\+Handler (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor of the system tray configuration handler. 
+
+\begin{DoxyNote}{Note}
+It is here so we could register this one to the QML engine providers. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_af3821f8ca6d8e369d8fea31e78be26a5}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!````~TrayConfigHandler@{\texorpdfstring{$\sim$}{\string~}TrayConfigHandler}}
+\index{````~TrayConfigHandler@{\texorpdfstring{$\sim$}{\string~}TrayConfigHandler}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrayConfigHandler()}{\string~TrayConfigHandler()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_af3821f8ca6d8e369d8fea31e78be26a5} 
+panel\+::loader\+::\+Tray\+Config\+Handler\+::\texorpdfstring{$\sim$}{\string~}\+Tray\+Config\+Handler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+The destructor of the system tray configuration handler. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_a0081ec49217ab46c220b241e82f6d175}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!GetTrayConfigs@{GetTrayConfigs}}
+\index{GetTrayConfigs@{GetTrayConfigs}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{GetTrayConfigs()}{GetTrayConfigs()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_a0081ec49217ab46c220b241e82f6d175} 
+std\+::vector$<$ \mbox{\hyperlink{structpanel_1_1loader_1_1TrayConfig}{Tray\+Config}} $>$ panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Get\+Tray\+Configs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get a vector of the configurations for recorded system tray icons. 
+
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(std\+::vector$<$\+Tray\+Config$>$) The vector of the configurations. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/config\+\_\+loader/system\+\_\+tray/tray\+\_\+config\+\_\+handler.\+h\item 
+src/config\+\_\+loader/system\+\_\+tray/tray\+\_\+config\+\_\+handler.\+cc\end{DoxyCompactItemize}

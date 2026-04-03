@@ -126,7 +126,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Gets the base directory for configuration files. </p>
-<p>This function first gets the target path, it will create the directory if it doesn't exist, and then return the path. </p><dl class="section note"><dt>Note</dt><dd>This function relies on <code>QStandardPaths::writableLocation</code>. </dd></dl>
+<p>This function first gets the target path, it will create the directory if it doesn't exist, and then return the path. </p><dl class="section note"><dt>Note</dt><dd>This function relies on <code>QStandardPaths::writableLocation</code>. </dd>
+<dd>
+The program crashes if the config directory failed to create. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="#a484dbc0863d7ec0f7c6d2a5607e658f5" title="Gets the system configuration directory.">GetSystemConfigDir()</a></code>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>(QString) The base directory for configuration files. </dd></dl>
 
@@ -187,7 +189,9 @@ Static Public Member Functions</h2></td></tr>
 <p>Gets the path for the system tray configuration file. </p>
 <dl class="section note"><dt>Note</dt><dd>This function relies on <code>QStandardPaths::writableLocation</code>. </dd>
 <dd>
-This function does NOT do the existence check. </dd></dl>
+An empty file will be created if the target file does NOT exist. </dd>
+<dd>
+The program crashes if the config directory failed to create. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="#a6a72ce47a553df1e76997cf0637c17a4" title="Gets the base directory for configuration files.">GetConfigBaseDir()</a></code>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>(QString) The path for the system tray configuration file. </dd></dl>
 

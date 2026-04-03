@@ -32,6 +32,9 @@ Gets the base directory for configuration files\&. This function first gets the 
 \fBNote\fP
 .RS 4
 This function relies on \fRQStandardPaths::writableLocation\fP\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
 .RE
 .PP
 \fBSee also\fP
@@ -71,7 +74,10 @@ Gets the path for the system tray configuration file\&.
 This function relies on \fRQStandardPaths::writableLocation\fP\&. 
 
 .PP
-This function does NOT do the existence check\&. 
+An empty file will be created if the target file does NOT exist\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
 .RE
 .PP
 \fBSee also\fP

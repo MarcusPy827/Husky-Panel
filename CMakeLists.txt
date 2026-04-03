@@ -199,6 +199,8 @@ set(FRONTEND_SOURCES
 set(CONFIG_LOADER_SOURCES
   src/config_loader/path_finder/path_finder.h
   src/config_loader/path_finder/path_finder.cc
+  src/config_loader/system_tray/tray_config_handler.h
+  src/config_loader/system_tray/tray_config_handler.cc
 )
 
 set(I18N_SOURCES

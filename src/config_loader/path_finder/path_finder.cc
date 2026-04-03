@@ -18,6 +18,13 @@
 #include <QStandardPaths>
 #include <QDir>
 
+#include <sysexits.h>
+
+#include "absl/log/log.h"
+#include "absl/log/check.h"
+#include "absl/strings/str_format.h"
+#include "absl/strings/str_cat.h"
+
 #include "src/config_loader/path_finder/path_finder.h"
 
 namespace panel {
@@ -43,6 +50,7 @@ QString PathFinder::GetSystemConfigDir() {
  * @details This function first gets the target path, it will create the
  *          directory if it doesn't exist, and then return the path.
  * @note This function relies on @c QStandardPaths::writableLocation.
+ * @note The program crashes if the config directory failed to create.
  * @see @c GetSystemConfigDir().
  * @return (QString) The base directory for configuration files.
  */
@@ -51,7 +59,10 @@ QString PathFinder::GetConfigBaseDir() {
   QString target = GetSystemConfigDir() + CONFIG_DIR_NAME + "/";
   QDir dir_existence_test(target);
   if (!dir_existence_test.exists()) {
-    QDir().mkpath(target);
+    if (!QDir().mkpath(target)) {
+      LOG(ERROR) << absl::StrCat("Failed to create config directory!!");
+      exit(EX_IOERR);
+    }
   }
 
   return target;
@@ -61,13 +72,25 @@ QString PathFinder::GetConfigBaseDir() {
  * @brief Gets the path for the system tray configuration file.
  * 
  * @note This function relies on @c QStandardPaths::writableLocation.
- * @note This function does NOT do the existence check.
+ * @note An empty file will be created if the target file does NOT exist.
+ * @note The program crashes if the config directory failed to create.
  * @see @c GetConfigBaseDir().
  * @return (QString) The path for the system tray configuration file.
  */
 
 QString PathFinder::GetTrayConfigPath() {
-  return GetConfigBaseDir() + "system_tray.conf";
+  QString target = GetConfigBaseDir() + "system_tray.conf";
+  QFile file(target);
+  if (!file.exists()) {
+    if (file.open(QIODevice::WriteOnly)) {
+      file.close();
+    } else {
+      LOG(ERROR) << absl::StrCat("Failed to create system tray config file!!");
+      exit(EX_IOERR);
+    }
+  }
+
+  return target;
 }
 
 }  // namespace loader

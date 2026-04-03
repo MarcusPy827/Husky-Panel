@@ -1,0 +1,56 @@
+\doxysection{tray\+\_\+config\+\_\+handler.\+h}
+\hypertarget{tray__config__handler_8h_source}{}\label{tray__config__handler_8h_source}\index{src/config\_loader/system\_tray/tray\_config\_handler.h@{src/config\_loader/system\_tray/tray\_config\_handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_CONFIG\_LOADER\_SYSTEM\_TRAY\_TRAY\_CONFIG\_HANDLER\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_CONFIG\_LOADER\_SYSTEM\_TRAY\_TRAY\_CONFIG\_HANDLER\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ CONFIG\_DIR\_NAME\ "{}marcus.husky.panel"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpanel_1_1loader_1_1TrayConfig}{TrayConfig}}\ \{}
+\DoxyCodeLine{00032\ \ \ QString\ id;}
+\DoxyCodeLine{00033\ \ \ QString\ friendly\_name;}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ is\_visible\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_abb611be5c21110d70fd27118d7026448}{TrayConfigHandler}}\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00038\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_abb611be5c21110d70fd27118d7026448}{TrayConfigHandler}}(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_af3821f8ca6d8e369d8fea31e78be26a5}{\string~TrayConfigHandler}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ std::vector<TrayConfig>\ \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_a0081ec49217ab46c220b241e82f6d175}{GetTrayConfigs}}();}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00048\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_CONFIG\_LOADER\_SYSTEM\_TRAY\_TRAY\_CONFIG\_HANDLER\_H\_}}
+
+\end{DoxyCode}
