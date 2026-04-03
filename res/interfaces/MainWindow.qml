@@ -158,7 +158,7 @@ Window {
           Layout.topMargin: 24
           Layout.leftMargin: 24
           Layout.rightMargin: 24
-          text: StatusBarTranslator.Tr("Action_" + confirmDialog.pendingLabel)
+          text: StatusBarTranslator.Tr(confirmDialog.pendingLabel)
           font.pixelSize: 24
           color: Theme.surface_fg
           wrapMode: Text.WordWrap

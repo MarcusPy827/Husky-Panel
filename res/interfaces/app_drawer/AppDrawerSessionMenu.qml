@@ -126,7 +126,7 @@ Popup {
         }
         onClicked: {
           root.close()
-          root.confirmActionRequested("lock", qsTr("Lock"))
+          root.confirmActionRequested("lock", "Action_lock")
         }
       }
     }
@@ -203,7 +203,7 @@ Popup {
         }
         onClicked: {
           root.close()
-          root.confirmActionRequested("logout", qsTr("Log Out"))
+          root.confirmActionRequested("logout", "Action_logout")
         }
       }
     }
@@ -282,7 +282,7 @@ Popup {
         }
         onClicked: {
           root.close()
-          root.confirmActionRequested("switchUser", qsTr("Switch User"))
+          root.confirmActionRequested("switchUser", "Action_switch_user")
         }
       }
     }
