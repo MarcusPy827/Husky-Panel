@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(HuskyPanel VERSION 0.9.4 LANGUAGES CXX)
+project(HuskyPanel VERSION 0.9.4 LANGUAGES CXX C)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -147,6 +147,8 @@ set(BACKEND_SOURCES
   src/info_server/current_window/current_window_provider_factory.cc
   src/info_server/current_window/current_window_kwin_impl.h
   src/info_server/current_window/current_window_kwin_impl.cc
+  src/info_server/current_window/current_window_wlroots_impl.h
+  src/info_server/current_window/current_window_wlroots_impl.cc
   src/info_server/current_window/current_window_null_impl.h
   src/info_server/current_window/current_window_null_impl.cc
   src/info_server/clock/clock.h
@@ -265,6 +267,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     ${PROJECT_SOURCES}
     ${QM_FILES}
     res/resources.qrc
+  )
+
+  qt6_generate_wayland_protocol_client_sources(HuskyPanel
+    FILES
+      ${CMAKE_CURRENT_SOURCE_DIR}/protocols/wlr-foreign-toplevel-management-unstable-v1.xml
   )
 
   if(USE_VENDORED_LIBS)
