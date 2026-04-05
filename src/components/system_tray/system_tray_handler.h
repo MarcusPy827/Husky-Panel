@@ -24,6 +24,7 @@
 #include <QImage>
 #include <QList>
 #include <QReadWriteLock>
+#include <QSettings>
 #include <QString>
 
 #include "src/info_server/tray_handler/tray_handler.h"
@@ -41,8 +42,12 @@ class SystemTrayHandler : public QAbstractListModel {
  public:
   enum Roles {
     ServiceRole       = Qt::UserRole + 1,
+    RealServiceRole,
+    TitleRole,
+    AppIdRole,
     TooltipRole,
     IsVisibleRole,
+    IsConfigVisibleRole,
     NeedsAttentionRole,
     IconRevisionRole,
     IconKeyRole,
@@ -70,6 +75,7 @@ class SystemTrayHandler : public QAbstractListModel {
   Q_INVOKABLE void contextMenu(const QString& service, int x, int y);
   Q_INVOKABLE void secondaryActivate(const QString& service, int x, int y);
   Q_INVOKABLE void scroll(const QString& service, int delta);
+  Q_INVOKABLE void setConfigVisible(const QString& service, bool visible);
 
  private:
   int IndexOf(const QString& service) const;
@@ -83,6 +89,10 @@ class SystemTrayHandler : public QAbstractListModel {
   // Thread-safe image cache: written on main thread, read on render thread.
   mutable QReadWriteLock images_lock_;
   QHash<int, QImage> icon_images_;
+
+  // User-controlled hide set (service → hidden) backed by QSettings.
+  QHash<QString, bool> user_hidden_;
+  QSettings* settings_ = nullptr;
 
   backend::TrayHandler* tray_handler_ = nullptr;
 

@@ -27,11 +27,12 @@ Rectangle {
   required property string service
   required property string tooltip
   required property bool   is_visible
+  required property bool   is_config_visible
   required property bool   needs_attention
   required property int    icon_revision
   required property int    icon_key
 
-  visible: is_visible
+  visible: is_visible && is_config_visible
 
   implicitWidth: 32
   Layout.fillHeight: true

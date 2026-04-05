@@ -20,6 +20,7 @@
 #include "absl/strings/str_cat.h"
 
 #include "src/components/system_tray/system_tray_handler.h"
+#include "src/config_loader/path_finder/path_finder.h"
 
 namespace panel {
 namespace frontend {
@@ -27,6 +28,8 @@ namespace frontend {
 SystemTrayHandler::SystemTrayHandler(QObject* parent)
     : QAbstractListModel(parent) {
   LOG(INFO) << absl::StrCat("Initializing SystemTrayHandler...");
+  settings_ = new QSettings(loader::PathFinder::GetTrayConfigPath(),
+    QSettings::IniFormat, this);
   tray_handler_ = new backend::TrayHandler();
   QObject::connect(tray_handler_, &backend::TrayHandler::NewTrayIcon,
     this, &SystemTrayHandler::OnIconAdded);
@@ -50,8 +53,12 @@ QVariant SystemTrayHandler::data(const QModelIndex& index, int role) const {
 
   switch (role) {
     case ServiceRole:        return service;
+    case RealServiceRole:    return entry->GetRealService();
+    case TitleRole:          return entry->GetTitle();
+    case AppIdRole:          return entry->GetAppId();
     case TooltipRole:        return entry->GetTooltip();
     case IsVisibleRole:      return entry->IsVisible();
+    case IsConfigVisibleRole: return !user_hidden_.value(service, false);
     case NeedsAttentionRole: return entry->NeedsAttention();
     case IconRevisionRole:   return icon_revisions_.value(service, 0);
     case IconKeyRole:        return icon_keys_.value(service, -1);
@@ -62,9 +69,13 @@ QVariant SystemTrayHandler::data(const QModelIndex& index, int role) const {
 QHash<int, QByteArray> SystemTrayHandler::roleNames() const {
   return {
     { ServiceRole,        "service"        },
+    { RealServiceRole,    "real_service"   },
+    { TitleRole,          "title"          },
+    { AppIdRole,          "app_id"         },
     { TooltipRole,        "tooltip"        },
-    { IsVisibleRole,      "is_visible"     },
-    { NeedsAttentionRole, "needs_attention"},
+    { IsVisibleRole,       "is_visible"      },
+    { IsConfigVisibleRole, "is_config_visible" },
+    { NeedsAttentionRole,  "needs_attention" },
     { IconRevisionRole,   "icon_revision"  },
     { IconKeyRole,        "icon_key"       },
   };
@@ -109,6 +120,21 @@ void SystemTrayHandler::scroll(const QString& service, int delta) {
   Scroll(service, delta);
 }
 
+void SystemTrayHandler::setConfigVisible(const QString& service, bool visible) {
+  int row = IndexOf(service);
+  if (row == -1) return;
+  user_hidden_[service] = !visible;
+
+  TrayIconItem* entry = entries_.value(service, nullptr);
+  if (entry) {
+    settings_->setValue(entry->GetRealService() + "/visible", visible);
+    settings_->sync();
+  }
+
+  QModelIndex idx = index(row);
+  emit dataChanged(idx, idx, {IsConfigVisibleRole});
+}
+
 void SystemTrayHandler::OnIconAdded(const QString& service) {
   if (entries_.contains(service)) {
     LOG(WARNING) << absl::StrCat("OnIconAdded: '", service.toStdString(),
@@ -122,6 +148,13 @@ void SystemTrayHandler::OnIconAdded(const QString& service) {
   icon_revisions_[service] = 0;
 
   auto* entry = new TrayIconItem(service, this);
+
+  // Load persisted visibility preference (default: visible).
+  {
+    const QString cfg_key = entry->GetRealService();
+    bool visible = settings_->value(cfg_key + "/visible", true).toBool();
+    if (!visible) user_hidden_[service] = true;
+  }
 
   // Cache initial icon image.
   {
@@ -160,6 +193,7 @@ void SystemTrayHandler::OnIconDeleted(const QString& service) {
   delete entries_.take(service);
   icon_revisions_.remove(service);
   icon_keys_.remove(service);
+  user_hidden_.remove(service);
   endRemoveRows();
 
   if (key >= 0) {

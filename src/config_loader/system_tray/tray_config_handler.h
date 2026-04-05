@@ -42,6 +42,9 @@ class TrayConfigHandler : public QObject {
   ~TrayConfigHandler();
 
   std::vector<TrayConfig> GetTrayConfigs();
+  bool IsTrayIconPrefrenceExists(const QString& id);
+  bool IsTrayIconVisible(const QString& id);
+  void SetTrayIconVisible(const QString& id, bool visible);
 };
 
 }  // namespace loader

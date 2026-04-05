@@ -29,6 +29,9 @@ Item {
 
   property bool sidePaneVisible: true
   readonly property int slideOffset: 24
+  readonly property Item titleBarItem: titleBarRect
+  readonly property Item menuBtnItem: menuBtn
+  readonly property Item closeBtnItem: closeBtn
   signal closeAnimationFinished()
 
   function open() {
@@ -72,14 +75,10 @@ Item {
     onStopped: root.closeAnimationFinished()
   }
 
-  property string currentSectionId: "appearance"
+  property string currentSectionId: "system_tray"
   readonly property var sections: [
-    { id: "appearance", icon: "palette",       label: "Appearance" },
-    { id: "display",    icon: "monitor",        label: "Display" },
-    { id: "sound",      icon: "volume_up",      label: "Sound" },
-    { id: "network",    icon: "wifi",           label: "Network" },
-    { id: "notifs",     icon: "notifications",  label: "Notifications" },
-    { id: "about",      icon: "info",           label: "About" }
+    { id: "system_tray", icon: "apps", label: ConfigPanelTranslator.Tr("SystemTray") },
+    { id: "about", icon: "info", label: ConfigPanelTranslator.Tr("AboutSystem") }
   ]
 
   function sectionIndexOf(secId) {
@@ -108,6 +107,7 @@ Item {
 
       // Title bar
       Rectangle {
+        id: titleBarRect
         Layout.fillWidth: true
         Layout.preferredHeight: 64
         color: Theme.surface_container
@@ -127,8 +127,9 @@ Item {
           anchors.rightMargin: 16
           spacing: 8
 
-          // Menu button (toggle sidepane)
+          // Menu button
           Item {
+            id: menuBtn
             implicitWidth: 48
             implicitHeight: 48
 
@@ -222,11 +223,110 @@ Item {
           // Panel title
           Text {
             Layout.fillWidth: true
-            text: "Settings"
+            text: ConfigPanelTranslator.Tr("Preferences")
             color: Theme.surface_variant_fg
             font.pixelSize: 18
             font.weight: Font.Medium
             verticalAlignment: Text.AlignVCenter
+          }
+
+          // Spacer
+          Item {
+            implicitHeight: 48
+            Layout.fillWidth: true
+          }
+
+          // Close button
+          Item {
+            id: closeBtn
+            implicitWidth: 48
+            implicitHeight: 48
+
+            Rectangle {
+              id: closeBtnBg
+              anchors.fill: parent
+              radius: 24
+              color: "transparent"
+
+              Rectangle {
+                id: closeBtnStateLayer
+                anchors.fill: parent
+                radius: parent.radius
+                color: "transparent"
+              }
+
+              Canvas {
+                id: closeBtnRipple
+                anchors.fill: parent
+                opacity: 0
+
+                property real centerX: parent.width / 2
+                property real centerY: parent.height / 2
+                property real rippleRadius: 0
+
+                onPaint: {
+                  var ctx = getContext("2d")
+                  ctx.clearRect(0, 0, width, height)
+                  ctx.save()
+                  ctx.beginPath()
+                  ctx.arc(width / 2, height / 2, width / 2, 0, 2 * Math.PI)
+                  ctx.clip()
+                  var c = Theme.state_layer_pressed
+                  ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
+                  ctx.beginPath()
+                  ctx.arc(centerX, centerY, rippleRadius, 0, 2 * Math.PI)
+                  ctx.fill()
+                  ctx.restore()
+                }
+
+                onOpacityChanged: requestPaint()
+                onRippleRadiusChanged: requestPaint()
+
+                ParallelAnimation {
+                  id: closeBtnRippleAnim
+                  NumberAnimation {
+                    target: closeBtnRipple; property: "rippleRadius"
+                    from: 0; to: closeBtnBg.width * 1.25
+                    duration: 400; easing.type: Easing.OutCubic
+                  }
+                  SequentialAnimation {
+                    PropertyAction { target: closeBtnRipple; property: "opacity"; value: 0.3 }
+                    PauseAnimation { duration: 150 }
+                    NumberAnimation {
+                      target: closeBtnRipple; property: "opacity"
+                      from: 0.3; to: 0
+                      duration: 250; easing.type: Easing.OutCubic
+                    }
+                  }
+                }
+              }
+            }
+
+            Text {
+              anchors.centerIn: parent
+              font.family: "Material Symbols Rounded"
+              font.pixelSize: 24
+              text: "\ue5cd"  // "close"
+              color: Theme.surface_variant_fg
+              horizontalAlignment: Text.AlignHCenter
+              verticalAlignment: Text.AlignVCenter
+            }
+
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true
+              onEntered: closeBtnStateLayer.color = Theme.state_layer_hover
+              onExited:  closeBtnStateLayer.color = "transparent"
+              onPressed: (mouse) => {
+                closeBtnStateLayer.color = Theme.state_layer_pressed
+                closeBtnRipple.centerX = mouse.x
+                closeBtnRipple.centerY = mouse.y
+                closeBtnRippleAnim.restart()
+              }
+              onReleased: closeBtnStateLayer.color =
+                containsMouse ? Theme.state_layer_hover : "transparent"
+              onClicked: root.close()
+            }
           }
         }
       }
@@ -245,6 +345,7 @@ Item {
           Layout.preferredWidth: root.sidePaneVisible ? 220 : 0
           Layout.fillHeight: true
           color: Theme.surface_container_low
+          bottomLeftRadius: 12
 
           Behavior on Layout.preferredWidth {
             NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
@@ -267,14 +368,40 @@ Item {
             Rectangle {
               id: sidePaneIndicator
               x: 16
-              y: root.sectionIndexOf(root.currentSectionId) * 54
               width: sidePaneColumn.width - 32
               height: 48
               radius: 24
               color: Theme.secondary_container
 
-              Behavior on y {
-                NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+              Component.onCompleted: y = root.sectionIndexOf(root.currentSectionId) * 54
+
+              Connections {
+                target: root
+                function onCurrentSectionIdChanged() {
+                  indicatorMoveAnim.to = root.sectionIndexOf(root.currentSectionId) * 54
+                  indicatorAnim.restart()
+                }
+              }
+
+              ParallelAnimation {
+                id: indicatorAnim
+                NumberAnimation {
+                  id: indicatorMoveAnim
+                  target: sidePaneIndicator; property: "y"
+                  duration: 300; easing.type: Easing.OutCubic
+                }
+                SequentialAnimation {
+                  NumberAnimation {
+                    target: sidePaneIndicator; property: "height"
+                    from: 48; to: 64
+                    duration: 120; easing.type: Easing.OutCubic
+                  }
+                  NumberAnimation {
+                    target: sidePaneIndicator; property: "height"
+                    from: 64; to: 48
+                    duration: 250; easing.type: Easing.OutCubic
+                  }
+                }
               }
             }
 
@@ -288,6 +415,7 @@ Item {
               Repeater {
                 model: root.sections
                 delegate: ConfigPanelSidePaneItem {
+                  required property var modelData
                   width: sidePaneColumn.width - 32
                   icon: modelData.icon
                   label: modelData.label
@@ -336,6 +464,17 @@ Item {
           Layout.fillWidth: true
           Layout.fillHeight: true
           color: Theme.surface_container_low
+          bottomRightRadius: 12
+
+          Loader {
+            anchors.fill: parent
+            source: {
+              switch (root.currentSectionId) {
+                case "system_tray": return "ConfigPanelSystemTrayPage.qml"
+                default: return ""
+              }
+            }
+          }
         }
       }
     }

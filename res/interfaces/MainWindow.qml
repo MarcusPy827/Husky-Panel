@@ -46,8 +46,6 @@ Window {
   property bool drawerExpanded: false
   property bool calendarFlyoutOpen: false
   property bool calendarFlyoutExpanded: false
-  property bool configPanelOpen: false
-  property bool configPanelExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -77,41 +75,23 @@ Window {
     }
   }
 
-  onConfigPanelOpenChanged: {
-    if (configPanelOpen) {
-      appDrawerOpen = false
-      calendarFlyoutOpen = false
-      configPanelExpanded = true
-      LayerShellHelper.setFullMask(root)
-      configPanel.open()
-    } else {
-      configPanel.close()
-    }
-  }
-
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded && !configPanelExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded && !configPanelExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onConfigPanelExpandedChanged: {
-    if (!configPanelExpanded && !drawerExpanded && !calendarFlyoutExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.configPanelOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
-      root.configPanelOpen = false
     }
   }
 
@@ -398,7 +378,7 @@ Window {
         id: barContextMenu
         MenuItem {
           text: StatusBarTranslator.Tr("Configure...")
-          onTriggered: root.configPanelOpen = true
+          onTriggered: configPanelWindow.open()
         }
       }
 
@@ -511,19 +491,9 @@ Window {
     }
   }
 
-  // Config panel
-  Item {
-    x: 8
-    y: root.barHeight + root.drawerTopMargin
-    width: root.drawerW
-    height: root.drawerH
-    visible: root.configPanelExpanded
-
-    ConfigPanel {
-      id: configPanel
-      anchors.fill: parent
-      onCloseAnimationFinished: root.configPanelExpanded = false
-    }
+  // Config panel (standalone frameless window)
+  ConfigPanelWindow {
+    id: configPanelWindow
   }
 
 }

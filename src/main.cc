@@ -54,6 +54,7 @@
 #include "src/utils/xdg_icon_handler/xdg_icon_handler.h"
 #include "src/utils/user_avatar_handler/user_avatar_handler.h"
 #include "src/utils/layer_shell_helper/layer_shell_helper.h"
+#include "QWKQuick/qwkquickglobal.h"
 
 #ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
@@ -97,6 +98,14 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("CalendarTranslator",
     translation_loader_calendar);
   LOG(INFO) << absl::StrCat("Successfully injected calendar translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for config panel...");
+  auto* translation_loader_config_panel = new panel::loader::TranslationLoader(
+    ":/translations/translations/config_panel.locale",
+    panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("ConfigPanelTranslator",
+    translation_loader_config_panel);
+  LOG(INFO) << absl::StrCat("Successfully injected config panel translator.");
   LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
     "injected!");
 
@@ -229,6 +238,9 @@ int main(int argc, char *argv[]) {
   auto* layer_shell_helper = new panel::utils::LayerShellHelper(&a);
   engine.rootContext()->setContextProperty(
     "LayerShellHelper", layer_shell_helper);
+
+  LOG(INFO) << absl::StrCat("Registering QWindowKit QML types...");
+  QWK::registerTypes(&engine);
 
   LOG(INFO) << absl::StrCat("Loading main QML file...");
   engine.load(QUrl(QStringLiteral("qrc:/ui/interfaces/MainWindow.qml")));

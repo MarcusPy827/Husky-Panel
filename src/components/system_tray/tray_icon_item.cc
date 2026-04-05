@@ -115,6 +115,9 @@ TrayIconItem::TrayIconItem(const QString& service, QObject* parent)
     }
   }
 
+  title_  = dbus_->property("Title").toString();
+  app_id_ = dbus_->property("Id").toString();
+
   UpdateIcon();
   UpdateTooltip();
 
@@ -261,6 +264,9 @@ void TrayIconItem::UpdateIcon() {
   arg.endArray();
 
   if (!best_image.isNull()) {
+    if (best_image.width() != kTargetSize || best_image.height() != kTargetSize)
+      best_image = best_image.scaled(kTargetSize, kTargetSize,
+        Qt::KeepAspectRatio, Qt::SmoothTransformation);
     icon_image_ = OverrideDarkIcons(best_image);
     emit IconChanged();
   }
@@ -286,7 +292,7 @@ void TrayIconItem::UpdateTooltip() {
   const QDBusArgument& arg = v.value<QDBusArgument>();
   backend::SNIToolTip tt;
   arg >> tt;
-  tooltip_ = tt.title.isEmpty() ? real_service_ : tt.title;
+  tooltip_ = tt.title;
   emit TooltipChanged();
 }
 

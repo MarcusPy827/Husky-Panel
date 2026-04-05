@@ -1,0 +1,15 @@
+[Preferences]
+zh_cn = "偏好设置"
+en_us = "Preferences"
+
+[SystemTray]
+zh_cn = "系统托盘"
+en_us = "System Tray"
+
+[AboutSystem]
+zh_cn = "关于系统"
+en_us = "About System"
+
+[FoldIcons]
+zh_cn = "折叠托盘中的图标"
+en_us = "Hide icons from the tray"
