@@ -1,0 +1,46 @@
+\doxysection{user\+\_\+avatar\+\_\+handler.\+h}
+\hypertarget{user__avatar__handler_8h_source}{}\label{user__avatar__handler_8h_source}\index{src/utils/user\_avatar\_handler/user\_avatar\_handler.h@{src/utils/user\_avatar\_handler/user\_avatar\_handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2025\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QQuickImageProvider>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QIcon>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QPixmap>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QSize>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#ifndef\ SRC\_UTILS\_USER\_AVATAR\_HANDLER\_USER\_AVATAR\_HANDLER\_H\_}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ SRC\_UTILS\_USER\_AVATAR\_HANDLER\_USER\_AVATAR\_HANDLER\_H\_}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }utils\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }UserAvatarHandler\ :\ \textcolor{keyword}{public}\ QQuickImageProvider\ \{}
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{explicit}\ UserAvatarHandler();}
+\DoxyCodeLine{00033\ \ \ QPixmap\ requestPixmap(\textcolor{keyword}{const}\ QString\&\ \textcolor{keywordtype}{id},\ QSize*\ size,}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ QSize\&\ requested)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \}\ \ \textcolor{comment}{//\ namespace\ utils}}
+\DoxyCodeLine{00038\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_UTILS\_USER\_AVATAR\_HANDLER\_USER\_AVATAR\_HANDLER\_H\_}}
+
+\end{DoxyCode}

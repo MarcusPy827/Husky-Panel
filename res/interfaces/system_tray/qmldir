@@ -1,2 +1,4 @@
-SystemTray     1.0 SystemTray.qml
-SystemTrayIcon 1.0 SystemTrayIcon.qml
+SystemTray                1.0 SystemTray.qml
+SystemTrayIcon            1.0 SystemTrayIcon.qml
+SystemTrayExpandIcon      1.0 SystemTrayExpandIcon.qml
+SystemTrayOverflowFlyout  1.0 SystemTrayOverflowFlyout.qml

@@ -42,6 +42,9 @@ class TrayIconItem : public QObject {
 
   // Returns a copy of the current icon image (copy-safe for cross-thread use).
   QImage GetImage() const { return icon_image_; }
+  QString GetRealService() const { return real_service_; }
+  QString GetTitle() const { return title_; }
+  QString GetAppId() const { return app_id_; }
   QString GetTooltip() const { return tooltip_; }
   bool IsVisible() const { return status_ != QLatin1String("Passive"); }
   bool NeedsAttention() const {
@@ -63,6 +66,8 @@ class TrayIconItem : public QObject {
   QString real_path_;
 
   QImage icon_image_;
+  QString title_;
+  QString app_id_;
   QString tooltip_;
   QString status_ = QStringLiteral("Active");
 

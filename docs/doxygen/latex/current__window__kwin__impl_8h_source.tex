@@ -1,0 +1,56 @@
+\doxysection{current\+\_\+window\+\_\+kwin\+\_\+impl.\+h}
+\hypertarget{current__window__kwin__impl_8h_source}{}\label{current__window__kwin__impl_8h_source}\index{src/info\_server/current\_window/current\_window\_kwin\_impl.h@{src/info\_server/current\_window/current\_window\_kwin\_impl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_KWIN\_IMPL\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_KWIN\_IMPL\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}src/info\_server/current\_window/current\_window\_provider.h"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }CurrentWindowKwinImpl\ :\ \textcolor{keyword}{public}\ CurrentWindowProvider\{}
+\DoxyCodeLine{00027\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00028\ \ \ Q\_CLASSINFO(\textcolor{stringliteral}{"{}D-\/Bus\ Interface"{}},\ \textcolor{stringliteral}{"{}marcus.panel.util.AppBridge"{}})}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{explicit}\ CurrentWindowKwinImpl(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00032\ \ \ \string~CurrentWindowKwinImpl();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ QString\ GetApplicationName()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ QString\ GetPackageName()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{structpanel_1_1backend_1_1CurrentWindowInfo}{CurrentWindowInfo}}\ window\_info\_;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00041\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ UpdateActiveApp(QString\ name,\ QString\ appid,\ QString\ title);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ OnActiveWindowChanged();}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00048\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_KWIN\_IMPL\_H\_}}
+
+\end{DoxyCode}

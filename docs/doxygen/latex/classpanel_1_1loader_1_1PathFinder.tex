@@ -1,0 +1,107 @@
+\doxysection{panel\+::loader\+::Path\+Finder Class Reference}
+\hypertarget{classpanel_1_1loader_1_1PathFinder}{}\label{classpanel_1_1loader_1_1PathFinder}\index{panel::loader::PathFinder@{panel::loader::PathFinder}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static QString \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a484dbc0863d7ec0f7c6d2a5607e658f5}{Get\+System\+Config\+Dir}} ()
+\begin{DoxyCompactList}\small\item\em Gets the system configuration directory. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4}{Get\+Config\+Base\+Dir}} ()
+\begin{DoxyCompactList}\small\item\em Gets the base directory for configuration files. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a7708fd5aa1756adb3cb2b714b5c37455}{Get\+Tray\+Config\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Gets the path for the system tray configuration file. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_aeca383a63eb30102391183367d512470}{Get\+Tray\+Expanding\+Icon\+Config\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Gets the path for the system tray expanding icon configuration file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1loader_1_1PathFinder_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4}\index{panel::loader::PathFinder@{panel::loader::PathFinder}!GetConfigBaseDir@{GetConfigBaseDir}}
+\index{GetConfigBaseDir@{GetConfigBaseDir}!panel::loader::PathFinder@{panel::loader::PathFinder}}
+\doxysubsubsection{\texorpdfstring{GetConfigBaseDir()}{GetConfigBaseDir()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4} 
+QString panel\+::loader\+::\+Path\+Finder\+::\+Get\+Config\+Base\+Dir (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the base directory for configuration files. 
+
+This function first gets the target path, it will create the directory if it doesn\textquotesingle{}t exist, and then return the path. \begin{DoxyNote}{Note}
+This function relies on {\ttfamily QStandard\+Paths\+::writable\+Location}. 
+
+The program crashes if the config directory failed to create. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{classpanel_1_1loader_1_1PathFinder_a484dbc0863d7ec0f7c6d2a5607e658f5}{Get\+System\+Config\+Dir()}}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QString) The base directory for configuration files. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1PathFinder_a484dbc0863d7ec0f7c6d2a5607e658f5}\index{panel::loader::PathFinder@{panel::loader::PathFinder}!GetSystemConfigDir@{GetSystemConfigDir}}
+\index{GetSystemConfigDir@{GetSystemConfigDir}!panel::loader::PathFinder@{panel::loader::PathFinder}}
+\doxysubsubsection{\texorpdfstring{GetSystemConfigDir()}{GetSystemConfigDir()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1PathFinder_a484dbc0863d7ec0f7c6d2a5607e658f5} 
+QString panel\+::loader\+::\+Path\+Finder\+::\+Get\+System\+Config\+Dir (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the system configuration directory. 
+
+\begin{DoxyNote}{Note}
+This function relies on {\ttfamily QStandard\+Paths\+::writable\+Location} and assumes that that directory exists and writable. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(QString) The system configuration directory. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1PathFinder_a7708fd5aa1756adb3cb2b714b5c37455}\index{panel::loader::PathFinder@{panel::loader::PathFinder}!GetTrayConfigPath@{GetTrayConfigPath}}
+\index{GetTrayConfigPath@{GetTrayConfigPath}!panel::loader::PathFinder@{panel::loader::PathFinder}}
+\doxysubsubsection{\texorpdfstring{GetTrayConfigPath()}{GetTrayConfigPath()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1PathFinder_a7708fd5aa1756adb3cb2b714b5c37455} 
+QString panel\+::loader\+::\+Path\+Finder\+::\+Get\+Tray\+Config\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the path for the system tray configuration file. 
+
+\begin{DoxyNote}{Note}
+This function relies on {\ttfamily QStandard\+Paths\+::writable\+Location}. 
+
+An empty file will be created if the target file does NOT exist. 
+
+The program crashes if the config directory failed to create. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4}{Get\+Config\+Base\+Dir()}}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QString) The path for the system tray configuration file. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1PathFinder_aeca383a63eb30102391183367d512470}\index{panel::loader::PathFinder@{panel::loader::PathFinder}!GetTrayExpandingIconConfigPath@{GetTrayExpandingIconConfigPath}}
+\index{GetTrayExpandingIconConfigPath@{GetTrayExpandingIconConfigPath}!panel::loader::PathFinder@{panel::loader::PathFinder}}
+\doxysubsubsection{\texorpdfstring{GetTrayExpandingIconConfigPath()}{GetTrayExpandingIconConfigPath()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1PathFinder_aeca383a63eb30102391183367d512470} 
+QString panel\+::loader\+::\+Path\+Finder\+::\+Get\+Tray\+Expanding\+Icon\+Config\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the path for the system tray expanding icon configuration file. 
+
+\begin{DoxyNote}{Note}
+This function relies on {\ttfamily QStandard\+Paths\+::writable\+Location}. 
+
+An empty file will be created if the target file does NOT exist. 
+
+The program crashes if the config directory failed to create. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4}{Get\+Config\+Base\+Dir()}}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QString) The path for the system tray expanding icon configuration file. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/config\+\_\+loader/path\+\_\+finder/path\+\_\+finder.\+h\item 
+src/config\+\_\+loader/path\+\_\+finder/path\+\_\+finder.\+cc\end{DoxyCompactItemize}

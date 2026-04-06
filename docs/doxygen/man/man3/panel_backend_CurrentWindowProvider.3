@@ -1,0 +1,46 @@
+.TH "panel::backend::CurrentWindowProvider" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::CurrentWindowProvider
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.PP
+Inherited by \fBpanel::backend::CurrentWindowKwinImpl\fP, \fBpanel::backend::CurrentWindowNullImpl\fP, and \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBCurrentWindowChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCurrentWindowProvider\fP (QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "virtual QString \fBGetApplicationName\fP ()=0"
+.br
+.ti -1c
+.RI "virtual QString \fBGetPackageName\fP ()=0"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual QString panel::backend::CurrentWindowProvider::GetApplicationName ()\fR [pure virtual]\fP"
+
+.PP
+Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+.SS "virtual QString panel::backend::CurrentWindowProvider::GetPackageName ()\fR [pure virtual]\fP"
+
+.PP
+Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

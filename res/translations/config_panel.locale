@@ -1,0 +1,23 @@
+[Preferences]
+zh_cn = "偏好设置"
+en_us = "Preferences"
+
+[SystemTray]
+zh_cn = "系统托盘"
+en_us = "System Tray"
+
+[AboutSystem]
+zh_cn = "关于系统"
+en_us = "About System"
+
+[FoldIcons]
+zh_cn = "折叠托盘中的图标"
+en_us = "Hide icons from the tray"
+
+[ExpandIconConfig]
+zh_cn = "「展开」图标设置"
+en_us = '"Expanding Icon" Preference'
+
+[SetExpandIconOnLeftHandSide]
+zh_cn = "将「展开」图标放置于相对于托盘图标左侧"
+en_us = 'Place the "Expanding Icon" on the left-hand side of the tray icons'

@@ -1,0 +1,48 @@
+\doxysection{path\+\_\+finder.\+h}
+\hypertarget{path__finder_8h_source}{}\label{path__finder_8h_source}\index{src/config\_loader/path\_finder/path\_finder.h@{src/config\_loader/path\_finder/path\_finder.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_CONFIG\_LOADER\_PATH\_FINDER\_PATH\_FINDER\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_CONFIG\_LOADER\_PATH\_FINDER\_PATH\_FINDER\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ CONFIG\_DIR\_NAME\ "{}marcus.husky.panel"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder}{PathFinder}}\ \{}
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Directories\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ QString\ \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a484dbc0863d7ec0f7c6d2a5607e658f5}{GetSystemConfigDir}}();}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{static}\ QString\ \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a6a72ce47a553df1e76997cf0637c17a4}{GetConfigBaseDir}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Files\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{static}\ QString\ \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_a7708fd5aa1756adb3cb2b714b5c37455}{GetTrayConfigPath}}();}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{static}\ QString\ \mbox{\hyperlink{classpanel_1_1loader_1_1PathFinder_aeca383a63eb30102391183367d512470}{GetTrayExpandingIconConfigPath}}();}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00040\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_CONFIG\_LOADER\_PATH\_FINDER\_PATH\_FINDER\_H\_}}
+
+\end{DoxyCode}

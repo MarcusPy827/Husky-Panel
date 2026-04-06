@@ -1,0 +1,56 @@
+\doxysection{tray\+\_\+icon\+\_\+image\+\_\+handler.\+h}
+\hypertarget{tray__icon__image__handler_8h_source}{}\label{tray__icon__image__handler_8h_source}\index{src/components/system\_tray/tray\_icon\_image\_handler.h@{src/components/system\_tray/tray\_icon\_image\_handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ tray\_icon\_image\_handler.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_IMAGE\_HANDLER\_H\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_IMAGE\_HANDLER\_H\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QQuickImageProvider>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}src/components/system\_tray/system\_tray\_handler.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }frontend\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ QQuickImageProvider\ that\ serves\ tray\ icon\ images\ under\ the\ "{}trayicon"{}\ id.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ URL\ format:\ image://trayicon/<key>/<revision>}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ <key>\ \ \ \ \ \ —\ stable\ integer\ assigned\ per\ service\ in\ SystemTrayHandler.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ <revision>\ —\ increments\ each\ time\ the\ icon\ changes,\ busting\ the\ QML\ cache.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ requestImage()\ may\ be\ called\ from\ the\ render\ thread;\ SystemTrayHandler}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ protects\ its\ image\ map\ with\ a\ QReadWriteLock.}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }TrayIconImageHandler\ :\ \textcolor{keyword}{public}\ QQuickImageProvider\ \{}
+\DoxyCodeLine{00036\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{explicit}\ TrayIconImageHandler(\mbox{\hyperlink{classpanel_1_1frontend_1_1SystemTrayHandler}{SystemTrayHandler}}*\ handler);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ backend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00040\ \ \ QImage\ requestImage(\textcolor{keyword}{const}\ QString\&\ \textcolor{keywordtype}{id},\ QSize*\ size,}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ QSize\&\ requested\_size)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{classpanel_1_1frontend_1_1SystemTrayHandler}{SystemTrayHandler}}*\ handler\_;}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \}\ \ \textcolor{comment}{//\ namespace\ frontend}}
+\DoxyCodeLine{00048\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_IMAGE\_HANDLER\_H\_}}
+
+\end{DoxyCode}

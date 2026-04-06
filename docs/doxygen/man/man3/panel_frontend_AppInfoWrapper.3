@@ -1,0 +1,41 @@
+.TH "panel::frontend::AppInfoWrapper" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::frontend::AppInfoWrapper
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBappsChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAppInfoWrapper\fP (QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "QVariantList \fBGetAllApps\fP () const"
+.br
+.ti -1c
+.RI "Q_INVOKABLE QVariantList \fBappsByCategory\fP (const QString &category) const"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "QVariantList \fBallApps\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

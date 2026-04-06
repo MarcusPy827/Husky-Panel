@@ -1,0 +1,92 @@
+\doxysection{tray\+\_\+icon\+\_\+item.\+h}
+\hypertarget{tray__icon__item_8h_source}{}\label{tray__icon__item_8h_source}\index{src/components/system\_tray/tray\_icon\_item.h@{src/components/system\_tray/tray\_icon\_item.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ tray\_icon\_item.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_ITEM\_H\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_ITEM\_H\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QImage>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QDBusInterface>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/libdbusmenu/src/dbusmenuimporter.h"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }frontend\ \{}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Manages\ the\ D-\/Bus\ connection\ and\ icon\ data\ for\ a\ single\ StatusNotifierItem.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ Lives\ on\ the\ main\ thread;\ UpdateIcon/UpdateTooltip/UpdateStatus\ run\ there.}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }TrayIconItem\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00035\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{explicit}\ TrayIconItem(\textcolor{keyword}{const}\ QString\&\ service,\ QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00039\ \ \ \string~TrayIconItem()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ backend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{//\ Returns\ a\ copy\ of\ the\ current\ icon\ image\ (copy-\/safe\ for\ cross-\/thread\ use).}}
+\DoxyCodeLine{00044\ \ \ QImage\ GetImage()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ icon\_image\_;\ \}}
+\DoxyCodeLine{00045\ \ \ QString\ GetRealService()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ real\_service\_;\ \}}
+\DoxyCodeLine{00046\ \ \ QString\ GetTitle()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ title\_;\ \}}
+\DoxyCodeLine{00047\ \ \ QString\ GetAppId()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ app\_id\_;\ \}}
+\DoxyCodeLine{00048\ \ \ QString\ GetTooltip()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ tooltip\_;\ \}}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{bool}\ IsVisible()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ status\_\ !=\ QLatin1String(\textcolor{stringliteral}{"{}Passive"{}});\ \}}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{bool}\ NeedsAttention()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ status\_\ ==\ QLatin1String(\textcolor{stringliteral}{"{}NeedsAttention"{}});}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ Activate(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ ContextMenu(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ SecondaryActivate(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{void}\ Scroll(\textcolor{keywordtype}{int}\ delta);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ signals:}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ IconChanged();}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ TooltipChanged();}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{void}\ StatusChanged();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ QString\ real\_service\_;}
+\DoxyCodeLine{00066\ \ \ QString\ real\_path\_;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ QImage\ icon\_image\_;}
+\DoxyCodeLine{00069\ \ \ QString\ title\_;}
+\DoxyCodeLine{00070\ \ \ QString\ app\_id\_;}
+\DoxyCodeLine{00071\ \ \ QString\ tooltip\_;}
+\DoxyCodeLine{00072\ \ \ QString\ status\_\ =\ QStringLiteral(\textcolor{stringliteral}{"{}Active"{}});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ QDBusInterface*\ dbus\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00075\ \ \ DBusMenuImporter*\ menu\_importer\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ UpdateIcon();}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ UpdateTooltip();}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ UpdateStatus(\textcolor{keyword}{const}\ QString\&\ status);}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \}\ \ \textcolor{comment}{//\ namespace\ frontend}}
+\DoxyCodeLine{00084\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_COMPONENTS\_SYSTEM\_TRAY\_TRAY\_ICON\_ITEM\_H\_}}
+
+\end{DoxyCode}

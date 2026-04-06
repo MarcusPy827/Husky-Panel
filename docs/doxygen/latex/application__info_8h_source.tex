@@ -1,0 +1,72 @@
+\doxysection{application\+\_\+info.\+h}
+\hypertarget{application__info_8h_source}{}\label{application__info_8h_source}\index{src/info\_server/application\_info/application\_info.h@{src/info\_server/application\_info/application\_info.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_INFO\_SERVER\_APPLICATION\_INFO\_APPLICATION\_INFO\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_INFO\_SERVER\_APPLICATION\_INFO\_APPLICATION\_INFO\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QStringList>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <KService>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAppInfo}{AppInfo}}\ \{}
+\DoxyCodeLine{00028\ \ \ QString\ id;}
+\DoxyCodeLine{00029\ \ \ QString\ name;}
+\DoxyCodeLine{00030\ \ \ QString\ generic\_name;}
+\DoxyCodeLine{00031\ \ \ QString\ comment;}
+\DoxyCodeLine{00032\ \ \ QString\ icon\_name;}
+\DoxyCodeLine{00033\ \ \ QString\ exec;}
+\DoxyCodeLine{00034\ \ \ QStringList\ categories;}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{enum\ class}\ AppCategory\ \{}
+\DoxyCodeLine{00038\ \ \ kAll\ =\ 0,}
+\DoxyCodeLine{00039\ \ \ kAudioVideo\ =\ 1,}
+\DoxyCodeLine{00040\ \ \ kDevelopment\ =\ 2,}
+\DoxyCodeLine{00041\ \ \ kEducation\ =\ 3,}
+\DoxyCodeLine{00042\ \ \ kGame\ =\ 4,}
+\DoxyCodeLine{00043\ \ \ kGraphics\ =\ 5,}
+\DoxyCodeLine{00044\ \ \ kNetwork\ =\ 6,}
+\DoxyCodeLine{00045\ \ \ kOffice\ =\ 7,}
+\DoxyCodeLine{00046\ \ \ kSettings\ =\ 8,}
+\DoxyCodeLine{00047\ \ \ kSystem\ =\ 9,}
+\DoxyCodeLine{00048\ \ \ kUtilities\ =\ 10}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00052\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1backend_1_1ApplicationInfo}{ApplicationInfo}}\ \{}
+\DoxyCodeLine{00055\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{static}\ QList<AppInfo>\ GetAllAppications();}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{static}\ QList<AppInfo>\ GetApplicationsByCategory(QString\ category);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structAppInfo}{AppInfo}}\ KService2AppInfo(\textcolor{keyword}{const}\ KService::Ptr\ \&service);}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00064\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_INFO\_SERVER\_APPLICATION\_INFO\_APPLICATION\_INFO\_H\_}}
+
+\end{DoxyCode}

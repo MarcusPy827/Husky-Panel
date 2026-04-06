@@ -1,0 +1,537 @@
+\doxysection{theme\+\_\+conf.\+h}
+\hypertarget{theme__conf_8h_source}{}\label{theme__conf_8h_source}\index{src/theme\_loader/theme\_conf.h@{src/theme\_loader/theme\_conf.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2025\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_THEME\_LOADER\_THEME\_CONF\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_THEME\_LOADER\_THEME\_CONF\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QStringLiteral>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}src/utils/strings/strings.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}src/utils/color\_palette\_wrapper/color\_palette\_wrapper.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}src/utils/colors/colors.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}src/components/calendar/calendar\_style.h"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/material-\/color-\/utilities/cpp/dynamiccolor/dynamic\_scheme.h"{}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpanel_1_1loader_1_1StyleTuple}{StyleTuple}}\ \{}
+\DoxyCodeLine{00038\ \ \ QString\ light\_style;}
+\DoxyCodeLine{00039\ \ \ QString\ dark\_style;}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpanel_1_1loader_1_1SchemeTuple}{SchemeTuple}}\ \{}
+\DoxyCodeLine{00043\ \ \ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\ light;}
+\DoxyCodeLine{00044\ \ \ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\ dark;}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{static}\ QString\ GetAppBackground(}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00049\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainer();}
+\DoxyCodeLine{00050\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00051\ \ \ material\_color\_utilities::Argb\ border\_color\ =\ palette-\/>GetPrimary();}
+\DoxyCodeLine{00052\ \ \ QString\ border\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(border\_color);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00055\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ *[class='base\_layer']\ \{}}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/left-\/radius:\ 8px;}}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/right-\/radius:\ 8px;}}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/left-\/radius:\ 0px;}}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/right-\/radius:\ 0px;}}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex,\ border\_hex\});}}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCommonBtnStyle(}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00068\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00069\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00070\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00071\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00072\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00073\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00074\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00075\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00076\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00077\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00080\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_btn']\ \{}}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00086\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00092\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_btn']:hover\ \{}}
+\DoxyCodeLine{00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00095\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00097\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_btn']:pressed\ \{}}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00111\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00112\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00113\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed\});}}
+\DoxyCodeLine{00114\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00115\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCommonIconBtnStyle(}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00118\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00119\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00120\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00121\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00122\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00123\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00124\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00125\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00126\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00127\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00130\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_icon\_btn']\ \{}}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00133\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00134\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00135\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00136\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00138\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_icon\_btn']:hover\ \{}}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00144\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00145\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00146\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00147\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00148\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00149\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00150\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00151\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_icon\_btn']:pressed\ \{}}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00156\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00157\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='common\_bar\_icon\_btn']\ \{}}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00167\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00168\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00170\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00171\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00173\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00175\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='common\_bar\_icon\_btn']:hover\ \{}}
+\DoxyCodeLine{00176\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00177\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00178\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00179\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00183\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00184\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00185\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00186\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='common\_bar\_icon\_btn']:pressed\ \{}}
+\DoxyCodeLine{00187\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00191\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00192\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00193\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed\});}}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00198\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00199\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCommonSmallIconBtnStyle(}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00201\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00202\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00203\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00204\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00205\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00206\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00207\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00208\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00209\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00210\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00213\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00214\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_small\_icon\_btn']\ \{}}
+\DoxyCodeLine{00215\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00216\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00217\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00218\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00219\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00220\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00221\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_small\_icon\_btn']:hover\ \{}}
+\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00227\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00228\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00229\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00230\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00231\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00232\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00233\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00234\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00235\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_small\_icon\_btn']:pressed\ \{}}
+\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00238\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00239\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00240\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00241\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00242\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00243\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00244\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00245\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00246\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed\});}}
+\DoxyCodeLine{00247\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00248\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00249\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCommonExtraSmallIconBtnStyle(}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00251\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00252\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00253\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00254\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00255\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00256\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00257\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00258\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00259\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00260\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00263\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00264\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_extra\_small\_icon\_btn']\ \{}}
+\DoxyCodeLine{00265\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00266\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00267\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00268\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00269\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 14px;}}
+\DoxyCodeLine{00270\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00271\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 4px;}}
+\DoxyCodeLine{00272\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 4px;}}
+\DoxyCodeLine{00273\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00274\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00275\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_extra\_small\_icon\_btn']:hover\ \{}}
+\DoxyCodeLine{00276\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00277\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00278\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00279\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00280\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 14px;}}
+\DoxyCodeLine{00281\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00282\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 4px;}}
+\DoxyCodeLine{00283\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 4px;}}
+\DoxyCodeLine{00284\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00285\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00286\ \textcolor{stringliteral}{\ \ \ \ \ \ QPushButton[class='common\_bar\_extra\_small\_icon\_btn']:pressed\ \{}}
+\DoxyCodeLine{00287\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00288\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00289\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00290\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00291\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 14px;}}
+\DoxyCodeLine{00292\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00293\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 4px;}}
+\DoxyCodeLine{00294\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 4px;}}
+\DoxyCodeLine{00295\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00296\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed\});}}
+\DoxyCodeLine{00297\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00298\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00299\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetSmallAppBarBaseStyle(}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00301\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainer();}
+\DoxyCodeLine{00302\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00303\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00304\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00305\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='app\_bar\_container\_small']\ \{}}
+\DoxyCodeLine{00306\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ min-\/height:\ 64px;}}
+\DoxyCodeLine{00307\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ max-\/height:\ 64px;}}
+\DoxyCodeLine{00308\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00309\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ none;}}
+\DoxyCodeLine{00310\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ margin:\ 0px;}}
+\DoxyCodeLine{00311\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding:\ 0px;}}
+\DoxyCodeLine{00312\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex\});}}
+\DoxyCodeLine{00313\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00314\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00315\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetAppBarIconBtnStyle(}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00317\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00318\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00319\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00320\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00321\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00322\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00323\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00324\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00325\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00326\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00327\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00328\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00329\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='app\_bar\_icon\_button']\ \{}}
+\DoxyCodeLine{00330\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00331\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00332\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 48px;}}
+\DoxyCodeLine{00333\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 48px;}}
+\DoxyCodeLine{00334\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ transparent;}}
+\DoxyCodeLine{00335\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 24px;}}
+\DoxyCodeLine{00336\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00337\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00338\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00339\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00340\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='app\_bar\_icon\_button']:hover\ \{}}
+\DoxyCodeLine{00341\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00342\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00343\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00344\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00345\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00346\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='app\_bar\_icon\_button']:pressed\ \{}}
+\DoxyCodeLine{00347\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00348\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00349\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00350\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00351\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed\});}}
+\DoxyCodeLine{00352\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00353\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00354\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetAppBarSearchBarStyle(}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00356\ \ \ material\_color\_utilities::Argb\ on\_surface\_variant\_color\ =\ palette}
+\DoxyCodeLine{00357\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00358\ \ \ QString\ on\_surface\_variant\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00359\ \ \ \ \ on\_surface\_variant\_color);}
+\DoxyCodeLine{00360\ \ \ material\_color\_utilities::Argb\ surface\_container\_highest\_color\ =\ palette}
+\DoxyCodeLine{00361\ \ \ \ \ -\/>GetSurfaceContainerHighest();}
+\DoxyCodeLine{00362\ \ \ QString\ surface\_container\_highest\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00363\ \ \ \ \ surface\_container\_highest\_color);}
+\DoxyCodeLine{00364\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00365\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00366\ \textcolor{stringliteral}{\ \ \ \ \ \ QLineEdit[class='app\_bar\_search\_bar']\ \{}}
+\DoxyCodeLine{00367\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00368\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00369\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00370\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 24px;}}
+\DoxyCodeLine{00371\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 48px;}}
+\DoxyCodeLine{00372\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 24px;}}
+\DoxyCodeLine{00373\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 24px;}}
+\DoxyCodeLine{00374\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00375\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{on\_surface\_variant\_hex,}}
+\DoxyCodeLine{00376\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ surface\_container\_highest\_hex\});}}
+\DoxyCodeLine{00377\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00378\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00379\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ Get48PxFABStyle(}
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00381\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnPrimaryContainer();}
+\DoxyCodeLine{00382\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00383\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetPrimaryContainer();}
+\DoxyCodeLine{00384\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00385\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00386\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00387\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00388\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00389\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00390\ \ \ \ \ bg\_hex,\ 0.8);}
+\DoxyCodeLine{00391\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00392\ \ \ \ \ bg\_hex,\ 0.9);}
+\DoxyCodeLine{00393\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00394\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00395\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='fab\_48px']\ \{}}
+\DoxyCodeLine{00396\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00397\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t4\%;}}
+\DoxyCodeLine{00398\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 48px;}}
+\DoxyCodeLine{00399\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 48px;}}
+\DoxyCodeLine{00400\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t4\%;}}
+\DoxyCodeLine{00401\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 12px;}}
+\DoxyCodeLine{00402\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 24px;}}
+\DoxyCodeLine{00403\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00404\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00405\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00406\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='fab\_48px']:hover\ \{}}
+\DoxyCodeLine{00407\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00408\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00409\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00410\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00411\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00412\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00413\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='fab\_48px']:pressed\ \{}}
+\DoxyCodeLine{00414\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00415\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00416\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00417\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00418\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00419\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed,\ bg\_hex\});}}
+\DoxyCodeLine{00420\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00421\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00422\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetNavigationDrawerStyle(}
+\DoxyCodeLine{00423\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00424\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainerLow();}
+\DoxyCodeLine{00425\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00426\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00427\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00428\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='navigation\_drawer']\ \{}}
+\DoxyCodeLine{00429\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00430\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 360px;}}
+\DoxyCodeLine{00431\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00432\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00433\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex\});}}
+\DoxyCodeLine{00434\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00435\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00436\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetNavigationDrawerCompactStyle(}
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00438\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainerLow();}
+\DoxyCodeLine{00439\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00440\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00441\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00442\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='navigation\_drawer\_compact']\ \{}}
+\DoxyCodeLine{00443\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00444\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 180px;}}
+\DoxyCodeLine{00445\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00446\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00447\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex\});}}
+\DoxyCodeLine{00448\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00449\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00450\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetScrollAreaStyle(}
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00452\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainerLow();}
+\DoxyCodeLine{00453\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00454\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00455\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00456\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00457\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00458\ \ \ QString\ handler\_hex\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00459\ \ \ \ \ state\_layer\_hex\_raw,\ 0.7);}
+\DoxyCodeLine{00460\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00461\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00462\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00463\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00464\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00465\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00466\ \textcolor{stringliteral}{\ \ \ \ \ \ QScrollArea\ \{}}
+\DoxyCodeLine{00467\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00468\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00469\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00470\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00471\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00472\ \textcolor{stringliteral}{\ \ \ \ \ \ QScrollArea\ QScrollBar\ \{}}
+\DoxyCodeLine{00473\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00474\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background-\/color:\ transparent;}}
+\DoxyCodeLine{00475\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ none;}}
+\DoxyCodeLine{00476\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00477\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00478\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00479\ \textcolor{stringliteral}{\ \ \ \ \ \ QScrollArea\ QScrollBar:vertical\ \{}}
+\DoxyCodeLine{00480\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00481\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ none;}}
+\DoxyCodeLine{00482\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00483\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ max-\/width:\ 8px;}}
+\DoxyCodeLine{00484\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00485\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00486\ \textcolor{stringliteral}{\ \ \ \ \ \ QScrollArea\ QScrollBar::handle:vertical\ \{}}
+\DoxyCodeLine{00487\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t2\%;}}
+\DoxyCodeLine{00488\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ max-\/width:\ 8px;}}
+\DoxyCodeLine{00489\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 4px;}}
+\DoxyCodeLine{00490\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00491\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00492\ \textcolor{stringliteral}{\ \ \ \ \ \ QScrollArea\ QScrollBar::add-\/line:vertical,\ QScrollBar::sub-\/line:vertical\ \{}}
+\DoxyCodeLine{00493\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 0px;}}
+\DoxyCodeLine{00494\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex,\ handler\_hex\});}}
+\DoxyCodeLine{00495\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00496\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00497\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ \mbox{\hyperlink{structpanel_1_1loader_1_1StyleTuple}{StyleTuple}}\ GetThemeMap(\textcolor{keyword}{const}\ \mbox{\hyperlink{structpanel_1_1loader_1_1SchemeTuple}{SchemeTuple}}\&\ conf)\ \{}
+\DoxyCodeLine{00498\ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{00499\ \ \ \ \ GetAppBackground(conf.dark)}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ +\ GetCommonBtnStyle(conf.dark)}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ +\ GetCommonIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ +\ GetCommonSmallIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ +\ GetCommonExtraSmallIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ +\ GetSmallAppBarBaseStyle(conf.light)}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ +\ GetAppBarIconBtnStyle(conf.light)}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ +\ GetAppBarSearchBarStyle(conf.light)}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ +\ Get48PxFABStyle(conf.light)}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ +\ GetNavigationDrawerStyle(conf.light)}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ +\ GetNavigationDrawerCompactStyle(conf.light)}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ +\ GetCalendarStyle(conf.light)}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ +\ GetScrollAreaStyle(conf.light),}
+\DoxyCodeLine{00512\ \ \ \ \ GetAppBackground(conf.dark)}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ +\ GetCommonBtnStyle(conf.dark)}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ +\ GetCommonIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ +\ GetCommonSmallIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ +\ GetCommonExtraSmallIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ +\ GetSmallAppBarBaseStyle(conf.dark)}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ +\ GetAppBarIconBtnStyle(conf.dark)}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ +\ GetAppBarSearchBarStyle(conf.dark)}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ +\ Get48PxFABStyle(conf.dark)}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ +\ GetNavigationDrawerStyle(conf.dark)}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ +\ GetNavigationDrawerCompactStyle(conf.dark)}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ +\ GetCalendarStyle(conf.dark)}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ +\ GetScrollAreaStyle(conf.dark)}
+\DoxyCodeLine{00525\ \ \ \};}
+\DoxyCodeLine{00526\ \}}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00529\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_THEME\_LOADER\_THEME\_CONF\_H\_}}
+
+\end{DoxyCode}

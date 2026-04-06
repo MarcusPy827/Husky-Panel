@@ -1,0 +1,187 @@
+\doxysection{panel\+::backend\+::Wlroots\+Helper Class Reference}
+\hypertarget{classpanel_1_1backend_1_1WlrootsHelper}{}\label{classpanel_1_1backend_1_1WlrootsHelper}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+Inheritance diagram for panel\+::backend\+::Wlroots\+Helper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpanel_1_1backend_1_1WlrootsHelper}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_af7494548f96d2124266addd01833aa86}\label{classpanel_1_1backend_1_1WlrootsHelper_af7494548f96d2124266addd01833aa86} 
+void {\bfseries Activated} (const QString \&app\+\_\+id, const QString \&title)
+\item 
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_a96e4a010f331902a3c4f6a70978429df}\label{classpanel_1_1backend_1_1WlrootsHelper_a96e4a010f331902a3c4f6a70978429df} 
+void {\bfseries Closed} (\mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper}{Wlroots\+Helper}} \texorpdfstring{$\ast$}{*}self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_ac3f86fb80377c74f657dd0fae4e061cd}{Wlroots\+Helper}} (struct \+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1 \texorpdfstring{$\ast$}{*}handle, QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a wrapper for the wlr handle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_aa9daa2acc62acf0927d2c7dc40bbf241}{\texorpdfstring{$\sim$}{\string~}\+Wlroots\+Helper}} ()
+\begin{DoxyCompactList}\small\item\em The destructor of the wrapper which is responsiblr for cleaning up. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_abdc6b4c9f5291174048918de2c03a582}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+title}} (const QString \&title) override
+\begin{DoxyCompactList}\small\item\em Handle the {\ttfamily title} event of foreign\+\_\+toplevel\+\_\+handle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_ab8bdc4baf25d5c5daa63c5ac7dbcad89}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+app\+\_\+id}} (const QString \&app\+\_\+id) override
+\begin{DoxyCompactList}\small\item\em Handle the {\ttfamily app\+\_\+id} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_a7f931119e46e9eb85c780fd62e5a57f1}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+state}} (wl\+\_\+array \texorpdfstring{$\ast$}{*}state) override
+\begin{DoxyCompactList}\small\item\em Handle the {\ttfamily state} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_a7668e8824c73939ac858d74caa85fda5}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+done}} () override
+\begin{DoxyCompactList}\small\item\em Handle the {\ttfamily done} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1WlrootsHelper_a5b4021b081ea07a75110db974d84bd8b}{zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+closed}} () override
+\begin{DoxyCompactList}\small\item\em Handle the {\ttfamily closed} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_ac3f86fb80377c74f657dd0fae4e061cd}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!WlrootsHelper@{WlrootsHelper}}
+\index{WlrootsHelper@{WlrootsHelper}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{WlrootsHelper()}{WlrootsHelper()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_ac3f86fb80377c74f657dd0fae4e061cd} 
+panel\+::backend\+::\+Wlroots\+Helper\+::\+Wlroots\+Helper (\begin{DoxyParamCaption}\item[{struct \+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1 \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a wrapper for the wlr handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & (zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\texorpdfstring{$\ast$}{*}) The raw handle. \\
+\hline
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject for this wrapper. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This wrapper will manage the callback of title/app\+\_\+id/state/done/closed, and emit Activated signals accordingly. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_aa9daa2acc62acf0927d2c7dc40bbf241}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!````~WlrootsHelper@{\texorpdfstring{$\sim$}{\string~}WlrootsHelper}}
+\index{````~WlrootsHelper@{\texorpdfstring{$\sim$}{\string~}WlrootsHelper}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WlrootsHelper()}{\string~WlrootsHelper()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_aa9daa2acc62acf0927d2c7dc40bbf241} 
+panel\+::backend\+::\+Wlroots\+Helper\+::\texorpdfstring{$\sim$}{\string~}\+Wlroots\+Helper (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+The destructor of the wrapper which is responsiblr for cleaning up. 
+
+\begin{DoxyNote}{Note}
+We are using {\ttfamily destory()} to release the Wayland resource, then Qt will take care of the rest of the QObject part. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_ab8bdc4baf25d5c5daa63c5ac7dbcad89}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!zwlr\_foreign\_toplevel\_handle\_v1\_app\_id@{zwlr\_foreign\_toplevel\_handle\_v1\_app\_id}}
+\index{zwlr\_foreign\_toplevel\_handle\_v1\_app\_id@{zwlr\_foreign\_toplevel\_handle\_v1\_app\_id}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_handle\_v1\_app\_id()}{zwlr\_foreign\_toplevel\_handle\_v1\_app\_id()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_ab8bdc4baf25d5c5daa63c5ac7dbcad89} 
+void panel\+::backend\+::\+Wlroots\+Helper\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+app\+\_\+id (\begin{DoxyParamCaption}\item[{const QString \&}]{app\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Handle the {\ttfamily app\+\_\+id} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+\_\+id} & (QString \&) The application id, which is usually the {\ttfamily }.desktop filename without extension name?? Or, it could be the {\ttfamily WM\+\_\+\+CLASS} for those XWayland windows.\\
+\hline
+\end{DoxyParams}
+The app\+\_\+id is ONLY cached to {\ttfamily pending\+\_\+app\+\_\+id\+\_\+} and it would take effects while {\ttfamily done()} is called. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1}.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_a5b4021b081ea07a75110db974d84bd8b}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!zwlr\_foreign\_toplevel\_handle\_v1\_closed@{zwlr\_foreign\_toplevel\_handle\_v1\_closed}}
+\index{zwlr\_foreign\_toplevel\_handle\_v1\_closed@{zwlr\_foreign\_toplevel\_handle\_v1\_closed}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_handle\_v1\_closed()}{zwlr\_foreign\_toplevel\_handle\_v1\_closed()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_a5b4021b081ea07a75110db974d84bd8b} 
+void panel\+::backend\+::\+Wlroots\+Helper\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+closed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Handle the {\ttfamily closed} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. 
+
+This represents the toplevel window being closed, and we forward the notification to the manager by emitting {\ttfamily Closed(\+Wlr\+Toplevel\+Handle \texorpdfstring{$\ast$}{*}handle)}. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_a7668e8824c73939ac858d74caa85fda5}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!zwlr\_foreign\_toplevel\_handle\_v1\_done@{zwlr\_foreign\_toplevel\_handle\_v1\_done}}
+\index{zwlr\_foreign\_toplevel\_handle\_v1\_done@{zwlr\_foreign\_toplevel\_handle\_v1\_done}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_handle\_v1\_done()}{zwlr\_foreign\_toplevel\_handle\_v1\_done()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_a7668e8824c73939ac858d74caa85fda5} 
+void panel\+::backend\+::\+Wlroots\+Helper\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+done (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Handle the {\ttfamily done} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. 
+
+This represents the end of a batch update. If {\ttfamily pending\+\_\+activated\+\_\+} is true, then the signal {\ttfamily Activated}(pending\+\_\+app\+\_\+id\+\_\+, {\ttfamily pending\+\_\+title\+\_\+}) would be emitted. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_a7f931119e46e9eb85c780fd62e5a57f1}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!zwlr\_foreign\_toplevel\_handle\_v1\_state@{zwlr\_foreign\_toplevel\_handle\_v1\_state}}
+\index{zwlr\_foreign\_toplevel\_handle\_v1\_state@{zwlr\_foreign\_toplevel\_handle\_v1\_state}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_handle\_v1\_state()}{zwlr\_foreign\_toplevel\_handle\_v1\_state()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_a7f931119e46e9eb85c780fd62e5a57f1} 
+void panel\+::backend\+::\+Wlroots\+Helper\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+state (\begin{DoxyParamCaption}\item[{wl\+\_\+array \texorpdfstring{$\ast$}{*}}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Handle the {\ttfamily state} event of {\ttfamily foreign\+\_\+toplevel\+\_\+handle}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & (wl\+\_\+array\texorpdfstring{$\ast$}{*}) The state array, consisting of a list of state enums.\\
+\hline
+\end{DoxyParams}
+Parse whether state contains {\ttfamily state\+\_\+activated}, and writes it to {\ttfamily pending\+\_\+activated\+\_\+}. It would decide whether to emit {\ttfamily Activated} while {\ttfamily done()} is called. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1WlrootsHelper_abdc6b4c9f5291174048918de2c03a582}\index{panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}!zwlr\_foreign\_toplevel\_handle\_v1\_title@{zwlr\_foreign\_toplevel\_handle\_v1\_title}}
+\index{zwlr\_foreign\_toplevel\_handle\_v1\_title@{zwlr\_foreign\_toplevel\_handle\_v1\_title}!panel::backend::WlrootsHelper@{panel::backend::WlrootsHelper}}
+\doxysubsubsection{\texorpdfstring{zwlr\_foreign\_toplevel\_handle\_v1\_title()}{zwlr\_foreign\_toplevel\_handle\_v1\_title()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1WlrootsHelper_abdc6b4c9f5291174048918de2c03a582} 
+void panel\+::backend\+::\+Wlroots\+Helper\+::zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1\+\_\+title (\begin{DoxyParamCaption}\item[{const QString \&}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Handle the {\ttfamily title} event of foreign\+\_\+toplevel\+\_\+handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & (QString \&) The window title.\\
+\hline
+\end{DoxyParams}
+The title is ONLY cached to {\ttfamily pending\+\_\+title\+\_\+} and it would take effect while {\ttfamily done()} is called. \begin{DoxyNote}{Note}
+Overridding the virtual function from {\ttfamily zwlr\+\_\+foreign\+\_\+toplevel\+\_\+handle\+\_\+v1}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+h\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+wlroots\+\_\+impl.\+cc\end{DoxyCompactItemize}

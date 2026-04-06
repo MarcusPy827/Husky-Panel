@@ -254,9 +254,9 @@ For more details about the plugin, read the README in `plugins/kde/app-bridge`.
 
 - [X] Search bar
 - [X] Clock
-- [ ] System tray
+- [X] System tray
     - [X] Simple tray
-    - [ ] Icon folding
+    - [X] Icon folding
 - [X] App indicator
     - [X] KWin support (via KWin script)
     - [X] Niri/Hyprland support

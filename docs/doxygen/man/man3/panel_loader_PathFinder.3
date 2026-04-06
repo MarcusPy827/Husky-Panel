@@ -1,0 +1,128 @@
+.TH "panel::loader::PathFinder" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::loader::PathFinder
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static QString \fBGetSystemConfigDir\fP ()"
+.br
+.RI "Gets the system configuration directory\&. "
+.ti -1c
+.RI "static QString \fBGetConfigBaseDir\fP ()"
+.br
+.RI "Gets the base directory for configuration files\&. "
+.ti -1c
+.RI "static QString \fBGetTrayConfigPath\fP ()"
+.br
+.RI "Gets the path for the system tray configuration file\&. "
+.ti -1c
+.RI "static QString \fBGetTrayExpandingIconConfigPath\fP ()"
+.br
+.RI "Gets the path for the system tray expanding icon configuration file\&. "
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "QString panel::loader::PathFinder::GetConfigBaseDir ()\fR [static]\fP"
+
+.PP
+Gets the base directory for configuration files\&. This function first gets the target path, it will create the directory if it doesn't exist, and then return the path\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function relies on \fRQStandardPaths::writableLocation\fP\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBGetSystemConfigDir()\fP\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The base directory for configuration files\&. 
+.RE
+.PP
+
+.SS "QString panel::loader::PathFinder::GetSystemConfigDir ()\fR [static]\fP"
+
+.PP
+Gets the system configuration directory\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function relies on \fRQStandardPaths::writableLocation\fP and assumes that that directory exists and writable\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The system configuration directory\&. 
+.RE
+.PP
+
+.SS "QString panel::loader::PathFinder::GetTrayConfigPath ()\fR [static]\fP"
+
+.PP
+Gets the path for the system tray configuration file\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function relies on \fRQStandardPaths::writableLocation\fP\&. 
+
+.PP
+An empty file will be created if the target file does NOT exist\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBGetConfigBaseDir()\fP\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The path for the system tray configuration file\&. 
+.RE
+.PP
+
+.SS "QString panel::loader::PathFinder::GetTrayExpandingIconConfigPath ()\fR [static]\fP"
+
+.PP
+Gets the path for the system tray expanding icon configuration file\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function relies on \fRQStandardPaths::writableLocation\fP\&. 
+
+.PP
+An empty file will be created if the target file does NOT exist\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBGetConfigBaseDir()\fP\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The path for the system tray expanding icon configuration file\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

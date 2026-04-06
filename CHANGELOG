@@ -1,5 +1,13 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/tray_fold_0403
+  * Added a config panel.
+  * 新增了一个配置面板
+  * Added a backend for reading/writing config.
+  * 新增了用于读写配置文件的后端
+  * Implemented tray icon fold feture.
+  * 实现了托盘图标折叠功能
+
 * marcus/app_drawer_enhancement_0402
   * Added missing translations to the session options.
   * 为「会话选项」补充了缺失的翻译

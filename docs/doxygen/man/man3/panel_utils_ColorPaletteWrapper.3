@@ -1,0 +1,37 @@
+.TH "panel::utils::ColorPaletteWrapper" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::utils::ColorPaletteWrapper
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static QColor \fBGetSystemHighlightColor\fP ()"
+.br
+.ti -1c
+.RI "static material_color_utilities::Argb \fBHex2Rgb\fP (const QString &hex)"
+.br
+.ti -1c
+.RI "static QString \fBArgb2Hex\fP (material_color_utilities::Argb argb, bool read_alpha=true)"
+.br
+.ti -1c
+.RI "static material_color_utilities::CorePalettes \fBGenPalette\fP (const QString &hex)"
+.br
+.ti -1c
+.RI "static std::unique_ptr< material_color_utilities::DynamicScheme > \fBGenScheme\fP (const QString &primary_hex, ColorSchemeType type, bool is_dark=false, double contrast_level=0\&.0)"
+.br
+.ti -1c
+.RI "static QString \fBGetTypeName\fP (ColorSchemeType type)"
+.br
+.ti -1c
+.RI "static bool \fBIsDark\fP ()"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

@@ -1,0 +1,204 @@
+.TH "panel::backend::WlrootsHelper" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::WlrootsHelper
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject, and QtWayland::zwlr_foreign_toplevel_handle_v1\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBActivated\fP (const QString &app_id, const QString &title)"
+.br
+.ti -1c
+.RI "void \fBClosed\fP (\fBWlrootsHelper\fP *self)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWlrootsHelper\fP (struct ::zwlr_foreign_toplevel_handle_v1 *handle, QObject *parent=nullptr)"
+.br
+.RI "Constructs a wrapper for the wlr handle\&. "
+.ti -1c
+.RI "\fB~WlrootsHelper\fP ()"
+.br
+.RI "The destructor of the wrapper which is responsiblr for cleaning up\&. "
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_handle_v1_title\fP (const QString &title) override"
+.br
+.RI "Handle the \fRtitle\fP event of foreign_toplevel_handle\&. "
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_handle_v1_app_id\fP (const QString &app_id) override"
+.br
+.RI "Handle the \fRapp_id\fP event of \fRforeign_toplevel_handle\fP\&. "
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_handle_v1_state\fP (wl_array *state) override"
+.br
+.RI "Handle the \fRstate\fP event of \fRforeign_toplevel_handle\fP\&. "
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_handle_v1_done\fP () override"
+.br
+.RI "Handle the \fRdone\fP event of \fRforeign_toplevel_handle\fP\&. "
+.ti -1c
+.RI "void \fBzwlr_foreign_toplevel_handle_v1_closed\fP () override"
+.br
+.RI "Handle the \fRclosed\fP event of \fRforeign_toplevel_handle\fP\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::WlrootsHelper::WlrootsHelper (struct ::zwlr_foreign_toplevel_handle_v1 * handle, QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+Constructs a wrapper for the wlr handle\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhandle\fP (zwlr_foreign_toplevel_handle_v1*) The raw handle\&. 
+.br
+\fIparent\fP (QObject*) The parent QObject for this wrapper\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This wrapper will manage the callback of title/app_id/state/done/closed, and emit Activated signals accordingly\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "panel::backend::WlrootsHelper::~WlrootsHelper ()"
+
+.PP
+The destructor of the wrapper which is responsiblr for cleaning up\&. 
+.PP
+\fBNote\fP
+.RS 4
+We are using \fRdestory()\fP to release the Wayland resource, then Qt will take care of the rest of the QObject part\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void panel::backend::WlrootsHelper::zwlr_foreign_toplevel_handle_v1_app_id (const QString & app_id)\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Handle the \fRapp_id\fP event of \fRforeign_toplevel_handle\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIapp_id\fP (QString &) The application id, which is usually the \fR\fP\&.desktop filename without extension name?? Or, it could be the \fRWM_CLASS\fP for those XWayland windows\&.
+.RE
+.PP
+The app_id is ONLY cached to \fRpending_app_id_\fP and it would take effects while \fRdone()\fP is called\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_handle_v1\fP\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void panel::backend::WlrootsHelper::zwlr_foreign_toplevel_handle_v1_closed ()\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Handle the \fRclosed\fP event of \fRforeign_toplevel_handle\fP\&. This represents the toplevel window being closed, and we forward the notification to the manager by emitting \fRClosed(WlrToplevelHandle *handle)\fP\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_handle_v1\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void panel::backend::WlrootsHelper::zwlr_foreign_toplevel_handle_v1_done ()\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Handle the \fRdone\fP event of \fRforeign_toplevel_handle\fP\&. This represents the end of a batch update\&. If \fRpending_activated_\fP is true, then the signal \fRActivated\fP(pending_app_id_, \fRpending_title_\fP) would be emitted\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_handle_v1\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void panel::backend::WlrootsHelper::zwlr_foreign_toplevel_handle_v1_state (wl_array * state)\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Handle the \fRstate\fP event of \fRforeign_toplevel_handle\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstate\fP (wl_array*) The state array, consisting of a list of state enums\&.
+.RE
+.PP
+Parse whether state contains \fRstate_activated\fP, and writes it to \fRpending_activated_\fP\&. It would decide whether to emit \fRActivated\fP while \fRdone()\fP is called\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_handle_v1\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "void panel::backend::WlrootsHelper::zwlr_foreign_toplevel_handle_v1_title (const QString & title)\fR [override]\fP, \fR [protected]\fP"
+
+.PP
+Handle the \fRtitle\fP event of foreign_toplevel_handle\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItitle\fP (QString &) The window title\&.
+.RE
+.PP
+The title is ONLY cached to \fRpending_title_\fP and it would take effect while \fRdone()\fP is called\&. 
+.PP
+\fBNote\fP
+.RS 4
+Overridding the virtual function from \fRzwlr_foreign_toplevel_handle_v1\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

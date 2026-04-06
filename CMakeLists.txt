@@ -77,6 +77,7 @@ add_subdirectory(lib/3rdparty/gtest EXCLUDE_FROM_ALL)
 # Force QWindowKit static build
 set(QWINDOWKIT_BUILD_STATIC ON CACHE BOOL "" FORCE)
 set(QWINDOWKIT_BUILD_STATIC ON)
+set(QWINDOWKIT_BUILD_QUICK ON CACHE BOOL "" FORCE)
 set(QWINDOWKIT_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
 
@@ -196,6 +197,13 @@ set(FRONTEND_SOURCES
   src/components/calendar/calendar.cc
 )
 
+set(CONFIG_LOADER_SOURCES
+  src/config_loader/path_finder/path_finder.h
+  src/config_loader/path_finder/path_finder.cc
+  src/config_loader/system_tray/tray_config_handler.h
+  src/config_loader/system_tray/tray_config_handler.cc
+)
+
 set(I18N_SOURCES
   src/translation_loader/translation_loader.h
   src/translation_loader/translation_loader.cc
@@ -208,6 +216,7 @@ set(COMMON_SOURCES
   ${UTIL_SOURCES}
   ${BACKEND_SOURCES}
   ${FRONTEND_SOURCES}
+  ${CONFIG_LOADER_SOURCES}
   ${I18N_SOURCES}
 )
 
@@ -313,6 +322,7 @@ target_link_libraries(HuskyPanel
   ${VENDORED_STATIC_SWITCHABLE_LIBS}
   MaterialColorUtils
   QWindowKit::Widgets
+  QWindowKit::Quick
 
   -Wl,-Bdynamic
   ${SYSTEM_DYNAMIC_SWITCHABLE_LIBS}

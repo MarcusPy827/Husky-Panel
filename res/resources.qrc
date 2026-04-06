@@ -3,13 +3,13 @@
         <file>fonts/material-symbols/material_symbol_rounded.ttf</file>
         <file>fonts/material-symbols/material_symbol_outlined.ttf</file>
         <file>fonts/material-symbols/material_symbol_sharp.ttf</file>
-        <file>translations/bar.locale</file>
     </qresource>
     <qresource prefix="/translations">
         <file>translations/HuskyPanel_zh_CN.qm</file>
         <file>translations/bar.locale</file>
         <file>translations/calendar.locale</file>
         <file>translations/app_drawer.locale</file>
+        <file>translations/config_panel.locale</file>
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
@@ -32,8 +32,12 @@
         <file>interfaces/wlan_indicator/WLANIndicator.qml</file>
         <file>interfaces/system_tray/SystemTray.qml</file>
         <file>interfaces/system_tray/SystemTrayIcon.qml</file>
+        <file>interfaces/system_tray/SystemTrayExpandIcon.qml</file>
+        <file>interfaces/system_tray/SystemTrayOverflowFlyout.qml</file>
         <file>interfaces/system_tray/qmldir</file>
         <file>interfaces/config_panel/ConfigPanel.qml</file>
         <file>interfaces/config_panel/ConfigPanelSidePaneItem.qml</file>
+        <file>interfaces/config_panel/ConfigPanelSystemTrayPage.qml</file>
+        <file>interfaces/config_panel/ConfigPanelWindow.qml</file>
     </qresource>
 </RCC>

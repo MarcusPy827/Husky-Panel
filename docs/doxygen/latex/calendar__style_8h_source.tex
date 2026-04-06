@@ -1,0 +1,252 @@
+\doxysection{calendar\+\_\+style.\+h}
+\hypertarget{calendar__style_8h_source}{}\label{calendar__style_8h_source}\index{src/components/calendar/calendar\_style.h@{src/components/calendar/calendar\_style.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_COMPONENTS\_CALENDAR\_CALENDAR\_STYLE\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_COMPONENTS\_CALENDAR\_CALENDAR\_STYLE\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QStringLiteral>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}src/utils/strings/strings.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}src/utils/color\_palette\_wrapper/color\_palette\_wrapper.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}src/utils/colors/colors.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}lib/3rdparty/material-\/color-\/utilities/cpp/dynamiccolor/dynamic\_scheme.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }loader\ \{}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{static}\ QString\ GetCalendarBackground(}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00038\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurface();}
+\DoxyCodeLine{00039\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00040\ \ \ material\_color\_utilities::Argb\ border\_color\ =\ palette-\/>GetPrimary();}
+\DoxyCodeLine{00041\ \ \ QString\ border\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(border\_color);}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00043\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='calendar\_frame']\ \{}}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 2px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ 2px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 12px;}}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding:\ 10px;}}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex,\ border\_hex\});}}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCalendarTitleBar(}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00055\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainer();}
+\DoxyCodeLine{00056\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00058\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='calendar\_title\_bar']\ \{}}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/left-\/radius:\ 12px;}}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/right-\/radius:\ 12px;}}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/left-\/radius:\ 0px;}}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/right-\/radius:\ 0px;}}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ min-\/height:\ 32px;}}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ max-\/height:\ 32px;}}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex\});}}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCalendarTitle(}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00073\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00074\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00076\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ \ \ QWidget[class='calendar\_window\_title']\ \{}}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t1\%;}}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/weight:\ bold;}}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{text\_hex\});}}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCalendarContent(}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00087\ \ \ material\_color\_utilities::Argb\ bg\_color\ =\ palette-\/>GetSurfaceContainer();}
+\DoxyCodeLine{00088\ \ \ QString\ bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(bg\_color);}
+\DoxyCodeLine{00089\ \ \ material\_color\_utilities::Argb\ text\_color\ =\ palette-\/>GetOnSurface();}
+\DoxyCodeLine{00090\ \ \ QString\ text\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(text\_color);}
+\DoxyCodeLine{00091\ \ \ QString\ text\_dim\ =\ utils::Colors::ApplyOpacityToHexColor(text\_hex,\ 0.8);}
+\DoxyCodeLine{00092\ \ \ material\_color\_utilities::Argb\ state\_layer\_color\ =\ palette}
+\DoxyCodeLine{00093\ \ \ \ \ -\/>GetOnSurfaceVariant();}
+\DoxyCodeLine{00094\ \ \ QString\ state\_layer\_hex\_raw\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00095\ \ \ \ \ state\_layer\_color,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00096\ \ \ QString\ state\_layer\_hex\_hover\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00097\ \ \ \ \ state\_layer\_hex\_raw,\ 0.08);}
+\DoxyCodeLine{00098\ \ \ QString\ state\_layer\_hex\_pressed\ =\ utils::Colors::ApplyOpacityToHexColor(}
+\DoxyCodeLine{00099\ \ \ \ \ state\_layer\_hex\_raw,\ 0.1);}
+\DoxyCodeLine{00100\ \ \ material\_color\_utilities::Argb\ on\_primary\_color\ =\ palette-\/>GetOnPrimary();}
+\DoxyCodeLine{00101\ \ \ QString\ on\_primary\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(}
+\DoxyCodeLine{00102\ \ \ \ \ on\_primary\_color);}
+\DoxyCodeLine{00103\ \ \ material\_color\_utilities::Argb\ primary\_color\ =\ palette-\/>GetPrimary();}
+\DoxyCodeLine{00104\ \ \ QString\ primary\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(primary\_color);}
+\DoxyCodeLine{00105\ \ \ material\_color\_utilities::Argb\ norm\_bg\_color\ =\ palette-\/>GetBackground();}
+\DoxyCodeLine{00106\ \ \ QString\ norm\_bg\_hex\ =\ utils::ColorPaletteWrapper::Argb2Hex(norm\_bg\_color);}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordflow}{return}\ utils::Strings::TemplateCat(}
+\DoxyCodeLine{00108\ \ \ \ \ QStringLiteral(R\textcolor{stringliteral}{"{}"{}"{}(}}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget[class='calendar\_w']\ \{}}
+\DoxyCodeLine{00110\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00111\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/left-\/radius:\ 0px;}}
+\DoxyCodeLine{00112\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/right-\/radius:\ 0px;}}
+\DoxyCodeLine{00113\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/left-\/radius:\ 12px;}}
+\DoxyCodeLine{00114\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/right-\/radius:\ 12px;}}
+\DoxyCodeLine{00115\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00117\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00118\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget[class='calendar\_w']\ QWidget\#qt\_calendar\_navigationbar\ \{}}
+\DoxyCodeLine{00119\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00120\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t1\%;}}
+\DoxyCodeLine{00121\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00122\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00123\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00124\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget[class='calendar\_w']\ QToolButton::menu-\/indicator\ \{}}
+\DoxyCodeLine{00125\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ image:\ none;\ }}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 0px;}}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget[class='calendar\_w']\ QAbstractItemView:enabled\ \{}}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t8\%;}}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t1\%;}}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/left-\/radius:\ 0px;}}
+\DoxyCodeLine{00133\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/right-\/radius:\ 0px;}}
+\DoxyCodeLine{00134\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/left-\/radius:\ 12px;}}
+\DoxyCodeLine{00135\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/right-\/radius:\ 12px;}}
+\DoxyCodeLine{00136\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00138\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget\ QHeaderView::section\ \{}}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background-\/color:\ \%t8\%;}}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t8\%;}}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding:\ 4px;}}
+\DoxyCodeLine{00144\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ none;}}
+\DoxyCodeLine{00145\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/weight:\ bold;}}
+\DoxyCodeLine{00146\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00147\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00148\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00149\ \textcolor{stringliteral}{\ \ \ \ \ \ QCalendarWidget[class='calendar\_w']\ QTableView\ \{}}
+\DoxyCodeLine{00150\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background-\/color:\ \%t8\%;}}
+\DoxyCodeLine{00151\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ selection-\/color:\ \%t6\%;}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ selection-\/background-\/color:\ \%t7\%;}}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ outline:\ none;}}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t2\%;}}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/left-\/radius:\ 0px;}}
+\DoxyCodeLine{00156\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/top-\/right-\/radius:\ 0px;}}
+\DoxyCodeLine{00157\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/left-\/radius:\ 12px;}}
+\DoxyCodeLine{00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/bottom-\/right-\/radius:\ 12px;}}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_month\_btn']\ \{}}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00167\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00168\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ width:\ 24px;}}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00170\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00171\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00172\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00173\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_month\_btn']:hover\ \{}}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00175\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00176\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00177\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00178\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00179\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00180\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00181\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00183\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00184\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_month\_btn']:pressed\ \{}}
+\DoxyCodeLine{00185\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00186\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t4\%;}}
+\DoxyCodeLine{00187\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t4\%;}}
+\DoxyCodeLine{00188\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00189\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 18px;}}
+\DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00191\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00192\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00193\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_time\_btn']\ \{}}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ transparent;}}
+\DoxyCodeLine{00198\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00199\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00200\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00201\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00202\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00203\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00206\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_time\_btn']:hover\ \{}}
+\DoxyCodeLine{00207\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00208\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t3\%;}}
+\DoxyCodeLine{00209\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t3\%;}}
+\DoxyCodeLine{00210\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00211\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00212\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00213\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00214\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00215\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00216\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00217\ \textcolor{stringliteral}{\ \ \ \ \ \ QToolButton[class='calendar\_handle\_time\_btn']:pressed\ \{}}
+\DoxyCodeLine{00218\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ color:\ \%t2\%;}}
+\DoxyCodeLine{00219\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t4\%;}}
+\DoxyCodeLine{00220\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border:\ 0px\ solid\ \%t4\%;}}
+\DoxyCodeLine{00221\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ border-\/radius:\ 6px;}}
+\DoxyCodeLine{00222\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ font-\/size:\ 16px;}}
+\DoxyCodeLine{00223\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ height:\ 32px;}}
+\DoxyCodeLine{00224\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/left:\ 8px;}}
+\DoxyCodeLine{00225\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ padding-\/right:\ 8px;}}
+\DoxyCodeLine{00226\ \textcolor{stringliteral}{\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00227\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00228\ \textcolor{stringliteral}{\ \ \ \ \ \ *[class='cal\_header']\ \{}}
+\DoxyCodeLine{00229\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ background:\ \%t8\%\ !important;}}
+\DoxyCodeLine{00230\ \textcolor{stringliteral}{\ \ \ \ \ \ \})"{}"{}"{}),\ QList<QString>\{bg\_hex,\ text\_hex,\ state\_layer\_hex\_hover,}}
+\DoxyCodeLine{00231\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state\_layer\_hex\_pressed,\ text\_dim,\ on\_primary\_hex,}}
+\DoxyCodeLine{00232\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ primary\_hex,\ norm\_bg\_hex\});}}
+\DoxyCodeLine{00233\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{00234\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00235\ \textcolor{stringliteral}{}\textcolor{keyword}{static}\ QString\ GetCalendarStyle(}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<material\_color\_utilities::DynamicScheme>\&\ palette)\ \{}
+\DoxyCodeLine{00237\ \ \ \textcolor{keywordflow}{return}\ GetCalendarBackground(palette)}
+\DoxyCodeLine{00238\ \ \ \ \ +\ GetCalendarTitleBar(palette)}
+\DoxyCodeLine{00239\ \ \ \ \ +\ GetCalendarTitle(palette)}
+\DoxyCodeLine{00240\ \ \ \ \ +\ GetCalendarContent(palette);}
+\DoxyCodeLine{00241\ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00244\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_COMPONENTS\_CALENDAR\_CALENDAR\_STYLE\_H\_}}
+
+\end{DoxyCode}

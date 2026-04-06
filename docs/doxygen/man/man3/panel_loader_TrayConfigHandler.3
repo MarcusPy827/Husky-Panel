@@ -1,0 +1,208 @@
+.TH "panel::loader::TrayConfigHandler" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::loader::TrayConfigHandler
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTrayConfigHandler\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor of the system tray configuration handler\&. "
+.ti -1c
+.RI "\fB~TrayConfigHandler\fP ()"
+.br
+.RI "The destructor of the system tray configuration handler\&. "
+.ti -1c
+.RI "std::vector< \fBTrayConfig\fP > \fBGetTrayConfigs\fP ()"
+.br
+.RI "Get a vector of the configurations for recorded system tray icons\&. "
+.ti -1c
+.RI "bool \fBIsTrayIconPrefrenceExists\fP (const QString &id)"
+.br
+.RI "Get if the system tray preference for the given id exists\&. "
+.ti -1c
+.RI "bool \fBIsTrayIconVisible\fP (const QString &id)"
+.br
+.RI "Get if a system tray icon is visible according to the preference\&. "
+.ti -1c
+.RI "void \fBSetTrayIconVisible\fP (const QString &id, bool visible)"
+.br
+.RI "Set if a system tray icon is visible\&. "
+.ti -1c
+.RI "bool \fBIsExpandIconOnLeftHandSide\fP ()"
+.br
+.RI "Get if the expanding icon should be placed on the left-hand side of the tray icons\&. "
+.ti -1c
+.RI "void \fBSetExpandIconOnLeftHandSide\fP (bool on_left)"
+.br
+.RI "Set if the expanding icon should be placed on the left-hand side of the tray icons\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::loader::TrayConfigHandler::TrayConfigHandler (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor of the system tray configuration handler\&. 
+.PP
+\fBNote\fP
+.RS 4
+It is here so we could register this one to the QML engine providers\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "panel::loader::TrayConfigHandler::~TrayConfigHandler ()"
+
+.PP
+The destructor of the system tray configuration handler\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::vector< \fBTrayConfig\fP > panel::loader::TrayConfigHandler::GetTrayConfigs ()"
+
+.PP
+Get a vector of the configurations for recorded system tray icons\&. 
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(std::vector<TrayConfig>) The vector of the configurations\&. 
+.RE
+.PP
+
+.SS "bool panel::loader::TrayConfigHandler::IsExpandIconOnLeftHandSide ()"
+
+.PP
+Get if the expanding icon should be placed on the left-hand side of the tray icons\&. 
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+
+.PP
+Defaulting to \fRfalse\fP if opreation failed\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(bool) True if the expanding icon should be placed on the left-hand side of the tray icons, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool panel::loader::TrayConfigHandler::IsTrayIconPrefrenceExists (const QString & id)"
+
+.PP
+Get if the system tray preference for the given id exists\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI(const\fP QString &) id The id of the system tray icon\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+
+.PP
+Defaulting to \fRfalse\fP if opreation failed\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(bool) True if the preference exists, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool panel::loader::TrayConfigHandler::IsTrayIconVisible (const QString & id)"
+
+.PP
+Get if a system tray icon is visible according to the preference\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI(const\fP QString &) id The id of the system tray icon\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+
+.PP
+Defaulting to \fRtrue\fP if opreation failed\&.\&.\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(bool) True if the preference exists, false otherwise\&. 
+.RE
+.PP
+
+.SS "void panel::loader::TrayConfigHandler::SetExpandIconOnLeftHandSide (bool on_left)"
+
+.PP
+Set if the expanding icon should be placed on the left-hand side of the tray icons\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI(bool)\fP on_left Whether the expanding icon should be on the left-hand side\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::loader::TrayConfigHandler::SetTrayIconVisible (const QString & id, bool visible)"
+
+.PP
+Set if a system tray icon is visible\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI(const\fP QString &) id The id of the system tray icon\&. 
+.br
+\fI(bool)\fP visible Whether the system tray icon is visible\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Don't ask me why using \fRfcntl\fP instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this\&.\&.\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

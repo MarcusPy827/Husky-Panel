@@ -46,8 +46,8 @@ Window {
   property bool drawerExpanded: false
   property bool calendarFlyoutOpen: false
   property bool calendarFlyoutExpanded: false
-  property bool configPanelOpen: false
-  property bool configPanelExpanded: false
+  property bool trayOverflowOpen: false
+  property bool trayOverflowExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -68,6 +68,7 @@ Window {
   onCalendarFlyoutOpenChanged: {
     if (calendarFlyoutOpen) {
       appDrawerOpen = false
+      trayOverflowOpen = false
       calendarFlyoutExpanded = true
       LayerShellHelper.setFullMask(root)
       calendarFlyout.open()
@@ -77,41 +78,41 @@ Window {
     }
   }
 
-  onConfigPanelOpenChanged: {
-    if (configPanelOpen) {
-      appDrawerOpen = false
+  onTrayOverflowOpenChanged: {
+    if (trayOverflowOpen) {
       calendarFlyoutOpen = false
-      configPanelExpanded = true
+      trayOverflowExpanded = true
       LayerShellHelper.setFullMask(root)
-      configPanel.open()
+      trayOverflowFlyout.open()
     } else {
-      configPanel.close()
+      trayOverflowFlyout.close()
+      // trayOverflowExpanded → false is set by onCloseAnimationFinished below
     }
   }
 
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded && !configPanelExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded && !configPanelExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
-  onConfigPanelExpandedChanged: {
-    if (!configPanelExpanded && !drawerExpanded && !calendarFlyoutExpanded)
+  onTrayOverflowExpandedChanged: {
+    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.configPanelOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.trayOverflowOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
-      root.configPanelOpen = false
+      root.trayOverflowOpen = false
     }
   }
 
@@ -398,7 +399,7 @@ Window {
         id: barContextMenu
         MenuItem {
           text: StatusBarTranslator.Tr("Configure...")
-          onTriggered: root.configPanelOpen = true
+          onTriggered: configPanelWindow.open()
         }
       }
 
@@ -459,7 +460,9 @@ Window {
           Layout.alignment: Qt.AlignVCenter
 
           // System tray
-          SystemTray {}
+          SystemTray {
+            onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
+          }
 
           // WLAN indicator
           WLANIndicator {}
@@ -511,19 +514,24 @@ Window {
     }
   }
 
-  // Config panel
+  // System tray overflow flyout
   Item {
-    x: 8
+    x: root.width - trayOverflowFlyout.implicitWidth - root.calendarFlyoutW - 12
     y: root.barHeight + root.drawerTopMargin
-    width: root.drawerW
-    height: root.drawerH
-    visible: root.configPanelExpanded
+    width: trayOverflowFlyout.implicitWidth
+    height: trayOverflowFlyout.implicitHeight
+    visible: root.trayOverflowExpanded
 
-    ConfigPanel {
-      id: configPanel
+    SystemTrayOverflowFlyout {
+      id: trayOverflowFlyout
       anchors.fill: parent
-      onCloseAnimationFinished: root.configPanelExpanded = false
+      onCloseAnimationFinished: root.trayOverflowExpanded = false
     }
+  }
+
+  // Config panel (standalone frameless window)
+  ConfigPanelWindow {
+    id: configPanelWindow
   }
 
 }
