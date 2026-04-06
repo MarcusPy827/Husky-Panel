@@ -12,13 +12,27 @@ Inheritance diagram for panel\+::frontend\+::System\+Tray\+Handler\+:\begin{figu
 \Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a959669c23d059c5f2b92db7470307933}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a959669c23d059c5f2b92db7470307933} 
 enum {\bfseries Roles} \{ \newline
 {\bfseries Service\+Role} = Qt\+::User\+Role + 1
-, {\bfseries Tooltip\+Role}
+, {\bfseries Real\+Service\+Role}
+, {\bfseries Title\+Role}
+, {\bfseries App\+Id\+Role}
+, \newline
+{\bfseries Tooltip\+Role}
 , {\bfseries Is\+Visible\+Role}
+, {\bfseries Is\+Config\+Visible\+Role}
 , {\bfseries Needs\+Attention\+Role}
 , \newline
 {\bfseries Icon\+Revision\+Role}
 , {\bfseries Icon\+Key\+Role}
  \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_ac1ea5be0e176ad43cf697107b2bcdcd4}\label{classpanel_1_1frontend_1_1SystemTrayHandler_ac1ea5be0e176ad43cf697107b2bcdcd4} 
+void {\bfseries hidden\+Active\+Count\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_ac88ffc01fb8a074ca6f5038cb59ec3bd}\label{classpanel_1_1frontend_1_1SystemTrayHandler_ac88ffc01fb8a074ca6f5038cb59ec3bd} 
+void {\bfseries expand\+Icon\+On\+Left\+Changed} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -34,6 +48,12 @@ QVariant {\bfseries data} (const QModel\+Index \&index, int role=Qt\+::\+Display
 \item 
 \Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a43826868633288b75ce8f58ddf2b15a8}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a43826868633288b75ce8f58ddf2b15a8} 
 QHash$<$ int, QByte\+Array $>$ {\bfseries role\+Names} () const override
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a21043dd58a15192ad865aebc82d4135a}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a21043dd58a15192ad865aebc82d4135a} 
+int {\bfseries hidden\+Active\+Count} () const
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_afdb8c2d1eca95aa96a68193dc3b1de0c}\label{classpanel_1_1frontend_1_1SystemTrayHandler_afdb8c2d1eca95aa96a68193dc3b1de0c} 
+bool {\bfseries expand\+Icon\+On\+Left} () const
 \item 
 \Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a7e436540ec5618f3832fe4dd9b47b63e}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a7e436540ec5618f3832fe4dd9b47b63e} 
 QImage {\bfseries Get\+Icon\+Image} (int key) const
@@ -61,6 +81,21 @@ Q\+\_\+\+INVOKABLE void {\bfseries secondary\+Activate} (const QString \&service
 \item 
 \Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a4b45ab0a25d2897ff0117a43b9fe0aa7}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a4b45ab0a25d2897ff0117a43b9fe0aa7} 
 Q\+\_\+\+INVOKABLE void {\bfseries scroll} (const QString \&service, int delta)
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a73cc8ff1e39751ec9271f91f861b5f61}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a73cc8ff1e39751ec9271f91f861b5f61} 
+Q\+\_\+\+INVOKABLE void {\bfseries set\+Config\+Visible} (const QString \&service, bool visible)
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_af83b69f0f53ebca5828a3ff9b939965f}\label{classpanel_1_1frontend_1_1SystemTrayHandler_af83b69f0f53ebca5828a3ff9b939965f} 
+Q\+\_\+\+INVOKABLE void {\bfseries set\+Expand\+Icon\+On\+Left} (bool value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a8fb231ed2d693833c01ca2dfa0f9bfea}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a8fb231ed2d693833c01ca2dfa0f9bfea} 
+int {\bfseries hidden\+Active\+Count}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1SystemTrayHandler_a034fc29507b47776b8ed101e3d00341f}\label{classpanel_1_1frontend_1_1SystemTrayHandler_a034fc29507b47776b8ed101e3d00341f} 
+bool {\bfseries expand\+Icon\+On\+Left}
 \end{DoxyCompactItemize}
 
 

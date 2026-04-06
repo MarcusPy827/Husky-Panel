@@ -136,44 +136,49 @@ $(function(){initNavTree('tray__icon__item_8h_source.html','',''); });
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// Returns a copy of the current icon image (copy-safe for cross-thread use).</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  QImage GetImage()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> icon_image_; }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  QString GetTooltip()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> tooltip_; }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">bool</span> IsVisible()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> status_ != QLatin1String(<span class="stringliteral">&quot;Passive&quot;</span>); }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">bool</span> NeedsAttention()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> status_ == QLatin1String(<span class="stringliteral">&quot;NeedsAttention&quot;</span>);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> Activate(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">void</span> ContextMenu(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordtype">void</span> SecondaryActivate(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">void</span> Scroll(<span class="keywordtype">int</span> delta);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> signals:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">void</span> IconChanged();</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">void</span> TooltipChanged();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordtype">void</span> StatusChanged();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  QString real_service_;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  QString real_path_;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  QImage icon_image_;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  QString tooltip_;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  QString status_ = QStringLiteral(<span class="stringliteral">&quot;Active&quot;</span>);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  QDBusInterface* dbus_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  DBusMenuImporter* menu_importer_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> <span class="keyword">private</span> slots:</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> UpdateIcon();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">void</span> UpdateTooltip();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">void</span> UpdateStatus(<span class="keyword">const</span> QString&amp; status);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  QString GetRealService()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> real_service_; }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  QString GetTitle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> title_; }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  QString GetAppId()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> app_id_; }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  QString GetTooltip()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> tooltip_; }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordtype">bool</span> IsVisible()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> status_ != QLatin1String(<span class="stringliteral">&quot;Passive&quot;</span>); }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordtype">bool</span> NeedsAttention()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">return</span> status_ == QLatin1String(<span class="stringliteral">&quot;NeedsAttention&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">void</span> Activate(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">void</span> ContextMenu(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordtype">void</span> SecondaryActivate(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">void</span> Scroll(<span class="keywordtype">int</span> delta);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> signals:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> IconChanged();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">void</span> TooltipChanged();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">void</span> StatusChanged();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  QString real_service_;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  QString real_path_;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  QImage icon_image_;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  QString title_;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  QString app_id_;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  QString tooltip_;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  QString status_ = QStringLiteral(<span class="stringliteral">&quot;Active&quot;</span>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  QDBusInterface* dbus_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  DBusMenuImporter* menu_importer_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> <span class="keyword">private</span> slots:</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">void</span> UpdateIcon();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordtype">void</span> UpdateTooltip();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">void</span> UpdateStatus(<span class="keyword">const</span> QString&amp; status);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
 </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}  <span class="comment">// namespace frontend</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}  <span class="comment">// namespace panel</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#endif  </span><span class="comment">// SRC_COMPONENTS_SYSTEM_TRAY_TRAY_ICON_ITEM_H_</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}  <span class="comment">// namespace frontend</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}  <span class="comment">// namespace panel</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif  </span><span class="comment">// SRC_COMPONENTS_SYSTEM_TRAY_TRAY_ICON_ITEM_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

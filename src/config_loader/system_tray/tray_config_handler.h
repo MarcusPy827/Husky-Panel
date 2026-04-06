@@ -45,6 +45,8 @@ class TrayConfigHandler : public QObject {
   bool IsTrayIconPrefrenceExists(const QString& id);
   bool IsTrayIconVisible(const QString& id);
   void SetTrayIconVisible(const QString& id, bool visible);
+  bool IsExpandIconOnLeftHandSide();
+  void SetExpandIconOnLeftHandSide(bool on_left);
 };
 
 }  // namespace loader

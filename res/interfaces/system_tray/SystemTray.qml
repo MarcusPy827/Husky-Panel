@@ -20,9 +20,12 @@ import QtQuick
 import QtQuick.Layouts
 
 // Container for all active StatusNotifierItem icons. Renders a row of
-// SystemTrayIcon delegates driven by the TrayHandler model.
+// SystemTrayIcon delegates driven by the TrayHandler model, plus an overflow
+// expand button that appears when there are hidden-but-active icons.
 Item {
   id: root
+
+  signal overflowClicked()
 
   Layout.fillHeight: true
   implicitWidth: row.implicitWidth
@@ -30,13 +33,25 @@ Item {
   RowLayout {
     id: row
     anchors.fill: parent
-    spacing: 8
+    spacing: 4
+
+    // Left-side expand button (shown when expandIconOnLeft is enabled)
+    SystemTrayExpandIcon {
+      // qmllint disable unqualified
+      visible: TrayHandler.hiddenActiveCount > 0 && TrayHandler.expandIconOnLeft
+      onClicked: root.overflowClicked()
+    }
 
     Repeater {
-      model: TrayHandler
-      // SystemTrayIcon declares required properties matching the model role
-      // names, so the Repeater auto-binds each role — no explicit model.xxx.
+      model: TrayHandler // qmllint disable unqualified
       delegate: SystemTrayIcon {}
+    }
+
+    // Right-side expand button (default position)
+    SystemTrayExpandIcon {
+      // qmllint disable unqualified
+      visible: TrayHandler.hiddenActiveCount > 0 && !TrayHandler.expandIconOnLeft
+      onClicked: root.overflowClicked()
     }
   }
 }

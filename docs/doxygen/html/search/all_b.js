@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['themeloader_0',['ThemeLoader',['../classpanel_1_1loader_1_1ThemeLoader.html',1,'panel::loader']]],
-  ['translationloader_1',['TranslationLoader',['../classpanel_1_1loader_1_1TranslationLoader.html',1,'panel::loader']]],
-  ['trayconfig_2',['TrayConfig',['../structpanel_1_1loader_1_1TrayConfig.html',1,'panel::loader']]],
-  ['trayconfighandler_3',['TrayConfigHandler',['../classpanel_1_1loader_1_1TrayConfigHandler.html',1,'panel::loader::TrayConfigHandler'],['../classpanel_1_1loader_1_1TrayConfigHandler.html#abb611be5c21110d70fd27118d7026448',1,'panel::loader::TrayConfigHandler::TrayConfigHandler()']]],
-  ['trayhandler_4',['TrayHandler',['../classpanel_1_1backend_1_1TrayHandler.html',1,'panel::backend']]],
-  ['trayiconimagehandler_5',['TrayIconImageHandler',['../classpanel_1_1frontend_1_1TrayIconImageHandler.html',1,'panel::frontend']]],
-  ['trayiconitem_6',['TrayIconItem',['../classpanel_1_1frontend_1_1TrayIconItem.html',1,'panel::frontend']]]
+  ['schemetuple_0',['SchemeTuple',['../structpanel_1_1loader_1_1SchemeTuple.html',1,'panel::loader']]],
+  ['sessionhandler_1',['SessionHandler',['../classpanel_1_1backend_1_1SessionHandler.html',1,'panel::backend']]],
+  ['setexpandicononlefthandside_2',['SetExpandIconOnLeftHandSide',['../classpanel_1_1loader_1_1TrayConfigHandler.html#aa6859d8f7f223096386383c8b2e0309b',1,'panel::loader::TrayConfigHandler']]],
+  ['settrayiconvisible_3',['SetTrayIconVisible',['../classpanel_1_1loader_1_1TrayConfigHandler.html#adb01899534f39d2fbd1a8e67eb41340f',1,'panel::loader::TrayConfigHandler']]],
+  ['sniimage_4',['SNIImage',['../structpanel_1_1backend_1_1SNIImage.html',1,'panel::backend']]],
+  ['snitooltip_5',['SNIToolTip',['../structpanel_1_1backend_1_1SNIToolTip.html',1,'panel::backend']]],
+  ['strings_6',['Strings',['../classpanel_1_1utils_1_1Strings.html',1,'panel::utils']]],
+  ['styletuple_7',['StyleTuple',['../structpanel_1_1loader_1_1StyleTuple.html',1,'panel::loader']]],
+  ['systemtrayhandler_8',['SystemTrayHandler',['../classpanel_1_1frontend_1_1SystemTrayHandler.html',1,'panel::frontend']]]
 ];

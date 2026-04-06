@@ -21,6 +21,10 @@ panel::loader::PathFinder
 .RI "static QString \fBGetTrayConfigPath\fP ()"
 .br
 .RI "Gets the path for the system tray configuration file\&. "
+.ti -1c
+.RI "static QString \fBGetTrayExpandingIconConfigPath\fP ()"
+.br
+.RI "Gets the path for the system tray expanding icon configuration file\&. "
 .in -1c
 .SH "Member Function Documentation"
 .PP 
@@ -88,6 +92,33 @@ The program crashes if the config directory failed to create\&.
 \fBReturns\fP
 .RS 4
 (QString) The path for the system tray configuration file\&. 
+.RE
+.PP
+
+.SS "QString panel::loader::PathFinder::GetTrayExpandingIconConfigPath ()\fR [static]\fP"
+
+.PP
+Gets the path for the system tray expanding icon configuration file\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function relies on \fRQStandardPaths::writableLocation\fP\&. 
+
+.PP
+An empty file will be created if the target file does NOT exist\&. 
+
+.PP
+The program crashes if the config directory failed to create\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBGetConfigBaseDir()\fP\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The path for the system tray expanding icon configuration file\&. 
 .RE
 .PP
 

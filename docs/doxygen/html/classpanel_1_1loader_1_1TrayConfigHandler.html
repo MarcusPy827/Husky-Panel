@@ -106,6 +106,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af3821f8ca6d8e369d8fea31e78be26a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor of the system tray configuration handler.  <br /></td></tr>
 <tr class="memitem:a0081ec49217ab46c220b241e82f6d175" id="r_a0081ec49217ab46c220b241e82f6d175"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structpanel_1_1loader_1_1TrayConfig.html">TrayConfig</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0081ec49217ab46c220b241e82f6d175">GetTrayConfigs</a> ()</td></tr>
 <tr class="memdesc:a0081ec49217ab46c220b241e82f6d175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vector of the configurations for recorded system tray icons.  <br /></td></tr>
+<tr class="memitem:a9d0c4535045e6f2e67d890840fdb788f" id="r_a9d0c4535045e6f2e67d890840fdb788f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d0c4535045e6f2e67d890840fdb788f">IsTrayIconPrefrenceExists</a> (const QString &amp;id)</td></tr>
+<tr class="memdesc:a9d0c4535045e6f2e67d890840fdb788f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get if the system tray preference for the given id exists.  <br /></td></tr>
+<tr class="memitem:ac79262c9bef972ba68c609fada531fc7" id="r_ac79262c9bef972ba68c609fada531fc7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac79262c9bef972ba68c609fada531fc7">IsTrayIconVisible</a> (const QString &amp;id)</td></tr>
+<tr class="memdesc:ac79262c9bef972ba68c609fada531fc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get if a system tray icon is visible according to the preference.  <br /></td></tr>
+<tr class="memitem:adb01899534f39d2fbd1a8e67eb41340f" id="r_adb01899534f39d2fbd1a8e67eb41340f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb01899534f39d2fbd1a8e67eb41340f">SetTrayIconVisible</a> (const QString &amp;id, bool visible)</td></tr>
+<tr class="memdesc:adb01899534f39d2fbd1a8e67eb41340f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set if a system tray icon is visible.  <br /></td></tr>
+<tr class="memitem:a61be7384088a84509a920de8f274a98c" id="r_a61be7384088a84509a920de8f274a98c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61be7384088a84509a920de8f274a98c">IsExpandIconOnLeftHandSide</a> ()</td></tr>
+<tr class="memdesc:a61be7384088a84509a920de8f274a98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get if the expanding icon should be placed on the left-hand side of the tray icons.  <br /></td></tr>
+<tr class="memitem:aa6859d8f7f223096386383c8b2e0309b" id="r_aa6859d8f7f223096386383c8b2e0309b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6859d8f7f223096386383c8b2e0309b">SetExpandIconOnLeftHandSide</a> (bool on_left)</td></tr>
+<tr class="memdesc:aa6859d8f7f223096386383c8b2e0309b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set if the expanding icon should be placed on the left-hand side of the tray icons.  <br /></td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb611be5c21110d70fd27118d7026448" name="abb611be5c21110d70fd27118d7026448"></a>
@@ -176,6 +186,146 @@ Public Member Functions</h2></td></tr>
 <p>Get a vector of the configurations for recorded system tray icons. </p>
 <dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>(std::vector&lt;TrayConfig&gt;) The vector of the configurations. </dd></dl>
+
+</div>
+</div>
+<a id="a61be7384088a84509a920de8f274a98c" name="a61be7384088a84509a920de8f274a98c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61be7384088a84509a920de8f274a98c">&#9670;&#160;</a></span>IsExpandIconOnLeftHandSide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool panel::loader::TrayConfigHandler::IsExpandIconOnLeftHandSide </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get if the expanding icon should be placed on the left-hand side of the tray icons. </p>
+<dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd>
+<dd>
+Defaulting to <code>false</code> if opreation failed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>(bool) True if the expanding icon should be placed on the left-hand side of the tray icons, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a9d0c4535045e6f2e67d890840fdb788f" name="a9d0c4535045e6f2e67d890840fdb788f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d0c4535045e6f2e67d890840fdb788f">&#9670;&#160;</a></span>IsTrayIconPrefrenceExists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool panel::loader::TrayConfigHandler::IsTrayIconPrefrenceExists </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get if the system tray preference for the given id exists. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(const</td><td>QString &amp;) id The id of the system tray icon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd>
+<dd>
+Defaulting to <code>false</code> if opreation failed. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>(bool) True if the preference exists, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ac79262c9bef972ba68c609fada531fc7" name="ac79262c9bef972ba68c609fada531fc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79262c9bef972ba68c609fada531fc7">&#9670;&#160;</a></span>IsTrayIconVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool panel::loader::TrayConfigHandler::IsTrayIconVisible </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get if a system tray icon is visible according to the preference. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(const</td><td>QString &amp;) id The id of the system tray icon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd>
+<dd>
+Defaulting to <code>true</code> if opreation failed... </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>(bool) True if the preference exists, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aa6859d8f7f223096386383c8b2e0309b" name="aa6859d8f7f223096386383c8b2e0309b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6859d8f7f223096386383c8b2e0309b">&#9670;&#160;</a></span>SetExpandIconOnLeftHandSide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void panel::loader::TrayConfigHandler::SetExpandIconOnLeftHandSide </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>on_left</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set if the expanding icon should be placed on the left-hand side of the tray icons. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(bool)</td><td>on_left Whether the expanding icon should be on the left-hand side. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void. </dd></dl>
+
+</div>
+</div>
+<a id="adb01899534f39d2fbd1a8e67eb41340f" name="adb01899534f39d2fbd1a8e67eb41340f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb01899534f39d2fbd1a8e67eb41340f">&#9670;&#160;</a></span>SetTrayIconVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void panel::loader::TrayConfigHandler::SetTrayIconVisible </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>visible</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set if a system tray icon is visible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(const</td><td>QString &amp;) id The id of the system tray icon. </td></tr>
+    <tr><td class="paramname">(bool)</td><td>visible Whether the system tray icon is visible. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Don't ask me why using <code>fcntl</code> instead of Qt's own implementation, if you asked, then my answer is: This is something I like!!!! And don't judge me out of this... </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void. </dd></dl>
 
 </div>
 </div>

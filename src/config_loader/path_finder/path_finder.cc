@@ -93,5 +93,33 @@ QString PathFinder::GetTrayConfigPath() {
   return target;
 }
 
+
+/**
+ * @brief Gets the path for the system tray expanding icon configuration file.
+ * 
+ * @note This function relies on @c QStandardPaths::writableLocation.
+ * @note An empty file will be created if the target file does NOT exist.
+ * @note The program crashes if the config directory failed to create.
+ * @see @c GetConfigBaseDir().
+ * @return (QString) The path for the system tray expanding icon configuration
+ *                   file.
+ */
+
+QString PathFinder::GetTrayExpandingIconConfigPath() {
+  QString target = GetConfigBaseDir() + "tray_expanding_icon.conf";
+  QFile file(target);
+  if (!file.exists()) {
+    if (file.open(QIODevice::WriteOnly)) {
+      file.close();
+    } else {
+      LOG(ERROR) << absl::StrCat("Failed to create system tray expanding ",
+        "icon config file!!");
+      exit(EX_IOERR);
+    }
+  }
+
+  return target;
+}
+
 }  // namespace loader
 }  // namespace panel

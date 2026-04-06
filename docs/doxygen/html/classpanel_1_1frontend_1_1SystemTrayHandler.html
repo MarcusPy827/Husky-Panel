@@ -102,14 +102,26 @@ Inheritance diagram for panel::frontend::SystemTrayHandler:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:a959669c23d059c5f2b92db7470307933" id="r_a959669c23d059c5f2b92db7470307933"><td class="memItemLeft" align="right" valign="top"><a id="a959669c23d059c5f2b92db7470307933" name="a959669c23d059c5f2b92db7470307933"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Roles</b> { <br />
 &#160;&#160;<b>ServiceRole</b> = Qt::UserRole + 1
-, <b>TooltipRole</b>
+, <b>RealServiceRole</b>
+, <b>TitleRole</b>
+, <b>AppIdRole</b>
+, <br />
+&#160;&#160;<b>TooltipRole</b>
 , <b>IsVisibleRole</b>
+, <b>IsConfigVisibleRole</b>
 , <b>NeedsAttentionRole</b>
 , <br />
 &#160;&#160;<b>IconRevisionRole</b>
 , <b>IconKeyRole</b>
 <br />
  }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-signals" class="groupheader"><a id="signals" name="signals"></a>
+Signals</h2></td></tr>
+<tr class="memitem:ac1ea5be0e176ad43cf697107b2bcdcd4" id="r_ac1ea5be0e176ad43cf697107b2bcdcd4"><td class="memItemLeft" align="right" valign="top"><a id="ac1ea5be0e176ad43cf697107b2bcdcd4" name="ac1ea5be0e176ad43cf697107b2bcdcd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>hiddenActiveCountChanged</b> ()</td></tr>
+<tr class="memitem:ac88ffc01fb8a074ca6f5038cb59ec3bd" id="r_ac88ffc01fb8a074ca6f5038cb59ec3bd"><td class="memItemLeft" align="right" valign="top"><a id="ac88ffc01fb8a074ca6f5038cb59ec3bd" name="ac88ffc01fb8a074ca6f5038cb59ec3bd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>expandIconOnLeftChanged</b> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -121,6 +133,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>rowCount</b> (const QM
 QVariant&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> (const QModelIndex &amp;index, int role=Qt::DisplayRole) const override</td></tr>
 <tr class="memitem:a43826868633288b75ce8f58ddf2b15a8" id="r_a43826868633288b75ce8f58ddf2b15a8"><td class="memItemLeft" align="right" valign="top"><a id="a43826868633288b75ce8f58ddf2b15a8" name="a43826868633288b75ce8f58ddf2b15a8"></a>
 QHash&lt; int, QByteArray &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>roleNames</b> () const override</td></tr>
+<tr class="memitem:a21043dd58a15192ad865aebc82d4135a" id="r_a21043dd58a15192ad865aebc82d4135a"><td class="memItemLeft" align="right" valign="top"><a id="a21043dd58a15192ad865aebc82d4135a" name="a21043dd58a15192ad865aebc82d4135a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hiddenActiveCount</b> () const</td></tr>
+<tr class="memitem:afdb8c2d1eca95aa96a68193dc3b1de0c" id="r_afdb8c2d1eca95aa96a68193dc3b1de0c"><td class="memItemLeft" align="right" valign="top"><a id="afdb8c2d1eca95aa96a68193dc3b1de0c" name="afdb8c2d1eca95aa96a68193dc3b1de0c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>expandIconOnLeft</b> () const</td></tr>
 <tr class="memitem:a7e436540ec5618f3832fe4dd9b47b63e" id="r_a7e436540ec5618f3832fe4dd9b47b63e"><td class="memItemLeft" align="right" valign="top"><a id="a7e436540ec5618f3832fe4dd9b47b63e" name="a7e436540ec5618f3832fe4dd9b47b63e"></a>
 QImage&#160;</td><td class="memItemRight" valign="bottom"><b>GetIconImage</b> (int key) const</td></tr>
 <tr class="memitem:a737d76ee4a89cc15623dc00a74081eea" id="r_a737d76ee4a89cc15623dc00a74081eea"><td class="memItemLeft" align="right" valign="top"><a id="a737d76ee4a89cc15623dc00a74081eea" name="a737d76ee4a89cc15623dc00a74081eea"></a>
@@ -139,6 +155,17 @@ Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>contextMe
 Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>secondaryActivate</b> (const QString &amp;service, int x, int y)</td></tr>
 <tr class="memitem:a4b45ab0a25d2897ff0117a43b9fe0aa7" id="r_a4b45ab0a25d2897ff0117a43b9fe0aa7"><td class="memItemLeft" align="right" valign="top"><a id="a4b45ab0a25d2897ff0117a43b9fe0aa7" name="a4b45ab0a25d2897ff0117a43b9fe0aa7"></a>
 Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>scroll</b> (const QString &amp;service, int delta)</td></tr>
+<tr class="memitem:a73cc8ff1e39751ec9271f91f861b5f61" id="r_a73cc8ff1e39751ec9271f91f861b5f61"><td class="memItemLeft" align="right" valign="top"><a id="a73cc8ff1e39751ec9271f91f861b5f61" name="a73cc8ff1e39751ec9271f91f861b5f61"></a>
+Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>setConfigVisible</b> (const QString &amp;service, bool visible)</td></tr>
+<tr class="memitem:af83b69f0f53ebca5828a3ff9b939965f" id="r_af83b69f0f53ebca5828a3ff9b939965f"><td class="memItemLeft" align="right" valign="top"><a id="af83b69f0f53ebca5828a3ff9b939965f" name="af83b69f0f53ebca5828a3ff9b939965f"></a>
+Q_INVOKABLE void&#160;</td><td class="memItemRight" valign="bottom"><b>setExpandIconOnLeft</b> (bool value)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-properties" class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a8fb231ed2d693833c01ca2dfa0f9bfea" id="r_a8fb231ed2d693833c01ca2dfa0f9bfea"><td class="memItemLeft" align="right" valign="top"><a id="a8fb231ed2d693833c01ca2dfa0f9bfea" name="a8fb231ed2d693833c01ca2dfa0f9bfea"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hiddenActiveCount</b></td></tr>
+<tr class="memitem:a034fc29507b47776b8ed101e3d00341f" id="r_a034fc29507b47776b8ed101e3d00341f"><td class="memItemLeft" align="right" valign="top"><a id="a034fc29507b47776b8ed101e3d00341f" name="a034fc29507b47776b8ed101e3d00341f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>expandIconOnLeft</b></td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/components/system_tray/<a class="el" href="system__tray__handler_8h_source.html">system_tray_handler.h</a></li>

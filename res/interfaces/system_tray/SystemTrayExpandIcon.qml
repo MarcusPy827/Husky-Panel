@@ -1,5 +1,5 @@
 /*
- * SystemTrayIcon.qml
+ * SystemTrayExpandIcon.qml
  * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,32 +19,19 @@
 import QtQuick
 import QtQuick.Layouts
 
-// A single system tray icon button with hover state layer, ripple on press,
-// and opacity blink when the icon is in NeedsAttention status.
 Rectangle {
   id: root
 
-  required property string service
-  required property string tooltip
-  required property bool   is_visible
-  required property bool   is_config_visible
-  required property bool   needs_attention
-  required property int    icon_revision
-  required property int    icon_key
+  signal clicked
 
-  property bool inOverflow: false
-
-  visible: is_visible && (inOverflow ? !is_config_visible : is_config_visible)
-
-  implicitWidth: 32
+  implicitWidth: contentLayout.implicitWidth + 16
   Layout.fillHeight: true
   radius: 6
   color: "transparent"
 
-  readonly property color stateHover:   Theme.status_bar_state_layer_hover
+  readonly property color stateHover: Theme.status_bar_state_layer_hover
   readonly property color statePressed: Theme.status_bar_state_layer_pressed
 
-  // Hover / press state layer
   Rectangle {
     id: stateLayer
     anchors.fill: parent
@@ -52,7 +39,6 @@ Rectangle {
     color: "transparent"
   }
 
-  // Ripple
   Canvas {
     id: ripple
     anchors.fill: parent
@@ -110,75 +96,33 @@ Rectangle {
     }
   }
 
-  // Icon image
-  Image {
-    id: iconImage
-    anchors.centerIn: parent
-    width: 18
-    height: 18
-    source: (icon_key >= 0)
-      ? "image://trayicon/" + icon_key + "/" + icon_revision
-      : ""
-    fillMode: Image.PreserveAspectFit
-    smooth: true
-    cache: false
+  RowLayout {
+    id: contentLayout
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: parent.left
+    anchors.leftMargin: 8
+    spacing: 0
 
-    opacity: needs_attention ? blinkOpacity : 1.0
-
-    // Blink animation: only active when in NeedsAttention status.
-    property real blinkOpacity: 1.0
-
-    SequentialAnimation {
-      id: blinkAnim
-      running: root.needs_attention
-      loops: Animation.Infinite
-      NumberAnimation {
-        target: iconImage; property: "blinkOpacity"
-        to: 0.3; duration: 600; easing.type: Easing.InOutSine
-      }
-      NumberAnimation {
-        target: iconImage; property: "blinkOpacity"
-        to: 1.0; duration: 600; easing.type: Easing.InOutSine
-      }
-      // Reset opacity when animation stops (attention cleared).
-      onRunningChanged: {
-        if (!running) iconImage.blinkOpacity = 1.0
-      }
+    Text {
+      text: "\ue5c3"  // "apps"
+      color: Theme.status_bar_surface_fg
+      font.pixelSize: 18
+      font.family: "Material Symbols Rounded"
     }
   }
 
-  // Input handling
   MouseArea {
-    id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-
-    onEntered: stateLayer.color = root.stateHover
-    onExited:  stateLayer.color = "transparent"
-
+    onEntered:  stateLayer.color = root.stateHover
+    onExited:   stateLayer.color = "transparent"
     onPressed: (mouse) => {
       stateLayer.color = root.statePressed
       ripple.centerX = mouse.x
       ripple.centerY = mouse.y
       rippleAnim.restart()
     }
-
     onReleased: stateLayer.color = containsMouse ? root.stateHover : "transparent"
-
-    onClicked: (mouse) => {
-      var g = mapToGlobal(mouse.x, mouse.y)
-      if (mouse.button === Qt.LeftButton) {
-        TrayHandler.activate(root.service, g.x, g.y)
-      } else if (mouse.button === Qt.MiddleButton) {
-        TrayHandler.secondaryActivate(root.service, g.x, g.y)
-      } else if (mouse.button === Qt.RightButton) {
-        TrayHandler.contextMenu(root.service, g.x, g.y)
-      }
-    }
-
-    onWheel: (wheel) => {
-      TrayHandler.scroll(root.service, wheel.angleDelta.y)
-    }
+    onClicked: root.clicked()
   }
 }

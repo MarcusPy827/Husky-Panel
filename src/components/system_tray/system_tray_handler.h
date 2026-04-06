@@ -24,7 +24,6 @@
 #include <QImage>
 #include <QList>
 #include <QReadWriteLock>
-#include <QSettings>
 #include <QString>
 
 #include "src/info_server/tray_handler/tray_handler.h"
@@ -53,6 +52,11 @@ class SystemTrayHandler : public QAbstractListModel {
     IconKeyRole,
   };
 
+  Q_PROPERTY(int hiddenActiveCount READ hiddenActiveCount
+    NOTIFY hiddenActiveCountChanged)
+  Q_PROPERTY(bool expandIconOnLeft READ expandIconOnLeft
+    WRITE setExpandIconOnLeft NOTIFY expandIconOnLeftChanged)
+
   explicit SystemTrayHandler(QObject* parent = nullptr);
   ~SystemTrayHandler() = default;
 
@@ -60,6 +64,9 @@ class SystemTrayHandler : public QAbstractListModel {
   QVariant data(const QModelIndex& index,
     int role = Qt::DisplayRole) const override;
   QHash<int, QByteArray> roleNames() const override;
+
+  int hiddenActiveCount() const;
+  bool expandIconOnLeft() const { return expand_icon_on_left_; }
 
   // Called by TrayIconImageProvider from the render thread.
   QImage GetIconImage(int key) const;
@@ -76,6 +83,11 @@ class SystemTrayHandler : public QAbstractListModel {
   Q_INVOKABLE void secondaryActivate(const QString& service, int x, int y);
   Q_INVOKABLE void scroll(const QString& service, int delta);
   Q_INVOKABLE void setConfigVisible(const QString& service, bool visible);
+  Q_INVOKABLE void setExpandIconOnLeft(bool value);
+
+signals:
+  void hiddenActiveCountChanged();
+  void expandIconOnLeftChanged();
 
  private:
   int IndexOf(const QString& service) const;
@@ -90,9 +102,9 @@ class SystemTrayHandler : public QAbstractListModel {
   mutable QReadWriteLock images_lock_;
   QHash<int, QImage> icon_images_;
 
-  // User-controlled hide set (service → hidden) backed by QSettings.
+  // User-controlled hide set (service → hidden), persisted via TrayConfigHandler.
   QHash<QString, bool> user_hidden_;
-  QSettings* settings_ = nullptr;
+  bool expand_icon_on_left_ = false;
 
   backend::TrayHandler* tray_handler_ = nullptr;
 

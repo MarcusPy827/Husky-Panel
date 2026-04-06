@@ -46,6 +46,8 @@ Window {
   property bool drawerExpanded: false
   property bool calendarFlyoutOpen: false
   property bool calendarFlyoutExpanded: false
+  property bool trayOverflowOpen: false
+  property bool trayOverflowExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -66,6 +68,7 @@ Window {
   onCalendarFlyoutOpenChanged: {
     if (calendarFlyoutOpen) {
       appDrawerOpen = false
+      trayOverflowOpen = false
       calendarFlyoutExpanded = true
       LayerShellHelper.setFullMask(root)
       calendarFlyout.open()
@@ -75,23 +78,41 @@ Window {
     }
   }
 
+  onTrayOverflowOpenChanged: {
+    if (trayOverflowOpen) {
+      calendarFlyoutOpen = false
+      trayOverflowExpanded = true
+      LayerShellHelper.setFullMask(root)
+      trayOverflowFlyout.open()
+    } else {
+      trayOverflowFlyout.close()
+      // trayOverflowExpanded → false is set by onCloseAnimationFinished below
+    }
+  }
+
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onTrayOverflowExpandedChanged: {
+    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.trayOverflowOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
+      root.trayOverflowOpen = false
     }
   }
 
@@ -439,7 +460,9 @@ Window {
           Layout.alignment: Qt.AlignVCenter
 
           // System tray
-          SystemTray {}
+          SystemTray {
+            onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
+          }
 
           // WLAN indicator
           WLANIndicator {}
@@ -488,6 +511,21 @@ Window {
       id: calendarFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.calendarFlyoutExpanded = false
+    }
+  }
+
+  // System tray overflow flyout
+  Item {
+    x: root.width - trayOverflowFlyout.implicitWidth - root.calendarFlyoutW - 12
+    y: root.barHeight + root.drawerTopMargin
+    width: trayOverflowFlyout.implicitWidth
+    height: trayOverflowFlyout.implicitHeight
+    visible: root.trayOverflowExpanded
+
+    SystemTrayOverflowFlyout {
+      id: trayOverflowFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.trayOverflowExpanded = false
     }
   }
 

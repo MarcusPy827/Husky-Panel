@@ -20,7 +20,7 @@
 #include "absl/strings/str_cat.h"
 
 #include "src/components/system_tray/system_tray_handler.h"
-#include "src/config_loader/path_finder/path_finder.h"
+#include "src/config_loader/system_tray/tray_config_handler.h"
 
 namespace panel {
 namespace frontend {
@@ -28,8 +28,8 @@ namespace frontend {
 SystemTrayHandler::SystemTrayHandler(QObject* parent)
     : QAbstractListModel(parent) {
   LOG(INFO) << absl::StrCat("Initializing SystemTrayHandler...");
-  settings_ = new QSettings(loader::PathFinder::GetTrayConfigPath(),
-    QSettings::IniFormat, this);
+  expand_icon_on_left_ = loader::TrayConfigHandler()
+    .IsExpandIconOnLeftHandSide();
   tray_handler_ = new backend::TrayHandler();
   QObject::connect(tray_handler_, &backend::TrayHandler::NewTrayIcon,
     this, &SystemTrayHandler::OnIconAdded);
@@ -81,6 +81,17 @@ QHash<int, QByteArray> SystemTrayHandler::roleNames() const {
   };
 }
 
+int SystemTrayHandler::hiddenActiveCount() const {
+  int count = 0;
+  for (const QString& service : services_) {
+    if (user_hidden_.value(service, false)) {
+      TrayIconItem* entry = entries_.value(service, nullptr);
+      if (entry && entry->IsVisible()) ++count;
+    }
+  }
+  return count;
+}
+
 QImage SystemTrayHandler::GetIconImage(int key) const {
   QReadLocker locker(&images_lock_);
   return icon_images_.value(key);
@@ -120,19 +131,26 @@ void SystemTrayHandler::scroll(const QString& service, int delta) {
   Scroll(service, delta);
 }
 
+void SystemTrayHandler::setExpandIconOnLeft(bool value) {
+  if (expand_icon_on_left_ == value) return;
+  expand_icon_on_left_ = value;
+  loader::TrayConfigHandler().SetExpandIconOnLeftHandSide(value);
+  emit expandIconOnLeftChanged();
+}
+
 void SystemTrayHandler::setConfigVisible(const QString& service, bool visible) {
   int row = IndexOf(service);
   if (row == -1) return;
   user_hidden_[service] = !visible;
 
   TrayIconItem* entry = entries_.value(service, nullptr);
-  if (entry) {
-    settings_->setValue(entry->GetRealService() + "/visible", visible);
-    settings_->sync();
-  }
+  if (entry)
+    loader::TrayConfigHandler().SetTrayIconVisible(entry->GetRealService(),
+      visible);
 
   QModelIndex idx = index(row);
   emit dataChanged(idx, idx, {IsConfigVisibleRole});
+  emit hiddenActiveCountChanged();
 }
 
 void SystemTrayHandler::OnIconAdded(const QString& service) {
@@ -152,7 +170,7 @@ void SystemTrayHandler::OnIconAdded(const QString& service) {
   // Load persisted visibility preference (default: visible).
   {
     const QString cfg_key = entry->GetRealService();
-    bool visible = settings_->value(cfg_key + "/visible", true).toBool();
+    bool visible = loader::TrayConfigHandler().IsTrayIconVisible(cfg_key);
     if (!visible) user_hidden_[service] = true;
   }
 
@@ -175,6 +193,7 @@ void SystemTrayHandler::OnIconAdded(const QString& service) {
   services_.append(service);
   entries_[service] = entry;
   endInsertRows();
+  emit hiddenActiveCountChanged();
 }
 
 void SystemTrayHandler::OnIconDeleted(const QString& service) {
@@ -200,6 +219,7 @@ void SystemTrayHandler::OnIconDeleted(const QString& service) {
     QWriteLocker locker(&images_lock_);
     icon_images_.remove(key);
   }
+  emit hiddenActiveCountChanged();
 }
 
 void SystemTrayHandler::OnEntryIconChanged(const QString& service) {
@@ -232,6 +252,7 @@ void SystemTrayHandler::OnEntryStatusChanged(const QString& service) {
   if (row == -1) return;
   QModelIndex idx = index(row);
   emit dataChanged(idx, idx, { IsVisibleRole, NeedsAttentionRole });
+  emit hiddenActiveCountChanged();
 }
 
 int SystemTrayHandler::IndexOf(const QString& service) const {

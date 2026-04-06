@@ -14,7 +14,17 @@ Inheritance diagram for panel\+::loader\+::Tray\+Config\+Handler\+:\begin{figure
 \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_af3821f8ca6d8e369d8fea31e78be26a5}{\texorpdfstring{$\sim$}{\string~}\+Tray\+Config\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em The destructor of the system tray configuration handler. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structpanel_1_1loader_1_1TrayConfig}{Tray\+Config}} $>$ \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_a0081ec49217ab46c220b241e82f6d175}{Get\+Tray\+Configs}} ()
-\begin{DoxyCompactList}\small\item\em Get a vector of the configurations for recorded system tray icons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get a vector of the configurations for recorded system tray icons. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_a9d0c4535045e6f2e67d890840fdb788f}{Is\+Tray\+Icon\+Prefrence\+Exists}} (const QString \&id)
+\begin{DoxyCompactList}\small\item\em Get if the system tray preference for the given id exists. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_ac79262c9bef972ba68c609fada531fc7}{Is\+Tray\+Icon\+Visible}} (const QString \&id)
+\begin{DoxyCompactList}\small\item\em Get if a system tray icon is visible according to the preference. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_adb01899534f39d2fbd1a8e67eb41340f}{Set\+Tray\+Icon\+Visible}} (const QString \&id, bool visible)
+\begin{DoxyCompactList}\small\item\em Set if a system tray icon is visible. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_a61be7384088a84509a920de8f274a98c}{Is\+Expand\+Icon\+On\+Left\+Hand\+Side}} ()
+\begin{DoxyCompactList}\small\item\em Get if the expanding icon should be placed on the left-\/hand side of the tray icons. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1loader_1_1TrayConfigHandler_aa6859d8f7f223096386383c8b2e0309b}{Set\+Expand\+Icon\+On\+Left\+Hand\+Side}} (bool on\+\_\+left)
+\begin{DoxyCompactList}\small\item\em Set if the expanding icon should be placed on the left-\/hand side of the tray icons. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \label{doc-constructors}
@@ -69,6 +79,114 @@ Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquot
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 (std\+::vector$<$\+Tray\+Config$>$) The vector of the configurations. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_a61be7384088a84509a920de8f274a98c}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!IsExpandIconOnLeftHandSide@{IsExpandIconOnLeftHandSide}}
+\index{IsExpandIconOnLeftHandSide@{IsExpandIconOnLeftHandSide}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{IsExpandIconOnLeftHandSide()}{IsExpandIconOnLeftHandSide()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_a61be7384088a84509a920de8f274a98c} 
+bool panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Is\+Expand\+Icon\+On\+Left\+Hand\+Side (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get if the expanding icon should be placed on the left-\/hand side of the tray icons. 
+
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+
+Defaulting to {\ttfamily false} if opreation failed. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(bool) True if the expanding icon should be placed on the left-\/hand side of the tray icons, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_a9d0c4535045e6f2e67d890840fdb788f}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!IsTrayIconPrefrenceExists@{IsTrayIconPrefrenceExists}}
+\index{IsTrayIconPrefrenceExists@{IsTrayIconPrefrenceExists}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{IsTrayIconPrefrenceExists()}{IsTrayIconPrefrenceExists()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_a9d0c4535045e6f2e67d890840fdb788f} 
+bool panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Is\+Tray\+Icon\+Prefrence\+Exists (\begin{DoxyParamCaption}\item[{const QString \&}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Get if the system tray preference for the given id exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em (const} & QString \&) id The id of the system tray icon. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+
+Defaulting to {\ttfamily false} if opreation failed. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(bool) True if the preference exists, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_ac79262c9bef972ba68c609fada531fc7}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!IsTrayIconVisible@{IsTrayIconVisible}}
+\index{IsTrayIconVisible@{IsTrayIconVisible}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{IsTrayIconVisible()}{IsTrayIconVisible()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_ac79262c9bef972ba68c609fada531fc7} 
+bool panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Is\+Tray\+Icon\+Visible (\begin{DoxyParamCaption}\item[{const QString \&}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Get if a system tray icon is visible according to the preference. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em (const} & QString \&) id The id of the system tray icon. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+
+Defaulting to {\ttfamily true} if opreation failed... 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(bool) True if the preference exists, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_aa6859d8f7f223096386383c8b2e0309b}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!SetExpandIconOnLeftHandSide@{SetExpandIconOnLeftHandSide}}
+\index{SetExpandIconOnLeftHandSide@{SetExpandIconOnLeftHandSide}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{SetExpandIconOnLeftHandSide()}{SetExpandIconOnLeftHandSide()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_aa6859d8f7f223096386383c8b2e0309b} 
+void panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Set\+Expand\+Icon\+On\+Left\+Hand\+Side (\begin{DoxyParamCaption}\item[{bool}]{on\+\_\+left}{}\end{DoxyParamCaption})}
+
+
+
+Set if the expanding icon should be placed on the left-\/hand side of the tray icons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em (bool)} & on\+\_\+left Whether the expanding icon should be on the left-\/hand side. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1loader_1_1TrayConfigHandler_adb01899534f39d2fbd1a8e67eb41340f}\index{panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}!SetTrayIconVisible@{SetTrayIconVisible}}
+\index{SetTrayIconVisible@{SetTrayIconVisible}!panel::loader::TrayConfigHandler@{panel::loader::TrayConfigHandler}}
+\doxysubsubsection{\texorpdfstring{SetTrayIconVisible()}{SetTrayIconVisible()}}
+{\footnotesize\ttfamily \label{classpanel_1_1loader_1_1TrayConfigHandler_adb01899534f39d2fbd1a8e67eb41340f} 
+void panel\+::loader\+::\+Tray\+Config\+Handler\+::\+Set\+Tray\+Icon\+Visible (\begin{DoxyParamCaption}\item[{const QString \&}]{id}{, }\item[{bool}]{visible}{}\end{DoxyParamCaption})}
+
+
+
+Set if a system tray icon is visible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em (const} & QString \&) id The id of the system tray icon. \\
+\hline
+{\em (bool)} & visible Whether the system tray icon is visible. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Don\textquotesingle{}t ask me why using {\ttfamily fcntl} instead of Qt\textquotesingle{}s own implementation, if you asked, then my answer is\+: This is something I like!!!! And don\textquotesingle{}t judge me out of this... 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+void. 
 \end{DoxyReturn}
 
 

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wlrootshelper_0',['WlrootsHelper',['../classpanel_1_1backend_1_1WlrootsHelper.html#ac3f86fb80377c74f657dd0fae4e061cd',1,'panel::backend::WlrootsHelper']]],
-  ['wlrtoplevelmgr_1',['WlrToplevelMgr',['../classpanel_1_1backend_1_1WlrToplevelMgr.html#ab7cb72667efd87afdeb577f2e1c0ac36',1,'panel::backend::WlrToplevelMgr']]]
+  ['setexpandicononlefthandside_0',['SetExpandIconOnLeftHandSide',['../classpanel_1_1loader_1_1TrayConfigHandler.html#aa6859d8f7f223096386383c8b2e0309b',1,'panel::loader::TrayConfigHandler']]],
+  ['settrayiconvisible_1',['SetTrayIconVisible',['../classpanel_1_1loader_1_1TrayConfigHandler.html#adb01899534f39d2fbd1a8e67eb41340f',1,'panel::loader::TrayConfigHandler']]]
 ];

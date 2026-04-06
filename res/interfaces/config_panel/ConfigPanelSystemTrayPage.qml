@@ -68,7 +68,7 @@ Item {
 
       // Page title
       Text {
-        text: ConfigPanelTranslator.Tr("SystemTray")
+        text: ConfigPanelTranslator.Tr("SystemTray") // qmllint disable unqualified
         font.pixelSize: 22
         font.weight: Font.Medium
         color: Theme.surface_variant_fg // qmllint disable unqualified
@@ -77,7 +77,121 @@ Item {
 
       // Section header
       Text {
-        text: ConfigPanelTranslator.Tr("FoldIcons")
+        text: ConfigPanelTranslator.Tr("ExpandIconConfig") // qmllint disable unqualified
+        font.pixelSize: 14
+        font.weight: Font.Medium
+        color: Theme.primary // qmllint disable unqualified
+        topPadding: 4
+        bottomPadding: 4
+      }
+
+      // Decide whether the "Expanding icon" on the left hand side
+      Rectangle {
+        width: pageColumn.width
+        height: 56
+        radius: 12
+        color: Theme.surface_container // qmllint disable unqualified
+
+        RowLayout {
+          anchors {
+            fill: parent
+            leftMargin: 16
+            rightMargin: 16
+          }
+          spacing: 12
+
+          // Util desc
+          Text {
+            Layout.fillWidth: true
+            text: ConfigPanelTranslator.Tr("SetExpandIconOnLeftHandSide") // qmllint disable unqualified
+            font.pixelSize: 16
+            color: Theme.surface_variant_fg // qmllint disable unqualified
+            elide: Text.ElideRight
+            Layout.alignment: Qt.AlignVCenter
+          }
+
+          // Switch
+          Item {
+            id: switchExpandLeft
+            implicitWidth: 52
+            implicitHeight: 32
+            Layout.alignment: Qt.AlignVCenter
+
+            readonly property bool checked: TrayHandler.expandIconOnLeft // qmllint disable unqualified
+
+            property bool isHovered: false
+            property bool isPressed: false
+
+            readonly property real handleSize:
+              isPressed ? 28 : (checked ? 24 : 16)
+            readonly property real handleCenterX: checked ? 36 : 16
+            readonly property color handleColor:
+              checked
+                ? ((isHovered || isPressed) ? Theme.primary_container   // qmllint disable unqualified
+                                            : Theme.surface_bg)         // qmllint disable unqualified
+                : Theme.surface_variant_fg                              // qmllint disable unqualified
+            readonly property color stateLayerColor: {
+              var c = checked ? Theme.primary : Theme.surface_fg // qmllint disable unqualified
+              if (isPressed) return Qt.rgba(c.r, c.g, c.b, 0.10)
+              if (isHovered) return Qt.rgba(c.r, c.g, c.b, 0.08)
+              return "transparent"
+            }
+
+            Rectangle {
+              anchors.fill: parent
+              radius: 16
+              color: switchExpandLeft.checked
+                ? Theme.primary                 // qmllint disable unqualified
+                : Theme.surface_container_high  // qmllint disable unqualified
+              border.width: switchExpandLeft.checked ? 0 : 2
+              border.color: Theme.surface_variant_fg // qmllint disable unqualified
+              Behavior on color        { ColorAnimation { duration: 200; easing.type: Easing.OutCubic } }
+              Behavior on border.width { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+            }
+
+            Rectangle {
+              width: 40; height: 40; radius: 20
+              anchors.verticalCenter: parent.verticalCenter
+              x: switchExpandLeft.handleCenterX - 20
+              color: switchExpandLeft.stateLayerColor
+              Behavior on x     { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+              Behavior on color { ColorAnimation  { duration: 150; easing.type: Easing.OutCubic } }
+            }
+
+            Rectangle {
+              width: switchExpandLeft.handleSize
+              height: width
+              radius: width / 2
+              anchors.verticalCenter: parent.verticalCenter
+              x: switchExpandLeft.handleCenterX - switchExpandLeft.handleSize / 2
+              color: switchExpandLeft.handleColor
+              Behavior on width { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+              Behavior on x     { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+              Behavior on color { ColorAnimation  { duration: 200; easing.type: Easing.OutCubic } }
+            }
+
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true
+              onEntered:  switchExpandLeft.isHovered = true
+              onExited:   { switchExpandLeft.isHovered = false; switchExpandLeft.isPressed = false }
+              onPressed:  switchExpandLeft.isPressed  = true
+              onReleased: switchExpandLeft.isPressed  = false
+              onClicked:  TrayHandler.setExpandIconOnLeft(!switchExpandLeft.checked) // qmllint disable unqualified
+            }
+          }
+        }
+      }
+
+      // Spacer
+      Item {
+        Layout.fillWidth: true
+        height: 12
+      }
+
+      // Section header
+      Text {
+        text: ConfigPanelTranslator.Tr("FoldIcons") // qmllint disable unqualified
         font.pixelSize: 14
         font.weight: Font.Medium
         color: Theme.primary // qmllint disable unqualified

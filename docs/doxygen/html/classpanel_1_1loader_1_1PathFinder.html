@@ -100,6 +100,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6a72ce47a553df1e76997cf0637c17a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the base directory for configuration files.  <br /></td></tr>
 <tr class="memitem:a7708fd5aa1756adb3cb2b714b5c37455" id="r_a7708fd5aa1756adb3cb2b714b5c37455"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7708fd5aa1756adb3cb2b714b5c37455">GetTrayConfigPath</a> ()</td></tr>
 <tr class="memdesc:a7708fd5aa1756adb3cb2b714b5c37455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the path for the system tray configuration file.  <br /></td></tr>
+<tr class="memitem:aeca383a63eb30102391183367d512470" id="r_aeca383a63eb30102391183367d512470"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeca383a63eb30102391183367d512470">GetTrayExpandingIconConfigPath</a> ()</td></tr>
+<tr class="memdesc:aeca383a63eb30102391183367d512470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the path for the system tray expanding icon configuration file.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a6a72ce47a553df1e76997cf0637c17a4" name="a6a72ce47a553df1e76997cf0637c17a4"></a>
@@ -194,6 +196,40 @@ An empty file will be created if the target file does NOT exist. </dd>
 The program crashes if the config directory failed to create. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="#a6a72ce47a553df1e76997cf0637c17a4" title="Gets the base directory for configuration files.">GetConfigBaseDir()</a></code>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>(QString) The path for the system tray configuration file. </dd></dl>
+
+</div>
+</div>
+<a id="aeca383a63eb30102391183367d512470" name="aeca383a63eb30102391183367d512470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeca383a63eb30102391183367d512470">&#9670;&#160;</a></span>GetTrayExpandingIconConfigPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString panel::loader::PathFinder::GetTrayExpandingIconConfigPath </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the path for the system tray expanding icon configuration file. </p>
+<dl class="section note"><dt>Note</dt><dd>This function relies on <code>QStandardPaths::writableLocation</code>. </dd>
+<dd>
+An empty file will be created if the target file does NOT exist. </dd>
+<dd>
+The program crashes if the config directory failed to create. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="#a6a72ce47a553df1e76997cf0637c17a4" title="Gets the base directory for configuration files.">GetConfigBaseDir()</a></code>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>(QString) The path for the system tray expanding icon configuration file. </dd></dl>
 
 </div>
 </div>

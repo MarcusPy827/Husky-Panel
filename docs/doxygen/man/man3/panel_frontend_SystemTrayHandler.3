@@ -12,7 +12,17 @@ Inherits QAbstractListModel\&.
 
 .in +1c
 .ti -1c
-.RI "enum \fBRoles\fP { \fBServiceRole\fP = Qt::UserRole + 1, \fBTooltipRole\fP, \fBIsVisibleRole\fP, \fBNeedsAttentionRole\fP, \fBIconRevisionRole\fP, \fBIconKeyRole\fP }"
+.RI "enum \fBRoles\fP { \fBServiceRole\fP = Qt::UserRole + 1, \fBRealServiceRole\fP, \fBTitleRole\fP, \fBAppIdRole\fP, \fBTooltipRole\fP, \fBIsVisibleRole\fP, \fBIsConfigVisibleRole\fP, \fBNeedsAttentionRole\fP, \fBIconRevisionRole\fP, \fBIconKeyRole\fP }"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBhiddenActiveCountChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBexpandIconOnLeftChanged\fP ()"
 .br
 .in -1c
 .SS "Public Member Functions"
@@ -29,6 +39,12 @@ Inherits QAbstractListModel\&.
 .br
 .ti -1c
 .RI "QHash< int, QByteArray > \fBroleNames\fP () const override"
+.br
+.ti -1c
+.RI "int \fBhiddenActiveCount\fP () const"
+.br
+.ti -1c
+.RI "bool \fBexpandIconOnLeft\fP () const"
 .br
 .ti -1c
 .RI "QImage \fBGetIconImage\fP (int key) const"
@@ -56,6 +72,22 @@ Inherits QAbstractListModel\&.
 .br
 .ti -1c
 .RI "Q_INVOKABLE void \fBscroll\fP (const QString &service, int delta)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetConfigVisible\fP (const QString &service, bool visible)"
+.br
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetExpandIconOnLeft\fP (bool value)"
+.br
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "int \fBhiddenActiveCount\fP"
+.br
+.ti -1c
+.RI "bool \fBexpandIconOnLeft\fP"
 .br
 .in -1c
 

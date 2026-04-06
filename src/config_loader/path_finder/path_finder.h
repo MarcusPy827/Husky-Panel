@@ -33,6 +33,7 @@ class PathFinder {
 
   /* ---------- Files ---------- */
   static QString GetTrayConfigPath();
+  static QString GetTrayExpandingIconConfigPath();
 };
 
 }  // namespace loader
