@@ -15,6 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QGuiApplication>
 #include <QWindow>
 
 #include "absl/log/log.h"
@@ -23,6 +24,7 @@
 #include "absl/strings/str_cat.h"
 
 #include "src/utils/layer_shell_helper/layer_shell_helper.h"
+#include "src/utils/layer_shell_helper/xorg_panel_helper.h"
 
 #ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
 #include "lib/3rdparty/layer-shell-qt/src/interfaces/window.h"
@@ -74,11 +76,17 @@ void LayerShellHelper::SetFullMask(QObject* window_obj) {
   window->setMask(QRegion(0, 0, window->width(), window->height()));
 }
 
-// Configures a window as a full-screen LayerOverlay surface.
-// Used for the confirm dialog so it sits above the panel layer.
+// Configures a window as a full-screen overlay surface.
+// On Wayland: uses LayerShell overlay layer.
+// On X11: adds WindowStaysOnTopHint so the dialog floats above the dock.
 void LayerShellHelper::SetupOverlayWindow(QObject* window_obj) {
   QWindow* window = qobject_cast<QWindow*>(window_obj);
   if (window == nullptr) {
+    return;
+  }
+
+  if (QGuiApplication::platformName() == QLatin1String("xcb")) {
+    panel::utils::XOrgPanelHelper::SetupXorgOverlayWindow(window);
     return;
   }
 

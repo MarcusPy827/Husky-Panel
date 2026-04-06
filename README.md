@@ -217,7 +217,7 @@ cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
 ```bash
 mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=Release ..
-cmake --build
+cmake --build .
 ```
 
 The process could lasts for minutes...

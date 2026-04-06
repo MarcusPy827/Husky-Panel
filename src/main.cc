@@ -54,6 +54,7 @@
 #include "src/utils/xdg_icon_handler/xdg_icon_handler.h"
 #include "src/utils/user_avatar_handler/user_avatar_handler.h"
 #include "src/utils/layer_shell_helper/layer_shell_helper.h"
+#include "src/utils/layer_shell_helper/xorg_panel_helper.h"
 #include "QWKQuick/qwkquickglobal.h"
 
 #ifdef HUSKY_USE_VENDORED_LAYERSHELLQT
@@ -250,11 +251,26 @@ int main(int argc, char *argv[]) {
   }
 
   LOG(INFO) << absl::StrCat(
-    "Now setting up layer shell for the panel window...");
+    "Now setting up panel window for the current display session...");
   QObject* root = engine.rootObjects().first();
   QQuickWindow* window = qobject_cast<QQuickWindow*>(root);
-  if (window) {
-    QWindow* native = window;
+  if (!window) {
+    LOG(ERROR) << absl::StrCat("Failed to get QQuickWindow. ",
+      "Please check your session.");
+    return -1;
+  }
+
+  QWindow* native = window;
+  const bool is_x11 =
+      QGuiApplication::platformName() == QLatin1String("xcb");
+
+  if (is_x11) {
+    LOG(INFO) << absl::StrCat("X11/Xorg session detected, now using EWMH ",
+      "DOCK setup...");
+    panel::utils::XOrgPanelHelper::SetupXorgPanelWindow(native, 32);
+  } else {
+    LOG(INFO) << absl::StrCat("Wayland session detected, using layer shell ",
+      "setup...");
     LayerShellQt::Window* layer_shell = LayerShellQt::Window::get(native);
     layer_shell->setAnchors(static_cast<LayerShellQt::Window::Anchor>(
       LayerShellQt::Window::Anchor::AnchorTop |
@@ -265,10 +281,6 @@ int main(int argc, char *argv[]) {
       LayerShellQt::Window::KeyboardInteractivityOnDemand);
     layer_shell->setExclusiveZone(32);
     window->show();
-  } else {
-    LOG(ERROR) << absl::StrCat("Failed to get QQuickWindow. ",
-      "Please check your session.");
-    return -1;
   }
 
   return a.exec();
