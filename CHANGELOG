@@ -1,5 +1,9 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/exit_panel_0409
+  * Added an exit panel button.
+  * 新增了退出按钮
+
 * marcus/xorg_support_0405
   * Added Xorg session support.
   * 新增了Xorg会话支持
