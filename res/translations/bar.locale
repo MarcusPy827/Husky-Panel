@@ -74,6 +74,10 @@ en_us = "CLOCK INITIALIZING"
 zh_cn = "yyyy年M月"
 en_us = "yyyy-M-"
 
+[yyyy-M]
+zh_cn = "yyyy年M月"
+en_us = "yyyy-M"
+
 [dd]
 zh_cn = "dd日"
 en_us = "dd"

@@ -154,6 +154,8 @@ set(BACKEND_SOURCES
   src/info_server/current_window/current_window_kwin_impl.cc
   src/info_server/current_window/current_window_wlroots_impl.h
   src/info_server/current_window/current_window_wlroots_impl.cc
+  src/info_server/current_window/current_window_xorg_impl.h
+  src/info_server/current_window/current_window_xorg_impl.cc
   src/info_server/current_window/current_window_null_impl.h
   src/info_server/current_window/current_window_null_impl.cc
   src/info_server/clock/clock.h

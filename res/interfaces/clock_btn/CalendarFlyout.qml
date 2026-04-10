@@ -234,7 +234,7 @@ Item {
             }
 
             Text {
-              text: Qt.formatDate(new Date(root._viewYear, root._viewMonth, 1), StatusBarTranslator.Tr("yyyy-M-"))
+              text: Qt.formatDate(new Date(root._viewYear, root._viewMonth, 1), StatusBarTranslator.Tr("yyyy-M"))
               color: Theme.surface_fg
               font.pixelSize: 16
               font.bold: true
