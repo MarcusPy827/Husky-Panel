@@ -398,8 +398,13 @@ Window {
       Menu {
         id: barContextMenu
         MenuItem {
-          text: StatusBarTranslator.Tr("Configure...")
+          text: StatusBarTranslator.Tr("ConfigurePanel")
           onTriggered: configPanelWindow.open()
+        }
+        
+        MenuItem {
+          text: StatusBarTranslator.Tr("ExitPanel")
+          onTriggered: Qt.quit()
         }
       }
 

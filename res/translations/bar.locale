@@ -141,3 +141,11 @@ en_us = "Su"
 [Configure...]
 zh_cn = "配置..."
 en_us = "Configure..."
+
+[ConfigurePanel]
+zh_cn = "配置面板"
+en_us = "Configure panel"
+
+[ExitPanel]
+zh_cn = "退出面板"
+en_us = "Exit panel"
