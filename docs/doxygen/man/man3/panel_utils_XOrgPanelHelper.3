@@ -1,0 +1,70 @@
+.TH "panel::utils::XOrgPanelHelper" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::utils::XOrgPanelHelper
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBSetupXorgPanelWindow\fP (QWindow *window, int bar_height)"
+.br
+.RI "Sets up the status bar for the X11/Xorg session\&. "
+.ti -1c
+.RI "static void \fBSetupXorgOverlayWindow\fP (QWindow *window)"
+.br
+.RI "This function configures an overlay window for X11/Xorg window\&. "
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void panel::utils::XOrgPanelHelper::SetupXorgOverlayWindow (QWindow * window)\fR [static]\fP"
+
+.PP
+This function configures an overlay window for X11/Xorg window\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function adds \fRQt::WindowStaysOnTopHint\fP so that the overlay/ flyout could be fixed at top\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIwindow\fP (QWindow*) The target overlay/flyout window\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::utils::XOrgPanelHelper::SetupXorgPanelWindow (QWindow * window, int bar_height)\fR [static]\fP"
+
+.PP
+Sets up the status bar for the X11/Xorg session\&. This function sets the frameless window hint for the target status bar window and anchors it to top-left of primary screen\&. After showing the window, it sets the \fR_NET_WM_WINDOW_TYPE_DOCK\fP and \fR_NET_WM_STRUT_PARTIAL\fP to reserve the space needed\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function also ensures that the status bar is avaliable on all the virtual desktop\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIwindow\fP (QWindow*) The target panel\&. 
+.br
+\fIbar_height\fP (int) The height of the status bar\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

@@ -9,5 +9,6 @@ var searchData=
   ['currentwindowkwinimpl_6',['CurrentWindowKwinImpl',['../classpanel_1_1backend_1_1CurrentWindowKwinImpl.html',1,'panel::backend']]],
   ['currentwindownullimpl_7',['CurrentWindowNullImpl',['../classpanel_1_1backend_1_1CurrentWindowNullImpl.html',1,'panel::backend']]],
   ['currentwindowprovider_8',['CurrentWindowProvider',['../classpanel_1_1backend_1_1CurrentWindowProvider.html',1,'panel::backend']]],
-  ['currentwindowwlrootsimpl_9',['CurrentWindowWlrootsImpl',['../classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html',1,'panel::backend']]]
+  ['currentwindowwlrootsimpl_9',['CurrentWindowWlrootsImpl',['../classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html',1,'panel::backend']]],
+  ['currentwindowxorgimpl_10',['CurrentWindowXorgImpl',['../classpanel_1_1backend_1_1CurrentWindowXorgImpl.html',1,'panel::backend']]]
 ];

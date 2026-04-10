@@ -39,11 +39,13 @@ find_package(PkgConfig
   REQUIRED
 )
 
-pkg_check_modules(WaylandClient 
-  REQUIRED 
-  wayland-client 
+pkg_check_modules(WaylandClient
+  REQUIRED
+  wayland-client
   IMPORTED_TARGET
 )
+
+pkg_check_modules(XCB xcb IMPORTED_TARGET)
 
 find_package(QT 
   NAMES Qt6 
@@ -138,6 +140,8 @@ set(UTIL_SOURCES
   src/utils/user_avatar_handler/user_avatar_handler.cc
   src/utils/layer_shell_helper/layer_shell_helper.h
   src/utils/layer_shell_helper/layer_shell_helper.cc
+  src/utils/layer_shell_helper/xorg_panel_helper.h
+  src/utils/layer_shell_helper/xorg_panel_helper.cc
 )
 
 set(BACKEND_SOURCES
@@ -150,6 +154,8 @@ set(BACKEND_SOURCES
   src/info_server/current_window/current_window_kwin_impl.cc
   src/info_server/current_window/current_window_wlroots_impl.h
   src/info_server/current_window/current_window_wlroots_impl.cc
+  src/info_server/current_window/current_window_xorg_impl.h
+  src/info_server/current_window/current_window_xorg_impl.cc
   src/info_server/current_window/current_window_null_impl.h
   src/info_server/current_window/current_window_null_impl.cc
   src/info_server/clock/clock.h
@@ -331,6 +337,7 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
+  $<$<BOOL:${XCB_FOUND}>:PkgConfig::XCB>
 )
 
 include(GNUInstallDirs)

@@ -9,7 +9,7 @@ panel::backend::CurrentWindowProvider
 .PP
 Inherits QObject\&.
 .PP
-Inherited by \fBpanel::backend::CurrentWindowKwinImpl\fP, \fBpanel::backend::CurrentWindowNullImpl\fP, and \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+Inherited by \fBpanel::backend::CurrentWindowKwinImpl\fP, \fBpanel::backend::CurrentWindowNullImpl\fP, \fBpanel::backend::CurrentWindowWlrootsImpl\fP, and \fBpanel::backend::CurrentWindowXorgImpl\fP\&.
 .SS "Signals"
 
 .in +1c
@@ -35,11 +35,11 @@ Inherited by \fBpanel::backend::CurrentWindowKwinImpl\fP, \fBpanel::backend::Cur
 .SS "virtual QString panel::backend::CurrentWindowProvider::GetApplicationName ()\fR [pure virtual]\fP"
 
 .PP
-Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP, and \fBpanel::backend::CurrentWindowXorgImpl\fP\&.
 .SS "virtual QString panel::backend::CurrentWindowProvider::GetPackageName ()\fR [pure virtual]\fP"
 
 .PP
-Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP\&.
+Implemented in \fBpanel::backend::CurrentWindowWlrootsImpl\fP, and \fBpanel::backend::CurrentWindowXorgImpl\fP\&.
 
 .SH "Author"
 .PP 

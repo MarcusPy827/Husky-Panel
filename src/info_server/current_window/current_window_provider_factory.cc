@@ -29,6 +29,7 @@
 #include "src/info_server/current_window/current_window_provider_factory.h"
 #include "src/info_server/current_window/current_window_kwin_impl.h"
 #include "src/info_server/current_window/current_window_wlroots_impl.h"
+#include "src/info_server/current_window/current_window_xorg_impl.h"
 #include "src/info_server/current_window/current_window_null_impl.h"
 #include "src/utils/dbus_def.h"
 
@@ -51,6 +52,13 @@ std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
     LOG(INFO) << absl::StrCat("Non-KWin Wayland session detected. ",
       "Using wlr-foreign-toplevel.");
     return std::make_unique<CurrentWindowWlrootsImpl>(parent);
+  }
+
+  bool is_xorg = !qEnvironmentVariable("DISPLAY").isEmpty();
+  if (is_xorg) {
+    LOG(INFO) << absl::StrCat("X11/XOrg session detected. ",
+      "Using _NET_ACTIVE_WINDOW via XCB.");
+    return std::make_unique<CurrentWindowXorgImpl>(parent);
   }
 
   LOG(ERROR) << absl::StrCat("Current WM is NOT supported. ",

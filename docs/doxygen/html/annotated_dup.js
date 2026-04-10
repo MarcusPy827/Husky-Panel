@@ -11,6 +11,7 @@ var annotated_dup =
         [ "CurrentWindowNullImpl", "classpanel_1_1backend_1_1CurrentWindowNullImpl.html", null ],
         [ "CurrentWindowProvider", "classpanel_1_1backend_1_1CurrentWindowProvider.html", null ],
         [ "CurrentWindowWlrootsImpl", "classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html", "classpanel_1_1backend_1_1CurrentWindowWlrootsImpl" ],
+        [ "CurrentWindowXorgImpl", "classpanel_1_1backend_1_1CurrentWindowXorgImpl.html", "classpanel_1_1backend_1_1CurrentWindowXorgImpl" ],
         [ "PowerOptions", "classpanel_1_1backend_1_1PowerOptions.html", null ],
         [ "SessionHandler", "classpanel_1_1backend_1_1SessionHandler.html", null ],
         [ "SNIImage", "structpanel_1_1backend_1_1SNIImage.html", null ],
@@ -53,7 +54,8 @@ var annotated_dup =
         [ "Misc", "classpanel_1_1utils_1_1Misc.html", null ],
         [ "Strings", "classpanel_1_1utils_1_1Strings.html", null ],
         [ "UserAvatarHandler", "classpanel_1_1utils_1_1UserAvatarHandler.html", null ],
-        [ "XdgIconHandler", "classpanel_1_1utils_1_1XdgIconHandler.html", null ]
+        [ "XdgIconHandler", "classpanel_1_1utils_1_1XdgIconHandler.html", null ],
+        [ "XOrgPanelHelper", "classpanel_1_1utils_1_1XOrgPanelHelper.html", null ]
       ] ]
     ] ],
     [ "AppInfo", "structAppInfo.html", null ]

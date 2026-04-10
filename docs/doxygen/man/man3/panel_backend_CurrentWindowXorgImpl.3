@@ -1,0 +1,109 @@
+.TH "panel::backend::CurrentWindowXorgImpl" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::CurrentWindowXorgImpl
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBpanel::backend::CurrentWindowProvider\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCurrentWindowXorgImpl\fP (QObject *parent=nullptr)"
+.br
+.RI "Constructs the XOrg/X11 implementation for active window tracking\&. "
+.ti -1c
+.RI "\fB~CurrentWindowXorgImpl\fP () override"
+.br
+.RI "Destructor — disconnects from the X display\&. "
+.ti -1c
+.RI "QString \fBGetApplicationName\fP () override"
+.br
+.RI "Returns the friendly application name of the current active window\&. "
+.ti -1c
+.RI "QString \fBGetPackageName\fP () override"
+.br
+.RI "Returns the package name (lowercased WM_CLASS) of the current active window\&. "
+.in -1c
+
+Public Member Functions inherited from \fBpanel::backend::CurrentWindowProvider\fP
+.in +1c
+.ti -1c
+.RI "\fBCurrentWindowProvider\fP (QObject *parent=nullptr)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Signals inherited from \fBpanel::backend::CurrentWindowProvider\fP
+.in +1c
+.ti -1c
+.RI "void \fBCurrentWindowChanged\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::CurrentWindowXorgImpl::CurrentWindowXorgImpl (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+Constructs the XOrg/X11 implementation for active window tracking\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&.
+.RE
+.PP
+Connects to the X display, selects \fRPropertyChangeMask\fP on the root window so that \fR_NET_ACTIVE_WINDOW\fP changes are delivered, then sets up a \fRQSocketNotifier\fP on the XCB file descriptor to receive those events without blocking the Qt event loop\&. Finally, reads the initial active window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "panel::backend::CurrentWindowXorgImpl::~CurrentWindowXorgImpl ()\fR [override]\fP"
+
+.PP
+Destructor — disconnects from the X display\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QString panel::backend::CurrentWindowXorgImpl::GetApplicationName ()\fR [override]\fP, \fR [virtual]\fP"
+
+.PP
+Returns the friendly application name of the current active window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The application name\&. 
+.RE
+.PP
+
+.PP
+Implements \fBpanel::backend::CurrentWindowProvider\fP\&.
+.SS "QString panel::backend::CurrentWindowXorgImpl::GetPackageName ()\fR [override]\fP, \fR [virtual]\fP"
+
+.PP
+Returns the package name (lowercased WM_CLASS) of the current active window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The package name\&. 
+.RE
+.PP
+
+.PP
+Implements \fBpanel::backend::CurrentWindowProvider\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

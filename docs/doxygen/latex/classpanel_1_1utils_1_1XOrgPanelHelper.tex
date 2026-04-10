@@ -1,0 +1,64 @@
+\doxysection{panel\+::utils\+::XOrg\+Panel\+Helper Class Reference}
+\hypertarget{classpanel_1_1utils_1_1XOrgPanelHelper}{}\label{classpanel_1_1utils_1_1XOrgPanelHelper}\index{panel::utils::XOrgPanelHelper@{panel::utils::XOrgPanelHelper}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classpanel_1_1utils_1_1XOrgPanelHelper_a67c8bad1ace2571e4336c4dc68c54a1f}{Setup\+Xorg\+Panel\+Window}} (QWindow \texorpdfstring{$\ast$}{*}window, int bar\+\_\+height)
+\begin{DoxyCompactList}\small\item\em Sets up the status bar for the X11/\+Xorg session. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classpanel_1_1utils_1_1XOrgPanelHelper_ab3b256a1fd545164c70ccd4adf935f5e}{Setup\+Xorg\+Overlay\+Window}} (QWindow \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em This function configures an overlay window for X11/\+Xorg window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1utils_1_1XOrgPanelHelper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1utils_1_1XOrgPanelHelper_ab3b256a1fd545164c70ccd4adf935f5e}\index{panel::utils::XOrgPanelHelper@{panel::utils::XOrgPanelHelper}!SetupXorgOverlayWindow@{SetupXorgOverlayWindow}}
+\index{SetupXorgOverlayWindow@{SetupXorgOverlayWindow}!panel::utils::XOrgPanelHelper@{panel::utils::XOrgPanelHelper}}
+\doxysubsubsection{\texorpdfstring{SetupXorgOverlayWindow()}{SetupXorgOverlayWindow()}}
+{\footnotesize\ttfamily \label{classpanel_1_1utils_1_1XOrgPanelHelper_ab3b256a1fd545164c70ccd4adf935f5e} 
+void panel\+::utils\+::\+XOrg\+Panel\+Helper\+::\+Setup\+Xorg\+Overlay\+Window (\begin{DoxyParamCaption}\item[{QWindow \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function configures an overlay window for X11/\+Xorg window. 
+
+\begin{DoxyNote}{Note}
+This function adds {\ttfamily Qt\+::\+Window\+Stays\+On\+Top\+Hint} so that the overlay/ flyout could be fixed at top. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em window} & (QWindow\texorpdfstring{$\ast$}{*}) The target overlay/flyout window. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1utils_1_1XOrgPanelHelper_a67c8bad1ace2571e4336c4dc68c54a1f}\index{panel::utils::XOrgPanelHelper@{panel::utils::XOrgPanelHelper}!SetupXorgPanelWindow@{SetupXorgPanelWindow}}
+\index{SetupXorgPanelWindow@{SetupXorgPanelWindow}!panel::utils::XOrgPanelHelper@{panel::utils::XOrgPanelHelper}}
+\doxysubsubsection{\texorpdfstring{SetupXorgPanelWindow()}{SetupXorgPanelWindow()}}
+{\footnotesize\ttfamily \label{classpanel_1_1utils_1_1XOrgPanelHelper_a67c8bad1ace2571e4336c4dc68c54a1f} 
+void panel\+::utils\+::\+XOrg\+Panel\+Helper\+::\+Setup\+Xorg\+Panel\+Window (\begin{DoxyParamCaption}\item[{QWindow \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{int}]{bar\+\_\+height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets up the status bar for the X11/\+Xorg session. 
+
+This function sets the frameless window hint for the target status bar window and anchors it to top-\/left of primary screen. After showing the window, it sets the {\ttfamily \+\_\+\+NET\+\_\+\+WM\+\_\+\+WINDOW\+\_\+\+TYPE\+\_\+\+DOCK} and {\ttfamily \+\_\+\+NET\+\_\+\+WM\+\_\+\+STRUT\+\_\+\+PARTIAL} to reserve the space needed. \begin{DoxyNote}{Note}
+This function also ensures that the status bar is avaliable on all the virtual desktop. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em window} & (QWindow\texorpdfstring{$\ast$}{*}) The target panel. \\
+\hline
+{\em bar\+\_\+height} & (int) The height of the status bar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/utils/layer\+\_\+shell\+\_\+helper/xorg\+\_\+panel\+\_\+helper.\+h\item 
+src/utils/layer\+\_\+shell\+\_\+helper/xorg\+\_\+panel\+\_\+helper.\+cc\end{DoxyCompactItemize}
