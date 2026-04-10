@@ -19,7 +19,8 @@ var hierarchy =
       [ "panel::backend::CurrentWindowProvider", "classpanel_1_1backend_1_1CurrentWindowProvider.html", [
         [ "panel::backend::CurrentWindowKwinImpl", "classpanel_1_1backend_1_1CurrentWindowKwinImpl.html", null ],
         [ "panel::backend::CurrentWindowNullImpl", "classpanel_1_1backend_1_1CurrentWindowNullImpl.html", null ],
-        [ "panel::backend::CurrentWindowWlrootsImpl", "classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html", null ]
+        [ "panel::backend::CurrentWindowWlrootsImpl", "classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html", null ],
+        [ "panel::backend::CurrentWindowXorgImpl", "classpanel_1_1backend_1_1CurrentWindowXorgImpl.html", null ]
       ] ],
       [ "panel::backend::PowerOptions", "classpanel_1_1backend_1_1PowerOptions.html", null ],
       [ "panel::backend::SessionHandler", "classpanel_1_1backend_1_1SessionHandler.html", null ],
@@ -58,6 +59,7 @@ var hierarchy =
     [ "panel::utils::Strings", "classpanel_1_1utils_1_1Strings.html", null ],
     [ "panel::loader::StyleTuple", "structpanel_1_1loader_1_1StyleTuple.html", null ],
     [ "panel::loader::TrayConfig", "structpanel_1_1loader_1_1TrayConfig.html", null ],
+    [ "panel::utils::XOrgPanelHelper", "classpanel_1_1utils_1_1XOrgPanelHelper.html", null ],
     [ "QtWayland::zwlr_foreign_toplevel_handle_v1", null, [
       [ "panel::backend::WlrootsHelper", "classpanel_1_1backend_1_1WlrootsHelper.html", null ]
     ] ],

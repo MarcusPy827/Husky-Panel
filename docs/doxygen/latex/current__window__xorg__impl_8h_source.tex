@@ -1,0 +1,66 @@
+\doxysection{current\+\_\+window\+\_\+xorg\+\_\+impl.\+h}
+\hypertarget{current__window__xorg__impl_8h_source}{}\label{current__window__xorg__impl_8h_source}\index{src/info\_server/current\_window/current\_window\_xorg\_impl.h@{src/info\_server/current\_window/current\_window\_xorg\_impl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_XORG\_IMPL\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_XORG\_IMPL\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <xcb/xcb.h>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QSocketNotifier>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}src/info\_server/current\_window/current\_window\_provider.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a1f8381c790377a8e1db8be31c985da1f}{CurrentWindowXorgImpl}}\ :\ \textcolor{keyword}{public}\ CurrentWindowProvider\ \{}
+\DoxyCodeLine{00031\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a1f8381c790377a8e1db8be31c985da1f}{CurrentWindowXorgImpl}}(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a51be32073fab9bf9091a723e28150271}{\string~CurrentWindowXorgImpl}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ QString\ \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a77c6218b7510fd8445d98b38b49081e1}{GetApplicationName}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ \ \ QString\ \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_aa4802f9a6bc46ccce0ece2a64872612a}{GetPackageName}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ xcb\_atom\_t\ InternAtom(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{void}\ UpdateActiveWindow();}
+\DoxyCodeLine{00043\ \ \ QString\ GetWindowClass(xcb\_window\_t\ window);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ xcb\_connection\_t*\ conn\_;}
+\DoxyCodeLine{00046\ \ \ xcb\_window\_t\ root\_;}
+\DoxyCodeLine{00047\ \ \ xcb\_atom\_t\ atom\_net\_active\_window\_;}
+\DoxyCodeLine{00048\ \ \ xcb\_atom\_t\ atom\_wm\_class\_;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ QSocketNotifier*\ notifier\_;}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{structpanel_1_1backend_1_1CurrentWindowInfo}{CurrentWindowInfo}}\ window\_info\_;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ OnXcbEvent();}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00058\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_INFO\_SERVER\_CURRENT\_WINDOW\_CURRENT\_WINDOW\_XORG\_IMPL\_H\_}}
+
+\end{DoxyCode}

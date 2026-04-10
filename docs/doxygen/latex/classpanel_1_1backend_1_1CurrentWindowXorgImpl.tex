@@ -1,0 +1,111 @@
+\doxysection{panel\+::backend\+::Current\+Window\+Xorg\+Impl Class Reference}
+\hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl}{}\label{classpanel_1_1backend_1_1CurrentWindowXorgImpl}\index{panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}}
+Inheritance diagram for panel\+::backend\+::Current\+Window\+Xorg\+Impl\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classpanel_1_1backend_1_1CurrentWindowXorgImpl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a1f8381c790377a8e1db8be31c985da1f}{Current\+Window\+Xorg\+Impl}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs the XOrg/\+X11 implementation for active window tracking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a51be32073fab9bf9091a723e28150271}{\texorpdfstring{$\sim$}{\string~}\+Current\+Window\+Xorg\+Impl}} () override
+\begin{DoxyCompactList}\small\item\em Destructor — disconnects from the X display. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a77c6218b7510fd8445d98b38b49081e1}{Get\+Application\+Name}} () override
+\begin{DoxyCompactList}\small\item\em Returns the friendly application name of the current active window. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowXorgImpl_aa4802f9a6bc46ccce0ece2a64872612a}{Get\+Package\+Name}} () override
+\begin{DoxyCompactList}\small\item\em Returns the package name (lowercased WM\+\_\+\+CLASS) of the current active window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Current\+Window\+Provider} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Signals inherited from \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Current\+Window\+Changed} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a1f8381c790377a8e1db8be31c985da1f}\index{panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}!CurrentWindowXorgImpl@{CurrentWindowXorgImpl}}
+\index{CurrentWindowXorgImpl@{CurrentWindowXorgImpl}!panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}}
+\doxysubsubsection{\texorpdfstring{CurrentWindowXorgImpl()}{CurrentWindowXorgImpl()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a1f8381c790377a8e1db8be31c985da1f} 
+panel\+::backend\+::\+Current\+Window\+Xorg\+Impl\+::\+Current\+Window\+Xorg\+Impl (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs the XOrg/\+X11 implementation for active window tracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject.\\
+\hline
+\end{DoxyParams}
+Connects to the X display, selects {\ttfamily Property\+Change\+Mask} on the root window so that {\ttfamily \+\_\+\+NET\+\_\+\+ACTIVE\+\_\+\+WINDOW} changes are delivered, then sets up a {\ttfamily QSocket\+Notifier} on the XCB file descriptor to receive those events without blocking the Qt event loop. Finally, reads the initial active window. \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a51be32073fab9bf9091a723e28150271}\index{panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}!````~CurrentWindowXorgImpl@{\texorpdfstring{$\sim$}{\string~}CurrentWindowXorgImpl}}
+\index{````~CurrentWindowXorgImpl@{\texorpdfstring{$\sim$}{\string~}CurrentWindowXorgImpl}!panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CurrentWindowXorgImpl()}{\string~CurrentWindowXorgImpl()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a51be32073fab9bf9091a723e28150271} 
+panel\+::backend\+::\+Current\+Window\+Xorg\+Impl\+::\texorpdfstring{$\sim$}{\string~}\+Current\+Window\+Xorg\+Impl (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Destructor — disconnects from the X display. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a77c6218b7510fd8445d98b38b49081e1}\index{panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}!GetApplicationName@{GetApplicationName}}
+\index{GetApplicationName@{GetApplicationName}!panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}}
+\doxysubsubsection{\texorpdfstring{GetApplicationName()}{GetApplicationName()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowXorgImpl_a77c6218b7510fd8445d98b38b49081e1} 
+QString panel\+::backend\+::\+Current\+Window\+Xorg\+Impl\+::\+Get\+Application\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the friendly application name of the current active window. 
+
+\begin{DoxyReturn}{Returns}
+(QString) The application name. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}.
+
+\Hypertarget{classpanel_1_1backend_1_1CurrentWindowXorgImpl_aa4802f9a6bc46ccce0ece2a64872612a}\index{panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}!GetPackageName@{GetPackageName}}
+\index{GetPackageName@{GetPackageName}!panel::backend::CurrentWindowXorgImpl@{panel::backend::CurrentWindowXorgImpl}}
+\doxysubsubsection{\texorpdfstring{GetPackageName()}{GetPackageName()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1CurrentWindowXorgImpl_aa4802f9a6bc46ccce0ece2a64872612a} 
+QString panel\+::backend\+::\+Current\+Window\+Xorg\+Impl\+::\+Get\+Package\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the package name (lowercased WM\+\_\+\+CLASS) of the current active window. 
+
+\begin{DoxyReturn}{Returns}
+(QString) The package name. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpanel_1_1backend_1_1CurrentWindowProvider}{panel\+::backend\+::\+Current\+Window\+Provider}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+xorg\+\_\+impl.\+h\item 
+src/info\+\_\+server/current\+\_\+window/current\+\_\+window\+\_\+xorg\+\_\+impl.\+cc\end{DoxyCompactItemize}
