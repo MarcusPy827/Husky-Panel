@@ -107,6 +107,7 @@ VERSION 0.9.3
 * QWindowKit
 * KDE Framework 6
 * KServices
+* PulseAudio (libpulse)
 
 <p align="right">(<a href="#readme-top">回到顶部</a>)</p>
 
@@ -182,7 +183,7 @@ Do you want to clean it?\nI mean... to delete everything in it?\n    (y/n) >>
 
 ##### 在基于Archlinux的发行版上
 ```bash
-sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt
+sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt libpulse
 ```
 
 ##### 在Fedora上
@@ -196,7 +197,7 @@ sudo reboot
 
 然后安装依赖：
 ```bash
-sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel
+sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel pulseaudio-libs-devel
 ```
 
 > `qt6-qtbase-private-devel` 是必需的，因为 QWindowKit 使用了 Qt 私有头文件。
@@ -225,7 +226,7 @@ sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
 sudo apt install build-essential cmake \
     libwayland-dev wayland-protocols libxkbcommon-dev \
     qt6-base-private-dev qt6-base-dev qt6-wayland-dev qt6-tools-dev \
-    libkf6service-dev extra-cmake-modules
+    libkf6service-dev extra-cmake-modules libpulse-dev
 ```
 
 然后使用 vendored 库配置构建：
@@ -356,6 +357,7 @@ KWin app-bridge 脚本插件会在执行 `cmake --install .`（见上方）时�
 ### 模板与参考
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template.git)
 * [LXQt-Panel](https://github.com/lxqt/lxqt-panel.git)
+* [PAUVControl-Qt](https://github.com/lxqt/pavucontrol-qt.git)
 
 <p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 

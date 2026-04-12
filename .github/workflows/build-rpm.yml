@@ -38,7 +38,8 @@ jobs:
             layer-shell-qt-devel \
             libdbusmenu-lxqt-devel \
             kf6-kservice-devel \
-            extra-cmake-modules
+            extra-cmake-modules \
+            pulseaudio-libs-devel
 
       - name: Checkout repository
         uses: actions/checkout@v4
