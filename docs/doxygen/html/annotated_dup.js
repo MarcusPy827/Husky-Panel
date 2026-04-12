@@ -18,6 +18,7 @@ var annotated_dup =
         [ "SNIToolTip", "structpanel_1_1backend_1_1SNIToolTip.html", null ],
         [ "TrayHandler", "classpanel_1_1backend_1_1TrayHandler.html", null ],
         [ "UserInfo", "classpanel_1_1backend_1_1UserInfo.html", null ],
+        [ "VolumeControl", "classpanel_1_1backend_1_1VolumeControl.html", "classpanel_1_1backend_1_1VolumeControl" ],
         [ "WlanInfo", "classpanel_1_1backend_1_1WlanInfo.html", null ],
         [ "WlrootsHelper", "classpanel_1_1backend_1_1WlrootsHelper.html", "classpanel_1_1backend_1_1WlrootsHelper" ],
         [ "WlrToplevelMgr", "classpanel_1_1backend_1_1WlrToplevelMgr.html", "classpanel_1_1backend_1_1WlrToplevelMgr" ]
@@ -33,6 +34,7 @@ var annotated_dup =
         [ "SystemTrayHandler", "classpanel_1_1frontend_1_1SystemTrayHandler.html", null ],
         [ "TrayIconImageHandler", "classpanel_1_1frontend_1_1TrayIconImageHandler.html", null ],
         [ "TrayIconItem", "classpanel_1_1frontend_1_1TrayIconItem.html", null ],
+        [ "VolumeControlHandler", "classpanel_1_1frontend_1_1VolumeControlHandler.html", "classpanel_1_1frontend_1_1VolumeControlHandler" ],
         [ "WLANIndicator", "classpanel_1_1frontend_1_1WLANIndicator.html", null ]
       ] ],
       [ "loader", null, [

@@ -1,0 +1,386 @@
+\doxysection{panel\+::frontend\+::Volume\+Control\+Handler Class Reference}
+\hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler}{}\label{classpanel_1_1frontend_1_1VolumeControlHandler}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+Inheritance diagram for panel\+::frontend\+::Volume\+Control\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpanel_1_1frontend_1_1VolumeControlHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a4a66ed4ba423bbec767961790e7ed1f8}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a4a66ed4ba423bbec767961790e7ed1f8} 
+void {\bfseries Sinks\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_aa95575dc6e7accf585900e7136350214}\label{classpanel_1_1frontend_1_1VolumeControlHandler_aa95575dc6e7accf585900e7136350214} 
+void {\bfseries Sources\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a27dc81e0611353a8e163515dc617cffc}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a27dc81e0611353a8e163515dc617cffc} 
+void {\bfseries Sink\+Inputs\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a1bb28b9ab720b93e00d4f353a0abcb1e}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a1bb28b9ab720b93e00d4f353a0abcb1e} 
+void {\bfseries Source\+Outputs\+Changed} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1ce17f2a3bc3e9c2c470347000b2637c}{Volume\+Control\+Handler}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor for {\ttfamily \doxylink{classpanel_1_1frontend_1_1VolumeControlHandler}{Volume\+Control\+Handler}}. \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1fd3cc73c5f7f0ac66755de3dfb50816}{Get\+Sinks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of available audio sinks (output devices). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_acf72f8b0d4882a2315db442b52d714b1}{Get\+Sources}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of available audio sources (input devices). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a7fb5de17d474e88d64711f0c87acca7f}{Get\+Sink\+Inputs}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of active sink inputs (application audio streams). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_ab3f0d2fe972a22cfd643cea2d3605508}{Get\+Source\+Outputs}} () const
+\begin{DoxyCompactList}\small\item\em Gets the list of active source outputs (application capture streams). \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_aaef677404578478c943ca43ab32750b6}{Get\+Volume\+Icon}} () const
+\begin{DoxyCompactList}\small\item\em Returns the material icon name reflecting the state of the default audio output sink. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a314f24d688b162f72b146640651c64de}{set\+Sink\+Volume}} (int index, int volume)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a sink (output device) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a8b7f09b4f550efa336a8e393c921ec57}{set\+Source\+Volume}} (int index, int volume)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a source (input device) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a289f03455c1f77dd42e14e27f6e6ad90}{set\+Sink\+Input\+Volume}} (int index, int volume)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a sink input (application output stream) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_ab4646270ffa98e20b6631d9ee89b1484}{set\+Source\+Output\+Volume}} (int index, int volume)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a source output (application capture stream) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_aba429a6f780603b726ab1b248abd8361}{set\+Sink\+Mute}} (int index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a sink (output device) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a7f487c3ca62c349f281687e0be388255}{set\+Source\+Mute}} (int index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a source (input device) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a385aa8fd9ec0f057e95390c84ee7f4c9}{set\+Sink\+Input\+Mute}} (int index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a sink input (application output stream) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a82b0ac1ff8bbb4e5a5f53a5339c32645}{set\+Source\+Output\+Mute}} (int index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a source output (application capture stream) by index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_acbef8828f5f221615b38cb6025381862}{set\+Default\+Sink}} (const QString \&name)
+\begin{DoxyCompactList}\small\item\em Sets the default audio sink (output device) by name. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a6c67a47c487451e9420d2ab99afd19ac}{set\+Default\+Source}} (const QString \&name)
+\begin{DoxyCompactList}\small\item\em Sets the default audio source (input device) by name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_ae50bbd602da8c2a02a5f9ff95221cd1b}\label{classpanel_1_1frontend_1_1VolumeControlHandler_ae50bbd602da8c2a02a5f9ff95221cd1b} 
+QVariant\+List {\bfseries sinks}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_abd59969abba258f08fa6db6e60fc04c7}\label{classpanel_1_1frontend_1_1VolumeControlHandler_abd59969abba258f08fa6db6e60fc04c7} 
+QVariant\+List {\bfseries sources}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a52d38ef8b2d7bcfd58801c065b363aca}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a52d38ef8b2d7bcfd58801c065b363aca} 
+QVariant\+List {\bfseries sink\+Inputs}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a3d8febcef94c8009bb2c56eb6ae75728}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a3d8febcef94c8009bb2c56eb6ae75728} 
+QVariant\+List {\bfseries source\+Outputs}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a8869a2eb3978acf085650d6fe1a7a09e}\label{classpanel_1_1frontend_1_1VolumeControlHandler_a8869a2eb3978acf085650d6fe1a7a09e} 
+QString {\bfseries volume\+Icon}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a1ce17f2a3bc3e9c2c470347000b2637c}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!VolumeControlHandler@{VolumeControlHandler}}
+\index{VolumeControlHandler@{VolumeControlHandler}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{VolumeControlHandler()}{VolumeControlHandler()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a1ce17f2a3bc3e9c2c470347000b2637c} 
+panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Volume\+Control\+Handler (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor for {\ttfamily \doxylink{classpanel_1_1frontend_1_1VolumeControlHandler}{Volume\+Control\+Handler}}. 
+
+Creates the underlying {\ttfamily \doxylink{classpanel_1_1backend_1_1VolumeControl}{backend\+::\+Volume\+Control}} instance, connects the signals needed (including sinks/sources/sink inputs/source outputs) to the corresponding signals of the handler. 
+\begin{DoxyParams}{Parameters}
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a7fb5de17d474e88d64711f0c87acca7f}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!GetSinkInputs@{GetSinkInputs}}
+\index{GetSinkInputs@{GetSinkInputs}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{GetSinkInputs()}{GetSinkInputs()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a7fb5de17d474e88d64711f0c87acca7f} 
+QVariant\+List panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Get\+Sink\+Inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of active sink inputs (application audio streams). 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{volume__control_8h_source}{volume\+\_\+control.\+h}} for the function {\ttfamily Volume\+Control\+::\+Get\+Sink\+Inputs()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of active sink input streams. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a1fd3cc73c5f7f0ac66755de3dfb50816}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!GetSinks@{GetSinks}}
+\index{GetSinks@{GetSinks}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{GetSinks()}{GetSinks()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a1fd3cc73c5f7f0ac66755de3dfb50816} 
+QVariant\+List panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Get\+Sinks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of available audio sinks (output devices). 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{volume__control_8h_source}{volume\+\_\+control.\+h}} for the function {\ttfamily Volume\+Control\+::\+Get\+Sinks()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of available audio sinks. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_ab3f0d2fe972a22cfd643cea2d3605508}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!GetSourceOutputs@{GetSourceOutputs}}
+\index{GetSourceOutputs@{GetSourceOutputs}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{GetSourceOutputs()}{GetSourceOutputs()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_ab3f0d2fe972a22cfd643cea2d3605508} 
+QVariant\+List panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Get\+Source\+Outputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of active source outputs (application capture streams). 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{volume__control_8h_source}{volume\+\_\+control.\+h}} for the function {\ttfamily Volume\+Control\+::\+Get\+Source\+Outputs()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of active source output streams. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_acf72f8b0d4882a2315db442b52d714b1}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!GetSources@{GetSources}}
+\index{GetSources@{GetSources}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{GetSources()}{GetSources()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_acf72f8b0d4882a2315db442b52d714b1} 
+QVariant\+List panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Get\+Sources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the list of available audio sources (input devices). 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{volume__control_8h_source}{volume\+\_\+control.\+h}} for the function {\ttfamily Volume\+Control\+::\+Get\+Sources()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of available audio sources. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_aaef677404578478c943ca43ab32750b6}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!GetVolumeIcon@{GetVolumeIcon}}
+\index{GetVolumeIcon@{GetVolumeIcon}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{GetVolumeIcon()}{GetVolumeIcon()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_aaef677404578478c943ca43ab32750b6} 
+QString panel\+::frontend\+::\+Volume\+Control\+Handler\+::\+Get\+Volume\+Icon (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the material icon name reflecting the state of the default audio output sink. 
+
+\begin{DoxyNote}{Note}
+Icon mapping reflects the active (default) output device\+: muted → {\ttfamily volume\+\_\+mute} 0\% → {\ttfamily volume\+\_\+off} 1 – 50\% → {\ttfamily volume\+\_\+down} 51 – 100\% → {\ttfamily volume\+\_\+up} 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(QString) One of\+: volume\+\_\+mute, volume\+\_\+off, volume\+\_\+down, volume\+\_\+up. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_acbef8828f5f221615b38cb6025381862}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setDefaultSink@{setDefaultSink}}
+\index{setDefaultSink@{setDefaultSink}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setDefaultSink()}{setDefaultSink()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_acbef8828f5f221615b38cb6025381862} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Default\+Sink (\begin{DoxyParamCaption}\item[{const QString \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the default audio sink (output device) by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & (const QString\&) The Pulse\+Audio sink name to set as default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a6c67a47c487451e9420d2ab99afd19ac}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setDefaultSource@{setDefaultSource}}
+\index{setDefaultSource@{setDefaultSource}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setDefaultSource()}{setDefaultSource()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a6c67a47c487451e9420d2ab99afd19ac} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Default\+Source (\begin{DoxyParamCaption}\item[{const QString \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the default audio source (input device) by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & (const QString\&) The Pulse\+Audio source name to set as default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a385aa8fd9ec0f057e95390c84ee7f4c9}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSinkInputMute@{setSinkInputMute}}
+\index{setSinkInputMute@{setSinkInputMute}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSinkInputMute()}{setSinkInputMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a385aa8fd9ec0f057e95390c84ee7f4c9} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Sink\+Input\+Mute (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a sink input (application output stream) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The sink input index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a289f03455c1f77dd42e14e27f6e6ad90}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSinkInputVolume@{setSinkInputVolume}}
+\index{setSinkInputVolume@{setSinkInputVolume}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSinkInputVolume()}{setSinkInputVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a289f03455c1f77dd42e14e27f6e6ad90} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Sink\+Input\+Volume (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{int}]{volume}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a sink input (application output stream) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The sink input index. \\
+\hline
+{\em volume} & (int) The desired volume level in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_aba429a6f780603b726ab1b248abd8361}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSinkMute@{setSinkMute}}
+\index{setSinkMute@{setSinkMute}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSinkMute()}{setSinkMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_aba429a6f780603b726ab1b248abd8361} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Sink\+Mute (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a sink (output device) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The sink index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a314f24d688b162f72b146640651c64de}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSinkVolume@{setSinkVolume}}
+\index{setSinkVolume@{setSinkVolume}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSinkVolume()}{setSinkVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a314f24d688b162f72b146640651c64de} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Sink\+Volume (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{int}]{volume}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a sink (output device) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The sink index. \\
+\hline
+{\em volume} & (int) The desired volume level in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a7f487c3ca62c349f281687e0be388255}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSourceMute@{setSourceMute}}
+\index{setSourceMute@{setSourceMute}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSourceMute()}{setSourceMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a7f487c3ca62c349f281687e0be388255} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Source\+Mute (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a source (input device) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The source index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a82b0ac1ff8bbb4e5a5f53a5339c32645}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSourceOutputMute@{setSourceOutputMute}}
+\index{setSourceOutputMute@{setSourceOutputMute}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSourceOutputMute()}{setSourceOutputMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a82b0ac1ff8bbb4e5a5f53a5339c32645} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Source\+Output\+Mute (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a source output (application capture stream) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The source output index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_ab4646270ffa98e20b6631d9ee89b1484}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSourceOutputVolume@{setSourceOutputVolume}}
+\index{setSourceOutputVolume@{setSourceOutputVolume}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSourceOutputVolume()}{setSourceOutputVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_ab4646270ffa98e20b6631d9ee89b1484} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Source\+Output\+Volume (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{int}]{volume}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a source output (application capture stream) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The source output index. \\
+\hline
+{\em volume} & (int) The desired volume level in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1VolumeControlHandler_a8b7f09b4f550efa336a8e393c921ec57}\index{panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}!setSourceVolume@{setSourceVolume}}
+\index{setSourceVolume@{setSourceVolume}!panel::frontend::VolumeControlHandler@{panel::frontend::VolumeControlHandler}}
+\doxysubsubsection{\texorpdfstring{setSourceVolume()}{setSourceVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1VolumeControlHandler_a8b7f09b4f550efa336a8e393c921ec57} 
+void panel\+::frontend\+::\+Volume\+Control\+Handler\+::set\+Source\+Volume (\begin{DoxyParamCaption}\item[{int}]{index}{, }\item[{int}]{volume}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a source (input device) by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (int) The source index. \\
+\hline
+{\em volume} & (int) The desired volume level in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/components/volume\+\_\+control/volume\+\_\+control\+\_\+handler.\+h\item 
+src/components/volume\+\_\+control/volume\+\_\+control\+\_\+handler.\+cc\end{DoxyCompactItemize}

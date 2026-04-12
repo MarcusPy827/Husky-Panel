@@ -1,7 +1,27 @@
 var searchData=
 [
-  ['setexpandicononlefthandside_0',['SetExpandIconOnLeftHandSide',['../classpanel_1_1loader_1_1TrayConfigHandler.html#aa6859d8f7f223096386383c8b2e0309b',1,'panel::loader::TrayConfigHandler']]],
-  ['settrayiconvisible_1',['SetTrayIconVisible',['../classpanel_1_1loader_1_1TrayConfigHandler.html#adb01899534f39d2fbd1a8e67eb41340f',1,'panel::loader::TrayConfigHandler']]],
-  ['setupxorgoverlaywindow_2',['SetupXorgOverlayWindow',['../classpanel_1_1utils_1_1XOrgPanelHelper.html#ab3b256a1fd545164c70ccd4adf935f5e',1,'panel::utils::XOrgPanelHelper']]],
-  ['setupxorgpanelwindow_3',['SetupXorgPanelWindow',['../classpanel_1_1utils_1_1XOrgPanelHelper.html#a67c8bad1ace2571e4336c4dc68c54a1f',1,'panel::utils::XOrgPanelHelper']]]
+  ['setdefaultsink_0',['SetDefaultSink',['../classpanel_1_1backend_1_1VolumeControl.html#ac9479da7bf533e55962f24110eece274',1,'panel::backend::VolumeControl']]],
+  ['setdefaultsink_1',['setDefaultSink',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#acbef8828f5f221615b38cb6025381862',1,'panel::frontend::VolumeControlHandler']]],
+  ['setdefaultsource_2',['SetDefaultSource',['../classpanel_1_1backend_1_1VolumeControl.html#a754c218cefdcf6e873ae4229f42daffd',1,'panel::backend::VolumeControl']]],
+  ['setdefaultsource_3',['setDefaultSource',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a6c67a47c487451e9420d2ab99afd19ac',1,'panel::frontend::VolumeControlHandler']]],
+  ['setexpandicononlefthandside_4',['SetExpandIconOnLeftHandSide',['../classpanel_1_1loader_1_1TrayConfigHandler.html#aa6859d8f7f223096386383c8b2e0309b',1,'panel::loader::TrayConfigHandler']]],
+  ['setsinkinputmute_5',['SetSinkInputMute',['../classpanel_1_1backend_1_1VolumeControl.html#a4f596895f7221c0bf71995eb0fbc5652',1,'panel::backend::VolumeControl']]],
+  ['setsinkinputmute_6',['setSinkInputMute',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a385aa8fd9ec0f057e95390c84ee7f4c9',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsinkinputvolume_7',['SetSinkInputVolume',['../classpanel_1_1backend_1_1VolumeControl.html#aa1151b68152cd2769ac76e89df3cfdfd',1,'panel::backend::VolumeControl']]],
+  ['setsinkinputvolume_8',['setSinkInputVolume',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a289f03455c1f77dd42e14e27f6e6ad90',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsinkmute_9',['SetSinkMute',['../classpanel_1_1backend_1_1VolumeControl.html#aa361c9e9861ff8edf911de461e425428',1,'panel::backend::VolumeControl']]],
+  ['setsinkmute_10',['setSinkMute',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#aba429a6f780603b726ab1b248abd8361',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsinkvolume_11',['SetSinkVolume',['../classpanel_1_1backend_1_1VolumeControl.html#a6117a485d2b5c3c4bba327a5415afb02',1,'panel::backend::VolumeControl']]],
+  ['setsinkvolume_12',['setSinkVolume',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a314f24d688b162f72b146640651c64de',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsourcemute_13',['SetSourceMute',['../classpanel_1_1backend_1_1VolumeControl.html#a9d17c1f83036cd41b9ed5b9858df0866',1,'panel::backend::VolumeControl']]],
+  ['setsourcemute_14',['setSourceMute',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a7f487c3ca62c349f281687e0be388255',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsourceoutputmute_15',['SetSourceOutputMute',['../classpanel_1_1backend_1_1VolumeControl.html#a46ec0dbc5319ba1c65fdc38ead04847e',1,'panel::backend::VolumeControl']]],
+  ['setsourceoutputmute_16',['setSourceOutputMute',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a82b0ac1ff8bbb4e5a5f53a5339c32645',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsourceoutputvolume_17',['SetSourceOutputVolume',['../classpanel_1_1backend_1_1VolumeControl.html#af9d03c735dfaffa009d15150378b6883',1,'panel::backend::VolumeControl']]],
+  ['setsourceoutputvolume_18',['setSourceOutputVolume',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#ab4646270ffa98e20b6631d9ee89b1484',1,'panel::frontend::VolumeControlHandler']]],
+  ['setsourcevolume_19',['SetSourceVolume',['../classpanel_1_1backend_1_1VolumeControl.html#ab15067e3ff569bd1277cd207eaaa04aa',1,'panel::backend::VolumeControl']]],
+  ['setsourcevolume_20',['setSourceVolume',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a8b7f09b4f550efa336a8e393c921ec57',1,'panel::frontend::VolumeControlHandler']]],
+  ['settrayiconvisible_21',['SetTrayIconVisible',['../classpanel_1_1loader_1_1TrayConfigHandler.html#adb01899534f39d2fbd1a8e67eb41340f',1,'panel::loader::TrayConfigHandler']]],
+  ['setupxorgoverlaywindow_22',['SetupXorgOverlayWindow',['../classpanel_1_1utils_1_1XOrgPanelHelper.html#ab3b256a1fd545164c70ccd4adf935f5e',1,'panel::utils::XOrgPanelHelper']]],
+  ['setupxorgpanelwindow_23',['SetupXorgPanelWindow',['../classpanel_1_1utils_1_1XOrgPanelHelper.html#a67c8bad1ace2571e4336c4dc68c54a1f',1,'panel::utils::XOrgPanelHelper']]]
 ];

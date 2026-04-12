@@ -1,0 +1,353 @@
+\doxysection{panel\+::backend\+::Volume\+Control Class Reference}
+\hypertarget{classpanel_1_1backend_1_1VolumeControl}{}\label{classpanel_1_1backend_1_1VolumeControl}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+Inheritance diagram for panel\+::backend\+::Volume\+Control\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpanel_1_1backend_1_1VolumeControl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a8db7ffd536a6ae1a09414996031e4aa9}\label{classpanel_1_1backend_1_1VolumeControl_a8db7ffd536a6ae1a09414996031e4aa9} 
+void {\bfseries Sinks\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a124675c3cad6942d30b971fccd213d00}\label{classpanel_1_1backend_1_1VolumeControl_a124675c3cad6942d30b971fccd213d00} 
+void {\bfseries Sources\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_afb5197d54ae60859fc2c2bf3b8fdc4dd}\label{classpanel_1_1backend_1_1VolumeControl_afb5197d54ae60859fc2c2bf3b8fdc4dd} 
+void {\bfseries Sink\+Inputs\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a1297b415b8209db6825f2281c760d999}\label{classpanel_1_1backend_1_1VolumeControl_a1297b415b8209db6825f2281c760d999} 
+void {\bfseries Source\+Outputs\+Changed} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a6aefbd8e06276aa5395c2e64aedd8713}{Volume\+Control}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor for {\ttfamily \doxylink{classpanel_1_1backend_1_1VolumeControl}{Volume\+Control}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a90842b10fd9cfe373da8b2c0d4bfd865}{\texorpdfstring{$\sim$}{\string~}\+Volume\+Control}} () override
+\begin{DoxyCompactList}\small\item\em The destructor for {\ttfamily \doxylink{classpanel_1_1backend_1_1VolumeControl}{Volume\+Control}}. \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_ac472de60918a8b39f04db0e6b056af64}{Get\+Sinks}} () const
+\begin{DoxyCompactList}\small\item\em Returns the cached list of audio sinks (output devices). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a29f9a774f2d4181b5fac01d11c57f57d}{Get\+Sources}} () const
+\begin{DoxyCompactList}\small\item\em Returns the cached list of audio sources (input devices). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_ab340974cd6309e991b4bddf58900bb16}{Get\+Sink\+Inputs}} () const
+\begin{DoxyCompactList}\small\item\em Returns the cached list of active sink inputs (application audio streams). \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a79463c5d7316f75de53c70817fc1b0e4}{Get\+Source\+Outputs}} () const
+\begin{DoxyCompactList}\small\item\em Returns the cached list of active source outputs (application capture streams). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a6117a485d2b5c3c4bba327a5415afb02}{Set\+Sink\+Volume}} (uint32\+\_\+t index, int volume\+\_\+percent)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a Pulse\+Audio sink by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_ab15067e3ff569bd1277cd207eaaa04aa}{Set\+Source\+Volume}} (uint32\+\_\+t index, int volume\+\_\+percent)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a Pulse\+Audio source by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_aa1151b68152cd2769ac76e89df3cfdfd}{Set\+Sink\+Input\+Volume}} (uint32\+\_\+t index, int volume\+\_\+percent)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a Pulse\+Audio sink input by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_af9d03c735dfaffa009d15150378b6883}{Set\+Source\+Output\+Volume}} (uint32\+\_\+t index, int volume\+\_\+percent)
+\begin{DoxyCompactList}\small\item\em Sets the volume of a Pulse\+Audio source output by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_aa361c9e9861ff8edf911de461e425428}{Set\+Sink\+Mute}} (uint32\+\_\+t index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a Pulse\+Audio sink by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a9d17c1f83036cd41b9ed5b9858df0866}{Set\+Source\+Mute}} (uint32\+\_\+t index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a Pulse\+Audio source by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a4f596895f7221c0bf71995eb0fbc5652}{Set\+Sink\+Input\+Mute}} (uint32\+\_\+t index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a Pulse\+Audio sink input by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a46ec0dbc5319ba1c65fdc38ead04847e}{Set\+Source\+Output\+Mute}} (uint32\+\_\+t index, bool muted)
+\begin{DoxyCompactList}\small\item\em Sets the mute state of a Pulse\+Audio source output by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_ac9479da7bf533e55962f24110eece274}{Set\+Default\+Sink}} (const QString \&name)
+\begin{DoxyCompactList}\small\item\em Sets the default Pulse\+Audio sink (output device) by name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl_a754c218cefdcf6e873ae4229f42daffd}{Set\+Default\+Source}} (const QString \&name)
+\begin{DoxyCompactList}\small\item\em Sets the default Pulse\+Audio source (input device) by name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a6aefbd8e06276aa5395c2e64aedd8713}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!VolumeControl@{VolumeControl}}
+\index{VolumeControl@{VolumeControl}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{VolumeControl()}{VolumeControl()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a6aefbd8e06276aa5395c2e64aedd8713} 
+panel\+::backend\+::\+Volume\+Control\+::\+Volume\+Control (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor for {\ttfamily \doxylink{classpanel_1_1backend_1_1VolumeControl}{Volume\+Control}}. 
+
+Initializes the Pulse\+Audio threaded main loop and context, sets up the state callback, and starts the PA thread. Subscribes to all sink, source, sink-\/input, source-\/output, and server events once the context reaches {\ttfamily PA\+\_\+\+CONTEXT\+\_\+\+READY}. 
+\begin{DoxyParams}{Parameters}
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a90842b10fd9cfe373da8b2c0d4bfd865}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!````~VolumeControl@{\texorpdfstring{$\sim$}{\string~}VolumeControl}}
+\index{````~VolumeControl@{\texorpdfstring{$\sim$}{\string~}VolumeControl}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}VolumeControl()}{\string~VolumeControl()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a90842b10fd9cfe373da8b2c0d4bfd865} 
+panel\+::backend\+::\+Volume\+Control\+::\texorpdfstring{$\sim$}{\string~}\+Volume\+Control (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+The destructor for {\ttfamily \doxylink{classpanel_1_1backend_1_1VolumeControl}{Volume\+Control}}. 
+
+Safely disconnects the Pulse\+Audio context, removes callbacks, stops the PA main loop thread, and frees all PA resources. \begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_ab340974cd6309e991b4bddf58900bb16}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!GetSinkInputs@{GetSinkInputs}}
+\index{GetSinkInputs@{GetSinkInputs}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{GetSinkInputs()}{GetSinkInputs()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_ab340974cd6309e991b4bddf58900bb16} 
+QVariant\+List panel\+::backend\+::\+Volume\+Control\+::\+Get\+Sink\+Inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the cached list of active sink inputs (application audio streams). 
+
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of active sink input streams. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_ac472de60918a8b39f04db0e6b056af64}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!GetSinks@{GetSinks}}
+\index{GetSinks@{GetSinks}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{GetSinks()}{GetSinks()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_ac472de60918a8b39f04db0e6b056af64} 
+QVariant\+List panel\+::backend\+::\+Volume\+Control\+::\+Get\+Sinks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the cached list of audio sinks (output devices). 
+
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of available audio sinks. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a79463c5d7316f75de53c70817fc1b0e4}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!GetSourceOutputs@{GetSourceOutputs}}
+\index{GetSourceOutputs@{GetSourceOutputs}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{GetSourceOutputs()}{GetSourceOutputs()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a79463c5d7316f75de53c70817fc1b0e4} 
+QVariant\+List panel\+::backend\+::\+Volume\+Control\+::\+Get\+Source\+Outputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the cached list of active source outputs (application capture streams). 
+
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of active source output streams. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a29f9a774f2d4181b5fac01d11c57f57d}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!GetSources@{GetSources}}
+\index{GetSources@{GetSources}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{GetSources()}{GetSources()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a29f9a774f2d4181b5fac01d11c57f57d} 
+QVariant\+List panel\+::backend\+::\+Volume\+Control\+::\+Get\+Sources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the cached list of audio sources (input devices). 
+
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of available audio sources. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_ac9479da7bf533e55962f24110eece274}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetDefaultSink@{SetDefaultSink}}
+\index{SetDefaultSink@{SetDefaultSink}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetDefaultSink()}{SetDefaultSink()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_ac9479da7bf533e55962f24110eece274} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Default\+Sink (\begin{DoxyParamCaption}\item[{const QString \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the default Pulse\+Audio sink (output device) by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & (const QString\&) The Pulse\+Audio sink name to set as default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a754c218cefdcf6e873ae4229f42daffd}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetDefaultSource@{SetDefaultSource}}
+\index{SetDefaultSource@{SetDefaultSource}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetDefaultSource()}{SetDefaultSource()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a754c218cefdcf6e873ae4229f42daffd} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Default\+Source (\begin{DoxyParamCaption}\item[{const QString \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the default Pulse\+Audio source (input device) by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & (const QString\&) The Pulse\+Audio source name to set as default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a4f596895f7221c0bf71995eb0fbc5652}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSinkInputMute@{SetSinkInputMute}}
+\index{SetSinkInputMute@{SetSinkInputMute}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSinkInputMute()}{SetSinkInputMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a4f596895f7221c0bf71995eb0fbc5652} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Sink\+Input\+Mute (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a Pulse\+Audio sink input by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The sink input index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_aa1151b68152cd2769ac76e89df3cfdfd}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSinkInputVolume@{SetSinkInputVolume}}
+\index{SetSinkInputVolume@{SetSinkInputVolume}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSinkInputVolume()}{SetSinkInputVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_aa1151b68152cd2769ac76e89df3cfdfd} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Sink\+Input\+Volume (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{int}]{volume\+\_\+percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a Pulse\+Audio sink input by index. 
+
+Looks up the channel count from the cached sink-\/input list, then issues a {\ttfamily pa\+\_\+context\+\_\+set\+\_\+sink\+\_\+input\+\_\+volume} operation on the PA thread. 
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The sink input index. \\
+\hline
+{\em volume\+\_\+percent} & (int) The desired volume in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_aa361c9e9861ff8edf911de461e425428}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSinkMute@{SetSinkMute}}
+\index{SetSinkMute@{SetSinkMute}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSinkMute()}{SetSinkMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_aa361c9e9861ff8edf911de461e425428} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Sink\+Mute (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a Pulse\+Audio sink by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The sink index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a6117a485d2b5c3c4bba327a5415afb02}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSinkVolume@{SetSinkVolume}}
+\index{SetSinkVolume@{SetSinkVolume}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSinkVolume()}{SetSinkVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a6117a485d2b5c3c4bba327a5415afb02} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Sink\+Volume (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{int}]{volume\+\_\+percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a Pulse\+Audio sink by index. 
+
+Looks up the channel count from the cached sink list, then issues a {\ttfamily pa\+\_\+context\+\_\+set\+\_\+sink\+\_\+volume\+\_\+by\+\_\+index} operation on the PA thread. 
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The sink index. \\
+\hline
+{\em volume\+\_\+percent} & (int) The desired volume in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a9d17c1f83036cd41b9ed5b9858df0866}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSourceMute@{SetSourceMute}}
+\index{SetSourceMute@{SetSourceMute}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSourceMute()}{SetSourceMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a9d17c1f83036cd41b9ed5b9858df0866} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Source\+Mute (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a Pulse\+Audio source by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The source index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_a46ec0dbc5319ba1c65fdc38ead04847e}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSourceOutputMute@{SetSourceOutputMute}}
+\index{SetSourceOutputMute@{SetSourceOutputMute}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSourceOutputMute()}{SetSourceOutputMute()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_a46ec0dbc5319ba1c65fdc38ead04847e} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Source\+Output\+Mute (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{muted}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mute state of a Pulse\+Audio source output by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The source output index. \\
+\hline
+{\em muted} & (bool) {\ttfamily true} to mute, {\ttfamily false} to unmute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_af9d03c735dfaffa009d15150378b6883}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSourceOutputVolume@{SetSourceOutputVolume}}
+\index{SetSourceOutputVolume@{SetSourceOutputVolume}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSourceOutputVolume()}{SetSourceOutputVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_af9d03c735dfaffa009d15150378b6883} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Source\+Output\+Volume (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{int}]{volume\+\_\+percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a Pulse\+Audio source output by index. 
+
+Looks up the channel count from the cached source-\/output list, then issues a {\ttfamily pa\+\_\+context\+\_\+set\+\_\+source\+\_\+output\+\_\+volume} operation on the PA thread. 
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The source output index. \\
+\hline
+{\em volume\+\_\+percent} & (int) The desired volume in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1backend_1_1VolumeControl_ab15067e3ff569bd1277cd207eaaa04aa}\index{panel::backend::VolumeControl@{panel::backend::VolumeControl}!SetSourceVolume@{SetSourceVolume}}
+\index{SetSourceVolume@{SetSourceVolume}!panel::backend::VolumeControl@{panel::backend::VolumeControl}}
+\doxysubsubsection{\texorpdfstring{SetSourceVolume()}{SetSourceVolume()}}
+{\footnotesize\ttfamily \label{classpanel_1_1backend_1_1VolumeControl_ab15067e3ff569bd1277cd207eaaa04aa} 
+void panel\+::backend\+::\+Volume\+Control\+::\+Set\+Source\+Volume (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{int}]{volume\+\_\+percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the volume of a Pulse\+Audio source by index. 
+
+Looks up the channel count from the cached source list, then issues a {\ttfamily pa\+\_\+context\+\_\+set\+\_\+source\+\_\+volume\+\_\+by\+\_\+index} operation on the PA thread. 
+\begin{DoxyParams}{Parameters}
+{\em index} & (uint32\+\_\+t) The source index. \\
+\hline
+{\em volume\+\_\+percent} & (int) The desired volume in percent (0–100). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/info\+\_\+server/volume\+\_\+control/volume\+\_\+control.\+h\item 
+src/info\+\_\+server/volume\+\_\+control/volume\+\_\+control.\+cc\end{DoxyCompactItemize}

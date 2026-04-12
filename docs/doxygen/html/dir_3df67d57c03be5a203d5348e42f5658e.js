@@ -8,5 +8,6 @@ var dir_3df67d57c03be5a203d5348e42f5658e =
     [ "session_handler", "dir_cc4e49ef0b781d883c5c23e18bc372a8.html", "dir_cc4e49ef0b781d883c5c23e18bc372a8" ],
     [ "tray_handler", "dir_4a0b417c00a4e2fff4cc00707660744b.html", "dir_4a0b417c00a4e2fff4cc00707660744b" ],
     [ "user_info", "dir_8f8868622a7fd22b4f598790e4eb99ae.html", "dir_8f8868622a7fd22b4f598790e4eb99ae" ],
+    [ "volume_control", "dir_c10eee7f16e4502eb102314e81d50995.html", "dir_c10eee7f16e4502eb102314e81d50995" ],
     [ "wlan_info", "dir_9954b4b5741561761f41a455e53c28c8.html", "dir_9954b4b5741561761f41a455e53c28c8" ]
 ];
