@@ -10,6 +10,7 @@
         <file>translations/calendar.locale</file>
         <file>translations/app_drawer.locale</file>
         <file>translations/config_panel.locale</file>
+        <file>translations/volume_control.locale</file>
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
@@ -39,5 +40,11 @@
         <file>interfaces/config_panel/ConfigPanelSidePaneItem.qml</file>
         <file>interfaces/config_panel/ConfigPanelSystemTrayPage.qml</file>
         <file>interfaces/config_panel/ConfigPanelWindow.qml</file>
+        <file>interfaces/volume_control/qmldir</file>
+        <file>interfaces/volume_control/VolumeIndicator.qml</file>
+        <file>interfaces/volume_control/VolumeFlyout.qml</file>
+        <file>interfaces/volume_control/VolumePage.qml</file>
+        <file>interfaces/volume_control/StreamPage.qml</file>
+        <file>interfaces/volume_control/VolumeSlider.qml</file>
     </qresource>
 </RCC>

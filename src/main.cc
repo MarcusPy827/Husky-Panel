@@ -48,6 +48,7 @@
 #include "src/info_server/tray_handler/tray_def.h"
 #include "src/components/system_tray/system_tray_handler.h"
 #include "src/components/system_tray/tray_icon_image_handler.h"
+#include "src/components/volume_control/volume_control_handler.h"
 #include "src/theme_loader/quick_theme_provider.h"
 #include "src/translation_loader/translation_loader.h"
 #include "src/utils/misc/misc.h"
@@ -62,6 +63,18 @@
 #else
 #include <LayerShellQt/window.h>
 #endif
+
+/**
+ * @brief Registers all backend and frontend context objects into the QML engine.
+ *
+ * @details Instantiates and injects all translation loaders, info wrappers,
+ *          component handlers, and utility objects as named context properties
+ *          accessible from QML.
+ * @param application (QGuiApplication&) The application instance used as
+ *        parent for long-lived objects.
+ * @param target (QQmlApplicationEngine&) The engine to inject context into.
+ * @return void.
+ */
 
 void InjectEngineContext(QGuiApplication& application,
     QQmlApplicationEngine& target) {
@@ -107,6 +120,15 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("ConfigPanelTranslator",
     translation_loader_config_panel);
   LOG(INFO) << absl::StrCat("Successfully injected config panel translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for volume control...");
+  auto* translation_loader_volume_control =
+    new panel::loader::TranslationLoader(
+      ":/translations/translations/volume_control.locale",
+      panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("VolumeControlTranslator",
+    translation_loader_volume_control);
+  LOG(INFO) << absl::StrCat("Successfully injected volume control translator.");
   LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
     "injected!");
 
@@ -168,7 +190,23 @@ void InjectEngineContext(QGuiApplication& application,
   target.addImageProvider("trayicon",
     new panel::frontend::TrayIconImageHandler(tray_handler));
   LOG(INFO) << absl::StrCat("Successfully injected system tray handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing volume control handler...");
+  auto* volume_handler = new panel::frontend::VolumeControlHandler(
+    &application);
+  target.rootContext()->setContextProperty("VolumeHandler", volume_handler);
+  LOG(INFO) << absl::StrCat("Successfully injected volume control handler!!");
 }
+
+
+/**
+ * @brief Registers all custom QML image providers into the engine.
+ *
+ * @details Currently registers the XDG icon handler (@c "icon") and the user
+ *          avatar handler (@c "useravatar").
+ * @param target (QQmlApplicationEngine&) The engine to add image providers to.
+ * @return void.
+ */
 
 void InjectImageProviders(QQmlApplicationEngine& target) {
   LOG(INFO) << absl::StrCat("Injecting image handlers into QML engine...");
@@ -184,6 +222,23 @@ void InjectImageProviders(QQmlApplicationEngine& target) {
 
   LOG(INFO) << absl::StrCat("Successfully injected all image hendlers!!");
 }
+
+
+/**
+ * @brief Loads a Qt @c QTranslator for the current system locale.
+ *
+ * @details This translation path is being deprecated in favour of
+ *          @c TranslationLoader. Iterates the system UI language list and
+ *          attempts to load the first matching @c HuskyPanel_<locale> file.
+ * @param application (QGuiApplication&) The application instance to install
+ *        the translator into.
+ * @note The method is depreciated, and do NOT add any new translations to the
+ *       @c .ts file. For any new translations, please use the
+ *       @c TranslationLoader class instead.
+ * @deprecated So do NOT add any new translations to the @c .ts file.
+ * @see The new @c TranslationLoader class.
+ * @return void.
+ */
 
 void InitializedDepreciatedTranslator(QGuiApplication& application) {
   LOG(INFO) << absl::StrCat("Loading locales via QTranslator...");
@@ -211,9 +266,32 @@ void InitializedDepreciatedTranslator(QGuiApplication& application) {
   LOG(INFO) << absl::StrCat("Done loading translations via QTranslator.");
 }
 
+
+/**
+ * @brief Pre-loads the Material Symbols icon font.
+ *
+ * @see The existing @c panel::loader::FontLoader class.
+ * @return void.
+ */
+
 void LoadIconFonts() {
+  panel::loader::FontLoader::GetOutlinedMaterialSymbolFont();
+  panel::loader::FontLoader::GetSharpMaterialSymbolFont();
   panel::loader::FontLoader::GetRoundedMaterialSymbolFont();
 }
+
+
+/**
+ * @brief Application entry point.
+ *
+ * @details Initializes logging, registers Qt meta-types, sets up the QML
+ *          engine with all context properties and image providers, loads the
+ *          main QML file, and configures the panel window for the current
+ *          display session (Wayland layer-shell or X11/EWMH DOCK).
+ * @param argc (int) Argument count.
+ * @param argv (char**) Argument vector.
+ * @return (int) Exit code.
+ */
 
 int main(int argc, char *argv[]) {
   // Initialize logging

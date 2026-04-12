@@ -47,6 +47,8 @@ pkg_check_modules(WaylandClient
 
 pkg_check_modules(XCB xcb IMPORTED_TARGET)
 
+pkg_check_modules(PULSE REQUIRED libpulse IMPORTED_TARGET)
+
 find_package(QT 
   NAMES Qt6 
   REQUIRED COMPONENTS 
@@ -175,6 +177,8 @@ set(BACKEND_SOURCES
   src/info_server/power_options/power_options.cc
   src/info_server/session_handler/session_handler.h
   src/info_server/session_handler/session_handler.cc
+  src/info_server/volume_control/volume_control.h
+  src/info_server/volume_control/volume_control.cc
 )
 
 set(FRONTEND_SOURCES
@@ -201,6 +205,8 @@ set(FRONTEND_SOURCES
   src/components/calendar/calendar_style.h
   src/components/calendar/calendar.h
   src/components/calendar/calendar.cc
+  src/components/volume_control/volume_control_handler.h
+  src/components/volume_control/volume_control_handler.cc
 )
 
 set(CONFIG_LOADER_SOURCES
@@ -337,6 +343,7 @@ target_link_libraries(HuskyPanel
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service
+  PkgConfig::PULSE
   $<$<BOOL:${XCB_FOUND}>:PkgConfig::XCB>
 )
 

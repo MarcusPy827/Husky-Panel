@@ -29,6 +29,7 @@ import "config_panel"
 import "krunner_btn"
 import "wlan_indicator"
 import "system_tray"
+import "volume_control"
 
 Window {
   id: root
@@ -41,6 +42,7 @@ Window {
   readonly property int drawerW: 960
   readonly property int drawerH: 648
   readonly property int calendarFlyoutW: 320
+  readonly property int volumeFlyoutW: 320
 
   property bool appDrawerOpen: false
   property bool drawerExpanded: false
@@ -48,6 +50,8 @@ Window {
   property bool calendarFlyoutExpanded: false
   property bool trayOverflowOpen: false
   property bool trayOverflowExpanded: false
+  property bool volumeFlyoutOpen: false
+  property bool volumeFlyoutExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -69,6 +73,7 @@ Window {
     if (calendarFlyoutOpen) {
       appDrawerOpen = false
       trayOverflowOpen = false
+      volumeFlyoutOpen = false
       calendarFlyoutExpanded = true
       LayerShellHelper.setFullMask(root)
       calendarFlyout.open()
@@ -81,6 +86,7 @@ Window {
   onTrayOverflowOpenChanged: {
     if (trayOverflowOpen) {
       calendarFlyoutOpen = false
+      volumeFlyoutOpen = false
       trayOverflowExpanded = true
       LayerShellHelper.setFullMask(root)
       trayOverflowFlyout.open()
@@ -90,29 +96,49 @@ Window {
     }
   }
 
+  onVolumeFlyoutOpenChanged: {
+    if (volumeFlyoutOpen) {
+      appDrawerOpen = false
+      calendarFlyoutOpen = false
+      trayOverflowOpen = false
+      volumeFlyoutExpanded = true
+      LayerShellHelper.setFullMask(root)
+      volumeFlyout.open()
+    } else {
+      volumeFlyout.close()
+      // volumeFlyoutExpanded → false is set by onCloseAnimationFinished below
+    }
+  }
+
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded && !volumeFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded && !volumeFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onTrayOverflowExpandedChanged: {
-    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded)
+    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded && !volumeFlyoutExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onVolumeFlyoutExpandedChanged: {
+    if (!volumeFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.trayOverflowOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.trayOverflowOpen || root.volumeFlyoutOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
       root.trayOverflowOpen = false
+      root.volumeFlyoutOpen = false
     }
   }
 
@@ -461,6 +487,7 @@ Window {
         }
 
         RowLayout {
+          id: rightBarGroup
           spacing: 4
           Layout.alignment: Qt.AlignVCenter
 
@@ -468,6 +495,13 @@ Window {
           SystemTray {
             onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
           }
+
+          // Volume indicator
+          VolumeIndicator {
+            id: volumeIndicatorBtn
+            onClicked: root.volumeFlyoutOpen = !root.volumeFlyoutOpen
+          }
+
 
           // WLAN indicator
           WLANIndicator {}
@@ -531,6 +565,26 @@ Window {
       id: trayOverflowFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.trayOverflowExpanded = false
+    }
+  }
+
+  // Volume flyout
+  Item {
+    x: {
+      var _track = rightBarGroup.x + volumeIndicatorBtn.x + root.width
+      var btnRight = volumeIndicatorBtn.mapToItem(baseLayer, volumeIndicatorBtn.width, 0).x
+      return Math.max(8, Math.min(root.width - root.volumeFlyoutW - 8,
+                                  btnRight - root.volumeFlyoutW))
+    }
+    y: root.barHeight + root.drawerTopMargin
+    width: root.volumeFlyoutW
+    height: volumeFlyout.implicitHeight
+    visible: root.volumeFlyoutExpanded
+
+    VolumeFlyout {
+      id: volumeFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.volumeFlyoutExpanded = false
     }
   }
 

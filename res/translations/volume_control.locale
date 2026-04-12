@@ -1,0 +1,47 @@
+[VolumeControl]
+en_us = "Volume Control"
+zh_cn = "音量控制"
+
+[NoDevice]
+en_us = "No device"
+zh_cn = "无可用设备"
+
+[ControlPerDevice]
+en_us = "Control per Device"
+zh_cn = "设备设定"
+
+[Output]
+en_us = "Output"
+zh_cn = "输出"
+
+[Input]
+en_us = "Input"
+zh_cn = "输入"
+
+[Stream]
+en_us = "Streams"
+zh_cn = "应用程序"
+
+[OutputDevice]
+en_us = "Output Device"
+zh_cn = "输出设备"
+
+[InputDevice]
+en_us = "Input Device"
+zh_cn = "输入设备"
+
+[Playback]
+en_us = "Playback"
+zh_cn = "正在播放"
+
+[Recording]
+en_us = "Recording"
+zh_cn = "正在录制"
+
+[NoActivePlayback]
+en_us = "No active playback"
+zh_cn = "无正在播放的音频的应用程序"
+
+[NoActiveRecording]
+en_us = "No active recording"
+zh_cn = "无正在录制的音频的应用程序"
