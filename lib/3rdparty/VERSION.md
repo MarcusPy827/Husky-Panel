@@ -79,3 +79,12 @@
 * **Check out date · 拉取日期**: Mar 6<sup>th</sup>, 2026.
 * **License · 许可证**: BSD 3-Clause License.
 * **Note · 备注**:  None | 无
+
+## PAUVControl-Qt
+* **Author · 原作者**: lxqt
+* **Repository · 原储存库**: https://github.com/lxqt/pavucontrol-qt.git
+* **Commit ID**: `5b280a4e45453560ea2ea839a9a3db0069c57ce8`.
+* **Commit date · 提交日期**: Nov 5<sup>th</sup>, 2025.
+* **Check out date · 拉取日期**: Apr 12<sup>nd</sup>, 2026.
+* **License · 许可证**: GNU LIBRARY GENERAL PUBLIC LICENSE Version 2.
+* **Note · 备注**:  None | 无

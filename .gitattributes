@@ -1,2 +1,5 @@
 # Ignore 3rd party libraries
 lib/3rdparty/* linguist-vendored
+
+# Some of my own notes
+private/*
