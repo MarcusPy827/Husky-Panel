@@ -1,5 +1,11 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/volume_control_0411
+  * Implemented a volume control panel.
+  * 新增了音量控制面板
+  * Added doxygen comment for `main.cc`.
+  * 为`main.cc`新增了doxygen注释
+
 * marcus/exit_panel_0409
   * Added an exit panel button.
   * 新增了退出按钮
