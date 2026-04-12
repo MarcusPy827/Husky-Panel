@@ -1,0 +1,349 @@
+.TH "panel::backend::VolumeControl" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::VolumeControl
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBSinksChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSourcesChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSinkInputsChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSourceOutputsChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVolumeControl\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor for \fR\fBVolumeControl\fP\fP\&. "
+.ti -1c
+.RI "\fB~VolumeControl\fP () override"
+.br
+.RI "The destructor for \fR\fBVolumeControl\fP\fP\&. "
+.ti -1c
+.RI "QVariantList \fBGetSinks\fP () const"
+.br
+.RI "Returns the cached list of audio sinks (output devices)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSources\fP () const"
+.br
+.RI "Returns the cached list of audio sources (input devices)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSinkInputs\fP () const"
+.br
+.RI "Returns the cached list of active sink inputs (application audio streams)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSourceOutputs\fP () const"
+.br
+.RI "Returns the cached list of active source outputs (application capture streams)\&. "
+.ti -1c
+.RI "void \fBSetSinkVolume\fP (uint32_t index, int volume_percent)"
+.br
+.RI "Sets the volume of a PulseAudio sink by index\&. "
+.ti -1c
+.RI "void \fBSetSourceVolume\fP (uint32_t index, int volume_percent)"
+.br
+.RI "Sets the volume of a PulseAudio source by index\&. "
+.ti -1c
+.RI "void \fBSetSinkInputVolume\fP (uint32_t index, int volume_percent)"
+.br
+.RI "Sets the volume of a PulseAudio sink input by index\&. "
+.ti -1c
+.RI "void \fBSetSourceOutputVolume\fP (uint32_t index, int volume_percent)"
+.br
+.RI "Sets the volume of a PulseAudio source output by index\&. "
+.ti -1c
+.RI "void \fBSetSinkMute\fP (uint32_t index, bool muted)"
+.br
+.RI "Sets the mute state of a PulseAudio sink by index\&. "
+.ti -1c
+.RI "void \fBSetSourceMute\fP (uint32_t index, bool muted)"
+.br
+.RI "Sets the mute state of a PulseAudio source by index\&. "
+.ti -1c
+.RI "void \fBSetSinkInputMute\fP (uint32_t index, bool muted)"
+.br
+.RI "Sets the mute state of a PulseAudio sink input by index\&. "
+.ti -1c
+.RI "void \fBSetSourceOutputMute\fP (uint32_t index, bool muted)"
+.br
+.RI "Sets the mute state of a PulseAudio source output by index\&. "
+.ti -1c
+.RI "void \fBSetDefaultSink\fP (const QString &name)"
+.br
+.RI "Sets the default PulseAudio sink (output device) by name\&. "
+.ti -1c
+.RI "void \fBSetDefaultSource\fP (const QString &name)"
+.br
+.RI "Sets the default PulseAudio source (input device) by name\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::VolumeControl::VolumeControl (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor for \fR\fBVolumeControl\fP\fP\&. Initializes the PulseAudio threaded main loop and context, sets up the state callback, and starts the PA thread\&. Subscribes to all sink, source, sink-input, source-output, and server events once the context reaches \fRPA_CONTEXT_READY\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "panel::backend::VolumeControl::~VolumeControl ()\fR [override]\fP"
+
+.PP
+The destructor for \fR\fBVolumeControl\fP\fP\&. Safely disconnects the PulseAudio context, removes callbacks, stops the PA main loop thread, and frees all PA resources\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QVariantList panel::backend::VolumeControl::GetSinkInputs () const"
+
+.PP
+Returns the cached list of active sink inputs (application audio streams)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of active sink input streams\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::backend::VolumeControl::GetSinks () const"
+
+.PP
+Returns the cached list of audio sinks (output devices)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of available audio sinks\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::backend::VolumeControl::GetSourceOutputs () const"
+
+.PP
+Returns the cached list of active source outputs (application capture streams)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of active source output streams\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::backend::VolumeControl::GetSources () const"
+
+.PP
+Returns the cached list of audio sources (input devices)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of available audio sources\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetDefaultSink (const QString & name)"
+
+.PP
+Sets the default PulseAudio sink (output device) by name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP (const QString&) The PulseAudio sink name to set as default\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetDefaultSource (const QString & name)"
+
+.PP
+Sets the default PulseAudio source (input device) by name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP (const QString&) The PulseAudio source name to set as default\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSinkInputMute (uint32_t index, bool muted)"
+
+.PP
+Sets the mute state of a PulseAudio sink input by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The sink input index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSinkInputVolume (uint32_t index, int volume_percent)"
+
+.PP
+Sets the volume of a PulseAudio sink input by index\&. Looks up the channel count from the cached sink-input list, then issues a \fRpa_context_set_sink_input_volume\fP operation on the PA thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The sink input index\&. 
+.br
+\fIvolume_percent\fP (int) The desired volume in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSinkMute (uint32_t index, bool muted)"
+
+.PP
+Sets the mute state of a PulseAudio sink by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The sink index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSinkVolume (uint32_t index, int volume_percent)"
+
+.PP
+Sets the volume of a PulseAudio sink by index\&. Looks up the channel count from the cached sink list, then issues a \fRpa_context_set_sink_volume_by_index\fP operation on the PA thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The sink index\&. 
+.br
+\fIvolume_percent\fP (int) The desired volume in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSourceMute (uint32_t index, bool muted)"
+
+.PP
+Sets the mute state of a PulseAudio source by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The source index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSourceOutputMute (uint32_t index, bool muted)"
+
+.PP
+Sets the mute state of a PulseAudio source output by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The source output index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSourceOutputVolume (uint32_t index, int volume_percent)"
+
+.PP
+Sets the volume of a PulseAudio source output by index\&. Looks up the channel count from the cached source-output list, then issues a \fRpa_context_set_source_output_volume\fP operation on the PA thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The source output index\&. 
+.br
+\fIvolume_percent\fP (int) The desired volume in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::VolumeControl::SetSourceVolume (uint32_t index, int volume_percent)"
+
+.PP
+Sets the volume of a PulseAudio source by index\&. Looks up the channel count from the cached source list, then issues a \fRpa_context_set_source_volume_by_index\fP operation on the PA thread\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (uint32_t) The source index\&. 
+.br
+\fIvolume_percent\fP (int) The desired volume in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

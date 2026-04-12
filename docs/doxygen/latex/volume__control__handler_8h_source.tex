@@ -1,0 +1,94 @@
+\doxysection{volume\+\_\+control\+\_\+handler.\+h}
+\hypertarget{volume__control__handler_8h_source}{}\label{volume__control__handler_8h_source}\index{src/components/volume\_control/volume\_control\_handler.h@{src/components/volume\_control/volume\_control\_handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_COMPONENTS\_VOLUME\_CONTROL\_VOLUME\_CONTROL\_HANDLER\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_COMPONENTS\_VOLUME\_CONTROL\_VOLUME\_CONTROL\_HANDLER\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QVariantList>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}src/info\_server/volume\_control/volume\_control.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }frontend\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1ce17f2a3bc3e9c2c470347000b2637c}{VolumeControlHandler}}\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00031\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ Q\_PROPERTY(QVariantList\ sinks}
+\DoxyCodeLine{00034\ \ \ \ \ READ\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1fd3cc73c5f7f0ac66755de3dfb50816}{GetSinks}}}
+\DoxyCodeLine{00035\ \ \ \ \ NOTIFY\ SinksChanged)}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ Q\_PROPERTY(QVariantList\ sources}
+\DoxyCodeLine{00038\ \ \ \ \ READ\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_acf72f8b0d4882a2315db442b52d714b1}{GetSources}}}
+\DoxyCodeLine{00039\ \ \ \ \ NOTIFY\ SourcesChanged)}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ Q\_PROPERTY(QVariantList\ sinkInputs}
+\DoxyCodeLine{00042\ \ \ \ \ READ\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a7fb5de17d474e88d64711f0c87acca7f}{GetSinkInputs}}}
+\DoxyCodeLine{00043\ \ \ \ \ NOTIFY\ SinkInputsChanged)}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ Q\_PROPERTY(QVariantList\ sourceOutputs}
+\DoxyCodeLine{00046\ \ \ \ \ READ\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_ab3f0d2fe972a22cfd643cea2d3605508}{GetSourceOutputs}}}
+\DoxyCodeLine{00047\ \ \ \ \ NOTIFY\ SourceOutputsChanged)}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ Q\_PROPERTY(QString\ volumeIcon}
+\DoxyCodeLine{00050\ \ \ \ \ READ\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_aaef677404578478c943ca43ab32750b6}{GetVolumeIcon}}}
+\DoxyCodeLine{00051\ \ \ \ \ NOTIFY\ SinksChanged)}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ backend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1ce17f2a3bc3e9c2c470347000b2637c}{VolumeControlHandler}}(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a1fd3cc73c5f7f0ac66755de3dfb50816}{GetSinks}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_acf72f8b0d4882a2315db442b52d714b1}{GetSources}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a7fb5de17d474e88d64711f0c87acca7f}{GetSinkInputs}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_ab3f0d2fe972a22cfd643cea2d3605508}{GetSourceOutputs}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ \ \ QString\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_aaef677404578478c943ca43ab32750b6}{GetVolumeIcon}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ For\ frontend\ usage\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00064\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a314f24d688b162f72b146640651c64de}{setSinkVolume}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ volume);}
+\DoxyCodeLine{00065\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a8b7f09b4f550efa336a8e393c921ec57}{setSourceVolume}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ volume);}
+\DoxyCodeLine{00066\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a289f03455c1f77dd42e14e27f6e6ad90}{setSinkInputVolume}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ volume);}
+\DoxyCodeLine{00067\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_ab4646270ffa98e20b6631d9ee89b1484}{setSourceOutputVolume}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ volume);}
+\DoxyCodeLine{00068\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_aba429a6f780603b726ab1b248abd8361}{setSinkMute}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{bool}\ muted);}
+\DoxyCodeLine{00069\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a7f487c3ca62c349f281687e0be388255}{setSourceMute}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{bool}\ muted);}
+\DoxyCodeLine{00070\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a385aa8fd9ec0f057e95390c84ee7f4c9}{setSinkInputMute}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{bool}\ muted);}
+\DoxyCodeLine{00071\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a82b0ac1ff8bbb4e5a5f53a5339c32645}{setSourceOutputMute}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{bool}\ muted);}
+\DoxyCodeLine{00072\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_acbef8828f5f221615b38cb6025381862}{setDefaultSink}}(\textcolor{keyword}{const}\ QString\&\ name);}
+\DoxyCodeLine{00073\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1frontend_1_1VolumeControlHandler_a6c67a47c487451e9420d2ab99afd19ac}{setDefaultSource}}(\textcolor{keyword}{const}\ QString\&\ name);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classpanel_1_1backend_1_1VolumeControl}{backend::VolumeControl}}*\ volume\_control\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ signals:}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ SinksChanged();}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ SourcesChanged();}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ SinkInputsChanged();}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ SourceOutputsChanged();}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \}\ \ \textcolor{comment}{//\ namespace\ frontend}}
+\DoxyCodeLine{00086\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_COMPONENTS\_VOLUME\_CONTROL\_VOLUME\_CONTROL\_HANDLER\_H\_}}
+
+\end{DoxyCode}

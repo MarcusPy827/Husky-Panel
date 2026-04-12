@@ -1,0 +1,393 @@
+.TH "panel::frontend::VolumeControlHandler" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::frontend::VolumeControlHandler
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBSinksChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSourcesChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSinkInputsChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBSourceOutputsChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVolumeControlHandler\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor for \fR\fBVolumeControlHandler\fP\fP\&. "
+.ti -1c
+.RI "QVariantList \fBGetSinks\fP () const"
+.br
+.RI "Gets the list of available audio sinks (output devices)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSources\fP () const"
+.br
+.RI "Gets the list of available audio sources (input devices)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSinkInputs\fP () const"
+.br
+.RI "Gets the list of active sink inputs (application audio streams)\&. "
+.ti -1c
+.RI "QVariantList \fBGetSourceOutputs\fP () const"
+.br
+.RI "Gets the list of active source outputs (application capture streams)\&. "
+.ti -1c
+.RI "QString \fBGetVolumeIcon\fP () const"
+.br
+.RI "Returns the material icon name reflecting the state of the default audio output sink\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSinkVolume\fP (int index, int volume)"
+.br
+.RI "Sets the volume of a sink (output device) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSourceVolume\fP (int index, int volume)"
+.br
+.RI "Sets the volume of a source (input device) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSinkInputVolume\fP (int index, int volume)"
+.br
+.RI "Sets the volume of a sink input (application output stream) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSourceOutputVolume\fP (int index, int volume)"
+.br
+.RI "Sets the volume of a source output (application capture stream) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSinkMute\fP (int index, bool muted)"
+.br
+.RI "Sets the mute state of a sink (output device) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSourceMute\fP (int index, bool muted)"
+.br
+.RI "Sets the mute state of a source (input device) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSinkInputMute\fP (int index, bool muted)"
+.br
+.RI "Sets the mute state of a sink input (application output stream) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetSourceOutputMute\fP (int index, bool muted)"
+.br
+.RI "Sets the mute state of a source output (application capture stream) by index\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetDefaultSink\fP (const QString &name)"
+.br
+.RI "Sets the default audio sink (output device) by name\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetDefaultSource\fP (const QString &name)"
+.br
+.RI "Sets the default audio source (input device) by name\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "QVariantList \fBsinks\fP"
+.br
+.ti -1c
+.RI "QVariantList \fBsources\fP"
+.br
+.ti -1c
+.RI "QVariantList \fBsinkInputs\fP"
+.br
+.ti -1c
+.RI "QVariantList \fBsourceOutputs\fP"
+.br
+.ti -1c
+.RI "QString \fBvolumeIcon\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::frontend::VolumeControlHandler::VolumeControlHandler (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor for \fR\fBVolumeControlHandler\fP\fP\&. Creates the underlying \fR\fBbackend::VolumeControl\fP\fP instance, connects the signals needed (including sinks/sources/sink inputs/source outputs) to the corresponding signals of the handler\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QVariantList panel::frontend::VolumeControlHandler::GetSinkInputs () const"
+
+.PP
+Gets the list of active sink inputs (application audio streams)\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBvolume_control\&.h\fP\fP for the function \fRVolumeControl::GetSinkInputs()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of active sink input streams\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::frontend::VolumeControlHandler::GetSinks () const"
+
+.PP
+Gets the list of available audio sinks (output devices)\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBvolume_control\&.h\fP\fP for the function \fRVolumeControl::GetSinks()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of available audio sinks\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::frontend::VolumeControlHandler::GetSourceOutputs () const"
+
+.PP
+Gets the list of active source outputs (application capture streams)\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBvolume_control\&.h\fP\fP for the function \fRVolumeControl::GetSourceOutputs()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of active source output streams\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::frontend::VolumeControlHandler::GetSources () const"
+
+.PP
+Gets the list of available audio sources (input devices)\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBvolume_control\&.h\fP\fP for the function \fRVolumeControl::GetSources()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of available audio sources\&. 
+.RE
+.PP
+
+.SS "QString panel::frontend::VolumeControlHandler::GetVolumeIcon () const"
+
+.PP
+Returns the material icon name reflecting the state of the default audio output sink\&. 
+.PP
+\fBNote\fP
+.RS 4
+Icon mapping reflects the active (default) output device: muted → \fRvolume_mute\fP 0% → \fRvolume_off\fP 1 – 50% → \fRvolume_down\fP 51 – 100% → \fRvolume_up\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) One of: volume_mute, volume_off, volume_down, volume_up\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setDefaultSink (const QString & name)"
+
+.PP
+Sets the default audio sink (output device) by name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP (const QString&) The PulseAudio sink name to set as default\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setDefaultSource (const QString & name)"
+
+.PP
+Sets the default audio source (input device) by name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP (const QString&) The PulseAudio source name to set as default\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSinkInputMute (int index, bool muted)"
+
+.PP
+Sets the mute state of a sink input (application output stream) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The sink input index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSinkInputVolume (int index, int volume)"
+
+.PP
+Sets the volume of a sink input (application output stream) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The sink input index\&. 
+.br
+\fIvolume\fP (int) The desired volume level in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSinkMute (int index, bool muted)"
+
+.PP
+Sets the mute state of a sink (output device) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The sink index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSinkVolume (int index, int volume)"
+
+.PP
+Sets the volume of a sink (output device) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The sink index\&. 
+.br
+\fIvolume\fP (int) The desired volume level in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSourceMute (int index, bool muted)"
+
+.PP
+Sets the mute state of a source (input device) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The source index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSourceOutputMute (int index, bool muted)"
+
+.PP
+Sets the mute state of a source output (application capture stream) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The source output index\&. 
+.br
+\fImuted\fP (bool) \fRtrue\fP to mute, \fRfalse\fP to unmute\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSourceOutputVolume (int index, int volume)"
+
+.PP
+Sets the volume of a source output (application capture stream) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The source output index\&. 
+.br
+\fIvolume\fP (int) The desired volume level in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::VolumeControlHandler::setSourceVolume (int index, int volume)"
+
+.PP
+Sets the volume of a source (input device) by index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP (int) The source index\&. 
+.br
+\fIvolume\fP (int) The desired volume level in percent (0–100)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

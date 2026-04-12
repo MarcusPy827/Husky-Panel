@@ -98,9 +98,9 @@ Item {
       Repeater {
         model: TrayHandler // qmllint disable unqualified
         delegate: SystemTrayIcon {
-          inOverflow: true
           width: 32
           height: 32
+          visible: is_visible && !is_config_visible
         }
       }
     }

@@ -1,0 +1,5 @@
+VolumeIndicator 1.0 VolumeIndicator.qml
+VolumeFlyout    1.0 VolumeFlyout.qml
+VolumePage      1.0 VolumePage.qml
+StreamPage      1.0 StreamPage.qml
+VolumeSlider    1.0 VolumeSlider.qml

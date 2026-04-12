@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Exec=pavucontrol-qt
+Icon=multimedia-volume-control
+StartupNotify=true
+Type=Application
+Categories=Qt;AudioVideo;Audio;Settings;DesktopSettings;
