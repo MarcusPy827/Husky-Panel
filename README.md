@@ -107,6 +107,7 @@ Currenty we are focusing on KWin/KDE Plasma 6.
 * QWindowKit
 * KDE Framework 6
 * KServices
+* PulseAudio (libpulse)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -147,7 +148,7 @@ You will need to install the dependencies.
 
 ##### On Archlinux-based Distros
 ```bash
-sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt
+sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt libpulse
 ```
 
 ##### On Fedora
@@ -161,7 +162,7 @@ sudo reboot
 
 Then install the dependencies:
 ```bash
-sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel
+sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel pulseaudio-libs-devel
 ```
 
 > `qt6-qtbase-private-devel` is required because QWindowKit uses Qt private headers. This package only contains headers.
@@ -190,7 +191,7 @@ sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
 sudo apt install build-essential cmake \
     libwayland-dev wayland-protocols libxkbcommon-dev \
     qt6-base-private-dev qt6-base-dev qt6-wayland-dev qt6-tools-dev \
-    libkf6service-dev extra-cmake-modules
+    libkf6service-dev extra-cmake-modules libpulse-dev
 ```
 
 Then configure with vendored libraries:
@@ -322,6 +323,7 @@ To contact me, please utilize the issue.
 ### Template & Reference
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template.git)
 * [LXQt-Panel](https://github.com/lxqt/lxqt-panel.git)
+* [PAUVControl-Qt](https://github.com/lxqt/pavucontrol-qt.git)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
