@@ -30,6 +30,20 @@ Item {
   Layout.fillHeight: true
   implicitWidth: row.implicitWidth
 
+  // Center x of the visible overflow button, in this item's coordinate space.
+  // Uses item.x + item.width/2 directly (row anchors.fill parent, so
+  // child coordinates are identical to root's coordinate space) to keep
+  // this property fully reactive when the RowLayout re-positions children.
+  readonly property real overflowBtnCenterX: {
+    if (TrayHandler.hiddenActiveCount > 0) { // qmllint disable unqualified
+      if (TrayHandler.expandIconOnLeft) // qmllint disable unqualified
+        return overflowLeftBtn.x + overflowLeftBtn.width / 2 // qmllint disable missing-property
+      else
+        return overflowRightBtn.x + overflowRightBtn.width / 2 // qmllint disable missing-property
+    }
+    return root.width / 2
+  }
+
   RowLayout {
     id: row
     anchors.fill: parent
@@ -37,6 +51,7 @@ Item {
 
     // Left-side expand button (shown when expandIconOnLeft is enabled)
     SystemTrayExpandIcon {
+      id: overflowLeftBtn
       // qmllint disable unqualified
       visible: TrayHandler.hiddenActiveCount > 0 && TrayHandler.expandIconOnLeft
       onClicked: root.overflowClicked()
@@ -49,6 +64,7 @@ Item {
 
     // Right-side expand button (default position)
     SystemTrayExpandIcon {
+      id: overflowRightBtn
       // qmllint disable unqualified
       visible: TrayHandler.hiddenActiveCount > 0 && !TrayHandler.expandIconOnLeft
       onClicked: root.overflowClicked()

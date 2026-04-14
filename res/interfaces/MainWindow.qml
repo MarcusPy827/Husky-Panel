@@ -483,6 +483,7 @@ Window {
 
           // App drawer button
           AppsBtn {
+            id: appDrawerBtn
             onClicked: root.appDrawerOpen = !root.appDrawerOpen
           }
 
@@ -525,6 +526,7 @@ Window {
 
           // System tray
           SystemTray {
+            id: systemTray
             onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
           }
 
@@ -548,6 +550,7 @@ Window {
 
           // Clock button
           ClockBtn {
+            id: clockBtn
             onClicked: root.calendarFlyoutOpen = !root.calendarFlyoutOpen
           }
         }
@@ -557,7 +560,12 @@ Window {
 
   // App drawer
   Item {
-    x: 8
+    x: {
+      var _track = appDrawerBtn.x + appDrawerBtn.width // qmllint disable missing-property
+      var btnCenterX = appDrawerBtn.mapToItem(baseLayer, appDrawerBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - root.drawerW - 8,
+                                  btnCenterX - root.drawerW / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: root.drawerW
     height: root.drawerH
@@ -577,7 +585,12 @@ Window {
 
   // Calendar flyout
   Item {
-    x: root.width - root.calendarFlyoutW - 8
+    x: {
+      var _track = rightBarGroup.x + clockBtn.x + clockBtn.width // qmllint disable missing-property
+      var btnCenterX = clockBtn.mapToItem(baseLayer, clockBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - root.calendarFlyoutW - 8,
+                                  btnCenterX - root.calendarFlyoutW / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: root.calendarFlyoutW
     height: calendarFlyout.implicitHeight
@@ -592,7 +605,13 @@ Window {
 
   // System tray overflow flyout
   Item {
-    x: root.width - trayOverflowFlyout.implicitWidth - root.calendarFlyoutW - 12
+    x: {
+      var _track = rightBarGroup.x + systemTray.x + systemTray.overflowBtnCenterX // qmllint disable missing-property
+      var btnCenterX = systemTray.mapToItem(baseLayer, systemTray.overflowBtnCenterX, 0).x // qmllint disable missing-property
+      var fw = trayOverflowFlyout.implicitWidth // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - fw - 8,
+                                  btnCenterX - fw / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: trayOverflowFlyout.implicitWidth
     height: trayOverflowFlyout.implicitHeight
@@ -608,10 +627,10 @@ Window {
   // Volume flyout
   Item {
     x: {
-      var _track = rightBarGroup.x + volumeIndicatorBtn.x + root.width
-      var btnRight = volumeIndicatorBtn.mapToItem(baseLayer, volumeIndicatorBtn.width, 0).x
+      var _track = rightBarGroup.x + volumeIndicatorBtn.x + volumeIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = volumeIndicatorBtn.mapToItem(baseLayer, volumeIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
       return Math.max(8, Math.min(root.width - root.volumeFlyoutW - 8,
-                                  btnRight - root.volumeFlyoutW))
+                                  btnCenterX - root.volumeFlyoutW / 2))
     }
     y: root.barHeight + root.drawerTopMargin
     width: root.volumeFlyoutW
@@ -629,10 +648,11 @@ Window {
   Item {
     readonly property int flyoutW: 320
     x: {
-      var btnRight = bluetoothIndicatorBtn.mapToItem(
-        baseLayer, bluetoothIndicatorBtn.width, 0).x
+      var _track = rightBarGroup.x + bluetoothIndicatorBtn.x + bluetoothIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = bluetoothIndicatorBtn.mapToItem( // qmllint disable missing-property
+        baseLayer, bluetoothIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
       return Math.max(8, Math.min(root.width - flyoutW - 8,
-                                  btnRight - flyoutW))
+                                  btnCenterX - flyoutW / 2))
     }
     y: root.barHeight + root.drawerTopMargin
     width: flyoutW

@@ -65,7 +65,7 @@ BluetoothInfo::BluetoothInfo(QObject* parent) : QObject(parent) {
 
   // Subscribe to property changes on all BlueZ objects (wildcard path).
   bus_.connect(
-    DBUS_BLUEZ_SERVICE, QString(), kPropsIface,
+    DBUS_BLUEZ_SERVICE, QString(), DBUS_PROPERTIES_INTERFACE,
     QStringLiteral("PropertiesChanged"),
     this,
     SLOT(OnPropertiesChanged(QString, QVariantMap, QStringList)));
@@ -114,7 +114,7 @@ bool BluetoothInfo::GetEnabled() const {
   auto it = managed_objects_.find(selected_adapter_path_);
   if (it == managed_objects_.end()) return false;
 
-  auto iface_it = it->find(kAdapterIface);
+  auto iface_it = it->find(DBUS_BLUEZ_ADAPTER_INTERFACE);
   if (iface_it == it->end()) return false;
 
   return iface_it->value(QStringLiteral("Powered")).toBool();
@@ -151,11 +151,11 @@ void BluetoothInfo::SetEnabled(bool enabled) {
 
   QDBusInterface props_iface(
     DBUS_BLUEZ_SERVICE, selected_adapter_path_,
-    kPropsIface, bus_);
+    DBUS_PROPERTIES_INTERFACE, bus_);
 
   props_iface.asyncCall(
     QStringLiteral("Set"),
-    QString(kAdapterIface),
+    QString(DBUS_BLUEZ_ADAPTER_INTERFACE),
     QStringLiteral("Powered"),
     QVariant::fromValue(QDBusVariant(enabled)));
 }
@@ -195,7 +195,7 @@ void BluetoothInfo::ConnectDevice(const QString& address) {
   QString device_path;
   for (auto it = managed_objects_.begin();
       it != managed_objects_.end(); ++it) {
-    auto dev_it = it->find(kDeviceIface);
+    auto dev_it = it->find(DBUS_BLUEZ_DEVICE_INTERFACE);
     if (dev_it == it->end()) continue;
     if (dev_it->value(QStringLiteral("Address")).toString() == address) {
       device_path = it.key();
@@ -215,7 +215,7 @@ void BluetoothInfo::ConnectDevice(const QString& address) {
   emit DevicesChanged();
 
   QDBusInterface dev_iface(
-    DBUS_BLUEZ_SERVICE, device_path, kDeviceIface, bus_);
+    DBUS_BLUEZ_SERVICE, device_path, DBUS_BLUEZ_DEVICE_INTERFACE, bus_);
   QDBusPendingCall pending = dev_iface.asyncCall(QStringLiteral("Connect"));
 
   auto* watcher = new QDBusPendingCallWatcher(pending, this);
@@ -251,7 +251,7 @@ void BluetoothInfo::DisconnectDevice(const QString& address) {
   QString device_path;
   for (auto it = managed_objects_.begin();
       it != managed_objects_.end(); ++it) {
-    auto dev_it = it->find(kDeviceIface);
+    auto dev_it = it->find(DBUS_BLUEZ_DEVICE_INTERFACE);
     if (dev_it == it->end()) continue;
     if (dev_it->value(QStringLiteral("Address")).toString() == address) {
       device_path = it.key();
@@ -264,7 +264,7 @@ void BluetoothInfo::DisconnectDevice(const QString& address) {
   device_state_overrides_.remove(address);
 
   QDBusInterface dev_iface(
-    DBUS_BLUEZ_SERVICE, device_path, kDeviceIface, bus_);
+    DBUS_BLUEZ_SERVICE, device_path, DBUS_BLUEZ_DEVICE_INTERFACE, bus_);
   dev_iface.asyncCall(QStringLiteral("Disconnect"));
 }
 
@@ -327,7 +327,7 @@ void BluetoothInfo::RebuildAdapters() {
 
   for (auto it = managed_objects_.begin();
       it != managed_objects_.end(); ++it) {
-    auto iface_it = it->find(kAdapterIface);
+    auto iface_it = it->find(DBUS_BLUEZ_ADAPTER_INTERFACE);
     if (iface_it == it->end()) continue;
 
     QVariantMap entry;
@@ -367,7 +367,7 @@ void BluetoothInfo::RebuildDevices() {
       it != managed_objects_.end(); ++it) {
     if (!it.key().startsWith(prefix)) continue;
 
-    auto dev_it = it->find(kDeviceIface);
+    auto dev_it = it->find(DBUS_BLUEZ_DEVICE_INTERFACE);
     if (dev_it == it->end()) continue;
 
     const QVariantMap& props = *dev_it;
@@ -467,8 +467,8 @@ void BluetoothInfo::OnInterfacesAdded(const QDBusObjectPath& path,
     const BlueZInterfaceMap& ifaces) {
   managed_objects_[path.path()] = ifaces;
 
-  bool adapters_dirty = ifaces.contains(kAdapterIface);
-  bool devices_dirty  = ifaces.contains(kDeviceIface);
+  bool adapters_dirty = ifaces.contains(DBUS_BLUEZ_ADAPTER_INTERFACE);
+  bool devices_dirty  = ifaces.contains(DBUS_BLUEZ_DEVICE_INTERFACE);
 
   if (adapters_dirty) {
     RebuildAdapters();
@@ -497,8 +497,8 @@ void BluetoothInfo::OnInterfacesRemoved(const QDBusObjectPath& path,
   auto it = managed_objects_.find(path.path());
   if (it == managed_objects_.end()) return;
 
-  bool adapters_dirty = ifaces.contains(kAdapterIface);
-  bool devices_dirty  = ifaces.contains(kDeviceIface);
+  bool adapters_dirty = ifaces.contains(DBUS_BLUEZ_ADAPTER_INTERFACE);
+  bool devices_dirty  = ifaces.contains(DBUS_BLUEZ_DEVICE_INTERFACE);
 
   for (const QString& iface : ifaces)
     it->remove(iface);
