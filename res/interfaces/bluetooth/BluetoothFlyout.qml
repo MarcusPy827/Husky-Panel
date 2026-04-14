@@ -231,12 +231,23 @@ Item {
               property real rippleRadius: 0
 
               onPaint: {
+                var w = pairBtnRipple.width  // qmllint disable missing-property
+                var h = pairBtnRipple.height // qmllint disable missing-property
                 var ctx = getContext("2d")
-                ctx.clearRect(0, 0, width, height)
+                ctx.clearRect(0, 0, w, h)
                 ctx.save()
+                var r = 8
                 ctx.beginPath()
-                ctx.arc(width / 2, height / 2, Math.min(width, height) / 2,
-                        0, 2 * Math.PI)
+                ctx.moveTo(r, 0)
+                ctx.lineTo(w - r, 0)
+                ctx.arcTo(w, 0, w, r, r)
+                ctx.lineTo(w, h - r)
+                ctx.arcTo(w, h, w - r, h, r)
+                ctx.lineTo(r, h)
+                ctx.arcTo(0, h, 0, h - r, r)
+                ctx.lineTo(0, r)
+                ctx.arcTo(0, 0, r, 0, r)
+                ctx.closePath()
                 ctx.clip()
                 var c = Theme.primary // qmllint disable unqualified
                 ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)
@@ -252,20 +263,24 @@ Item {
               ParallelAnimation {
                 id: pairBtnRippleAnim
                 NumberAnimation {
-                  target: pairBtnRipple; property: "rippleRadius"
+                  target: pairBtnRipple
+                  property: "rippleRadius" // qmllint disable missing-property
                   from: 0
-                  to: Math.sqrt(
+                  to: Math.sqrt( // qmllint disable missing-property
                     pairBtnRipple.width  * pairBtnRipple.width +
                     pairBtnRipple.height * pairBtnRipple.height)
                   duration: 400; easing.type: Easing.OutCubic
                 }
                 SequentialAnimation {
                   PropertyAction {
-                    target: pairBtnRipple; property: "opacity"; value: 0.3
+                    target: pairBtnRipple
+                    property: "opacity" // qmllint disable missing-property
+                    value: 0.3          // qmllint disable missing-property
                   }
                   PauseAnimation { duration: 150 }
                   NumberAnimation {
-                    target: pairBtnRipple; property: "opacity"
+                    target: pairBtnRipple
+                    property: "opacity" // qmllint disable missing-property
                     from: 0.3; to: 0
                     duration: 250; easing.type: Easing.OutCubic
                   }
