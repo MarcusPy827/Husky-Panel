@@ -1,6 +1,6 @@
 [简体中文](./README.zh.md) | English
 
-VERSION 0.9.3
+VERSION 0.9.4
 
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
@@ -22,7 +22,7 @@ VERSION 0.9.3
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![Static Badge](https://img.shields.io/badge/Qt-Target%20version%206.10.2-green?style=flat-square&logo=qt&link=qt.io) ![Static Badge](https://img.shields.io/badge/C%2B%2B%20standard-20-blue?style=flat-square&logo=c%2B%2B&link=https%3A%2F%2Fen.cppreference.com%2Fw%2Fcpp%2F20.html) ![Static Badge](https://img.shields.io/badge/Material%20Symbols%20version-4.0.0-yellow?style=flat-square&logo=materialdesign&color=%236750A4&link=https%3A%2F%2Ffonts.google.com%2Ficons) ![Static Badge](https://img.shields.io/badge/Version-0.9_alpha-yellow?style=flat-square) ![Static Badge](https://img.shields.io/badge/Made%20with-Love-red?style=flat-square)
+![Static Badge](https://img.shields.io/badge/Qt-Target%20version%206.10.2-green?style=flat-square&logo=qt&link=qt.io) ![Static Badge](https://img.shields.io/badge/C%2B%2B%20standard-17-blue?style=flat-square&logo=c%2B%2B&link=https%3A%2F%2Fen.cppreference.com%2Fw%2Fcpp%2F17.html) ![Static Badge](https://img.shields.io/badge/Material%20Symbols%20version-4.0.0-yellow?style=flat-square&logo=materialdesign&color=%236750A4&link=https%3A%2F%2Ffonts.google.com%2Ficons) ![Static Badge](https://img.shields.io/badge/Version-0.9_alpha-yellow?style=flat-square) ![Static Badge](https://img.shields.io/badge/Made%20with-Love-red?style=flat-square)
 
 
 
@@ -89,7 +89,7 @@ VERSION 0.9.3
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-`HuskyPanel` is another shell bar panel for Linux Wayland session. This is an experimental project that trys to utilize QWidget to bring a Material design 3 styled UI to your desktop environment.
+`HuskyPanel` is another shell bar panel for Linux Wayland session. This is an experimental project that uses Qt Quick (QML) to bring a Material Design 3 styled UI to your desktop environment.
 
 Currenty we are focusing on KWin/KDE Plasma 6.
 
@@ -115,8 +115,6 @@ Currenty we are focusing on KWin/KDE Plasma 6.
 
 <!-- GETTING STARTED -->
 ## Getting Started
-> ⚠️ **WARNING**: For the Debian-based distro part, I haven't finished writting the documentation yet, please ignore that part for now.
-
 Ensure that you have Qt version 6.5+ avaliable in your system. This bar uses a new API provided by Qt 6.5+ to aware the change in light/dark scheme. Without the proper version of Qt, the bar could NOT be complied.
 
 Currently only Plasma 6 is supported, we recommend you to login a Plasma 6.5 session to use this bar. Wlroots WM support is planned.
@@ -178,9 +176,18 @@ If more than one version is printed, your system is at risk of ABI breakage — 
 > Fedora packages `layer-shell-qt` and ECM from KDE Frameworks, so you generally do **not** need `-DUSE_VENDORED_LIBS=ON` or the manual ECM build step.
 
 ##### On OpenSUSE
+> **Note**: OpenSUSE Tumbleweed is recommended. Leap may ship Qt versions that are too old.
+
 ```bash
-sudo zypper in wayland-devel wayland-protocols-devel libxkbcommon-devel
+sudo zypper in \
+    libwayland-devel wayland-protocols-devel libxkbcommon-devel \
+    qt6-base-devel qt6-wayland-devel qt6-declarative-devel qt6-tools-devel \
+    layer-shell-qt-devel libdbusmenu-lxqt-devel \
+    kf6-kservice-devel extra-cmake-modules \
+    libpulse-devel
 ```
+
+> If `layer-shell-qt-devel` or `libdbusmenu-lxqt-devel` are not available, pass `-DUSE_VENDORED_LIBS=ON` at configure time and build ECM first (see [Building ECM](#building-ecm-only-needed-when-use_vendored_libson)).
 
 ##### On Debian-Based Distros
 > ⚠️ **Note**: Ubuntu LTS releases (e.g. 24.04) ship Qt 6.4, which is **too old** — this project requires Qt 6.5+. You need at least **Ubuntu 24.10** or **Kubuntu 24.10** (or newer) to build. If you are on an LTS release, consider using [KDE Neon](https://neon.kde.org/) which ships up-to-date Qt and KDE Frameworks.
@@ -262,10 +269,10 @@ For more details about the plugin, read the README in `plugins/kde/app-bridge`.
     - [X] KWin support (via KWin script)
     - [X] Niri/Hyprland support
 - [ ] Notification manager
-- [ ] Network manager
-- [ ] Battery manager
-- [ ] Volume manager
-- [ ] Bluetooth manager
+- [X] Network manager
+- [X] Battery manager
+- [X] Volume manager
+- [X] Bluetooth manager
 - [X] App drawer
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -278,7 +285,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Top contributors
 
-<a href="https://github.com/github_username/MarcusPy827/Husky-Panel/contributors">
+<a href="https://github.com/MarcusPy827/Husky-Panel/contributors">
   <img src="https://contrib.rocks/image?repo=MarcusPy827/Husky-Panel" alt="contrib.rocks image" />
 </a>
 

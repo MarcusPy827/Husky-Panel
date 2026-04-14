@@ -1,5 +1,11 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/bluetooth_0412
+  * Implemented a bluetooth control panel.
+  * 新增了蓝牙控制面板
+  * Fixed main window translation missing issue.
+  * 修复了主窗口关于「翻译缺失」的报错
+
 * marcus/volume_control_0411
   * Implemented a volume control panel.
   * 新增了音量控制面板
