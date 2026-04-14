@@ -1,0 +1,43 @@
+[Bluetooth]
+zh_cn = "蓝牙"
+en_us = "Bluetooth"
+
+[Paired]
+zh_cn = "已配对"
+en_us = "Paired"
+
+[Connected]
+zh_cn = "已连接"
+en_us = "Connected"
+
+[Connecting]
+zh_cn = "连接中..."
+en_us = "Connecting..."
+
+[ConnectionFailed]
+zh_cn = "连接失败"
+en_us = "Failed to connect to this device"
+
+[Connect]
+zh_cn = "连接"
+en_us = "Connect"
+
+[Retry]
+zh_cn = "重试"
+en_us = "Retry"
+
+[Disconnect]
+zh_cn = "断开连接"
+en_us = "Disconnect"
+
+[PleaseWait]
+zh_cn = "请稍候..."
+en_us = "Please wait..."
+
+[NoPairedDevices]
+zh_cn = "没有已配对的设备"
+en_us = "No paired device."
+
+[BluetoothOff]
+zh_cn = "蓝牙已关闭"
+en_us = "Bluetooth is off."

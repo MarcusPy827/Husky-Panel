@@ -83,6 +83,18 @@ class QuickThemeProvider : public QObject {
   Q_PROPERTY(QColor surface_container_high
     READ GetSurfaceContainerHigh
     NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor error
+    READ GetError
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor error_container
+    READ GetErrorContainer
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor on_error_container
+    READ GetOnErrorContainer
+    NOTIFY SchemeUpdated)
+  Q_PROPERTY(QColor secondary
+    READ GetSecondary
+    NOTIFY SchemeUpdated)
 
  public:
   explicit QuickThemeProvider(QObject* parent = nullptr);
@@ -107,6 +119,10 @@ class QuickThemeProvider : public QObject {
   const QColor GetPrimaryContainer();
   const QColor GetSecondaryContainer();
   const QColor GetSecondaryContainerFg();
+  const QColor GetError();
+  const QColor GetErrorContainer();
+  const QColor GetOnErrorContainer();
+  const QColor GetSecondary();
 
  private:
   QColor status_bar_bg_;
@@ -127,6 +143,10 @@ class QuickThemeProvider : public QObject {
   QColor primary_container_;
   QColor secondary_container_;
   QColor secondary_container_fg_;
+  QColor error_;
+  QColor error_container_;
+  QColor on_error_container_;
+  QColor secondary_;
 
   void WriteScheme(const material_color_utilities::DynamicScheme & scheme);
   int WriteSchemeForStatusBar(

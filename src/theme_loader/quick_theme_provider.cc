@@ -96,6 +96,14 @@ void QuickThemeProvider::WriteScheme(const
   secondary_container_fg_ = QColor(
     utils::ColorPaletteWrapper::Argb2Hex(
       scheme.GetOnSecondaryContainer()));
+  error_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetError()));
+  error_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetErrorContainer()));
+  on_error_container_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetOnErrorContainer()));
+  secondary_ = QColor(utils::ColorPaletteWrapper::Argb2Hex(
+    scheme.GetSecondary()));
 
   emit SchemeUpdated();
 }
@@ -187,6 +195,22 @@ const QColor QuickThemeProvider::GetSecondaryContainer() {
 
 const QColor QuickThemeProvider::GetSecondaryContainerFg() {
   return secondary_container_fg_;
+}
+
+const QColor QuickThemeProvider::GetError() {
+  return error_;
+}
+
+const QColor QuickThemeProvider::GetErrorContainer() {
+  return error_container_;
+}
+
+const QColor QuickThemeProvider::GetOnErrorContainer() {
+  return on_error_container_;
+}
+
+const QColor QuickThemeProvider::GetSecondary() {
+  return secondary_;
 }
 
 }  // namespace loader

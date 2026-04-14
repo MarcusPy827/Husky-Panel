@@ -49,6 +49,7 @@
 #include "src/components/system_tray/system_tray_handler.h"
 #include "src/components/system_tray/tray_icon_image_handler.h"
 #include "src/components/volume_control/volume_control_handler.h"
+#include "src/components/bluetooth/bluetooth_handler.h"
 #include "src/theme_loader/quick_theme_provider.h"
 #include "src/translation_loader/translation_loader.h"
 #include "src/utils/misc/misc.h"
@@ -129,6 +130,15 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("VolumeControlTranslator",
     translation_loader_volume_control);
   LOG(INFO) << absl::StrCat("Successfully injected volume control translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for bluetooth...");
+  auto* translation_loader_bluetooth =
+    new panel::loader::TranslationLoader(
+      ":/translations/translations/bluetooth.locale",
+      panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("BluetoothTranslator",
+    translation_loader_bluetooth);
+  LOG(INFO) << absl::StrCat("Successfully injected bluetooth translator.");
   LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
     "injected!");
 
@@ -196,6 +206,13 @@ void InjectEngineContext(QGuiApplication& application,
     &application);
   target.rootContext()->setContextProperty("VolumeHandler", volume_handler);
   LOG(INFO) << absl::StrCat("Successfully injected volume control handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing bluetooth handler...");
+  auto* bluetooth_handler = new panel::frontend::BluetoothHandler(
+    &application);
+  target.rootContext()->setContextProperty("BluetoothHandler",
+    bluetooth_handler);
+  LOG(INFO) << absl::StrCat("Successfully injected bluetooth handler!!");
 }
 
 

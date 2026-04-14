@@ -1,0 +1,155 @@
+\doxysection{bluetooth\+\_\+info.\+h}
+\hypertarget{bluetooth__info_8h_source}{}\label{bluetooth__info_8h_source}\index{src/info\_server/bluetooth/bluetooth\_info.h@{src/info\_server/bluetooth/bluetooth\_info.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2026\ MarcusPy827}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ SRC\_INFO\_SERVER\_BLUETOOTH\_BLUETOOTH\_INFO\_H\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ SRC\_INFO\_SERVER\_BLUETOOTH\_BLUETOOTH\_INFO\_H\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QDBusArgument>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QDBusConnection>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QDBusInterface>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <QDBusObjectPath>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <QDBusPendingCallWatcher>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <QMetaType>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <QVariantList>}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <QVariantMap>}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ D-\/Bus\ type\ aliases\ for\ the\ BlueZ\ ObjectManager\ interface.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ InterfaceMap\ =\ a\{sa\{sv\}\}\ \ (interface\ name\ →\ property\ map)}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ ManagedObjectMap\ =\ a\{oa\{sa\{sv\}\}\}\ \ (object\ path\ →\ InterfaceMap)}}
+\DoxyCodeLine{00036\ \textcolor{keyword}{using\ }BlueZInterfaceMap\ =\ QMap<QString,\ QVariantMap>;}
+\DoxyCodeLine{00037\ \textcolor{keyword}{using\ }BlueZObjectMap\ =\ QMap<QDBusObjectPath,\ BlueZInterfaceMap>;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ Q\_DECLARE\_METATYPE(BlueZInterfaceMap)}
+\DoxyCodeLine{00040\ Q\_DECLARE\_METATYPE(BlueZObjectMap)}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{namespace\ }panel\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }backend\ \{}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ Monitors\ and\ controls\ Bluetooth\ via\ the\ BlueZ\ D-\/Bus\ API}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ (org.bluez).\ Exposes\ adapter\ and\ device\ lists,\ power\ state,\ and}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ connect/disconnect\ operations.\ All\ data\ is\ updated\ reactively\ via}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ D-\/Bus\ signals\ and\ marshalled\ to\ the\ Qt\ main\ thread.}}
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_ab835286d5495d6914dbe012f14a17fdd}{BluetoothInfo}}\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00050\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//\ Possible\ fine-\/grained\ states\ for\ a\ device\ entry\ exposed\ to\ QML.}}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{enum\ class}\ DeviceState\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ kConnected,}
+\DoxyCodeLine{00056\ \ \ \ \ kPaired,}
+\DoxyCodeLine{00057\ \ \ \ \ kConnecting,}
+\DoxyCodeLine{00058\ \ \ \ \ kFailed,}
+\DoxyCodeLine{00059\ \ \ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_ab835286d5495d6914dbe012f14a17fdd}{BluetoothInfo}}(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_ab835286d5495d6914dbe012f14a17fdd}{\string~BluetoothInfo}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{//\ Returns\ a\ list\ of\ available\ Bluetooth\ adapters.\ Each\ entry\ is\ a}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{//\ QVariantMap\ with\ keys:\ "{}address"{}\ (QString),\ "{}name"{}\ (QString),}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{//\ "{}path"{}\ (QString).}}
+\DoxyCodeLine{00067\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_ad9384c126e061c126315f97db52dfd1c}{GetAdapters}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{comment}{//\ Returns\ the\ D-\/Bus\ object\ path\ of\ the\ currently\ selected\ adapter.}}
+\DoxyCodeLine{00070\ \ \ QString\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a33dc409030906266610136391972404c}{GetSelectedAdapterPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{//\ Returns\ whether\ the\ selected\ adapter\ is\ powered\ on.}}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_acbd77a498d9bae03987a8d064ab4b80c}{GetEnabled}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{comment}{//\ Returns\ the\ list\ of\ known\ devices\ for\ the\ selected\ adapter.\ Each}}
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{//\ entry\ is\ a\ QVariantMap\ with\ keys:\ "{}address"{}\ (QString),\ "{}name"{}}}
+\DoxyCodeLine{00077\ \ \ \textcolor{comment}{//\ (QString),\ "{}icon"{}\ (QString\ —\ material\ icon\ name),\ "{}state"{}\ (QString}}
+\DoxyCodeLine{00078\ \ \ \textcolor{comment}{//\ —\ "{}connected"{}\ |\ "{}paired"{}\ |\ "{}connecting"{}\ |\ "{}failed"{}).}}
+\DoxyCodeLine{00079\ \ \ QVariantList\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a76f8d84e819117635cc7e23ae10a554d}{GetDevices}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{//\ Powers\ the\ selected\ adapter\ on\ or\ off.}}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a6005fd7232a503f677227fe5a3d3000d}{SetEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{comment}{//\ Changes\ the\ active\ adapter.\ @p\ path\ is\ a\ BlueZ\ D-\/Bus\ object\ path.}}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a82b3836208ebf6cc8f20a0b51ac667a2}{SelectAdapter}}(\textcolor{keyword}{const}\ QString\&\ path);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{comment}{//\ Initiates\ an\ async\ D-\/Bus\ Connect()\ call\ on\ a\ device.\ The\ device's}}
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{//\ state\ transitions\ to\ "{}connecting"{}\ immediately,\ and\ then\ to}}
+\DoxyCodeLine{00089\ \ \ \textcolor{comment}{//\ "{}connected"{}\ or\ "{}failed"{}\ when\ the\ call\ completes.}}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a36ea643fceef0797999f93a669c70838}{ConnectDevice}}(\textcolor{keyword}{const}\ QString\&\ address);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{//\ Initiates\ an\ async\ D-\/Bus\ Disconnect()\ call\ on\ a\ device.}}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpanel_1_1backend_1_1BluetoothInfo_a7cf4015c3bb91479b99780914ef845e9}{DisconnectDevice}}(\textcolor{keyword}{const}\ QString\&\ address);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ signals:}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{void}\ AdaptersChanged();}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{void}\ EnabledChanged();}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{void}\ DevicesChanged();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00101\ \ \ \textcolor{comment}{//\ Fetches\ all\ managed\ BlueZ\ objects\ and\ rebuilds\ adapters/devices.}}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{void}\ RefreshAll();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{comment}{//\ Rebuilds\ adapters\_\ from\ managed\_objects\_.}}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ RebuildAdapters();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \textcolor{comment}{//\ Rebuilds\ devices\_\ for\ the\ selected\ adapter\ from\ managed\_objects\_.}}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{void}\ RebuildDevices();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{comment}{//\ Returns\ the\ material\ icon\ name\ for\ a\ BlueZ\ device\ icon\ string.}}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{static}\ QString\ IconForDevice(\textcolor{keyword}{const}\ QString\&\ bluez\_icon);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{comment}{//\ Returns\ the\ string\ key\ for\ a\ DeviceState.}}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{static}\ QString\ StateString(DeviceState\ s);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00117\ \ \ \textcolor{comment}{//\ Slot:\ receives\ org.freedesktop.DBus.ObjectManager.InterfacesAdded.}}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordtype}{void}\ OnInterfacesAdded(\textcolor{keyword}{const}\ QDBusObjectPath\&\ path,}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{const}\ BlueZInterfaceMap\&\ ifaces);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{//\ Slot:\ receives\ org.freedesktop.DBus.ObjectManager.InterfacesRemoved.}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordtype}{void}\ OnInterfacesRemoved(\textcolor{keyword}{const}\ QDBusObjectPath\&\ path,}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{const}\ QStringList\&\ ifaces);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{comment}{//\ Slot:\ receives\ org.freedesktop.DBus.Properties.PropertiesChanged\ from}}
+\DoxyCodeLine{00126\ \ \ \textcolor{comment}{//\ any\ BlueZ\ object\ (wildcard\ path\ match).\ Triggers\ a\ full\ refresh\ of\ all}}
+\DoxyCodeLine{00127\ \ \ \textcolor{comment}{//\ managed\ objects\ so\ that\ adapter/device\ data\ stays\ consistent.}}
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordtype}{void}\ OnPropertiesChanged(\textcolor{keyword}{const}\ QString\&\ iface,}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{const}\ QVariantMap\&\ changed,\ \textcolor{keyword}{const}\ QStringList\&\ invalidated);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00132\ \ \ QDBusConnection\ bus\_\ =\ QDBusConnection::systemBus();}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{comment}{//\ All\ objects\ returned\ by\ GetManagedObjects,\ keyed\ by\ object\ path\ string.}}
+\DoxyCodeLine{00135\ \ \ \textcolor{comment}{//\ Stored\ as\ QMap<QString,\ BlueZInterfaceMap>\ for\ easy\ lookup\ by\ path\ string.}}
+\DoxyCodeLine{00136\ \ \ QMap<QString,\ BlueZInterfaceMap>\ managed\_objects\_;}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ QString\ selected\_adapter\_path\_;}
+\DoxyCodeLine{00139\ \ \ QVariantList\ adapters\_;}
+\DoxyCodeLine{00140\ \ \ QVariantList\ devices\_;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{comment}{//\ Per-\/device\ overrides\ for\ connecting/failed\ states\ (address\ →\ state).}}
+\DoxyCodeLine{00143\ \ \ QMap<QString,\ DeviceState>\ device\_state\_overrides\_;}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \}\ \ \textcolor{comment}{//\ namespace\ backend}}
+\DoxyCodeLine{00147\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_INFO\_SERVER\_BLUETOOTH\_BLUETOOTH\_INFO\_H\_}}
+
+\end{DoxyCode}

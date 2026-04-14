@@ -3,6 +3,7 @@ var dir_3c4c7c1a85608ccd561c026bec818e51 =
     [ "app_drawer", "dir_2f1d8b32c8a8d0e32fd3c78b0cb44dee.html", "dir_2f1d8b32c8a8d0e32fd3c78b0cb44dee" ],
     [ "app_indicator", "dir_525cd230cf4a6285714f2e0ab9dcbc6e.html", "dir_525cd230cf4a6285714f2e0ab9dcbc6e" ],
     [ "battery_indicator", "dir_59f29a3f95eae7690415fa194107b838.html", "dir_59f29a3f95eae7690415fa194107b838" ],
+    [ "bluetooth", "dir_6f40adebf6c6dc6bcd61cb86a1e7a346.html", "dir_6f40adebf6c6dc6bcd61cb86a1e7a346" ],
     [ "calendar", "dir_256d3872350734f6d7e713f7e1f7d9e4.html", "dir_256d3872350734f6d7e713f7e1f7d9e4" ],
     [ "clock_btn", "dir_8395b7c94b7943248ba5b9b032f1e75a.html", "dir_8395b7c94b7943248ba5b9b032f1e75a" ],
     [ "krunner_btn", "dir_8442fb9d2598845c1713a0d1562a7f5c.html", "dir_8442fb9d2598845c1713a0d1562a7f5c" ],

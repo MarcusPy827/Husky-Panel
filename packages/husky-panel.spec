@@ -26,8 +26,10 @@ BuildRequires:  extra-cmake-modules
 BuildRequires:  pkgconfig(libpulse)
 
 Requires:       qt6-qtbase
+Requires:       qt6-qtdeclarative
 Requires:       qt6-qtwayland
 Requires:       layer-shell-qt
+Requires:       libdbusmenu-lxqt
 Requires:       kf6-kservice
 Requires:       pulseaudio-libs
 

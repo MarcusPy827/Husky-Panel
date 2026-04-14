@@ -89,4 +89,11 @@
 #define DBUS_DISPLAY_MANAGER_SEAT_INTERFACE \
   "org.freedesktop.DisplayManager.Seat"
 
+// Bluetooth (BlueZ)
+#define DBUS_BLUEZ_SERVICE "org.bluez"
+#define DBUS_BLUEZ_ROOT_PATH "/"
+#define DBUS_OBJECT_MANAGER_INTERFACE "org.freedesktop.DBus.ObjectManager"
+#define DBUS_BLUEZ_ADAPTER_INTERFACE "org.bluez.Adapter1"
+#define DBUS_BLUEZ_DEVICE_INTERFACE "org.bluez.Device1"
+
 #endif  // SRC_UTILS_DBUS_DEF_H_

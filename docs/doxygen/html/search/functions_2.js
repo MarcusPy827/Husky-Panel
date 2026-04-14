@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['isexpandicononlefthandside_0',['IsExpandIconOnLeftHandSide',['../classpanel_1_1loader_1_1TrayConfigHandler.html#a61be7384088a84509a920de8f274a98c',1,'panel::loader::TrayConfigHandler']]],
-  ['istrayiconprefrenceexists_1',['IsTrayIconPrefrenceExists',['../classpanel_1_1loader_1_1TrayConfigHandler.html#a9d0c4535045e6f2e67d890840fdb788f',1,'panel::loader::TrayConfigHandler']]],
-  ['istrayiconvisible_2',['IsTrayIconVisible',['../classpanel_1_1loader_1_1TrayConfigHandler.html#ac79262c9bef972ba68c609fada531fc7',1,'panel::loader::TrayConfigHandler']]]
+  ['disconnectdevice_0',['DisconnectDevice',['../classpanel_1_1backend_1_1BluetoothInfo.html#a7cf4015c3bb91479b99780914ef845e9',1,'panel::backend::BluetoothInfo']]],
+  ['disconnectdevice_1',['disconnectDevice',['../classpanel_1_1frontend_1_1BluetoothHandler.html#abc9853cdb718c13931a0fb2d92d05f87',1,'panel::frontend::BluetoothHandler']]]
 ];

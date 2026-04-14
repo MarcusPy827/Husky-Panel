@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['misc_0',['Misc',['../classpanel_1_1utils_1_1Misc.html',1,'panel::utils']]]
+  ['layershellhelper_0',['LayerShellHelper',['../classpanel_1_1utils_1_1LayerShellHelper.html',1,'panel::utils']]],
+  ['log_1',['Log',['../classpanel_1_1utils_1_1Log.html',1,'panel::utils']]]
 ];

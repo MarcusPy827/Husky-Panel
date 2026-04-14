@@ -30,6 +30,7 @@ import "krunner_btn"
 import "wlan_indicator"
 import "system_tray"
 import "volume_control"
+import "bluetooth"
 
 Window {
   id: root
@@ -52,6 +53,8 @@ Window {
   property bool trayOverflowExpanded: false
   property bool volumeFlyoutOpen: false
   property bool volumeFlyoutExpanded: false
+  property bool bluetoothFlyoutOpen: false
+  property bool bluetoothFlyoutExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -101,6 +104,7 @@ Window {
       appDrawerOpen = false
       calendarFlyoutOpen = false
       trayOverflowOpen = false
+      bluetoothFlyoutOpen = false
       volumeFlyoutExpanded = true
       LayerShellHelper.setFullMask(root)
       volumeFlyout.open()
@@ -110,35 +114,63 @@ Window {
     }
   }
 
+  onBluetoothFlyoutOpenChanged: {
+    if (bluetoothFlyoutOpen) {
+      appDrawerOpen = false
+      calendarFlyoutOpen = false
+      trayOverflowOpen = false
+      volumeFlyoutOpen = false
+      bluetoothFlyoutExpanded = true
+      LayerShellHelper.setFullMask(root)
+      bluetoothFlyout.open()
+    } else {
+      bluetoothFlyout.close()
+      // bluetoothFlyoutExpanded → false is set by onCloseAnimationFinished below
+    }
+  }
+
   onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded && !volumeFlyoutExpanded)
+    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded && !volumeFlyoutExpanded)
+    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onTrayOverflowExpandedChanged: {
-    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded && !volumeFlyoutExpanded)
+    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onVolumeFlyoutExpandedChanged: {
-    if (!volumeFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded)
+    if (!volumeFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
+        && !trayOverflowExpanded && !bluetoothFlyoutExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onBluetoothFlyoutExpandedChanged: {
+    if (!bluetoothFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
+        && !trayOverflowExpanded && !volumeFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen || root.trayOverflowOpen || root.volumeFlyoutOpen) && !confirmDialog.visible
+    visible: (root.appDrawerOpen || root.calendarFlyoutOpen
+              || root.trayOverflowOpen || root.volumeFlyoutOpen
+              || root.bluetoothFlyoutOpen) && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
       root.trayOverflowOpen = false
       root.volumeFlyoutOpen = false
+      root.bluetoothFlyoutOpen = false
     }
   }
 
@@ -185,7 +217,7 @@ Window {
           Layout.topMargin: 24
           Layout.leftMargin: 24
           Layout.rightMargin: 24
-          text: StatusBarTranslator.Tr(confirmDialog.pendingLabel)
+          text: confirmDialog.pendingLabel !== "" ? StatusBarTranslator.Tr(confirmDialog.pendingLabel) : "" // qmllint disable unqualified
           font.pixelSize: 24
           color: Theme.surface_fg
           wrapMode: Text.WordWrap
@@ -451,6 +483,7 @@ Window {
 
           // App drawer button
           AppsBtn {
+            id: appDrawerBtn
             onClicked: root.appDrawerOpen = !root.appDrawerOpen
           }
 
@@ -493,7 +526,14 @@ Window {
 
           // System tray
           SystemTray {
+            id: systemTray
             onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
+          }
+
+          // Bluetooth indicator
+          BluetoothIndicator {
+            id: bluetoothIndicatorBtn
+            onClicked: root.bluetoothFlyoutOpen = !root.bluetoothFlyoutOpen
           }
 
           // Volume indicator
@@ -501,7 +541,6 @@ Window {
             id: volumeIndicatorBtn
             onClicked: root.volumeFlyoutOpen = !root.volumeFlyoutOpen
           }
-
 
           // WLAN indicator
           WLANIndicator {}
@@ -511,6 +550,7 @@ Window {
 
           // Clock button
           ClockBtn {
+            id: clockBtn
             onClicked: root.calendarFlyoutOpen = !root.calendarFlyoutOpen
           }
         }
@@ -520,7 +560,12 @@ Window {
 
   // App drawer
   Item {
-    x: 8
+    x: {
+      var _track = appDrawerBtn.x + appDrawerBtn.width // qmllint disable missing-property
+      var btnCenterX = appDrawerBtn.mapToItem(baseLayer, appDrawerBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - root.drawerW - 8,
+                                  btnCenterX - root.drawerW / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: root.drawerW
     height: root.drawerH
@@ -540,7 +585,12 @@ Window {
 
   // Calendar flyout
   Item {
-    x: root.width - root.calendarFlyoutW - 8
+    x: {
+      var _track = rightBarGroup.x + clockBtn.x + clockBtn.width // qmllint disable missing-property
+      var btnCenterX = clockBtn.mapToItem(baseLayer, clockBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - root.calendarFlyoutW - 8,
+                                  btnCenterX - root.calendarFlyoutW / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: root.calendarFlyoutW
     height: calendarFlyout.implicitHeight
@@ -555,7 +605,13 @@ Window {
 
   // System tray overflow flyout
   Item {
-    x: root.width - trayOverflowFlyout.implicitWidth - root.calendarFlyoutW - 12
+    x: {
+      var _track = rightBarGroup.x + systemTray.x + systemTray.overflowBtnCenterX // qmllint disable missing-property
+      var btnCenterX = systemTray.mapToItem(baseLayer, systemTray.overflowBtnCenterX, 0).x // qmllint disable missing-property
+      var fw = trayOverflowFlyout.implicitWidth // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - fw - 8,
+                                  btnCenterX - fw / 2))
+    }
     y: root.barHeight + root.drawerTopMargin
     width: trayOverflowFlyout.implicitWidth
     height: trayOverflowFlyout.implicitHeight
@@ -571,10 +627,10 @@ Window {
   // Volume flyout
   Item {
     x: {
-      var _track = rightBarGroup.x + volumeIndicatorBtn.x + root.width
-      var btnRight = volumeIndicatorBtn.mapToItem(baseLayer, volumeIndicatorBtn.width, 0).x
+      var _track = rightBarGroup.x + volumeIndicatorBtn.x + volumeIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = volumeIndicatorBtn.mapToItem(baseLayer, volumeIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
       return Math.max(8, Math.min(root.width - root.volumeFlyoutW - 8,
-                                  btnRight - root.volumeFlyoutW))
+                                  btnCenterX - root.volumeFlyoutW / 2))
     }
     y: root.barHeight + root.drawerTopMargin
     width: root.volumeFlyoutW
@@ -585,6 +641,28 @@ Window {
       id: volumeFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.volumeFlyoutExpanded = false
+    }
+  }
+
+  // Bluetooth flyout
+  Item {
+    readonly property int flyoutW: 320
+    x: {
+      var _track = rightBarGroup.x + bluetoothIndicatorBtn.x + bluetoothIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = bluetoothIndicatorBtn.mapToItem( // qmllint disable missing-property
+        baseLayer, bluetoothIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - flyoutW - 8,
+                                  btnCenterX - flyoutW / 2))
+    }
+    y: root.barHeight + root.drawerTopMargin
+    width: flyoutW
+    height: bluetoothFlyout.implicitHeight
+    visible: root.bluetoothFlyoutExpanded
+
+    BluetoothFlyout {
+      id: bluetoothFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.bluetoothFlyoutExpanded = false
     }
   }
 

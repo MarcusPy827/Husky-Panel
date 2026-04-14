@@ -87,62 +87,82 @@
 \DoxyCodeLine{00083\ \ \ Q\_PROPERTY(QColor\ surface\_container\_high}
 \DoxyCodeLine{00084\ \ \ \ \ READ\ GetSurfaceContainerHigh}
 \DoxyCodeLine{00085\ \ \ \ \ NOTIFY\ SchemeUpdated)}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{explicit}\ QuickThemeProvider(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00089\ \ \ \string~QuickThemeProvider();}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ RefreshTheme();}
-\DoxyCodeLine{00092\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarBg();}
-\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarPrimary();}
-\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarSurfaceFg();}
-\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarStateLayerHover();}
-\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarStateLayerPressed();}
-\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{const}\ QColor\ GetPrimary();}
-\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainer();}
-\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceFg();}
-\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{const}\ QColor\ GetStateLayerHover();}
-\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{const}\ QColor\ GetStateLayerPressed();}
-\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceBg();}
-\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerLow();}
-\DoxyCodeLine{00104\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerLowest();}
-\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerHigh();}
-\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceVariantFg();}
-\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{const}\ QColor\ GetPrimaryContainer();}
-\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{const}\ QColor\ GetSecondaryContainer();}
-\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{const}\ QColor\ GetSecondaryContainerFg();}
-\DoxyCodeLine{00110\ }
-\DoxyCodeLine{00111\ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00112\ \ \ QColor\ status\_bar\_bg\_;}
-\DoxyCodeLine{00113\ \ \ QColor\ status\_bar\_primary\_;}
-\DoxyCodeLine{00114\ \ \ QColor\ status\_bar\_surface\_fg\_;}
-\DoxyCodeLine{00115\ \ \ QColor\ status\_bar\_state\_layer\_hover\_;}
-\DoxyCodeLine{00116\ \ \ QColor\ status\_bar\_state\_layer\_pressed\_;}
-\DoxyCodeLine{00117\ \ \ QColor\ primary\_;}
-\DoxyCodeLine{00118\ \ \ QColor\ surface\_container\_;}
-\DoxyCodeLine{00119\ \ \ QColor\ surface\_fg\_;}
-\DoxyCodeLine{00120\ \ \ QColor\ state\_layer\_hover\_;}
-\DoxyCodeLine{00121\ \ \ QColor\ state\_layer\_pressed\_;}
-\DoxyCodeLine{00122\ \ \ QColor\ surface\_bg\_;}
-\DoxyCodeLine{00123\ \ \ QColor\ surface\_container\_low\_;}
-\DoxyCodeLine{00124\ \ \ QColor\ surface\_container\_lowest\_;}
-\DoxyCodeLine{00125\ \ \ QColor\ surface\_container\_high\_;}
-\DoxyCodeLine{00126\ \ \ QColor\ surface\_variant\_fg\_;}
-\DoxyCodeLine{00127\ \ \ QColor\ primary\_container\_;}
-\DoxyCodeLine{00128\ \ \ QColor\ secondary\_container\_;}
-\DoxyCodeLine{00129\ \ \ QColor\ secondary\_container\_fg\_;}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{void}\ WriteScheme(\textcolor{keyword}{const}\ material\_color\_utilities::DynamicScheme\ \&\ scheme);}
-\DoxyCodeLine{00132\ \ \ \textcolor{keywordtype}{int}\ WriteSchemeForStatusBar(}
-\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{const}\ material\_color\_utilities::DynamicScheme\ \&\ scheme);}
-\DoxyCodeLine{00134\ }
-\DoxyCodeLine{00135\ \ signals:}
-\DoxyCodeLine{00136\ \ \ \textcolor{keywordtype}{void}\ SchemeUpdated();}
-\DoxyCodeLine{00137\ \};}
-\DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
-\DoxyCodeLine{00140\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
-\DoxyCodeLine{00141\ }
-\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_THEME\_LOADER\_QUICK\_THEME\_PROVIDER\_H\_}}
+\DoxyCodeLine{00086\ \ \ Q\_PROPERTY(QColor\ error}
+\DoxyCodeLine{00087\ \ \ \ \ READ\ GetError}
+\DoxyCodeLine{00088\ \ \ \ \ NOTIFY\ SchemeUpdated)}
+\DoxyCodeLine{00089\ \ \ Q\_PROPERTY(QColor\ error\_container}
+\DoxyCodeLine{00090\ \ \ \ \ READ\ GetErrorContainer}
+\DoxyCodeLine{00091\ \ \ \ \ NOTIFY\ SchemeUpdated)}
+\DoxyCodeLine{00092\ \ \ Q\_PROPERTY(QColor\ on\_error\_container}
+\DoxyCodeLine{00093\ \ \ \ \ READ\ GetOnErrorContainer}
+\DoxyCodeLine{00094\ \ \ \ \ NOTIFY\ SchemeUpdated)}
+\DoxyCodeLine{00095\ \ \ Q\_PROPERTY(QColor\ secondary}
+\DoxyCodeLine{00096\ \ \ \ \ READ\ GetSecondary}
+\DoxyCodeLine{00097\ \ \ \ \ NOTIFY\ SchemeUpdated)}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{explicit}\ QuickThemeProvider(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00101\ \ \ \string~QuickThemeProvider();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{void}\ RefreshTheme();}
+\DoxyCodeLine{00104\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarBg();}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarPrimary();}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarSurfaceFg();}
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarStateLayerHover();}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{const}\ QColor\ GetStatusBarStateLayerPressed();}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{const}\ QColor\ GetPrimary();}
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainer();}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceFg();}
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{const}\ QColor\ GetStateLayerHover();}
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{const}\ QColor\ GetStateLayerPressed();}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceBg();}
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerLow();}
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerLowest();}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceContainerHigh();}
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{const}\ QColor\ GetSurfaceVariantFg();}
+\DoxyCodeLine{00119\ \ \ \textcolor{keyword}{const}\ QColor\ GetPrimaryContainer();}
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{const}\ QColor\ GetSecondaryContainer();}
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ QColor\ GetSecondaryContainerFg();}
+\DoxyCodeLine{00122\ \ \ \textcolor{keyword}{const}\ QColor\ GetError();}
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{const}\ QColor\ GetErrorContainer();}
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{const}\ QColor\ GetOnErrorContainer();}
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{const}\ QColor\ GetSecondary();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00128\ \ \ QColor\ status\_bar\_bg\_;}
+\DoxyCodeLine{00129\ \ \ QColor\ status\_bar\_primary\_;}
+\DoxyCodeLine{00130\ \ \ QColor\ status\_bar\_surface\_fg\_;}
+\DoxyCodeLine{00131\ \ \ QColor\ status\_bar\_state\_layer\_hover\_;}
+\DoxyCodeLine{00132\ \ \ QColor\ status\_bar\_state\_layer\_pressed\_;}
+\DoxyCodeLine{00133\ \ \ QColor\ primary\_;}
+\DoxyCodeLine{00134\ \ \ QColor\ surface\_container\_;}
+\DoxyCodeLine{00135\ \ \ QColor\ surface\_fg\_;}
+\DoxyCodeLine{00136\ \ \ QColor\ state\_layer\_hover\_;}
+\DoxyCodeLine{00137\ \ \ QColor\ state\_layer\_pressed\_;}
+\DoxyCodeLine{00138\ \ \ QColor\ surface\_bg\_;}
+\DoxyCodeLine{00139\ \ \ QColor\ surface\_container\_low\_;}
+\DoxyCodeLine{00140\ \ \ QColor\ surface\_container\_lowest\_;}
+\DoxyCodeLine{00141\ \ \ QColor\ surface\_container\_high\_;}
+\DoxyCodeLine{00142\ \ \ QColor\ surface\_variant\_fg\_;}
+\DoxyCodeLine{00143\ \ \ QColor\ primary\_container\_;}
+\DoxyCodeLine{00144\ \ \ QColor\ secondary\_container\_;}
+\DoxyCodeLine{00145\ \ \ QColor\ secondary\_container\_fg\_;}
+\DoxyCodeLine{00146\ \ \ QColor\ error\_;}
+\DoxyCodeLine{00147\ \ \ QColor\ error\_container\_;}
+\DoxyCodeLine{00148\ \ \ QColor\ on\_error\_container\_;}
+\DoxyCodeLine{00149\ \ \ QColor\ secondary\_;}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{keywordtype}{void}\ WriteScheme(\textcolor{keyword}{const}\ material\_color\_utilities::DynamicScheme\ \&\ scheme);}
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordtype}{int}\ WriteSchemeForStatusBar(}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{const}\ material\_color\_utilities::DynamicScheme\ \&\ scheme);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ signals:}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{void}\ SchemeUpdated();}
+\DoxyCodeLine{00157\ \};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \}\ \ \textcolor{comment}{//\ namespace\ loader}}
+\DoxyCodeLine{00160\ \}\ \ \textcolor{comment}{//\ namespace\ panel}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SRC\_THEME\_LOADER\_QUICK\_THEME\_PROVIDER\_H\_}}
 
 \end{DoxyCode}

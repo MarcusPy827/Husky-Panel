@@ -1,0 +1,262 @@
+\doxysection{panel\+::frontend\+::Bluetooth\+Handler Class Reference}
+\hypertarget{classpanel_1_1frontend_1_1BluetoothHandler}{}\label{classpanel_1_1frontend_1_1BluetoothHandler}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+Inheritance diagram for panel\+::frontend\+::Bluetooth\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpanel_1_1frontend_1_1BluetoothHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a4c93dc6c5eadb8f5d32cf5175466c5e5}\label{classpanel_1_1frontend_1_1BluetoothHandler_a4c93dc6c5eadb8f5d32cf5175466c5e5} 
+void {\bfseries Enabled\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_ad97047c8785a51af5c99e3acce8e50d4}\label{classpanel_1_1frontend_1_1BluetoothHandler_ad97047c8785a51af5c99e3acce8e50d4} 
+void {\bfseries Adapters\+Changed} ()
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a9880b1c0b0f70203877a0872106c7361}\label{classpanel_1_1frontend_1_1BluetoothHandler_a9880b1c0b0f70203877a0872106c7361} 
+void {\bfseries Devices\+Changed} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a4578aced8505516b63df2353deeb6762}{Bluetooth\+Handler}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor for {\ttfamily \doxylink{classpanel_1_1frontend_1_1BluetoothHandler}{Bluetooth\+Handler}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a437b21d4c5c62163f41b1d50bf86c79f}{Get\+Bluetooth\+Enabled}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the selected Bluetooth adapter is powered on. \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_ae921cb74279c12efcd5dd2be22386178}{Get\+Adapters}} () const
+\begin{DoxyCompactList}\small\item\em Returns the list of available Bluetooth adapters. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a049f14f0f742c7a95b1c09985d7e5d41}{Get\+Selected\+Adapter\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Returns the D-\/\+Bus object path of the currently selected adapter. \end{DoxyCompactList}\item 
+QVariant\+List \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a7f5ce3808c2983f9cb7a99d4a525534b}{Get\+Devices}} () const
+\begin{DoxyCompactList}\small\item\em Returns the list of known Bluetooth devices for the selected adapter. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_ab4bd2d1f0c77d97f010ced78923dd6cd}{Get\+Bt\+Icon}} () const
+\begin{DoxyCompactList}\small\item\em Returns the Material Symbols icon name representing the current Bluetooth state. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_ad253463667498efa5c09eefd728a2834}{set\+Enabled}} (bool enabled)
+\begin{DoxyCompactList}\small\item\em Powers the selected Bluetooth adapter on or off. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a5edf76b61946c072f3219085fba0b0c3}{select\+Adapter}} (const QString \&path)
+\begin{DoxyCompactList}\small\item\em Selects a Bluetooth adapter by its D-\/\+Bus object path. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a5363e76e23ccc559410c0a9a35b453b0}{connect\+Device}} (const QString \&address)
+\begin{DoxyCompactList}\small\item\em Initiates an asynchronous connection to a Bluetooth device. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_abc9853cdb718c13931a0fb2d92d05f87}{disconnect\+Device}} (const QString \&address)
+\begin{DoxyCompactList}\small\item\em Disconnects from a Bluetooth device. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{classpanel_1_1frontend_1_1BluetoothHandler_a64a02aa6c38c56c0ca08be7e26d715b3}{open\+Pairing\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Opens the system Bluetooth pairing settings dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_aac61b989300e9110f9de65b59a51d7f2}\label{classpanel_1_1frontend_1_1BluetoothHandler_aac61b989300e9110f9de65b59a51d7f2} 
+bool {\bfseries bluetooth\+Enabled}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a9f4fc9079d123e421491740ae08d1e19}\label{classpanel_1_1frontend_1_1BluetoothHandler_a9f4fc9079d123e421491740ae08d1e19} 
+QVariant\+List {\bfseries adapters}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_abe9c2c74361001eb35477e7cf2ff5fad}\label{classpanel_1_1frontend_1_1BluetoothHandler_abe9c2c74361001eb35477e7cf2ff5fad} 
+QString {\bfseries selected\+Adapter\+Path}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_aa5223852acc7f5fee42ad4fc17254c20}\label{classpanel_1_1frontend_1_1BluetoothHandler_aa5223852acc7f5fee42ad4fc17254c20} 
+QVariant\+List {\bfseries devices}
+\item 
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_aa8735a1651fd3c8626d13e753b980be0}\label{classpanel_1_1frontend_1_1BluetoothHandler_aa8735a1651fd3c8626d13e753b980be0} 
+QString {\bfseries bt\+Icon}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a4578aced8505516b63df2353deeb6762}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!BluetoothHandler@{BluetoothHandler}}
+\index{BluetoothHandler@{BluetoothHandler}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{BluetoothHandler()}{BluetoothHandler()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a4578aced8505516b63df2353deeb6762} 
+panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Bluetooth\+Handler (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor for {\ttfamily \doxylink{classpanel_1_1frontend_1_1BluetoothHandler}{Bluetooth\+Handler}}. 
+
+Creates the underlying {\ttfamily \doxylink{classpanel_1_1backend_1_1BluetoothInfo}{backend\+::\+Bluetooth\+Info}} instance and wires its signals to the corresponding signals of this handler. 
+\begin{DoxyParams}{Parameters}
+{\em parent} & (QObject\texorpdfstring{$\ast$}{*}) The parent QObject. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+\label{doc-func-members}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a5363e76e23ccc559410c0a9a35b453b0}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!connectDevice@{connectDevice}}
+\index{connectDevice@{connectDevice}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{connectDevice()}{connectDevice()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a5363e76e23ccc559410c0a9a35b453b0} 
+void panel\+::frontend\+::\+Bluetooth\+Handler\+::connect\+Device (\begin{DoxyParamCaption}\item[{const QString \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Initiates an asynchronous connection to a Bluetooth device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & (const QString\&) The Bluetooth address of the device. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_abc9853cdb718c13931a0fb2d92d05f87}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!disconnectDevice@{disconnectDevice}}
+\index{disconnectDevice@{disconnectDevice}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{disconnectDevice()}{disconnectDevice()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_abc9853cdb718c13931a0fb2d92d05f87} 
+void panel\+::frontend\+::\+Bluetooth\+Handler\+::disconnect\+Device (\begin{DoxyParamCaption}\item[{const QString \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Disconnects from a Bluetooth device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & (const QString\&) The Bluetooth address of the device. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_ae921cb74279c12efcd5dd2be22386178}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!GetAdapters@{GetAdapters}}
+\index{GetAdapters@{GetAdapters}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{GetAdapters()}{GetAdapters()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_ae921cb74279c12efcd5dd2be22386178} 
+QVariant\+List panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Get\+Adapters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the list of available Bluetooth adapters. 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{bluetooth__info_8h_source}{bluetooth\+\_\+info.\+h}} for {\ttfamily Bluetooth\+Info\+::\+Get\+Adapters()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of adapter QVariant\+Maps. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a437b21d4c5c62163f41b1d50bf86c79f}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!GetBluetoothEnabled@{GetBluetoothEnabled}}
+\index{GetBluetoothEnabled@{GetBluetoothEnabled}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{GetBluetoothEnabled()}{GetBluetoothEnabled()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a437b21d4c5c62163f41b1d50bf86c79f} 
+bool panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Get\+Bluetooth\+Enabled (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns whether the selected Bluetooth adapter is powered on. 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{bluetooth__info_8h_source}{bluetooth\+\_\+info.\+h}} for {\ttfamily Bluetooth\+Info\+::\+Get\+Enabled()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(bool) {\ttfamily true} if Bluetooth is enabled, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_ab4bd2d1f0c77d97f010ced78923dd6cd}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!GetBtIcon@{GetBtIcon}}
+\index{GetBtIcon@{GetBtIcon}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{GetBtIcon()}{GetBtIcon()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_ab4bd2d1f0c77d97f010ced78923dd6cd} 
+QString panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Get\+Bt\+Icon (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the Material Symbols icon name representing the current Bluetooth state. 
+
+\begin{DoxyNote}{Note}
+Icon mapping\+: Bluetooth disabled → {\ttfamily bluetooth\+\_\+disabled} Enabled, no connected device → {\ttfamily bluetooth} Enabled, at least one connected device → {\ttfamily bluetooth\+\_\+connected} 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+(QString) One of\+: {\ttfamily bluetooth\+\_\+disabled}, {\ttfamily bluetooth}, {\ttfamily bluetooth\+\_\+connected}. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a7f5ce3808c2983f9cb7a99d4a525534b}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!GetDevices@{GetDevices}}
+\index{GetDevices@{GetDevices}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{GetDevices()}{GetDevices()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a7f5ce3808c2983f9cb7a99d4a525534b} 
+QVariant\+List panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Get\+Devices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the list of known Bluetooth devices for the selected adapter. 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{bluetooth__info_8h_source}{bluetooth\+\_\+info.\+h}} for {\ttfamily Bluetooth\+Info\+::\+Get\+Devices()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QVariant\+List) A list of device QVariant\+Maps. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a049f14f0f742c7a95b1c09985d7e5d41}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!GetSelectedAdapterPath@{GetSelectedAdapterPath}}
+\index{GetSelectedAdapterPath@{GetSelectedAdapterPath}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{GetSelectedAdapterPath()}{GetSelectedAdapterPath()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a049f14f0f742c7a95b1c09985d7e5d41} 
+QString panel\+::frontend\+::\+Bluetooth\+Handler\+::\+Get\+Selected\+Adapter\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the D-\/\+Bus object path of the currently selected adapter. 
+
+\begin{DoxySeeAlso}{See also}
+{\ttfamily \doxylink{bluetooth__info_8h_source}{bluetooth\+\_\+info.\+h}} for {\ttfamily Bluetooth\+Info\+::\+Get\+Selected\+Adapter\+Path()}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+(QString) The selected adapter\textquotesingle{}s object path. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a64a02aa6c38c56c0ca08be7e26d715b3}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!openPairingSettings@{openPairingSettings}}
+\index{openPairingSettings@{openPairingSettings}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{openPairingSettings()}{openPairingSettings()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a64a02aa6c38c56c0ca08be7e26d715b3} 
+void panel\+::frontend\+::\+Bluetooth\+Handler\+::open\+Pairing\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Opens the system Bluetooth pairing settings dialog. 
+
+Tries common Bluetooth management tools in order\+: the KDE Plasma control module, the GNOME control centre panel, Bluedevil\textquotesingle{}s pairing wizard, and Blueman manager. The first command found in the system {\ttfamily PATH} is launched detached. \begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_a5edf76b61946c072f3219085fba0b0c3}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!selectAdapter@{selectAdapter}}
+\index{selectAdapter@{selectAdapter}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{selectAdapter()}{selectAdapter()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_a5edf76b61946c072f3219085fba0b0c3} 
+void panel\+::frontend\+::\+Bluetooth\+Handler\+::select\+Adapter (\begin{DoxyParamCaption}\item[{const QString \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Selects a Bluetooth adapter by its D-\/\+Bus object path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & (const QString\&) The BlueZ D-\/\+Bus object path of the adapter to select. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+\Hypertarget{classpanel_1_1frontend_1_1BluetoothHandler_ad253463667498efa5c09eefd728a2834}\index{panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}!setEnabled@{setEnabled}}
+\index{setEnabled@{setEnabled}!panel::frontend::BluetoothHandler@{panel::frontend::BluetoothHandler}}
+\doxysubsubsection{\texorpdfstring{setEnabled()}{setEnabled()}}
+{\footnotesize\ttfamily \label{classpanel_1_1frontend_1_1BluetoothHandler_ad253463667498efa5c09eefd728a2834} 
+void panel\+::frontend\+::\+Bluetooth\+Handler\+::set\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled}{}\end{DoxyParamCaption})}
+
+
+
+Powers the selected Bluetooth adapter on or off. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled} & (bool) {\ttfamily true} to power on, {\ttfamily false} to power off. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/components/bluetooth/bluetooth\+\_\+handler.\+h\item 
+src/components/bluetooth/bluetooth\+\_\+handler.\+cc\end{DoxyCompactItemize}

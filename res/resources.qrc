@@ -11,6 +11,7 @@
         <file>translations/app_drawer.locale</file>
         <file>translations/config_panel.locale</file>
         <file>translations/volume_control.locale</file>
+        <file>translations/bluetooth.locale</file>
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
@@ -46,5 +47,8 @@
         <file>interfaces/volume_control/VolumePage.qml</file>
         <file>interfaces/volume_control/StreamPage.qml</file>
         <file>interfaces/volume_control/VolumeSlider.qml</file>
+        <file>interfaces/bluetooth/qmldir</file>
+        <file>interfaces/bluetooth/BluetoothIndicator.qml</file>
+        <file>interfaces/bluetooth/BluetoothFlyout.qml</file>
     </qresource>
 </RCC>
