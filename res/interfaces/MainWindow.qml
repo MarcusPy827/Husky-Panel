@@ -217,7 +217,7 @@ Window {
           Layout.topMargin: 24
           Layout.leftMargin: 24
           Layout.rightMargin: 24
-          text: StatusBarTranslator.Tr(confirmDialog.pendingLabel)
+          text: confirmDialog.pendingLabel !== "" ? StatusBarTranslator.Tr(confirmDialog.pendingLabel) : "" // qmllint disable unqualified
           font.pixelSize: 24
           color: Theme.surface_fg
           wrapMode: Text.WordWrap
