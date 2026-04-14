@@ -1,0 +1,269 @@
+.TH "panel::frontend::BluetoothHandler" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::frontend::BluetoothHandler
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBEnabledChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBAdaptersChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBDevicesChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBluetoothHandler\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor for \fR\fBBluetoothHandler\fP\fP\&. "
+.ti -1c
+.RI "bool \fBGetBluetoothEnabled\fP () const"
+.br
+.RI "Returns whether the selected Bluetooth adapter is powered on\&. "
+.ti -1c
+.RI "QVariantList \fBGetAdapters\fP () const"
+.br
+.RI "Returns the list of available Bluetooth adapters\&. "
+.ti -1c
+.RI "QString \fBGetSelectedAdapterPath\fP () const"
+.br
+.RI "Returns the D-Bus object path of the currently selected adapter\&. "
+.ti -1c
+.RI "QVariantList \fBGetDevices\fP () const"
+.br
+.RI "Returns the list of known Bluetooth devices for the selected adapter\&. "
+.ti -1c
+.RI "QString \fBGetBtIcon\fP () const"
+.br
+.RI "Returns the Material Symbols icon name representing the current Bluetooth state\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBsetEnabled\fP (bool enabled)"
+.br
+.RI "Powers the selected Bluetooth adapter on or off\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBselectAdapter\fP (const QString &path)"
+.br
+.RI "Selects a Bluetooth adapter by its D-Bus object path\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBconnectDevice\fP (const QString &address)"
+.br
+.RI "Initiates an asynchronous connection to a Bluetooth device\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBdisconnectDevice\fP (const QString &address)"
+.br
+.RI "Disconnects from a Bluetooth device\&. "
+.ti -1c
+.RI "Q_INVOKABLE void \fBopenPairingSettings\fP ()"
+.br
+.RI "Opens the system Bluetooth pairing settings dialog\&. "
+.in -1c
+.SS "Properties"
+
+.in +1c
+.ti -1c
+.RI "bool \fBbluetoothEnabled\fP"
+.br
+.ti -1c
+.RI "QVariantList \fBadapters\fP"
+.br
+.ti -1c
+.RI "QString \fBselectedAdapterPath\fP"
+.br
+.ti -1c
+.RI "QVariantList \fBdevices\fP"
+.br
+.ti -1c
+.RI "QString \fBbtIcon\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::frontend::BluetoothHandler::BluetoothHandler (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor for \fR\fBBluetoothHandler\fP\fP\&. Creates the underlying \fR\fBbackend::BluetoothInfo\fP\fP instance and wires its signals to the corresponding signals of this handler\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void panel::frontend::BluetoothHandler::connectDevice (const QString & address)"
+
+.PP
+Initiates an asynchronous connection to a Bluetooth device\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddress\fP (const QString&) The Bluetooth address of the device\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::BluetoothHandler::disconnectDevice (const QString & address)"
+
+.PP
+Disconnects from a Bluetooth device\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddress\fP (const QString&) The Bluetooth address of the device\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::frontend::BluetoothHandler::GetAdapters () const"
+
+.PP
+Returns the list of available Bluetooth adapters\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBbluetooth_info\&.h\fP\fP for \fRBluetoothInfo::GetAdapters()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of adapter QVariantMaps\&. 
+.RE
+.PP
+
+.SS "bool panel::frontend::BluetoothHandler::GetBluetoothEnabled () const"
+
+.PP
+Returns whether the selected Bluetooth adapter is powered on\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBbluetooth_info\&.h\fP\fP for \fRBluetoothInfo::GetEnabled()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(bool) \fRtrue\fP if Bluetooth is enabled, \fRfalse\fP otherwise\&. 
+.RE
+.PP
+
+.SS "QString panel::frontend::BluetoothHandler::GetBtIcon () const"
+
+.PP
+Returns the Material Symbols icon name representing the current Bluetooth state\&. 
+.PP
+\fBNote\fP
+.RS 4
+Icon mapping: Bluetooth disabled → \fRbluetooth_disabled\fP Enabled, no connected device → \fRbluetooth\fP Enabled, at least one connected device → \fRbluetooth_connected\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) One of: \fRbluetooth_disabled\fP, \fRbluetooth\fP, \fRbluetooth_connected\fP\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::frontend::BluetoothHandler::GetDevices () const"
+
+.PP
+Returns the list of known Bluetooth devices for the selected adapter\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBbluetooth_info\&.h\fP\fP for \fRBluetoothInfo::GetDevices()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) A list of device QVariantMaps\&. 
+.RE
+.PP
+
+.SS "QString panel::frontend::BluetoothHandler::GetSelectedAdapterPath () const"
+
+.PP
+Returns the D-Bus object path of the currently selected adapter\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fR\fBbluetooth_info\&.h\fP\fP for \fRBluetoothInfo::GetSelectedAdapterPath()\fP\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The selected adapter's object path\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::BluetoothHandler::openPairingSettings ()"
+
+.PP
+Opens the system Bluetooth pairing settings dialog\&. Tries common Bluetooth management tools in order: the KDE Plasma control module, the GNOME control centre panel, Bluedevil's pairing wizard, and Blueman manager\&. The first command found in the system \fRPATH\fP is launched detached\&. 
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::BluetoothHandler::selectAdapter (const QString & path)"
+
+.PP
+Selects a Bluetooth adapter by its D-Bus object path\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP (const QString&) The BlueZ D-Bus object path of the adapter to select\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::frontend::BluetoothHandler::setEnabled (bool enabled)"
+
+.PP
+Powers the selected Bluetooth adapter on or off\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIenabled\fP (bool) \fRtrue\fP to power on, \fRfalse\fP to power off\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.

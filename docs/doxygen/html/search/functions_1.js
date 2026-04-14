@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['getapplicationname_0',['GetApplicationName',['../classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html#a28410ec3c7dba17082461a9db28668b7',1,'panel::backend::CurrentWindowWlrootsImpl::GetApplicationName()'],['../classpanel_1_1backend_1_1CurrentWindowXorgImpl.html#a77c6218b7510fd8445d98b38b49081e1',1,'panel::backend::CurrentWindowXorgImpl::GetApplicationName()']]],
-  ['getconfigbasedir_1',['GetConfigBaseDir',['../classpanel_1_1loader_1_1PathFinder.html#a6a72ce47a553df1e76997cf0637c17a4',1,'panel::loader::PathFinder']]],
-  ['getpackagename_2',['GetPackageName',['../classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html#a2ef464b381c2f6838908443ff2802d52',1,'panel::backend::CurrentWindowWlrootsImpl::GetPackageName()'],['../classpanel_1_1backend_1_1CurrentWindowXorgImpl.html#aa4802f9a6bc46ccce0ece2a64872612a',1,'panel::backend::CurrentWindowXorgImpl::GetPackageName()']]],
-  ['getsinkinputs_3',['GetSinkInputs',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a7fb5de17d474e88d64711f0c87acca7f',1,'panel::frontend::VolumeControlHandler::GetSinkInputs()'],['../classpanel_1_1backend_1_1VolumeControl.html#ab340974cd6309e991b4bddf58900bb16',1,'panel::backend::VolumeControl::GetSinkInputs()']]],
-  ['getsinks_4',['GetSinks',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#a1fd3cc73c5f7f0ac66755de3dfb50816',1,'panel::frontend::VolumeControlHandler::GetSinks()'],['../classpanel_1_1backend_1_1VolumeControl.html#ac472de60918a8b39f04db0e6b056af64',1,'panel::backend::VolumeControl::GetSinks()']]],
-  ['getsourceoutputs_5',['GetSourceOutputs',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#ab3f0d2fe972a22cfd643cea2d3605508',1,'panel::frontend::VolumeControlHandler::GetSourceOutputs()'],['../classpanel_1_1backend_1_1VolumeControl.html#a79463c5d7316f75de53c70817fc1b0e4',1,'panel::backend::VolumeControl::GetSourceOutputs()']]],
-  ['getsources_6',['GetSources',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#acf72f8b0d4882a2315db442b52d714b1',1,'panel::frontend::VolumeControlHandler::GetSources()'],['../classpanel_1_1backend_1_1VolumeControl.html#a29f9a774f2d4181b5fac01d11c57f57d',1,'panel::backend::VolumeControl::GetSources()']]],
-  ['getsystemconfigdir_7',['GetSystemConfigDir',['../classpanel_1_1loader_1_1PathFinder.html#a484dbc0863d7ec0f7c6d2a5607e658f5',1,'panel::loader::PathFinder']]],
-  ['gettrayconfigpath_8',['GetTrayConfigPath',['../classpanel_1_1loader_1_1PathFinder.html#a7708fd5aa1756adb3cb2b714b5c37455',1,'panel::loader::PathFinder']]],
-  ['gettrayconfigs_9',['GetTrayConfigs',['../classpanel_1_1loader_1_1TrayConfigHandler.html#a0081ec49217ab46c220b241e82f6d175',1,'panel::loader::TrayConfigHandler']]],
-  ['gettrayexpandingiconconfigpath_10',['GetTrayExpandingIconConfigPath',['../classpanel_1_1loader_1_1PathFinder.html#aeca383a63eb30102391183367d512470',1,'panel::loader::PathFinder']]],
-  ['getvolumeicon_11',['GetVolumeIcon',['../classpanel_1_1frontend_1_1VolumeControlHandler.html#aaef677404578478c943ca43ab32750b6',1,'panel::frontend::VolumeControlHandler']]]
+  ['connectdevice_0',['ConnectDevice',['../classpanel_1_1backend_1_1BluetoothInfo.html#a36ea643fceef0797999f93a669c70838',1,'panel::backend::BluetoothInfo']]],
+  ['connectdevice_1',['connectDevice',['../classpanel_1_1frontend_1_1BluetoothHandler.html#a5363e76e23ccc559410c0a9a35b453b0',1,'panel::frontend::BluetoothHandler']]],
+  ['currentwindowwlrootsimpl_2',['CurrentWindowWlrootsImpl',['../classpanel_1_1backend_1_1CurrentWindowWlrootsImpl.html#accb9060a76e53e5a9ce603c44bd8993f',1,'panel::backend::CurrentWindowWlrootsImpl']]],
+  ['currentwindowxorgimpl_3',['CurrentWindowXorgImpl',['../classpanel_1_1backend_1_1CurrentWindowXorgImpl.html#a1f8381c790377a8e1db8be31c985da1f',1,'panel::backend::CurrentWindowXorgImpl']]]
 ];

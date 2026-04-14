@@ -15,6 +15,7 @@ var hierarchy =
     ] ],
     [ "QObject", null, [
       [ "panel::backend::BatteryInfo", "classpanel_1_1backend_1_1BatteryInfo.html", null ],
+      [ "panel::backend::BluetoothInfo", "classpanel_1_1backend_1_1BluetoothInfo.html", null ],
       [ "panel::backend::Clock", "classpanel_1_1backend_1_1Clock.html", null ],
       [ "panel::backend::CurrentWindowProvider", "classpanel_1_1backend_1_1CurrentWindowProvider.html", [
         [ "panel::backend::CurrentWindowKwinImpl", "classpanel_1_1backend_1_1CurrentWindowKwinImpl.html", null ],
@@ -33,6 +34,7 @@ var hierarchy =
       [ "panel::frontend::AppInfoWrapper", "classpanel_1_1frontend_1_1AppInfoWrapper.html", null ],
       [ "panel::frontend::AppLauncher", "classpanel_1_1frontend_1_1AppLauncher.html", null ],
       [ "panel::frontend::BatteryIndicator", "classpanel_1_1frontend_1_1BatteryIndicator.html", null ],
+      [ "panel::frontend::BluetoothHandler", "classpanel_1_1frontend_1_1BluetoothHandler.html", null ],
       [ "panel::frontend::ClockBtn", "classpanel_1_1frontend_1_1ClockBtn.html", null ],
       [ "panel::frontend::KRunnerBtn", "classpanel_1_1frontend_1_1KRunnerBtn.html", null ],
       [ "panel::frontend::TrayIconItem", "classpanel_1_1frontend_1_1TrayIconItem.html", null ],

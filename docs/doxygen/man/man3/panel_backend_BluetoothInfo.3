@@ -1,0 +1,202 @@
+.TH "panel::backend::BluetoothInfo" 3 "Version 0.9.5 - Unstable" "Husky Panel" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+panel::backend::BluetoothInfo
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum class \fBDeviceState\fP { \fBkConnected\fP, \fBkPaired\fP, \fBkConnecting\fP, \fBkFailed\fP }"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBAdaptersChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBEnabledChanged\fP ()"
+.br
+.ti -1c
+.RI "void \fBDevicesChanged\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBluetoothInfo\fP (QObject *parent=nullptr)"
+.br
+.RI "The constructor for \fR\fBBluetoothInfo\fP\fP\&. "
+.ti -1c
+.RI "QVariantList \fBGetAdapters\fP () const"
+.br
+.RI "Returns the list of available Bluetooth adapters\&. "
+.ti -1c
+.RI "QString \fBGetSelectedAdapterPath\fP () const"
+.br
+.RI "Returns the D-Bus object path of the selected adapter\&. "
+.ti -1c
+.RI "bool \fBGetEnabled\fP () const"
+.br
+.RI "Returns whether the selected adapter is powered on\&. "
+.ti -1c
+.RI "QVariantList \fBGetDevices\fP () const"
+.br
+.RI "Returns the list of known Bluetooth devices for the selected adapter\&. "
+.ti -1c
+.RI "void \fBSetEnabled\fP (bool enabled)"
+.br
+.RI "Powers the selected Bluetooth adapter on or off\&. "
+.ti -1c
+.RI "void \fBSelectAdapter\fP (const QString &path)"
+.br
+.RI "Selects a Bluetooth adapter by its D-Bus object path\&. "
+.ti -1c
+.RI "void \fBConnectDevice\fP (const QString &address)"
+.br
+.RI "Initiates an asynchronous Bluetooth connection to a device\&. "
+.ti -1c
+.RI "void \fBDisconnectDevice\fP (const QString &address)"
+.br
+.RI "Initiates an asynchronous Bluetooth disconnection from a device\&. "
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "panel::backend::BluetoothInfo::BluetoothInfo (QObject * parent = \fRnullptr\fP)\fR [explicit]\fP"
+
+.PP
+The constructor for \fR\fBBluetoothInfo\fP\fP\&. Connects to the BlueZ D-Bus service on the system bus, subscribes to \fRInterfacesAdded\fP, \fRInterfacesRemoved\fP, and \fRPropertiesChanged\fP signals, and performs an initial refresh of all managed objects\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP (QObject*) The parent QObject\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void panel::backend::BluetoothInfo::ConnectDevice (const QString & address)"
+
+.PP
+Initiates an asynchronous Bluetooth connection to a device\&. Sets the device's state to \fRconnecting\fP immediately, emits \fRDevicesChanged\fP, then calls \fRorg\&.bluez\&.Device1\&.Connect\fP\&. On completion, state transitions to \fRconnected\fP or \fRfailed\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddress\fP (const QString&) The Bluetooth address of the device to connect\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::BluetoothInfo::DisconnectDevice (const QString & address)"
+
+.PP
+Initiates an asynchronous Bluetooth disconnection from a device\&. Calls \fRorg\&.bluez\&.Device1\&.Disconnect\fP asynchronously\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddress\fP (const QString&) The Bluetooth address of the device to disconnect\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::backend::BluetoothInfo::GetAdapters () const"
+
+.PP
+Returns the list of available Bluetooth adapters\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) Each entry is a QVariantMap with keys \fRaddress\fP, \fRname\fP, and \fRpath\fP\&. 
+.RE
+.PP
+
+.SS "QVariantList panel::backend::BluetoothInfo::GetDevices () const"
+
+.PP
+Returns the list of known Bluetooth devices for the selected adapter\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QVariantList) Each entry is a QVariantMap with keys \fRaddress\fP, \fRname\fP, \fRicon\fP, and \fRstate\fP\&. 
+.RE
+.PP
+
+.SS "bool panel::backend::BluetoothInfo::GetEnabled () const"
+
+.PP
+Returns whether the selected adapter is powered on\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(bool) \fRtrue\fP if the selected adapter's \fRPowered\fP property is \fRtrue\fP, \fRfalse\fP otherwise or if no adapter is selected\&. 
+.RE
+.PP
+
+.SS "QString panel::backend::BluetoothInfo::GetSelectedAdapterPath () const"
+
+.PP
+Returns the D-Bus object path of the selected adapter\&. 
+.PP
+\fBReturns\fP
+.RS 4
+(QString) The selected adapter's BlueZ object path, or empty string if no adapter is available\&. 
+.RE
+.PP
+
+.SS "void panel::backend::BluetoothInfo::SelectAdapter (const QString & path)"
+
+.PP
+Selects a Bluetooth adapter by its D-Bus object path\&. Switches the active adapter and rebuilds the device list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP (const QString&) The BlueZ D-Bus object path of the adapter\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+.SS "void panel::backend::BluetoothInfo::SetEnabled (bool enabled)"
+
+.PP
+Powers the selected Bluetooth adapter on or off\&. Calls \fRorg\&.freedesktop\&.DBus\&.Properties\&.Set\fP on the selected adapter with the \fRPowered\fP property\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIenabled\fP (bool) \fRtrue\fP to power on, \fRfalse\fP to power off\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Husky Panel from the source code\&.
