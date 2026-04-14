@@ -179,6 +179,8 @@ set(BACKEND_SOURCES
   src/info_server/session_handler/session_handler.cc
   src/info_server/volume_control/volume_control.h
   src/info_server/volume_control/volume_control.cc
+  src/info_server/bluetooth/bluetooth_info.h
+  src/info_server/bluetooth/bluetooth_info.cc
 )
 
 set(FRONTEND_SOURCES
@@ -207,6 +209,8 @@ set(FRONTEND_SOURCES
   src/components/calendar/calendar.cc
   src/components/volume_control/volume_control_handler.h
   src/components/volume_control/volume_control_handler.cc
+  src/components/bluetooth/bluetooth_handler.h
+  src/components/bluetooth/bluetooth_handler.cc
 )
 
 set(CONFIG_LOADER_SOURCES
