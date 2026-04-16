@@ -50,6 +50,7 @@
 #include "src/components/system_tray/tray_icon_image_handler.h"
 #include "src/components/volume_control/volume_control_handler.h"
 #include "src/components/bluetooth/bluetooth_handler.h"
+#include "src/components/network_control/network_control_handler.h"
 #include "src/theme_loader/quick_theme_provider.h"
 #include "src/translation_loader/translation_loader.h"
 #include "src/utils/misc/misc.h"
@@ -139,6 +140,15 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("BluetoothTranslator",
     translation_loader_bluetooth);
   LOG(INFO) << absl::StrCat("Successfully injected bluetooth translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for network...");
+  auto* translation_loader_network_control =
+    new panel::loader::TranslationLoader(
+      ":/translations/translations/wlan_control.locale",
+      panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("NetworkTranslator",
+    translation_loader_network_control);
+  LOG(INFO) << absl::StrCat("Successfully injected network translator.");
   LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
     "injected!");
 
@@ -213,6 +223,12 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("BluetoothHandler",
     bluetooth_handler);
   LOG(INFO) << absl::StrCat("Successfully injected bluetooth handler!!");
+
+  LOG(INFO) << absl::StrCat("Initializing network control handler...");
+  auto* network_handler = new panel::frontend::NetworkControlHandler(
+    &application);
+  target.rootContext()->setContextProperty("NetworkHandler", network_handler);
+  LOG(INFO) << absl::StrCat("Successfully injected network control handler!!");
 }
 
 

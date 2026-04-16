@@ -12,6 +12,7 @@
         <file>translations/config_panel.locale</file>
         <file>translations/volume_control.locale</file>
         <file>translations/bluetooth.locale</file>
+        <file>translations/wlan_control.locale</file>
     </qresource>
     <qresource prefix="/ui">
         <file>interfaces/MainWindow.qml</file>
@@ -50,5 +51,12 @@
         <file>interfaces/bluetooth/qmldir</file>
         <file>interfaces/bluetooth/BluetoothIndicator.qml</file>
         <file>interfaces/bluetooth/BluetoothFlyout.qml</file>
+        <file>interfaces/network_control/qmldir</file>
+        <file>interfaces/network_control/NetworkFlyout.qml</file>
+        <file>interfaces/network_control/NetworkWirelessPage.qml</file>
+        <file>interfaces/network_control/NetworkCabledPage.qml</file>
+        <file>interfaces/network_control/NetworkHotspotPage.qml</file>
+        <file>interfaces/network_control/Md3Switch.qml</file>
+        <file>interfaces/network_control/NetActionButton.qml</file>
     </qresource>
 </RCC>

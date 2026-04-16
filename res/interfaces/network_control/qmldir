@@ -1,0 +1,7 @@
+module network_control
+NetworkFlyout 1.0 NetworkFlyout.qml
+NetworkWirelessPage 1.0 NetworkWirelessPage.qml
+NetworkCabledPage 1.0 NetworkCabledPage.qml
+NetworkHotspotPage 1.0 NetworkHotspotPage.qml
+Md3Switch 1.0 Md3Switch.qml
+NetActionButton 1.0 NetActionButton.qml

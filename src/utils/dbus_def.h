@@ -36,7 +36,7 @@
 #define DBUS_ACCOUNTS_SERVICE "org.freedesktop.Accounts"
 #define DBUS_ACCOUNTS_USER_INTERFACE "org.freedesktop.Accounts.User"
 
-// WLAN
+// WLAN / Network Manager
 #define DBUS_NETWORK_MANAGER_SERVICE "org.freedesktop.NetworkManager"
 #define DBUS_NETWORK_MANAGER_PATH "/org/freedesktop/NetworkManager"
 #define DBUS_NETWORK_MANAGER_INTERFACE "org.freedesktop.NetworkManager"
@@ -44,8 +44,18 @@
   "org.freedesktop.NetworkManager.Device"
 #define DBUS_NETWORK_MANAGER_WIRELESS_INTERFACE \
   "org.freedesktop.NetworkManager.Device.Wireless"
+#define DBUS_NETWORK_MANAGER_WIRED_INTERFACE \
+  "org.freedesktop.NetworkManager.Device.Wired"
 #define DBUS_NETWORK_MANAGER_ACCESS_POINT_INTERFACE \
   "org.freedesktop.NetworkManager.AccessPoint"
+#define DBUS_NETWORK_MANAGER_ACTIVE_CONNECTION_INTERFACE \
+  "org.freedesktop.NetworkManager.Connection.Active"
+#define DBUS_NETWORK_MANAGER_SETTINGS_PATH \
+  "/org/freedesktop/NetworkManager/Settings"
+#define DBUS_NETWORK_MANAGER_SETTINGS_INTERFACE \
+  "org.freedesktop.NetworkManager.Settings"
+#define DBUS_NETWORK_MANAGER_SETTINGS_CONNECTION_INTERFACE \
+  "org.freedesktop.NetworkManager.Settings.Connection"
 
 // Current Window Info (KWin)
 #define DBUS_KWIN_SERVICE "org.kde.KWin"

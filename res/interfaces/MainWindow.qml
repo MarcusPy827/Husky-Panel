@@ -31,6 +31,7 @@ import "wlan_indicator"
 import "system_tray"
 import "volume_control"
 import "bluetooth"
+import "network_control"
 
 Window {
   id: root
@@ -55,6 +56,8 @@ Window {
   property bool volumeFlyoutExpanded: false
   property bool bluetoothFlyoutOpen: false
   property bool bluetoothFlyoutExpanded: false
+  property bool networkFlyoutOpen: false
+  property bool networkFlyoutExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
@@ -120,6 +123,7 @@ Window {
       calendarFlyoutOpen = false
       trayOverflowOpen = false
       volumeFlyoutOpen = false
+      networkFlyoutOpen = false
       bluetoothFlyoutExpanded = true
       LayerShellHelper.setFullMask(root)
       bluetoothFlyout.open()
@@ -129,33 +133,61 @@ Window {
     }
   }
 
+  onNetworkFlyoutOpenChanged: {
+    if (networkFlyoutOpen) {
+      appDrawerOpen = false
+      calendarFlyoutOpen = false
+      trayOverflowOpen = false
+      volumeFlyoutOpen = false
+      bluetoothFlyoutOpen = false
+      networkFlyoutExpanded = true
+      LayerShellHelper.setFullMask(root)
+      networkFlyout.open()
+    } else {
+      networkFlyout.close()
+      // networkFlyoutExpanded → false is set by onCloseAnimationFinished below
+    }
+  }
+
   onDrawerExpandedChanged: {
     if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
+        && !networkFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onCalendarFlyoutExpandedChanged: {
     if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
+        && !networkFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onTrayOverflowExpandedChanged: {
     if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded)
+        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
+        && !networkFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onVolumeFlyoutExpandedChanged: {
     if (!volumeFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !trayOverflowExpanded && !bluetoothFlyoutExpanded)
+        && !trayOverflowExpanded && !bluetoothFlyoutExpanded
+        && !networkFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   onBluetoothFlyoutExpandedChanged: {
     if (!bluetoothFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !trayOverflowExpanded && !volumeFlyoutExpanded)
+        && !trayOverflowExpanded && !volumeFlyoutExpanded
+        && !networkFlyoutExpanded)
+      LayerShellHelper.setBarOnlyMask(root, barHeight)
+  }
+
+  onNetworkFlyoutExpandedChanged: {
+    if (!networkFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
+        && !trayOverflowExpanded && !volumeFlyoutExpanded
+        && !bluetoothFlyoutExpanded)
       LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
@@ -164,13 +196,15 @@ Window {
     anchors.fill: parent
     visible: (root.appDrawerOpen || root.calendarFlyoutOpen
               || root.trayOverflowOpen || root.volumeFlyoutOpen
-              || root.bluetoothFlyoutOpen) && !confirmDialog.visible
+              || root.bluetoothFlyoutOpen || root.networkFlyoutOpen)
+             && !confirmDialog.visible
     onClicked: {
       root.appDrawerOpen = false
       root.calendarFlyoutOpen = false
       root.trayOverflowOpen = false
       root.volumeFlyoutOpen = false
       root.bluetoothFlyoutOpen = false
+      root.networkFlyoutOpen = false
     }
   }
 
@@ -542,8 +576,11 @@ Window {
             onClicked: root.volumeFlyoutOpen = !root.volumeFlyoutOpen
           }
 
-          // WLAN indicator
-          WLANIndicator {}
+          // WLAN / network indicator
+          WLANIndicator {
+            id: networkIndicatorBtn
+            onClicked: root.networkFlyoutOpen = !root.networkFlyoutOpen
+          }
 
           // Battery indicator
           BatteryIndicator {}
@@ -663,6 +700,28 @@ Window {
       id: bluetoothFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.bluetoothFlyoutExpanded = false
+    }
+  }
+
+  // Network flyout
+  Item {
+    readonly property int flyoutW: 320
+    x: {
+      var _track = rightBarGroup.x + networkIndicatorBtn.x + networkIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = networkIndicatorBtn.mapToItem( // qmllint disable missing-property
+        baseLayer, networkIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - flyoutW - 8,
+                                  btnCenterX - flyoutW / 2))
+    }
+    y: root.barHeight + root.drawerTopMargin
+    width: flyoutW
+    height: networkFlyout.implicitHeight
+    visible: root.networkFlyoutExpanded
+
+    NetworkFlyout {
+      id: networkFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.networkFlyoutExpanded = false
     }
   }
 

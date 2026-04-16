@@ -18,6 +18,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 Rectangle {
   id: root
@@ -101,15 +102,76 @@ Rectangle {
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
     anchors.leftMargin: 8
-    spacing: 0
+    spacing: 2
 
+    // WLAN icon — visible when the machine has a wireless adapter
+    // (hidden when ethernet-only or no hardware at all)
     Text {
-      text: WLANProvider.wlan_icon
-      color: Theme.status_bar_surface_fg
+      visible: NetworkHandler && NetworkHandler.showWlanIcon // qmllint disable unqualified
+      text: NetworkHandler.wlanIcon        // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg   // qmllint disable unqualified
       font.pixelSize: 18
       font.family: "Material Symbols Rounded"
       verticalAlignment: Text.AlignVCenter
       bottomPadding: 2
+
+      ToolTip.visible: wlanHover.containsMouse
+      ToolTip.delay: 600
+      ToolTip.text: "Wireless"
+
+      MouseArea { id: wlanHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
+    }
+
+    // Ethernet icon — visible when the machine has an ethernet adapter
+    // (hidden when wireless-only or no hardware at all)
+    Text {
+      visible: NetworkHandler && NetworkHandler.showEthernetIcon  // qmllint disable unqualified
+      text: NetworkHandler.ethernetIcon         // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg        // qmllint disable unqualified
+      font.pixelSize: 18
+      font.family: "Material Symbols Rounded"
+      verticalAlignment: Text.AlignVCenter
+      bottomPadding: 2
+
+      ToolTip.visible: ethHover.containsMouse
+      ToolTip.delay: 600
+      ToolTip.text: "Ethernet"
+
+      MouseArea { id: ethHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
+    }
+
+    // Captive portal icon — shown when any connected network requires login
+    Text {
+      visible: NetworkHandler && NetworkHandler.loginRequired  // qmllint disable unqualified
+      text: "captive_portal"
+      color: Theme.status_bar_surface_fg     // qmllint disable unqualified
+      font.pixelSize: 18
+      font.family: "Material Symbols Rounded"
+      verticalAlignment: Text.AlignVCenter
+      bottomPadding: 2
+
+      ToolTip.visible: captiveHover.containsMouse
+      ToolTip.delay: 600
+      ToolTip.text: "Login required."
+
+      MouseArea { id: captiveHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
+    }
+
+    // No-hardware icon — shown when no network hardware is detected
+    Text {
+      visible: NetworkHandler && NetworkHandler.showNoHardwareIcon  // qmllint disable unqualified
+      text: "globe_2_cancel"
+      color: Theme.status_bar_surface_fg          // qmllint disable unqualified
+      font.pixelSize: 18
+      font.family: "Material Symbols Rounded"
+      verticalAlignment: Text.AlignVCenter
+      bottomPadding: 2
+
+      ToolTip.visible: noHwHover.containsMouse
+      ToolTip.delay: 600
+      ToolTip.text: "No network hardware found"
+
+      MouseArea { id: noHwHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
     }
   }
 
