@@ -155,23 +155,50 @@ void CurrentWindowXorgImpl::OnXcbEvent() {
  */
 
 void CurrentWindowXorgImpl::UpdateActiveWindow() {
+  xcb_window_t active_window = XCB_NONE;
+
+  // Use AnyPropertyType (XCB_ATOM_NONE) so non-standard WMs that store
+  // _NET_ACTIVE_WINDOW with a different type are not silently filtered out.
   xcb_get_property_reply_t* reply = xcb_get_property_reply(
     conn_,
     xcb_get_property(conn_, 0, root_, atom_net_active_window_,
-      XCB_ATOM_WINDOW, 0, 1),
+      XCB_ATOM_NONE, 0, 1),
     nullptr);
 
-  if (!reply || reply->type != XCB_ATOM_WINDOW ||
-      xcb_get_property_value_length(reply) == 0) {
-    free(reply);
-    return;
+  if (reply && xcb_get_property_value_length(reply) >=
+      static_cast<int>(sizeof(xcb_window_t))) {
+    active_window =
+      *static_cast<xcb_window_t*>(xcb_get_property_value(reply));
   }
-
-  xcb_window_t active_window =
-    *static_cast<xcb_window_t*>(xcb_get_property_value(reply));
   free(reply);
 
+  // Fallback: some compositors (e.g. GXDE/DDE) don't reliably update
+  // _NET_ACTIVE_WINDOW; xcb_get_input_focus gives the true focused window.
   if (active_window == XCB_NONE || active_window == root_) {
+    xcb_get_input_focus_reply_t* focus =
+      xcb_get_input_focus_reply(conn_, xcb_get_input_focus(conn_), nullptr);
+    if (focus) {
+      active_window = focus->focus;
+      free(focus);
+    }
+  }
+
+  // Walk up the window tree to find the top-level client window, since
+  // input focus may land on an internal child widget.
+  while (active_window != XCB_NONE && active_window != root_) {
+    xcb_query_tree_reply_t* tree = xcb_query_tree_reply(
+      conn_, xcb_query_tree(conn_, active_window), nullptr);
+    if (!tree || tree->parent == root_) {
+      free(tree);
+      break;
+    }
+    xcb_window_t parent = tree->parent;
+    free(tree);
+    active_window = parent;
+  }
+
+  if (active_window == XCB_NONE || active_window == root_ ||
+      active_window == XCB_INPUT_FOCUS_POINTER_ROOT) {
     return;
   }
 
@@ -208,10 +235,11 @@ QString CurrentWindowXorgImpl::GetWindowClass(xcb_window_t window) {
   xcb_get_property_reply_t* reply = xcb_get_property_reply(
     conn_,
     xcb_get_property(conn_, 0, window, atom_wm_class_,
-      XCB_ATOM_STRING, 0, 256),
+      XCB_ATOM_NONE, 0, 256),
     nullptr);
 
-  if (!reply || reply->type != XCB_ATOM_STRING) {
+  if (!reply || reply->type == XCB_ATOM_NONE ||
+      xcb_get_property_value_length(reply) == 0) {
     free(reply);
     return {};
   }
