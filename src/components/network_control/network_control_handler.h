@@ -56,7 +56,7 @@ class NetworkControlHandler : public QObject {
     READ GetLoginRequired
     NOTIFY StatusChanged)
 
-  // "settings_ethernet" | "globe_2_cancel"
+  // "settings_ethernet" | "cancel"
   Q_PROPERTY(QString ethernetIcon
     READ GetEthernetIcon
     NOTIFY StatusChanged)
@@ -291,6 +291,15 @@ class NetworkControlHandler : public QObject {
    * @return void.
    */
   Q_INVOKABLE void disconnectEthernet(const QString& device_path);
+
+  /**
+   * @brief Activates the first saved connection on the Ethernet device at
+   *        @p device_path.
+   *
+   * @param device_path (const QString&) D-Bus object path of the device.
+   * @return void.
+   */
+  Q_INVOKABLE void connectEthernet(const QString& device_path);
 
   /**
    * @brief Enables or disables the hotspot on a secondary Wi-Fi device.

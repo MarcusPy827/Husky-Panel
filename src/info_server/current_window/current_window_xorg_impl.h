@@ -21,6 +21,7 @@
 #include <xcb/xcb.h>
 
 #include <QSocketNotifier>
+#include <QTimer>
 
 #include "src/info_server/current_window/current_window_provider.h"
 
@@ -48,6 +49,8 @@ class CurrentWindowXorgImpl : public CurrentWindowProvider {
   xcb_atom_t atom_wm_class_;
 
   QSocketNotifier* notifier_;
+  QTimer* poll_timer_;
+  xcb_window_t last_active_window_;
   CurrentWindowInfo window_info_;
 
  private slots:

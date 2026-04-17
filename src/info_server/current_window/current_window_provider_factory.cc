@@ -38,23 +38,29 @@ namespace backend {
 
 std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
     QObject *parent) {
+  bool is_wayland = !qEnvironmentVariable("WAYLAND_DISPLAY").isEmpty();
+  bool is_xorg = !qEnvironmentVariable("DISPLAY").isEmpty();
+
   QDBusConnectionInterface * session_bus = QDBusConnection::sessionBus()
     .interface();
   bool is_kwin = session_bus && session_bus->isServiceRegistered(
     DBUS_KWIN_SERVICE);
 
-  if (is_kwin) {
+  // The KWin D-Bus script path is only needed on Wayland+KWin because XCB
+  // cannot inspect windows there. On X11 (even with KWin, e.g. GXDE/DDE),
+  // the XCB impl is self-contained and does not require the app-bridge script.
+  if (is_kwin && is_wayland && !is_xorg) {
+    LOG(INFO) << absl::StrCat("KWin Wayland session detected. ",
+      "Using KWin D-Bus app-bridge script.");
     return std::make_unique<CurrentWindowKwinImpl>(parent);
   }
 
-  bool is_wayland = !qEnvironmentVariable("WAYLAND_DISPLAY").isEmpty();
-  if (is_wayland) {
+  if (is_wayland && !is_xorg) {
     LOG(INFO) << absl::StrCat("Non-KWin Wayland session detected. ",
       "Using wlr-foreign-toplevel.");
     return std::make_unique<CurrentWindowWlrootsImpl>(parent);
   }
 
-  bool is_xorg = !qEnvironmentVariable("DISPLAY").isEmpty();
   if (is_xorg) {
     LOG(INFO) << absl::StrCat("X11/XOrg session detected. ",
       "Using _NET_ACTIVE_WINDOW via XCB.");

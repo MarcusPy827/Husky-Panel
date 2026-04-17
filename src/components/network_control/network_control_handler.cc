@@ -151,6 +151,10 @@ void NetworkControlHandler::disconnectEthernet(const QString& device_path) {
   network_control_->DisconnectEthernet(device_path);
 }
 
+void NetworkControlHandler::connectEthernet(const QString& device_path) {
+  network_control_->ConnectEthernet(device_path);
+}
+
 void NetworkControlHandler::setHotspotEnabled(bool enabled) {
   network_control_->SetHotspotEnabled(enabled);
 }

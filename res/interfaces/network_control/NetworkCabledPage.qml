@@ -139,7 +139,7 @@ Item {
               spacing: 10
 
               Text {
-                text: ethItem.modelData["icon"] ?? "globe_2_cancel"
+                text: ethItem.modelData["icon"] ?? "cancel"
                 font.family: "Material Symbols Rounded"; font.pixelSize: 22
                 color: Theme.surface_variant_fg  // qmllint disable unqualified
                 verticalAlignment: Text.AlignVCenter
@@ -171,6 +171,7 @@ Item {
                       if (s === "no_network") return NetworkTranslator.Tr("NoInternet")
                       if (s === "pending_authentication") return NetworkTranslator.Tr("PendingAuth")
                       if (s === "unplugged") return NetworkTranslator.Tr("Unplugged")
+                      if (s === "disconnected") return NetworkTranslator.Tr("Disconnected")  // qmllint disable unqualified
                       return s ?? NetworkTranslator.Tr("UnknownStatus")
                     }
                     font.pixelSize: 12
@@ -189,6 +190,14 @@ Item {
                     color: Theme.surface_variant_fg  // qmllint disable unqualified
                   }
                 }
+              }
+
+              // Connect button — when cable is present but NM is disconnected
+              NetActionButton {
+                visible: ethItem.modelData["canConnect"] === true
+                buttonText: NetworkTranslator.Tr("Connect")  // qmllint disable unqualified
+                onActionClicked: NetworkHandler.connectEthernet(  // qmllint disable unqualified
+                  ethItem.modelData["path"] ?? "")
               }
 
               // Disconnect button — only when ethernet is validly connected

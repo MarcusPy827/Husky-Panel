@@ -18,6 +18,7 @@
 #include <cstring>
 
 #include <KService>
+#include <QTimer>
 
 #include "absl/log/log.h"
 #include "absl/strings/str_cat.h"
@@ -26,10 +27,6 @@
 
 namespace panel {
 namespace backend {
-
-/* ------------------------------------------------------------------------- */
-/* Class 'CurrentWindowXorgImpl' */
-/* ------------------------------------------------------------------------- */
 
 /**
  * @brief Constructs the XOrg/X11 implementation for active window tracking.
@@ -49,7 +46,9 @@ CurrentWindowXorgImpl::CurrentWindowXorgImpl(QObject* parent)
       root_(XCB_NONE),
       atom_net_active_window_(XCB_NONE),
       atom_wm_class_(XCB_NONE),
-      notifier_(nullptr) {
+      notifier_(nullptr),
+      poll_timer_(nullptr),
+      last_active_window_(XCB_NONE) {
   if (xcb_connection_has_error(conn_)) {
     LOG(ERROR) << absl::StrCat("CurrentWindowXorgImpl: ",
       "failed to connect to X display.");
@@ -72,6 +71,14 @@ CurrentWindowXorgImpl::CurrentWindowXorgImpl(QObject* parent)
     xcb_get_file_descriptor(conn_), QSocketNotifier::Read, this);
   connect(notifier_, &QSocketNotifier::activated,
     this, &CurrentWindowXorgImpl::OnXcbEvent);
+
+  // Fallback poll: some WMs don't send PropertyNotify
+  // For every _NET_ACTIVE_WINDOW change. Poll every 500 ms to stay current.
+  poll_timer_ = new QTimer(this);
+  poll_timer_->setInterval(500);
+  connect(poll_timer_, &QTimer::timeout,
+    this, &CurrentWindowXorgImpl::UpdateActiveWindow);
+  poll_timer_->start();
 
   UpdateActiveWindow();
 
@@ -155,23 +162,54 @@ void CurrentWindowXorgImpl::OnXcbEvent() {
  */
 
 void CurrentWindowXorgImpl::UpdateActiveWindow() {
+  xcb_window_t active_window = XCB_NONE;
+
+  // Use AnyPropertyType (XCB_ATOM_NONE) so non-standard WMs that store
+  // _NET_ACTIVE_WINDOW with a different type are not silently filtered out.
   xcb_get_property_reply_t* reply = xcb_get_property_reply(
     conn_,
     xcb_get_property(conn_, 0, root_, atom_net_active_window_,
-      XCB_ATOM_WINDOW, 0, 1),
+      XCB_ATOM_NONE, 0, 1),
     nullptr);
 
-  if (!reply || reply->type != XCB_ATOM_WINDOW ||
-      xcb_get_property_value_length(reply) == 0) {
-    free(reply);
+  if (reply && xcb_get_property_value_length(reply) >=
+      static_cast<int>(sizeof(xcb_window_t))) {
+    active_window =
+      *static_cast<xcb_window_t*>(xcb_get_property_value(reply));
+  }
+  free(reply);
+
+  // _NET_ACTIVE_WINDOW Points to the client window per EWMH. Use
+  // xcb_get_input_focus as a fallback when the property is absent.
+  if (active_window == XCB_NONE || active_window == root_) {
+    xcb_get_input_focus_reply_t* focus =
+      xcb_get_input_focus_reply(conn_, xcb_get_input_focus(conn_), nullptr);
+    if (focus) {
+      active_window = focus->focus;
+      free(focus);
+    }
+
+    // Walk up the tree until we find a window that has WM_CLASS set.
+    for (int depth = 0; depth < 32 && active_window != XCB_NONE
+                                    && active_window != root_; ++depth) {
+      if (!GetWindowClass(active_window).isEmpty()) {
+        break;
+      }
+      xcb_query_tree_reply_t* tree = xcb_query_tree_reply(
+        conn_, xcb_query_tree(conn_, active_window), nullptr);
+      if (!tree) break;
+      xcb_window_t parent = tree->parent;
+      free(tree);
+      active_window = parent;
+    }
+  }
+
+  if (active_window == XCB_NONE || active_window == root_ ||
+      active_window == XCB_INPUT_FOCUS_POINTER_ROOT) {
     return;
   }
 
-  xcb_window_t active_window =
-    *static_cast<xcb_window_t*>(xcb_get_property_value(reply));
-  free(reply);
-
-  if (active_window == XCB_NONE || active_window == root_) {
+  if (active_window == last_active_window_) {
     return;
   }
 
@@ -180,14 +218,23 @@ void CurrentWindowXorgImpl::UpdateActiveWindow() {
     return;
   }
 
-  window_info_.package_name = wm_class.toLower();
-
-  KService::Ptr service = KService::serviceByDesktopName(wm_class);
-  if (!service) {
-    service = KService::serviceByDesktopName(wm_class.toLower());
+  if (wm_class.contains(QLatin1String("HuskyPanel"), Qt::CaseInsensitive)) {
+    return;
   }
 
-  window_info_.application_name = service ? service->name() : wm_class;
+  last_active_window_ = active_window;
+  window_info_.package_name = wm_class.toLower();
+
+  if (wm_class.compare(QLatin1String("gxde-desktop-panel"),
+      Qt::CaseInsensitive) == 0) {
+    window_info_.application_name = QStringLiteral("GXDE Desktop");
+  } else {
+    KService::Ptr service = KService::serviceByDesktopName(wm_class);
+    if (!service) {
+      service = KService::serviceByDesktopName(wm_class.toLower());
+    }
+    window_info_.application_name = service ? service->name() : wm_class;
+  }
 
   LOG(INFO) << absl::StrCat("CurrentWindowXorgImpl: active window changed — ",
     window_info_.application_name.toStdString());
@@ -208,10 +255,11 @@ QString CurrentWindowXorgImpl::GetWindowClass(xcb_window_t window) {
   xcb_get_property_reply_t* reply = xcb_get_property_reply(
     conn_,
     xcb_get_property(conn_, 0, window, atom_wm_class_,
-      XCB_ATOM_STRING, 0, 256),
+      XCB_ATOM_NONE, 0, 256),
     nullptr);
 
-  if (!reply || reply->type != XCB_ATOM_STRING) {
+  if (!reply || reply->type == XCB_ATOM_NONE ||
+      xcb_get_property_value_length(reply) == 0) {
     free(reply);
     return {};
   }
