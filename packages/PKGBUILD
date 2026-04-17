@@ -20,9 +20,13 @@ makedepends=(
     'cmake'
     'extra-cmake-modules'
     'qt6-tools'
+    'wayland'
     'wayland-protocols'
     'libxkbcommon'
     'git'
+)
+optdepends=(
+    'libxcb: X11/Xorg session support'
 )
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('SKIP')

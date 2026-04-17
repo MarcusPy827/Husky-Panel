@@ -38,6 +38,7 @@ build:rpm:fedora:
         kf6-kservice-devel
         extra-cmake-modules
         pulseaudio-libs-devel
+        libxcb-devel
 
   script:
     # ---- Create source tarball using git archive ----
