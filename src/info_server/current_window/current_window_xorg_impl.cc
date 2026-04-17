@@ -179,8 +179,8 @@ void CurrentWindowXorgImpl::UpdateActiveWindow() {
   }
   free(reply);
 
-  // Fallback: some compositors (e.g. GXDE/DDE) don't reliably update
-  // _NET_ACTIVE_WINDOW; xcb_get_input_focus gives the true focused window.
+  // _NET_ACTIVE_WINDOW Points to the client window per EWMH. Use
+  // xcb_get_input_focus as a fallback when the property is absent.
   if (active_window == XCB_NONE || active_window == root_) {
     xcb_get_input_focus_reply_t* focus =
       xcb_get_input_focus_reply(conn_, xcb_get_input_focus(conn_), nullptr);
@@ -188,20 +188,20 @@ void CurrentWindowXorgImpl::UpdateActiveWindow() {
       active_window = focus->focus;
       free(focus);
     }
-  }
 
-  // Walk up the window tree to find the top-level client window, since
-  // input focus may land on an internal child widget.
-  while (active_window != XCB_NONE && active_window != root_) {
-    xcb_query_tree_reply_t* tree = xcb_query_tree_reply(
-      conn_, xcb_query_tree(conn_, active_window), nullptr);
-    if (!tree || tree->parent == root_) {
+    // Walk up the tree until we find a window that has WM_CLASS set.
+    for (int depth = 0; depth < 32 && active_window != XCB_NONE
+                                    && active_window != root_; ++depth) {
+      if (!GetWindowClass(active_window).isEmpty()) {
+        break;
+      }
+      xcb_query_tree_reply_t* tree = xcb_query_tree_reply(
+        conn_, xcb_query_tree(conn_, active_window), nullptr);
+      if (!tree) break;
+      xcb_window_t parent = tree->parent;
       free(tree);
-      break;
+      active_window = parent;
     }
-    xcb_window_t parent = tree->parent;
-    free(tree);
-    active_window = parent;
   }
 
   if (active_window == XCB_NONE || active_window == root_ ||
