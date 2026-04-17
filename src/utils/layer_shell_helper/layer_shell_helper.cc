@@ -75,10 +75,11 @@ void LayerShellHelper::SetFullMask(QObject* window_obj) {
 
   window->setMask(QRegion(0, 0, window->width(), window->height()));
 
-  // On X11, _NET_WM_WINDOW_TYPE_DOCK windows are not focused by the WM, so
-  // TextInput fields fails. We need to REQUEST FOCUS!!!!!
+  // On X11, _NET_WM_WINDOW_TYPE_DOCK windows are not focused by the WM.
+  // requestActivate() sends _NET_ACTIVE_WINDOW which GXDE might ignores for
+  // DOCK windows. xcb_set_input_focus bypasses WM focus policy directly.
   if (QGuiApplication::platformName() == QLatin1String("xcb")) {
-    window->requestActivate();
+    panel::utils::XOrgPanelHelper::RequestXorgFocus(window);
   }
 }
 

@@ -27,6 +27,7 @@ class XOrgPanelHelper {
  public:
   static void SetupXorgPanelWindow(QWindow* window, int bar_height);
   static void SetupXorgOverlayWindow(QWindow* window);
+  static void RequestXorgFocus(QWindow* window);
 };
 
 }  // namespace utils

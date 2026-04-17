@@ -28,6 +28,7 @@
 // is defined before the preprocessor evaluates it.
 #if QT_CONFIG(xcb)
 #include <xcb/xcb.h>
+#include <qpa/qplatformnativeinterface.h>
 #endif
 
 #include "absl/log/log.h"
@@ -181,6 +182,47 @@ void XOrgPanelHelper::SetupXorgOverlayWindow(QWindow* window) {
 
   window->setFlag(Qt::WindowStaysOnTopHint);
   LOG(INFO) << absl::StrCat("Successfully set window hint for flyout!!");
+}
+
+
+/**
+ * @brief Forces keyboard focus to the panel window on X11, bypassing WM focus
+ *        policy that normally denies focus to DOCK-type windows.
+ *
+ * @details DOCK windows are intentionally non-focusable by most WMs. Qt's
+ *          requestActivate() sends _NET_ACTIVE_WINDOW which WMs like GXDE
+ *          ignore for DOCK windows. xcb_set_input_focus() talks directly to
+ *          the X server and bypasses that restriction, allowing text input
+ *          in AppDrawer/flyout fields to work correctly.
+ * @param window (QWindow*) The panel window that needs keyboard focus.
+ * @return void.
+ */
+
+void XOrgPanelHelper::RequestXorgFocus(QWindow* window) {
+  if (window == nullptr) {
+    return;
+  }
+
+#if QT_CONFIG(xcb)
+  auto* ni = QGuiApplication::platformNativeInterface();
+  if (ni == nullptr) {
+    return;
+  }
+
+  auto* conn = static_cast<xcb_connection_t*>(
+    ni->nativeResourceForIntegration("connection"));
+  if (conn == nullptr || xcb_connection_has_error(conn)) {
+    return;
+  }
+
+  xcb_window_t xwin = static_cast<xcb_window_t>(window->winId());
+  xcb_set_input_focus(conn, XCB_INPUT_FOCUS_POINTER_ROOT, xwin,
+    XCB_CURRENT_TIME);
+  xcb_flush(conn);
+
+  LOG(INFO) << absl::StrCat("XOrgPanelHelper: forced input focus to panel ",
+    "window (xcb_set_input_focus).");
+#endif  // QT_CONFIG(xcb)
 }
 
 }  // namespace utils
