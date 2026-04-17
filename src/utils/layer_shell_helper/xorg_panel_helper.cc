@@ -24,11 +24,8 @@
 #include <QScreen>
 #include <QWindow>
 
-// QT_CONFIG(xcb) requires Qt headers to be included first so that QT_CONFIG
-// is defined before the preprocessor evaluates it.
 #if QT_CONFIG(xcb)
 #include <xcb/xcb.h>
-#include <qpa/qplatformnativeinterface.h>
 #endif
 
 #include "absl/log/log.h"
@@ -204,14 +201,9 @@ void XOrgPanelHelper::RequestXorgFocus(QWindow* window) {
   }
 
 #if QT_CONFIG(xcb)
-  auto* ni = QGuiApplication::platformNativeInterface();
-  if (ni == nullptr) {
-    return;
-  }
-
-  auto* conn = static_cast<xcb_connection_t*>(
-    ni->nativeResourceForIntegration("connection"));
-  if (conn == nullptr || xcb_connection_has_error(conn)) {
+  xcb_connection_t* conn = xcb_connect(getenv("DISPLAY"), nullptr);
+  if (xcb_connection_has_error(conn)) {
+    xcb_disconnect(conn);
     return;
   }
 
@@ -219,6 +211,7 @@ void XOrgPanelHelper::RequestXorgFocus(QWindow* window) {
   xcb_set_input_focus(conn, XCB_INPUT_FOCUS_POINTER_ROOT, xwin,
     XCB_CURRENT_TIME);
   xcb_flush(conn);
+  xcb_disconnect(conn);
 
   LOG(INFO) << absl::StrCat("XOrgPanelHelper: forced input focus to panel ",
     "window (xcb_set_input_focus).");
