@@ -108,8 +108,8 @@ Rectangle {
     // (hidden when ethernet-only or no hardware at all)
     Text {
       visible: NetworkHandler && NetworkHandler.showWlanIcon // qmllint disable unqualified
-      text: NetworkHandler.wlanIcon        // qmllint disable unqualified
-      color: Theme.status_bar_surface_fg   // qmllint disable unqualified
+      text: NetworkHandler.wlanIcon // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg // qmllint disable unqualified
       font.pixelSize: 18
       font.family: "Material Symbols Rounded"
       verticalAlignment: Text.AlignVCenter

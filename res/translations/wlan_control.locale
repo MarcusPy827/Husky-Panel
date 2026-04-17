@@ -142,6 +142,10 @@ en_us = Cancel
 zh_cn = 所有适配器
 en_us = All Devices
 
+[NoDevice]
+zh_cn = 未监测到适配器
+en_us = No device
+
 [StatusDesc]
 zh_cn = 状态: 
 en_us = Status: 

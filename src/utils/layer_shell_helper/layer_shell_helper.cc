@@ -74,6 +74,12 @@ void LayerShellHelper::SetFullMask(QObject* window_obj) {
   }
 
   window->setMask(QRegion(0, 0, window->width(), window->height()));
+
+  // On X11, _NET_WM_WINDOW_TYPE_DOCK windows are not focused by the WM, so
+  // TextInput fields fails. We need to REQUEST FOCUS!!!!!
+  if (QGuiApplication::platformName() == QLatin1String("xcb")) {
+    window->requestActivate();
+  }
 }
 
 // Configures a window as a full-screen overlay surface.

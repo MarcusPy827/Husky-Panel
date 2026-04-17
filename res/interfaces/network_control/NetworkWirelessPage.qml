@@ -143,7 +143,7 @@ Item {
               for (var i = 0; i < devs.length; ++i) {
                 if (devs[i].path === sel) return devs[i].name
               }
-              return "No device"
+              return NetworkTranslator.Tr("NoDevice")
             }
             color: Theme.surface_fg  // qmllint disable unqualified
             font.pixelSize: 14
