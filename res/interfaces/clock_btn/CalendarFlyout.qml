@@ -126,7 +126,10 @@ Item {
         id: calendar_flyout_header
         Layout.fillWidth: true
         Layout.preferredHeight: root.headerH
-        Layout.margins: 2
+        Layout.topMargin: 3
+        Layout.bottomMargin: 2
+        Layout.leftMargin: 3
+        Layout.rightMargin: 3
         color: Theme.surface_container
         topLeftRadius: 12
         topRightRadius: 12

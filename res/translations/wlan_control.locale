@@ -145,3 +145,91 @@ en_us = Hotspot Configuration
 [Name]
 zh_cn = 名称
 en_us = Name
+
+[WEPIndex]
+zh_cn = WEP索引
+en_us = WEP Index
+
+[Authentication]
+zh_cn = 认证
+en_us = Authentication
+
+[OpenSystem]
+zh_cn = 开放系统
+en_us = Open System
+
+[SharedKey]
+zh_cn = 共享密钥
+en_us = Shared Key
+
+[Identity]
+zh_cn = 身份
+en_us = Identity
+
+[Domain]
+zh_cn = 域
+en_us = Domain
+
+[UserCertificate]
+zh_cn = 用户证书
+en_us = User certificate
+
+[CACertificate]
+zh_cn = CA证书
+en_us = CA certificate
+
+[SubjectMatch]
+zh_cn = 主体匹配
+en_us = Subject match
+
+[AltSubjectMatch]
+zh_cn = 备用主体匹配
+en_us = Alt. subject match
+
+[Connect2TheseServers]
+zh_cn = 连接到这些服务器
+en_us = Connect to these servers
+
+[PrivateKey]
+zh_cn = 私钥
+en_us = Private key
+
+[PrivateKeyPassword]
+zh_cn = 私钥密码
+en_us = Private key password
+
+[AnonymousIdentity]
+zh_cn = 匿名身份
+en_us = Anonymous identity
+
+[ProvisionPAC]
+zh_cn = 配置PAC
+en_us = Provision PAC
+
+[Disabled]
+zh_cn = 已禁用
+en_us = Disabled
+
+[Anonymous]
+zh_cn = 匿名
+en_us = Anonymous
+
+[Authenticated]
+zh_cn = 认证
+en_us = Authenticated
+
+[PACFile]
+zh_cn = PAC文件
+en_us = PAC File
+
+[InnerAuthentication]
+zh_cn = 内部认证
+en_us = Inner authentication
+
+[PEAPVersion]
+zh_cn = PEAP 版本
+en_us = PEAP Version
+
+[Auto]
+zh_cn = 自动
+en_us = Automatic

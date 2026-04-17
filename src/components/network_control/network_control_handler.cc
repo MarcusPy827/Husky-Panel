@@ -138,6 +138,11 @@ void NetworkControlHandler::connectWlan(const QString& ap_path,
   network_control_->ConnectWlan(ap_path, password);
 }
 
+void NetworkControlHandler::connectWlanAdvanced(const QString& ap_path,
+    const QVariantMap& credentials) {
+  network_control_->ConnectWlanAdvanced(ap_path, credentials);
+}
+
 void NetworkControlHandler::disconnectWlan(const QString& device_path) {
   network_control_->DisconnectWlan(device_path);
 }

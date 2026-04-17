@@ -102,9 +102,9 @@ Item {
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: headerCol.implicitHeight + 16
-        Layout.topMargin: 2
-        Layout.leftMargin: 2
-        Layout.rightMargin: 2
+        Layout.topMargin: 3
+        Layout.leftMargin: 3
+        Layout.rightMargin: 3
         color: Theme.surface_container // qmllint disable unqualified
         topLeftRadius: 10
         topRightRadius: 10

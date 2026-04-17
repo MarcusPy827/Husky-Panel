@@ -1,5 +1,9 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
+* marcus/vlan_manager_0414
+  * Implemented a network manager
+  * 新增了网络管理器
+
 * marcus/bluetooth_0412
   * Implemented a bluetooth control panel.
   * 新增了蓝牙控制面板

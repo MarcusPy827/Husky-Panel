@@ -23,6 +23,8 @@
 #include <QUuid>
 #include <QProcess>
 
+#include <algorithm>
+
 #include "absl/log/log.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_format.h"
@@ -40,9 +42,7 @@ using NmSettingsMap = QMap<QString, QVariantMap>;
 
 }  // namespace
 
-// ---------------------------------------------------------------------------
 // Construction / initialization
-// ---------------------------------------------------------------------------
 
 NetworkControl::NetworkControl(QObject* parent)
     : QObject(parent), bus_(QDBusConnection::systemBus()) {
@@ -231,7 +231,9 @@ void NetworkControl::ConnectWlan(const QString& ap_path,
 
   // No saved connection
   if (secured && password.isEmpty()) {
-    emit PasswordRequired(SsidToString(ssid), ap_path);
+    QString category = SecurityCategoryFromFlags(
+      ap_flags_var.toUInt(), wpa_var.toUInt(), rsn_var.toUInt());
+    emit PasswordRequired(SsidToString(ssid), ap_path, category);
     return;
   }
 
@@ -243,6 +245,48 @@ void NetworkControl::ConnectWlan(const QString& ap_path,
   }
 
   // Register as NmSettingsMap for D-Bus marshalling
+  NmSettingsMap nm_settings;
+  for (auto it = settings.begin(); it != settings.end(); ++it) {
+    nm_settings.insert(it.key(), it.value().toMap());
+  }
+
+  QDBusArgument arg;
+  arg.beginMap(QVariant::String, qMetaTypeId<QVariantMap>());
+  for (auto it = nm_settings.begin(); it != nm_settings.end(); ++it) {
+    arg.beginMapEntry();
+    arg << it.key() << it.value();
+    arg.endMapEntry();
+  }
+  arg.endMap();
+
+  nm.call("AddAndActivateConnection",
+    QVariant::fromValue(arg),
+    QVariant::fromValue(QDBusObjectPath(selected_wlan_device_path_)),
+    QVariant::fromValue(QDBusObjectPath(ap_path)));
+  pending_connect_ap_path_ = ap_path;
+}
+
+void NetworkControl::ConnectWlanAdvanced(const QString& ap_path,
+    const QVariantMap& credentials) {
+  if (selected_wlan_device_path_.isEmpty()) return;
+
+  QVariant ssid_var = GetNmProperty(
+    ap_path, DBUS_NETWORK_MANAGER_ACCESS_POINT_INTERFACE, "Ssid");
+  QByteArray ssid = ssid_var.toByteArray();
+
+  QString type = credentials.value(QStringLiteral("type")).toString();
+  QVariantMap settings;
+  if (type == QLatin1String(NC_SEC_WEP)) {
+    settings = BuildWepConnectionSettings(ssid, credentials);
+  } else {
+    settings = BuildEapConnectionSettings(ssid, credentials);
+  }
+
+  QDBusInterface nm(DBUS_NETWORK_MANAGER_SERVICE,
+    DBUS_NETWORK_MANAGER_PATH,
+    DBUS_NETWORK_MANAGER_INTERFACE,
+    bus_);
+
   NmSettingsMap nm_settings;
   for (auto it = settings.begin(); it != settings.end(); ++it) {
     nm_settings.insert(it.key(), it.value().toMap());
@@ -549,7 +593,7 @@ void NetworkControl::RefreshWlanData() {
       selected_wlan_device_path_;
   }
 
-  // Get all visible access points — deduplicate by SSID keeping strongest signal
+  // Get all visible access points
   QDBusInterface wireless(DBUS_NETWORK_MANAGER_SERVICE,
     selected_wlan_device_path_,
     DBUS_NETWORK_MANAGER_WIRELESS_INTERFACE, bus_);
@@ -801,6 +845,201 @@ QVariantMap NetworkControl::BuildOpenConnectionSettings(
 }
 
 // static
+QVariantMap NetworkControl::BuildWepConnectionSettings(const QByteArray& ssid,
+    const QVariantMap& credentials) {
+  QVariantMap conn;
+  conn[QStringLiteral("type")] = QStringLiteral("802-11-wireless");
+  conn[QStringLiteral("id")] = QString::fromUtf8(ssid);
+  conn[QStringLiteral("uuid")] = QUuid::createUuid().toString(
+    QUuid::WithoutBraces);
+
+  QVariantMap wireless;
+  wireless[QStringLiteral("ssid")] = ssid;
+  wireless[QStringLiteral("mode")] = QStringLiteral("infrastructure");
+
+  QVariantMap security;
+  security[QStringLiteral("key-mgmt")] = QStringLiteral("none");
+  security[QStringLiteral("wep-key0")] =
+    credentials.value(QStringLiteral("password")).toString();
+  security[QStringLiteral("wep-tx-keyidx")] =
+    credentials.value(QStringLiteral("wep_key_idx"), 0).toInt();
+  security[QStringLiteral("auth-alg")] =
+    credentials.value(QStringLiteral("auth_alg"),
+      QStringLiteral("open")).toString();
+
+  QVariantMap ipv4;
+  ipv4[QStringLiteral("method")] = QStringLiteral("auto");
+
+  QVariantMap ipv6;
+  ipv6[QStringLiteral("method")] = QStringLiteral("auto");
+
+  QVariantMap result;
+  result[QStringLiteral("connection")] = conn;
+  result[QStringLiteral("802-11-wireless")] = wireless;
+  result[QStringLiteral("802-11-wireless-security")] = security;
+  result[QStringLiteral("ipv4")] = ipv4;
+  result[QStringLiteral("ipv6")] = ipv6;
+  return result;
+}
+
+// static
+QVariantMap NetworkControl::BuildEapConnectionSettings(const QByteArray& ssid,
+    const QVariantMap& credentials) {
+  QString method =
+    credentials.value(QStringLiteral("eap_method")).toString().toLower();
+
+  QVariantMap conn;
+  conn[QStringLiteral("type")] = QStringLiteral("802-11-wireless");
+  conn[QStringLiteral("id")] = QString::fromUtf8(ssid);
+  conn[QStringLiteral("uuid")] = QUuid::createUuid().toString(
+    QUuid::WithoutBraces);
+
+  QVariantMap wireless;
+  wireless[QStringLiteral("ssid")] = ssid;
+  wireless[QStringLiteral("mode")] = QStringLiteral("infrastructure");
+
+  QVariantMap security;
+  security[QStringLiteral("key-mgmt")] = QStringLiteral("wpa-eap");
+
+  QVariantMap eap;
+
+  if (method == QLatin1String("tls")) {
+    eap[QStringLiteral("eap")] =
+      QStringList{QStringLiteral("tls")};
+    eap[QStringLiteral("identity")] =
+      credentials.value(QStringLiteral("identity")).toString();
+    eap[QStringLiteral("domain-suffix-match")] =
+      credentials.value(QStringLiteral("domain")).toString();
+    eap[QStringLiteral("subject-match")] =
+      credentials.value(QStringLiteral("subject_match")).toString();
+    QString alt = credentials.value(
+      QStringLiteral("alt_subject_match")).toString();
+    if (!alt.isEmpty())
+      eap[QStringLiteral("altsubject-matches")] = QStringList{alt};
+    eap[QStringLiteral("client-cert")] = PathToNmCertBytes(
+      credentials.value(QStringLiteral("user_cert")).toString());
+    eap[QStringLiteral("ca-cert")] = PathToNmCertBytes(
+      credentials.value(QStringLiteral("ca_cert")).toString());
+    eap[QStringLiteral("private-key")] = PathToNmCertBytes(
+      credentials.value(QStringLiteral("private_key")).toString());
+    eap[QStringLiteral("private-key-password")] =
+      credentials.value(QStringLiteral("private_key_password")).toString();
+    eap[QStringLiteral("private-key-password-flags")] = 0;
+  } else if (method == QLatin1String("leap")
+        || method == QLatin1String("pwd")) {
+    eap[QStringLiteral("eap")] = QStringList{method};
+    eap[QStringLiteral("identity")] =
+      credentials.value(QStringLiteral("username")).toString();
+    eap[QStringLiteral("password")] =
+      credentials.value(QStringLiteral("password")).toString();
+    eap[QStringLiteral("password-flags")] = 0;
+  } else if (method == QLatin1String("fast")) {
+    eap[QStringLiteral("eap")] =
+      QStringList{QStringLiteral("fast")};
+    eap[QStringLiteral("anonymous-identity")] =
+      credentials.value(QStringLiteral("anon_identity")).toString();
+    eap[QStringLiteral("phase1-fast-provisioning")] =
+      credentials.value(QStringLiteral("pac_provisioning"),
+        QStringLiteral("0")).toString();
+    QString pac = credentials.value(QStringLiteral("pac_file")).toString();
+    if (!pac.isEmpty())
+      eap[QStringLiteral("pac-file")] = PathToNmCertBytes(pac);
+    eap[QStringLiteral("phase2-auth")] =
+      credentials.value(QStringLiteral("inner_auth"),
+        QStringLiteral("gtc")).toString();
+    eap[QStringLiteral("identity")] =
+      credentials.value(QStringLiteral("username")).toString();
+    eap[QStringLiteral("password")] =
+      credentials.value(QStringLiteral("password")).toString();
+    eap[QStringLiteral("password-flags")] = 0;
+  } else if (method == QLatin1String("ttls")) {
+    eap[QStringLiteral("eap")] =
+      QStringList{QStringLiteral("ttls")};
+    eap[QStringLiteral("anonymous-identity")] =
+      credentials.value(QStringLiteral("anon_identity")).toString();
+    eap[QStringLiteral("domain-suffix-match")] =
+      credentials.value(QStringLiteral("domain")).toString();
+    eap[QStringLiteral("ca-cert")] = PathToNmCertBytes(
+      credentials.value(QStringLiteral("ca_cert")).toString());
+    eap[QStringLiteral("phase2-auth")] =
+      credentials.value(QStringLiteral("inner_auth"),
+        QStringLiteral("pap")).toString();
+    eap[QStringLiteral("identity")] =
+      credentials.value(QStringLiteral("username")).toString();
+    eap[QStringLiteral("password")] =
+      credentials.value(QStringLiteral("password")).toString();
+    eap[QStringLiteral("password-flags")] = 0;
+  } else {
+    // Default: PEAP
+    eap[QStringLiteral("eap")] =
+      QStringList{QStringLiteral("peap")};
+    eap[QStringLiteral("anonymous-identity")] =
+      credentials.value(QStringLiteral("anon_identity")).toString();
+    eap[QStringLiteral("domain-suffix-match")] =
+      credentials.value(QStringLiteral("domain")).toString();
+    eap[QStringLiteral("ca-cert")] = PathToNmCertBytes(
+      credentials.value(QStringLiteral("ca_cert")).toString());
+    QString peap_ver =
+      credentials.value(QStringLiteral("peap_version")).toString();
+    if (peap_ver == QLatin1String("0") || peap_ver == QLatin1String("1"))
+      eap[QStringLiteral("phase1-peapver")] = peap_ver;
+    eap[QStringLiteral("phase2-auth")] =
+      credentials.value(QStringLiteral("inner_auth"),
+        QStringLiteral("mschapv2")).toString();
+    eap[QStringLiteral("identity")] =
+      credentials.value(QStringLiteral("username")).toString();
+    eap[QStringLiteral("password")] =
+      credentials.value(QStringLiteral("password")).toString();
+    eap[QStringLiteral("password-flags")] = 0;
+  }
+
+  QVariantMap ipv4;
+  ipv4[QStringLiteral("method")] = QStringLiteral("auto");
+
+  QVariantMap ipv6;
+  ipv6[QStringLiteral("method")] = QStringLiteral("auto");
+
+  QVariantMap result;
+  result[QStringLiteral("connection")] = conn;
+  result[QStringLiteral("802-11-wireless")] = wireless;
+  result[QStringLiteral("802-11-wireless-security")] = security;
+  result[QStringLiteral("802-1x")] = eap;
+  result[QStringLiteral("ipv4")] = ipv4;
+  result[QStringLiteral("ipv6")] = ipv6;
+  return result;
+}
+
+// static
+QString NetworkControl::SecurityCategoryFromFlags(
+    uint ap_flags, uint wpa_flags, uint rsn_flags) {
+  bool enterprise_wpa = (wpa_flags & NC_AP_SEC_KEY_MGMT_8021X) != 0;
+  bool enterprise_rsn = (rsn_flags & NC_AP_SEC_KEY_MGMT_8021X) != 0;
+  if (enterprise_wpa || enterprise_rsn)
+    return QStringLiteral(NC_SEC_ENTERPRISE);
+
+  bool has_psk = (wpa_flags & NC_AP_SEC_KEY_MGMT_PSK) != 0
+              || (rsn_flags & NC_AP_SEC_KEY_MGMT_PSK) != 0
+              || (rsn_flags & NC_AP_SEC_KEY_MGMT_SAE) != 0;
+  if (has_psk)
+    return QStringLiteral(NC_SEC_WPA_PERSONAL);
+
+  if ((ap_flags & NC_AP_FLAG_PRIVACY) != 0
+      && wpa_flags == 0 && rsn_flags == 0)
+    return QStringLiteral(NC_SEC_WEP);
+
+  return QStringLiteral(NC_SEC_WPA_PERSONAL);
+}
+
+// static
+QByteArray NetworkControl::PathToNmCertBytes(const QString& path) {
+  if (path.isEmpty()) return {};
+  QByteArray result = QByteArrayLiteral("file://");
+  result += path.toUtf8();
+  result += '\0';
+  return result;
+}
+
+// static
 QString NetworkControl::SecurityTypeFromFlags(
     uint ap_flags, uint wpa_flags, uint rsn_flags) {
   if (!(ap_flags & NC_AP_FLAG_PRIVACY) && wpa_flags == 0 && rsn_flags == 0)
@@ -835,13 +1074,13 @@ QString NetworkControl::SecurityTypeFromFlags(
 // static
 QString NetworkControl::WlanIconFromStrength(int strength) {
   switch (strength) {
-    case -1:         return QStringLiteral("signal_wifi_off");
-    case 0 ... 10:   return QStringLiteral("signal_wifi_0_bar");
-    case 11 ... 25:  return QStringLiteral("network_wifi_1_bar");
-    case 26 ... 50:  return QStringLiteral("network_wifi_2_bar");
-    case 51 ... 75:  return QStringLiteral("network_wifi");
+    case -1: return QStringLiteral("signal_wifi_off");
+    case 0 ... 10: return QStringLiteral("signal_wifi_0_bar");
+    case 11 ... 25: return QStringLiteral("network_wifi_1_bar");
+    case 26 ... 50: return QStringLiteral("network_wifi_2_bar");
+    case 51 ... 75: return QStringLiteral("network_wifi");
     case 76 ... 100: return QStringLiteral("signal_wifi_4_bar");
-    default:         return QStringLiteral("wifi_find");
+    default: return QStringLiteral("wifi_find");
   }
 }
 
@@ -871,10 +1110,7 @@ QVariant NetworkControl::GetNmProperty(const QString& path,
   return reply.value();
 }
 
-// ---------------------------------------------------------------------------
 // D-Bus slots
-// ---------------------------------------------------------------------------
-
 void NetworkControl::OnNmPropertiesChanged(const QString& nm_interface,
     const QVariantMap& changed,
     const QStringList& /*invalidated*/) {

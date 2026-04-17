@@ -258,11 +258,23 @@ class NetworkControlHandler : public QObject {
    * @details For secured networks with no saved profile, emits
    *          @c passwordRequired() when @p password is empty.
    * @param ap_path (const QString&) D-Bus object path of the access point.
-   * @param password (const QString&) Pre-shared key, or empty string.
+   * @param password (const QString&) WPA pre-shared key, or empty string.
    * @return void.
    */
   Q_INVOKABLE void connectWlan(const QString& ap_path,
       const QString& password);
+
+  /**
+   * @brief Connects using explicit credentials for WEP or 802.1X networks.
+   *
+   * @details The @p credentials map must contain @c "type" set to
+   *          @c "wep" or @c "enterprise" plus method-specific keys.
+   * @param ap_path (const QString&) D-Bus object path of the access point.
+   * @param credentials (const QVariantMap&) Credential map.
+   * @return void.
+   */
+  Q_INVOKABLE void connectWlanAdvanced(const QString& ap_path,
+      const QVariantMap& credentials);
 
   /**
    * @brief Disconnects the Wi-Fi device at @p device_path.
@@ -314,9 +326,11 @@ class NetworkControlHandler : public QObject {
   void HotspotChanged();
   void AirplaneModeChanged();
 
-  // Re-emitted from the backend; QML should show a password dialog and call
-  // connectWlan() again with the password.
-  void passwordRequired(const QString& ssid, const QString& ap_path);
+  // Re-emitted from the backend. QML should show a credential form matching
+  // security_category (NC_SEC_WEP / NC_SEC_WPA_PERSONAL / NC_SEC_ENTERPRISE)
+  // then call connectWlan() or connectWlanAdvanced() with the result.
+  void passwordRequired(const QString& ssid, const QString& ap_path,
+      const QString& security_category);
 
  private:
   backend::NetworkControl* network_control_ = nullptr;

@@ -54,6 +54,11 @@
 // AP privacy flag
 #define NC_AP_FLAG_PRIVACY 0x1
 
+// Security category strings emitted with PasswordRequired
+#define NC_SEC_WEP          "wep"
+#define NC_SEC_WPA_PERSONAL "wpa_personal"
+#define NC_SEC_ENTERPRISE   "enterprise"
+
 #include <QDBusConnection>
 #include <QDBusObjectPath>
 #include <QObject>
@@ -237,13 +242,29 @@ class NetworkControl : public QObject {
    *
    * @details For open networks: connects directly. For secured networks with
    *          no saved profile and an empty @p password, emits
-   *          @c PasswordRequired. For secured networks with an existing
-   *          profile, activates it directly.
+   *          @c PasswordRequired with a security category string. For secured
+   *          networks with an existing profile, activates it directly.
    * @param ap_path (const QString&) D-Bus object path of the access point.
-   * @param password (const QString&) Pre-shared key, or empty string.
+   * @param password (const QString&) WPA pre-shared key, or empty string.
    * @return void.
    */
   void ConnectWlan(const QString& ap_path, const QString& password);
+
+  /**
+   * @brief Connects using explicit credentials for WEP or 802.1X networks.
+   *
+   * @details The @p credentials map must contain a @c "type" key set to
+   *          @c "wep" or @c "enterprise". For WEP: @c "password",
+   *          @c "wep_key_idx" (int, 0-based), @c "auth_alg"
+   *          (@c "open"|@c "shared"). For enterprise: @c "eap_method"
+   *          (@c "tls", @c "leap", @c "pwd", @c "fast", @c "ttls",
+   *          @c "peap") plus method-specific keys (see implementation).
+   * @param ap_path (const QString&) D-Bus object path of the access point.
+   * @param credentials (const QVariantMap&) Credential map.
+   * @return void.
+   */
+  void ConnectWlanAdvanced(const QString& ap_path,
+      const QVariantMap& credentials);
 
   /**
    * @brief Calls @c Disconnect on the Wi-Fi device at @p device_path.
@@ -296,9 +317,11 @@ class NetworkControl : public QObject {
   void AirplaneModeChanged();
 
   // Emitted when a secured AP has no saved connection and no password was
-  // provided. The frontend should show a password prompt and call
-  // ConnectWlan() again with the password.
-  void PasswordRequired(const QString& ssid, const QString& ap_path);
+  // provided. The frontend should show a credential form for the given
+  // security_category (NC_SEC_WEP, NC_SEC_WPA_PERSONAL, NC_SEC_ENTERPRISE)
+  // and call ConnectWlan() or ConnectWlanAdvanced() with the result.
+  void PasswordRequired(const QString& ssid, const QString& ap_path,
+      const QString& security_category);
 
  private:
   void Initialize();
@@ -318,8 +341,23 @@ class NetworkControl : public QObject {
   static QVariantMap BuildWpaPskConnectionSettings(
       const QByteArray& ssid, const QString& password);
 
+  // Builds an NM connection settings map for a WEP connection.
+  static QVariantMap BuildWepConnectionSettings(const QByteArray& ssid,
+      const QVariantMap& credentials);
+
+  // Builds an NM connection settings map for a WPA-Enterprise (EAP) connection.
+  static QVariantMap BuildEapConnectionSettings(const QByteArray& ssid,
+      const QVariantMap& credentials);
+
   // Builds an NM connection settings map for a new open connection.
   static QVariantMap BuildOpenConnectionSettings(const QByteArray& ssid);
+
+  // Returns a security category string (NC_SEC_*) derived from AP flag values.
+  static QString SecurityCategoryFromFlags(
+      uint ap_flags, uint wpa_flags, uint rsn_flags);
+
+  // Encodes a file-system path as NM certificate byte-array ("file://path\0").
+  static QByteArray PathToNmCertBytes(const QString& path);
 
   // Derives a human-readable security string from NM AP flag values.
   static QString SecurityTypeFromFlags(

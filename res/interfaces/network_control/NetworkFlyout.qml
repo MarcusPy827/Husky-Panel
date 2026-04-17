@@ -80,9 +80,9 @@ Item {
   // Forward password requests to the wireless page
   Connections {
     target: NetworkHandler  // qmllint disable unqualified
-    function onPasswordRequired(ssid, apPath) {
+    function onPasswordRequired(ssid, apPath, securityCategory) {
       tabBar.currentTab = 0
-      wirelessPage.showPasswordDialog(ssid, apPath)
+      wirelessPage.showPasswordDialog(ssid, apPath, securityCategory)
     }
   }
 
@@ -111,9 +111,9 @@ Item {
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: headerCol.implicitHeight + 16
-        Layout.topMargin: 2
-        Layout.leftMargin: 2
-        Layout.rightMargin: 2
+        Layout.topMargin: 3
+        Layout.leftMargin: 3
+        Layout.rightMargin: 3
         color: Theme.surface_container  // qmllint disable unqualified
         topLeftRadius: 10
         topRightRadius: 10
