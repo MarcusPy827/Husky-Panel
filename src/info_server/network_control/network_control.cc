@@ -103,7 +103,7 @@ QString NetworkControl::GetEthernetIcon() const {
     if (dev.value("isConnected").toBool())
       return QStringLiteral("settings_ethernet");
   }
-  return QStringLiteral("globe_2_cancel");
+  return QStringLiteral("cancel");
 }
 
 QString NetworkControl::GetWlanIcon() const {
@@ -324,6 +324,27 @@ void NetworkControl::DisconnectEthernet(const QString& device_path) {
     DBUS_NETWORK_MANAGER_DEVICE_INTERFACE,
     bus_);
   dev.call("Disconnect");
+}
+
+void NetworkControl::ConnectEthernet(const QString& device_path) {
+  if (device_path.isEmpty()) return;
+
+  QVariant avail = GetNmProperty(device_path,
+    DBUS_NETWORK_MANAGER_DEVICE_INTERFACE, "AvailableConnections");
+  if (!avail.isValid()) return;
+
+  QList<QDBusObjectPath> connections;
+  avail.value<QDBusArgument>() >> connections;
+  if (connections.isEmpty()) return;
+
+  QDBusInterface nm(DBUS_NETWORK_MANAGER_SERVICE,
+    DBUS_NETWORK_MANAGER_PATH,
+    DBUS_NETWORK_MANAGER_INTERFACE,
+    bus_);
+  nm.call("ActivateConnection",
+    QVariant::fromValue(connections.first()),
+    QVariant::fromValue(QDBusObjectPath(device_path)),
+    QVariant::fromValue(QDBusObjectPath("/")));
 }
 
 void NetworkControl::SetHotspotEnabled(bool enabled) {
@@ -687,6 +708,7 @@ void NetworkControl::RefreshEthernetData() {
     QString status;
     QString icon;
     bool is_connected = false;
+    bool can_connect  = false;
 
     if (state == NC_DEVICE_STATE_ACTIVATED) {
       if (login_required_) {
@@ -697,10 +719,16 @@ void NetworkControl::RefreshEthernetData() {
         icon = QStringLiteral("settings_ethernet");
         is_connected = true;
       }
-    } else if (!carrier || state == NC_DEVICE_STATE_UNAVAILABLE
-            || state == NC_DEVICE_STATE_DISCONNECTED) {
+    } else if (!carrier || state == NC_DEVICE_STATE_UNAVAILABLE) {
+      // Cable physically absent or NIC unavailable — cannot reconnect.
       status = QStringLiteral("unplugged");
-      icon = QStringLiteral("globe_2_cancel");
+      icon = QStringLiteral("cancel");
+    } else if (state == NC_DEVICE_STATE_DISCONNECTED) {
+      // Cable present but NM has disconnected (e.g. user hit Disconnect or
+      // autoconnect is off). Offer a manual reconnect button.
+      status = QStringLiteral("disconnected");
+      icon = QStringLiteral("settings_ethernet");
+      can_connect = true;
     } else if (state >= NC_DEVICE_STATE_PREPARE
             && state < NC_DEVICE_STATE_ACTIVATED) {
       status = (state == NC_DEVICE_STATE_NEED_AUTH)
@@ -709,7 +737,7 @@ void NetworkControl::RefreshEthernetData() {
       icon = QStringLiteral("settings_ethernet");
     } else {
       status = QStringLiteral("no_network");
-      icon = QStringLiteral("globe_2_cancel");
+      icon = QStringLiteral("cancel");
     }
 
     QVariantMap entry;
@@ -720,6 +748,7 @@ void NetworkControl::RefreshEthernetData() {
     entry[QStringLiteral("isHotspot")] = false;
     entry[QStringLiteral("isUsb")] = false;
     entry[QStringLiteral("isConnected")] = is_connected;
+    entry[QStringLiteral("canConnect")] = can_connect;
     ethernet_devices_.append(entry);
   }
 }

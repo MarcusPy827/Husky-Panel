@@ -116,7 +116,7 @@ class NetworkControl : public QObject {
    * @brief Returns the Material Symbol icon name for the Ethernet status.
    *
    * @details Returns @c "settings_ethernet" when any Ethernet device is
-   *          connected, otherwise @c "globe_2_cancel".
+   *          connected, otherwise @c "cancel".
    * @return QString.
    */
   QString GetEthernetIcon() const;
@@ -281,6 +281,15 @@ class NetworkControl : public QObject {
    * @return void.
    */
   void DisconnectEthernet(const QString& device_path);
+
+  /**
+   * @brief Activates the first available saved connection on the Ethernet
+   *        device at @p device_path via NetworkManager's ActivateConnection.
+   *
+   * @param device_path (const QString&) D-Bus object path of the device.
+   * @return void.
+   */
+  void ConnectEthernet(const QString& device_path);
 
   /**
    * @brief Enables or disables the hotspot on a secondary Wi-Fi device.

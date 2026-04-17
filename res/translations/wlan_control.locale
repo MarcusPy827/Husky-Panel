@@ -82,6 +82,10 @@ en_us = No Internet.
 zh_cn = 已拔出
 en_us = Unplugged
 
+[Disconnected]
+zh_cn = 未连接
+en_us = Disconnected
+
 [UnknownStatus]
 zh_cn = 未知状态
 en_us = Unknown status
@@ -121,6 +125,10 @@ en_us = No spare wireless adapter is available.
 [Connecting2]
 zh_cn = 正在连接到: 
 en_us = Connecting to: 
+
+[Username]
+zh_cn = 用户名
+en_us = Username
 
 [Password]
 zh_cn = 密码

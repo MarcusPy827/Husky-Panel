@@ -104,7 +104,7 @@ Rectangle {
     anchors.leftMargin: 8
     spacing: 2
 
-    // WLAN icon — visible when the machine has a wireless adapter
+    // WLAN icon
     // (hidden when ethernet-only or no hardware at all)
     Text {
       visible: NetworkHandler && NetworkHandler.showWlanIcon // qmllint disable unqualified
@@ -122,7 +122,7 @@ Rectangle {
       MouseArea { id: wlanHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
     }
 
-    // Ethernet icon — visible when the machine has an ethernet adapter
+    // Ethernet icon
     // (hidden when wireless-only or no hardware at all)
     Text {
       visible: NetworkHandler && NetworkHandler.showEthernetIcon  // qmllint disable unqualified
@@ -140,7 +140,7 @@ Rectangle {
       MouseArea { id: ethHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
     }
 
-    // Captive portal icon — shown when any connected network requires login
+    // Captive portal icon
     Text {
       visible: NetworkHandler && NetworkHandler.loginRequired  // qmllint disable unqualified
       text: "captive_portal"
@@ -157,11 +157,11 @@ Rectangle {
       MouseArea { id: captiveHover; anchors.fill: parent; acceptedButtons: Qt.NoButton; hoverEnabled: true }
     }
 
-    // No-hardware icon — shown when no network hardware is detected
+    // No-hardware icon
     Text {
-      visible: NetworkHandler && NetworkHandler.showNoHardwareIcon  // qmllint disable unqualified
-      text: "globe_2_cancel"
-      color: Theme.status_bar_surface_fg          // qmllint disable unqualified
+      visible: NetworkHandler && NetworkHandler.showNoHardwareIcon // qmllint disable unqualified
+      text: "cancel"
+      color: Theme.status_bar_surface_fg // qmllint disable unqualified
       font.pixelSize: 18
       font.family: "Material Symbols Rounded"
       verticalAlignment: Text.AlignVCenter
