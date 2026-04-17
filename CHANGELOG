@@ -1,6 +1,14 @@
 # Changelog | 更新信息
 ## VERSION 0.9.5 (UNSTABLE/WIP)
-* marcus/vlan_manager_0414
+* marcus/xorg_fix_0417
+  * Fixed minor mistake on network manager flyout.
+  * 修复了网络管理器菜单中的一些问题
+  * Fixed focus/keyboard issue on XOrg session.
+  * 修复了在XOrg会话下的键盘输入问题
+  * Fixed App Indicator issue on some XOrg sessions.
+  * 针对某些XOrg会话修复了App Indicator不工作的问题
+
+* marcus/wlan_manager_0414
   * Implemented a network manager
   * 新增了网络管理器
 
@@ -39,6 +47,7 @@
   * 为「会话选项」补充了缺失的翻译
   * Added more QML animations to the side menu bar.
   * 为侧边栏新增了更多QML动画
+
 * marcus/wlroots_app_indicator_0402
   * Redo the ripple and clip effects of `AppIndicator`.
   * 重做了`AppIndicator`的涟漪与圆角裁剪效果
