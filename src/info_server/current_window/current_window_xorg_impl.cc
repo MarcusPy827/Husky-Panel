@@ -225,12 +225,16 @@ void CurrentWindowXorgImpl::UpdateActiveWindow() {
   last_active_window_ = active_window;
   window_info_.package_name = wm_class.toLower();
 
-  KService::Ptr service = KService::serviceByDesktopName(wm_class);
-  if (!service) {
-    service = KService::serviceByDesktopName(wm_class.toLower());
+  if (wm_class.compare(QLatin1String("gxde-desktop-panel"),
+      Qt::CaseInsensitive) == 0) {
+    window_info_.application_name = QStringLiteral("GXDE Desktop");
+  } else {
+    KService::Ptr service = KService::serviceByDesktopName(wm_class);
+    if (!service) {
+      service = KService::serviceByDesktopName(wm_class.toLower());
+    }
+    window_info_.application_name = service ? service->name() : wm_class;
   }
-
-  window_info_.application_name = service ? service->name() : wm_class;
 
   LOG(INFO) << absl::StrCat("CurrentWindowXorgImpl: active window changed — ",
     window_info_.application_name.toStdString());
