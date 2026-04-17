@@ -46,17 +46,17 @@ std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
   bool is_kwin = session_bus && session_bus->isServiceRegistered(
     DBUS_KWIN_SERVICE);
 
-  // The KWin D-Bus script path is only needed on Wayland+KWin because XCB
-  // cannot inspect windows there. On X11 (even with KWin, e.g. GXDE/DDE),
-  // the XCB impl is self-contained and does not require the app-bridge script.
-  if (is_kwin && is_wayland && !is_xorg) {
+  // Wayland takes priority over X11 even when DISPLAY is set (XWayland).
+  // The KWin D-Bus script path is only needed on Wayland+KWin; on X11+KWin
+  // (e.g. GXDE/DDE) the XCB impl is self-contained.
+  if (is_wayland && is_kwin) {
     LOG(INFO) << absl::StrCat("KWin Wayland session detected. ",
       "Using KWin D-Bus app-bridge script.");
     return std::make_unique<CurrentWindowKwinImpl>(parent);
   }
 
-  if (is_wayland && !is_xorg) {
-    LOG(INFO) << absl::StrCat("Non-KWin Wayland session detected. ",
+  if (is_wayland) {
+    LOG(ERROR) << absl::StrCat("Non-KWin Wayland session detected. ",
       "Using wlr-foreign-toplevel.");
     return std::make_unique<CurrentWindowWlrootsImpl>(parent);
   }
