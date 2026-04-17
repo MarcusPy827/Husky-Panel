@@ -857,7 +857,8 @@ Item {
             id: eapMethodDrop
             Layout.fillWidth: true
             model: ["TLS", "LEAP", "PWD", "FAST", "TTLS",
-                    "PEAP"]
+                    "PEAP"
+                   ]
             currentIndex: 5
           }
 
