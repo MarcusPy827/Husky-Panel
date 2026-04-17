@@ -18,6 +18,7 @@
 #include <cstring>
 
 #include <KService>
+#include <QTimer>
 
 #include "absl/log/log.h"
 #include "absl/strings/str_cat.h"
@@ -26,10 +27,6 @@
 
 namespace panel {
 namespace backend {
-
-/* ------------------------------------------------------------------------- */
-/* Class 'CurrentWindowXorgImpl' */
-/* ------------------------------------------------------------------------- */
 
 /**
  * @brief Constructs the XOrg/X11 implementation for active window tracking.
@@ -49,7 +46,9 @@ CurrentWindowXorgImpl::CurrentWindowXorgImpl(QObject* parent)
       root_(XCB_NONE),
       atom_net_active_window_(XCB_NONE),
       atom_wm_class_(XCB_NONE),
-      notifier_(nullptr) {
+      notifier_(nullptr),
+      poll_timer_(nullptr),
+      last_active_window_(XCB_NONE) {
   if (xcb_connection_has_error(conn_)) {
     LOG(ERROR) << absl::StrCat("CurrentWindowXorgImpl: ",
       "failed to connect to X display.");
@@ -72,6 +71,14 @@ CurrentWindowXorgImpl::CurrentWindowXorgImpl(QObject* parent)
     xcb_get_file_descriptor(conn_), QSocketNotifier::Read, this);
   connect(notifier_, &QSocketNotifier::activated,
     this, &CurrentWindowXorgImpl::OnXcbEvent);
+
+  // Fallback poll: some WMs don't send PropertyNotify
+  // For every _NET_ACTIVE_WINDOW change. Poll every 500 ms to stay current.
+  poll_timer_ = new QTimer(this);
+  poll_timer_->setInterval(500);
+  connect(poll_timer_, &QTimer::timeout,
+    this, &CurrentWindowXorgImpl::UpdateActiveWindow);
+  poll_timer_->start();
 
   UpdateActiveWindow();
 
@@ -202,11 +209,20 @@ void CurrentWindowXorgImpl::UpdateActiveWindow() {
     return;
   }
 
+  if (active_window == last_active_window_) {
+    return;
+  }
+
   QString wm_class = GetWindowClass(active_window);
   if (wm_class.isEmpty()) {
     return;
   }
 
+  if (wm_class.contains(QLatin1String("HuskyPanel"), Qt::CaseInsensitive)) {
+    return;
+  }
+
+  last_active_window_ = active_window;
   window_info_.package_name = wm_class.toLower();
 
   KService::Ptr service = KService::serviceByDesktopName(wm_class);
