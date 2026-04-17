@@ -30,10 +30,9 @@ ClockBtn::ClockBtn(Calendar * calendar_in, QObject *parent) : QObject(parent) {
     this, &ClockBtn::ClockTextChanged);
 
   LOG(INFO) << absl::StrCat("Initializing calendar...");
-  if (calendar_in == nullptr) {
-    LOG(ERROR) << absl::StrCat("Calendar widget is null pointer, calendar ",
-      "widget will NOT show.");
-  } else {
+
+  // Depreciated old QWidget-based calendar.
+  if (calendar_in != nullptr) {
     calendar_ = calendar_in;
   }
 }

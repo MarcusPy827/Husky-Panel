@@ -1,0 +1,235 @@
+[Network]
+zh_cn = 网络
+en_us = Network
+
+[Wireless]
+zh_cn = 无线连接
+en_us = Wireless
+
+[Cabled]
+zh_cn = 有线连接
+en_us = Cabled
+
+[Hotspot]
+zh_cn = 热点
+en_us = Hotspot
+
+[AirplaneMode]
+zh_cn = 飞行模式
+en_us = Airplane Mode
+
+[ThisWillDisableConnections]
+zh_cn = 这将禁用无线连接和蓝牙
+en_us = This will disable wireless connections and bluetooth.
+
+[TargetDevice]
+zh_cn = 切换网卡
+en_us = Adapter
+
+[Enabled]
+zh_cn = 启用
+en_us = Enabled
+
+[CurrentNetwork]
+zh_cn = 当前连接
+en_us = Current Network
+
+[SecurityDesc]
+zh_cn = 安全性: 
+en_us = Security: 
+
+[None]
+zh_cn = 无
+en_us = none
+
+[HotspotDesc]
+zh_cn = | 热点 
+en_us = | Hotspot 
+
+[ViaUSB]
+zh_cn = | 通过 USB共享 
+en_us = | USB 
+
+[ViaBT]
+zh_cn = | 通过蓝牙共享 
+en_us = | Bluetooth 
+
+[Failed2Connect]
+zh_cn = 连接失败
+en_us = Failed to connect.
+
+[IncorrectPassword]
+zh_cn = 密码错误
+en_us = Incorrect password.
+
+[Connecting]
+zh_cn = 连接中
+en_us = Connecting...
+
+[Connected]
+zh_cn = 已连接
+en_us = Connected
+
+[PendingAuth]
+zh_cn = 等待认证
+en_us = Pending authentication...
+
+[NoInternet]
+zh_cn = 无互联网连接
+en_us = No Internet.
+
+[Unplugged]
+zh_cn = 已拔出
+en_us = Unplugged
+
+[UnknownStatus]
+zh_cn = 未知状态
+en_us = Unknown status
+
+[Connect]
+zh_cn = 连接
+en_us = Connect
+
+[Disconnect]
+zh_cn = 断开
+en_us = Disconnect
+
+[AvailableNetwork]
+zh_cn = 可用网络
+en_us = Available Networks
+
+[NoNetworkFound]
+zh_cn = 无可用网络
+en_us = No available network found.
+
+[AirplaneModeOn]
+zh_cn = 飞行模式已开启
+en_us = Airplane mode is on.
+
+[AdapterTurnedOff]
+zh_cn = 此适配器已关闭
+en_us = This adapter is currently turned off.
+
+[NoAdapterFound]
+zh_cn = 未找到可用适配器
+en_us = No adapter found.
+
+[NoSpareAdapter]
+zh_cn = 没有空闲的无线适配器
+en_us = No spare wireless adapter is available.
+
+[Connecting2]
+zh_cn = 正在连接到: 
+en_us = Connecting to: 
+
+[Password]
+zh_cn = 密码
+en_us = Password
+
+[Cancel]
+zh_cn = 取消
+en_us = Cancel
+
+[AllDevices]
+zh_cn = 所有适配器
+en_us = All Devices
+
+[StatusDesc]
+zh_cn = 状态: 
+en_us = Status: 
+
+[HotspotConfiguration]
+zh_cn = 热点配置
+en_us = Hotspot Configuration
+
+[Name]
+zh_cn = 名称
+en_us = Name
+
+[WEPIndex]
+zh_cn = WEP索引
+en_us = WEP Index
+
+[Authentication]
+zh_cn = 认证
+en_us = Authentication
+
+[OpenSystem]
+zh_cn = 开放系统
+en_us = Open System
+
+[SharedKey]
+zh_cn = 共享密钥
+en_us = Shared Key
+
+[Identity]
+zh_cn = 身份
+en_us = Identity
+
+[Domain]
+zh_cn = 域
+en_us = Domain
+
+[UserCertificate]
+zh_cn = 用户证书
+en_us = User certificate
+
+[CACertificate]
+zh_cn = CA证书
+en_us = CA certificate
+
+[SubjectMatch]
+zh_cn = 主体匹配
+en_us = Subject match
+
+[AltSubjectMatch]
+zh_cn = 备用主体匹配
+en_us = Alt. subject match
+
+[Connect2TheseServers]
+zh_cn = 连接到这些服务器
+en_us = Connect to these servers
+
+[PrivateKey]
+zh_cn = 私钥
+en_us = Private key
+
+[PrivateKeyPassword]
+zh_cn = 私钥密码
+en_us = Private key password
+
+[AnonymousIdentity]
+zh_cn = 匿名身份
+en_us = Anonymous identity
+
+[ProvisionPAC]
+zh_cn = 配置PAC
+en_us = Provision PAC
+
+[Disabled]
+zh_cn = 已禁用
+en_us = Disabled
+
+[Anonymous]
+zh_cn = 匿名
+en_us = Anonymous
+
+[Authenticated]
+zh_cn = 认证
+en_us = Authenticated
+
+[PACFile]
+zh_cn = PAC文件
+en_us = PAC File
+
+[InnerAuthentication]
+zh_cn = 内部认证
+en_us = Inner authentication
+
+[PEAPVersion]
+zh_cn = PEAP 版本
+en_us = PEAP Version
+
+[Auto]
+zh_cn = 自动
+en_us = Automatic

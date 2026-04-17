@@ -1,5 +1,5 @@
 /*
- * VolumeFlyout.qml
+ * NetworkFlyout.qml
  * Copyright (C) 2026 MarcusPy827
  *
  * This program is free software: you can redistribute it and/or modify
@@ -77,6 +77,15 @@ Item {
     onStopped: root.closeAnimationFinished()
   }
 
+  // Forward password requests to the wireless page
+  Connections {
+    target: NetworkHandler  // qmllint disable unqualified
+    function onPasswordRequired(ssid, apPath, securityCategory) {
+      tabBar.currentTab = 0
+      wirelessPage.showPasswordDialog(ssid, apPath, securityCategory)
+    }
+  }
+
   // Main frame
   Rectangle {
     id: frame
@@ -85,8 +94,8 @@ Item {
     anchors.top: parent.top
     implicitHeight: mainColumn.implicitHeight
     radius: 12
-    color: Theme.surface_bg // qmllint disable unqualified
-    border.color: Theme.primary // qmllint disable unqualified
+    color: Theme.surface_bg    // qmllint disable unqualified
+    border.color: Theme.primary  // qmllint disable unqualified
     border.width: 2
 
     MouseArea { anchors.fill: parent }
@@ -98,14 +107,14 @@ Item {
       anchors.top: parent.top
       spacing: 0
 
-      // Header toolbar
+      // Header
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: headerCol.implicitHeight + 16
         Layout.topMargin: 3
         Layout.leftMargin: 3
         Layout.rightMargin: 3
-        color: Theme.surface_container // qmllint disable unqualified
+        color: Theme.surface_container  // qmllint disable unqualified
         topLeftRadius: 10
         topRightRadius: 10
 
@@ -118,10 +127,9 @@ Item {
           spacing: 12
 
           Text {
-            text: VolumeControlTranslator.Tr("VolumeControl")
-            color: Theme.primary // qmllint disable unqualified
-            font.pixelSize: 16
-            font.weight: Font.Medium
+            text: NetworkTranslator.Tr("Network")
+            color: Theme.primary   // qmllint disable unqualified
+            font.pixelSize: 16; font.weight: Font.Medium
           }
 
           // Tab bar
@@ -132,16 +140,16 @@ Item {
 
             property int currentTab: 0
 
-            // Tab buttons
             Row {
               anchors.fill: parent
               spacing: 0
 
               Repeater {
-                model: [VolumeControlTranslator.Tr("Output"),
-                        VolumeControlTranslator.Tr("Input"),
-                        VolumeControlTranslator.Tr("Stream")
-                       ]
+                model: [
+                  NetworkTranslator.Tr("Wireless"),
+                  NetworkTranslator.Tr("Cabled"),
+                  NetworkTranslator.Tr("Hotspot")
+                ]
 
                 Rectangle {
                   id: tabItem
@@ -158,11 +166,10 @@ Item {
                     anchors.centerIn: parent
                     text: tabItem.modelData
                     color: tabItem.active
-                      ? Theme.primary // qmllint disable unqualified
+                      ? Theme.primary           // qmllint disable unqualified
                       : Theme.surface_variant_fg // qmllint disable unqualified
                     font.pixelSize: 14
                     font.weight: tabItem.active ? Font.Medium : Font.Normal
-
                     Behavior on color { ColorAnimation { duration: 200 } }
                   }
 
@@ -176,31 +183,24 @@ Item {
 
             // Indicator pill
             Rectangle {
-              width: 48
-              height: 3
-              radius: 1.5
+              width: 48; height: 3; radius: 1.5
               anchors.bottom: parent.bottom
-              color: Theme.primary // qmllint disable unqualified
-
+              color: Theme.primary  // qmllint disable unqualified
               x: tabBar.currentTab * (tabBar.width / 3) +
                  (tabBar.width / 3 - width) / 2
-
               Behavior on x {
                 NumberAnimation {
-                  duration: 360
-                  easing.type: Easing.OutBack
+                  duration: 360; easing.type: Easing.OutBack
                   easing.overshoot: 1.8
                 }
               }
             }
 
-            // Swipe gesture lives on the tab bar — no slider conflicts here.
-            // Moving left → next tab, moving right → previous tab.
+            // Swipe gesture
             DragHandler {
               id: swipeDrag
               target: null
-              xAxis.enabled: true
-              yAxis.enabled: false
+              xAxis.enabled: true; yAxis.enabled: false
 
               property real _startX: 0
 
@@ -243,37 +243,30 @@ Item {
         }
       }
 
-      // Tab content area
+      // Tab
       Item {
         id: tabContent
         Layout.fillWidth: true
         Layout.topMargin: 2
         clip: true
 
-        // Height tracks the active page, cross-fades between tabs
-        implicitHeight: tabBar.currentTab === 0 ? outputPage.implicitHeight
-                      : tabBar.currentTab === 1 ? inputPage.implicitHeight
-                      :                           streamPage.implicitHeight // qmllint disable unqualified
+        implicitHeight: tabBar.currentTab === 0 ? wirelessPage.implicitHeight
+                      : tabBar.currentTab === 1 ? cabledPage.implicitHeight
+                      :                           hotspotPage.implicitHeight
         Behavior on implicitHeight {
           NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
         }
 
-        // Live x of the sliding row — driven by animation or direct drag
         property real _liveX: 0
-        // Guards against double-animation when swipe updates tabBar.currentTab
         property bool _swipeSnapping: false
 
-        // Snap animation — same feel as the indicator pill
         NumberAnimation {
           id: snapAnim
-          target: tabContent
-          property: "_liveX"
-          duration: 360
-          easing.type: Easing.OutBack
+          target: tabContent; property: "_liveX"
+          duration: 360; easing.type: Easing.OutBack
           easing.overshoot: 1.8
         }
 
-        // Respond to tab-button clicks (not triggered during swipe)
         Connections {
           target: tabBar
           function onCurrentTabChanged() {
@@ -286,54 +279,32 @@ Item {
           }
         }
 
-        // All three pages side by side; x driven by _liveX
+        // Three pages side by side
         Item {
           x: tabContent._liveX
           width: tabContent.width * 3
 
-          VolumePage {
-            id: outputPage
+          NetworkWirelessPage {
+            id: wirelessPage
             x: 0
             width: tabContent.width
-
-            deviceLabel: VolumeControlTranslator.Tr("OutputDevice") // qmllint disable unqualified
-            devices: VolumeHandler.sinks // qmllint disable unqualified
-
-            onDeviceSelected: (name) => VolumeHandler.setDefaultSink(name) // qmllint disable unqualified
-            onDeviceVolumeChanged: (index, vol) =>
-              VolumeHandler.setSinkVolume(index, vol) // qmllint disable unqualified
           }
 
-          VolumePage {
-            id: inputPage
+          NetworkCabledPage {
+            id: cabledPage
             x: tabContent.width
             width: tabContent.width
-
-            deviceLabel: VolumeControlTranslator.Tr("InputDevice") // qmllint disable unqualified
-            devices: VolumeHandler.sources // qmllint disable unqualified
-
-            onDeviceSelected: (name) => VolumeHandler.setDefaultSource(name) // qmllint disable unqualified
-            onDeviceVolumeChanged: (index, vol) =>
-              VolumeHandler.setSourceVolume(index, vol) // qmllint disable unqualified
           }
 
-          StreamPage {
-            id: streamPage
+          NetworkHotspotPage {
+            id: hotspotPage
             x: tabContent.width * 2
             width: tabContent.width
-
-            playbackStreams:  VolumeHandler.sinkInputs    // qmllint disable unqualified
-            recordingStreams: VolumeHandler.sourceOutputs // qmllint disable unqualified
-
-            onPlaybackVolumeChanged:  (index, vol)   => VolumeHandler.setSinkInputVolume(index, vol)    // qmllint disable unqualified
-            onRecordingVolumeChanged: (index, vol)   => VolumeHandler.setSourceOutputVolume(index, vol) // qmllint disable unqualified
-            onPlaybackMuteToggled:    (index, muted) => VolumeHandler.setSinkInputMute(index, muted)    // qmllint disable unqualified
-            onRecordingMuteToggled:   (index, muted) => VolumeHandler.setSourceOutputMute(index, muted) // qmllint disable unqualified
           }
         }
       }
 
-      // Bottom spacer inside frame
+      // Bottom spacer
       Item { Layout.preferredHeight: 8 }
     }
   }

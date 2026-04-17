@@ -39,7 +39,8 @@ jobs:
             libdbusmenu-lxqt-devel \
             kf6-kservice-devel \
             extra-cmake-modules \
-            pulseaudio-libs-devel
+            pulseaudio-libs-devel \
+            libxcb-devel
 
       - name: Checkout repository
         uses: actions/checkout@v4

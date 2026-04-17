@@ -25,6 +25,9 @@ BuildRequires:  kf6-kservice-devel
 BuildRequires:  extra-cmake-modules
 BuildRequires:  pkgconfig(libpulse)
 
+# Optional: enables XCB/X11 session support
+# BuildRequires:  libxcb-devel
+
 Requires:       qt6-qtbase
 Requires:       qt6-qtdeclarative
 Requires:       qt6-qtwayland

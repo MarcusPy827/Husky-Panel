@@ -181,6 +181,8 @@ set(BACKEND_SOURCES
   src/info_server/volume_control/volume_control.cc
   src/info_server/bluetooth/bluetooth_info.h
   src/info_server/bluetooth/bluetooth_info.cc
+  src/info_server/network_control/network_control.h
+  src/info_server/network_control/network_control.cc
 )
 
 set(FRONTEND_SOURCES
@@ -211,6 +213,8 @@ set(FRONTEND_SOURCES
   src/components/volume_control/volume_control_handler.cc
   src/components/bluetooth/bluetooth_handler.h
   src/components/bluetooth/bluetooth_handler.cc
+  src/components/network_control/network_control_handler.h
+  src/components/network_control/network_control_handler.cc
 )
 
 set(CONFIG_LOADER_SOURCES
