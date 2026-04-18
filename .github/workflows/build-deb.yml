@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------
+# GitHub Actions — Build Debian package (.deb)
+# ---------------------------------------------------------------
+
+name: Build Debian Package
+
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-deb:
+    name: Debian (.deb)
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+
+    steps:
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            git devscripts dpkg-dev debhelper \
+            build-essential cmake pkg-config \
+            libwayland-dev wayland-protocols libxkbcommon-dev \
+            qt6-base-dev qt6-base-private-dev \
+            qt6-declarative-dev qt6-declarative-private-dev \
+            qt6-wayland-dev qt6-wayland-private-dev qt6-wayland-dev-tools \
+            qt6-tools-dev \
+            libkf6service-dev extra-cmake-modules \
+            liblayershellqtinterface-dev \
+            libpulse-dev
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build .deb package
+        run: |
+          cp -r packages/debian .
+          chmod +x debian/rules
+          dpkg-buildpackage -us -uc -b
+          mkdir -p deb-output
+          find .. -maxdepth 1 -name '*.deb' -exec cp {} deb-output/ \;
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: husky-panel-deb
+          path: deb-output/
+          if-no-files-found: error
+          retention-days: 30

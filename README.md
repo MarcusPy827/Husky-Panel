@@ -72,8 +72,7 @@ VERSION 0.9.4
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#build">Building</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -119,131 +118,12 @@ Ensure that you have Qt version 6.5+ avaliable in your system. This bar uses a n
 
 Currently only Plasma 6 is supported, we recommend you to login a Plasma 6.5 session to use this bar. Wlroots WM support is planned.
 
-### Prerequisites
-#### Building ECM (only needed when `USE_VENDORED_LIBS=ON`)
+### Building
+Please read the build instructions: 
+* For Arch-based distros: **[Arch Build Instructions](./docs/build_instructions/Arch.en.md)**.
+* For Debian-based distros: **[Debian Build Instructions](./docs/build_instructions/Debian.en.md)**.
+* For Fedora: **[Fedora Build Instructions](./docs/build_instructions/Fedora.en.md)**.
 
-> **If you are using system `layer-shell-qt` and `libdbusmenu-lxqt` (the default), you can skip this step entirely** — the system ECM is sufficient.
-
-ECM (Extra CMake Modules) is required by the vendored `layer-shell-qt`. The vendored version depends on a very new ECM, and many non-rolling distros do not meet the minimum version requirement. To solve this, we have vendored the ECM module as well. **If you pass `-DUSE_VENDORED_LIBS=ON`**, please build the ECM module first:
-
-First, open a terminal, make sure you are **on project root**.
-
-Then execute the following: 
-```bash
-chmod a+x ./scripts/configure_ecm.sh
-./scripts/configure_ecm.sh
-```
-
-If you see the log output:
-```
-[ OK ] ECM should be built and available in "/home/marcus/Desktop/Repository/Private/husky-panel/build/ecm-build/" now.
-```
-
-... then ECM modules are ready to use for next steps!!
-
-#### Install Dependencies
-You will need to install the dependencies.
-
-##### On Archlinux-based Distros
-```bash
-sudo pacman -S wayland wayland-protocols libxkbcommon layer-shell-qt libdbusmenu-lxqt libpulse
-```
-
-##### On Fedora
-> ⚠️ **CRITICAL WARNING**: Fedora ships its own Qt build. Mixing Qt versions **will** cause ABI mismatches, which can corrupt your desktop session and potentially make your system unbootable into a graphical environment.
-
-**Before installing any dependencies**, perform a full system upgrade and reboot to ensure all packages (especially Qt and KDE Frameworks) are at consistent versions:
-```bash
-sudo dnf upgrade --refresh
-sudo reboot
-```
-
-Then install the dependencies:
-```bash
-sudo dnf install wayland-devel wayland-protocols-devel libxkbcommon-devel layer-shell-qt-devel libdbusmenu-lxqt-devel kf6-kservice-devel extra-cmake-modules qt6-qtbase-private-devel qt6-qtwayland-devel pulseaudio-libs-devel
-```
-
-> `qt6-qtbase-private-devel` is required because QWindowKit uses Qt private headers. This package only contains headers.
-
-The KF6 and layer-shell-qt devel packages will automatically pull in the **matching** Qt 6 public development headers as dependencies — do **not** install `qt6-qtbase-devel` etc. by hand, as that may resolve to a different Qt version and break your Plasma session.
-
-After installation, verify that all Qt packages are from the **same version**:
-```bash
-rpm -qa 'qt6*' --qf '%{NAME}-%{VERSION}\n' | awk -F- '{print $NF}' | sort -u
-```
-If more than one version is printed, your system is at risk of ABI breakage — run `sudo dnf distro-sync 'qt6*'` to fix it.
-
-> Fedora packages `layer-shell-qt` and ECM from KDE Frameworks, so you generally do **not** need `-DUSE_VENDORED_LIBS=ON` or the manual ECM build step.
-
-##### On OpenSUSE
-> **Note**: OpenSUSE Tumbleweed is recommended. Leap may ship Qt versions that are too old.
-
-```bash
-sudo zypper in \
-    libwayland-devel wayland-protocols-devel libxkbcommon-devel \
-    qt6-base-devel qt6-wayland-devel qt6-declarative-devel qt6-tools-devel \
-    layer-shell-qt-devel libdbusmenu-lxqt-devel \
-    kf6-kservice-devel extra-cmake-modules \
-    libpulse-devel
-```
-
-> If `layer-shell-qt-devel` or `libdbusmenu-lxqt-devel` are not available, pass `-DUSE_VENDORED_LIBS=ON` at configure time and build ECM first (see [Building ECM](#building-ecm-only-needed-when-use_vendored_libson)).
-
-##### On Debian-Based Distros
-> ⚠️ **Note**: Ubuntu LTS releases (e.g. 24.04) ship Qt 6.4, which is **too old** — this project requires Qt 6.5+. You need at least **Ubuntu 24.10** or **Kubuntu 24.10** (or newer) to build. If you are on an LTS release, consider using [KDE Neon](https://neon.kde.org/) which ships up-to-date Qt and KDE Frameworks.
-
-> Ubuntu / Kubuntu do **not** ship `layer-shell-qt` or `libdbusmenu-lxqt` development packages. You **must** use `-DUSE_VENDORED_LIBS=ON` and build ECM first (see the [Building ECM](#building-ecm-only-needed-when-use_vendored_libson) section above).
-
-```bash
-sudo apt install build-essential cmake \
-    libwayland-dev wayland-protocols libxkbcommon-dev \
-    qt6-base-private-dev qt6-base-dev qt6-wayland-dev qt6-tools-dev \
-    libkf6service-dev extra-cmake-modules libpulse-dev
-```
-
-Then configure with vendored libraries:
-```bash
-mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
-```
-
-##### Side Notes
-You will also need to use a Wayland session, otherwise the bar will NOT attach properly to the top of the screen.
-
-> ⚠️ **Note**: This panel is NOT compactiable with Mutter, hence there is no way to run this panel on GNOME.
-
-Some third-party libraries (abseil, gtest, material-color-utilities, qwindowkit) are always vendored and do NOT need to be installed separately.
-
-By default, `layer-shell-qt` and `libdbusmenu-lxqt` are linked from the **system**. If your distro does not ship these packages (or ships an incompatible version), you can fall back to the vendored copies by passing `-DUSE_VENDORED_LIBS=ON` at configure time:
-
-```bash
-cmake -DCMAKE_BUILD_TYPE=Release -DUSE_VENDORED_LIBS=ON ..
-```
-
-### Build & Installation
-#### Build the Bar Itself
-```bash
-mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release ..
-cmake --build .
-```
-
-The process could lasts for minutes...
-
-#### (Optional) Install to System
-```bash
-sudo cmake --install .
-```
-> **Note**: Currently HuskyPanel does NOT autostart itself after you login, you may want to add it to your destop environment's autostart settings MANUALLY.
-
-#### (KWin Only) Install the Plugin
-The KWin app-bridge script plugin is installed automatically by `cmake --install .` (see above). It is enabled by default via the `INSTALL_KWIN_PLUGIN` CMake option.
-
-If you do **not** want the plugin, pass `-DINSTALL_KWIN_PLUGIN=OFF` at configure time.
-
-After installation, navigate to *KDE Settings*, search "*KWin*", and enable the script named "*Husky-Panel App Bridge*" in the *KWin Script* section. You may need to restart KWin or log out and back in.
-
-For more details about the plugin, read the README in `plugins/kde/app-bridge`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

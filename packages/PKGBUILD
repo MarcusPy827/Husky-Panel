@@ -1,7 +1,7 @@
 # Maintainer: MarcusPy827 <https://github.com/MarcusPy827>
 
 pkgname=husky-panel
-pkgver=0.9.4
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="(WIP) Yet another bar for Linux on Wayland session..."
 arch=('x86_64')

@@ -1,5 +1,5 @@
 %global app_name    husky-panel
-%global app_version 0.9.4
+%global app_version 1.0.0
 
 Name:           %{app_name}
 Version:        %{app_version}
@@ -58,6 +58,26 @@ Plasma 6 / KWin.
 %{_datadir}/kwin/scripts/marcus-app-bridge/
 
 %changelog
+* Fri Apr 17 2026 MarcusPy827 - 1.0.0-1
+- Implemented a battery manager
+- Added a "About System" page in the config panel
+- Fixed minor mistake on network manager flyout
+- Fixed focus/keyboard issue on XOrg session
+- Fixed App Indicator issue on some XOrg sessions
+- Implemented a network manager
+- Implemented a bluetooth control panel
+- Fixed main window translation missing issue
+- Implemented a volume control panel
+- Added an exit panel button
+- Added Xorg session support
+- Fixed the month format issue under EN_US translation in calendar
+- Added a config panel with backend for reading/writing config
+- Implemented tray icon fold feature
+- Added missing translations to the session options
+- Added more QML animations to the side menu bar
+- Redo the ripple and clip effects of AppIndicator
+- Added wlroots WM support for AppIndicator
+
 * Wed Apr 1 2026 MarcusPy827 - 0.9.4-1
 - Re-implemented all elements w/ QML.
 - Made a brand new calendar flyout.

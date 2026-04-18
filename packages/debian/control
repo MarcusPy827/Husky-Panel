@@ -1,0 +1,34 @@
+Source: husky-panel
+Section: utils
+Priority: optional
+Maintainer: MarcusPy827 <marcus.peng.2005@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+ cmake,
+ build-essential,
+ pkg-config,
+ libwayland-dev,
+ wayland-protocols,
+ libxkbcommon-dev,
+ qt6-base-dev,
+ qt6-base-private-dev,
+ qt6-declarative-dev,
+ qt6-declarative-private-dev,
+ qt6-wayland-dev,
+ qt6-wayland-private-dev,
+ qt6-wayland-dev-tools,
+ qt6-tools-dev,
+ libkf6service-dev,
+ extra-cmake-modules,
+ liblayershellqtinterface-dev,
+ libpulse-dev
+Standards-Version: 4.6.2
+Homepage: https://github.com/MarcusPy827/Husky-Panel
+Rules-Requires-Root: no
+
+Package: husky-panel
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Yet another bar for Linux on Wayland session
+ HuskyPanel is a shell bar panel for Linux Wayland sessions, built with Qt 6
+ and QML to deliver a Material Design 3 styled UI. Currently targeting KDE
+ Plasma 6 / KWin.
