@@ -51,7 +51,7 @@ jobs:
       - name: Create source tarball
         run: |
           APP_NAME="husky-panel"
-          APP_VERSION="0.9.4"
+          APP_VERSION=$(grep -m1 '^Version:' packages/husky-panel.spec | awk '{print $2}')
           TARBALL_NAME="${APP_NAME}-${APP_VERSION}"
 
           # Mark the workspace safe for git (container runs as root)

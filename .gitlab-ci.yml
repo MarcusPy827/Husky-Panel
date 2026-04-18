@@ -18,6 +18,7 @@ build:rpm:fedora:
   tags: []
 
   before_script:
+    - APP_VERSION=$(grep -m1 '^Version:' packages/husky-panel.spec | awk '{print $2}')
     # ---- System update & install build dependencies ----
     - dnf upgrade -y --refresh
     - dnf install -y
@@ -133,6 +134,7 @@ build:pkg:arch:
   image: archlinux:latest
   tags: []
   before_script:
+    - APP_VERSION=$(grep -m1 '^pkgver=' packages/PKGBUILD | cut -d= -f2)
     - |
       if [ "${RUNNER_REGION:-}" = "cn" ]; then
         cat > /etc/pacman.d/mirrorlist <<'EOF'
