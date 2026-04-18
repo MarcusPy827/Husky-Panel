@@ -292,7 +292,7 @@ build:pkg:arch:aarch64:
   tags: [arm64]
   before_script:
     - APP_VERSION=$(grep -m1 '^pkgver=' packages/PKGBUILD | cut -d= -f2)
-    - echo "DisableSandbox" >> /etc/pacman.conf
+    - sed -i '/^\[options\]/a DisableSandbox' /etc/pacman.conf
     - pacman -Syu --noconfirm --needed
     - pacman -S --noconfirm --needed base-devel git
 
