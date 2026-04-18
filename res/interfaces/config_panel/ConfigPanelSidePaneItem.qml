@@ -112,8 +112,8 @@ Item {
         font.pixelSize: 24
         text: root.icon
         color: root.isActive
-          ? Theme.secondary_container_fg // qmllint disable unqualified
-          : Theme.surface_variant_fg     // qmllint disable unqualified
+          ? Theme.secondary_container_fg  // qmllint disable unqualified
+          : Theme.surface_variant_fg  // qmllint disable unqualified
         Layout.alignment: Qt.AlignVCenter
       }
 
@@ -121,8 +121,8 @@ Item {
         text: root.label
         font.pixelSize: 14
         color: root.isActive
-          ? Theme.secondary_container_fg // qmllint disable unqualified
-          : Theme.surface_variant_fg     // qmllint disable unqualified
+          ? Theme.secondary_container_fg  // qmllint disable unqualified
+          : Theme.surface_variant_fg  // qmllint disable unqualified
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignVCenter
         elide: Text.ElideRight
@@ -133,10 +133,10 @@ Item {
       anchors.fill: parent
       hoverEnabled: true
 
-      onEntered: stateLayer.color = Theme.state_layer_hover   // qmllint disable unqualified
+      onEntered: stateLayer.color = Theme.state_layer_hover  // qmllint disable unqualified
       onExited:  stateLayer.color = "transparent"
       onPressed: (mouse) => {
-        stateLayer.color = Theme.state_layer_pressed           // qmllint disable unqualified
+        stateLayer.color = Theme.state_layer_pressed  // qmllint disable unqualified
         ripple.centerX = mouse.x
         ripple.centerY = mouse.y
         rippleAnim.restart()

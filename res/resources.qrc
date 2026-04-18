@@ -43,6 +43,7 @@
         <file>interfaces/system_tray/qmldir</file>
         <file>interfaces/config_panel/ConfigPanel.qml</file>
         <file>interfaces/config_panel/ConfigPanelSidePaneItem.qml</file>
+        <file>interfaces/config_panel/ConfigPanelAboutPage.qml</file>
         <file>interfaces/config_panel/ConfigPanelSystemTrayPage.qml</file>
         <file>interfaces/config_panel/ConfigPanelWindow.qml</file>
         <file>interfaces/volume_control/qmldir</file>
