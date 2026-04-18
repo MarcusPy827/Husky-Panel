@@ -26,7 +26,7 @@ Homepage: https://github.com/MarcusPy827/Husky-Panel
 Rules-Requires-Root: no
 
 Package: husky-panel
-Architecture: amd64
+Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Yet another bar for Linux on Wayland session
  HuskyPanel is a shell bar panel for Linux Wayland sessions, built with Qt 6

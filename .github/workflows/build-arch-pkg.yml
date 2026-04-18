@@ -13,10 +13,20 @@ on:
 
 jobs:
   build-arch-pkg:
-    name: Arch Linux (.pkg.tar.zst)
-    runs-on: ubuntu-latest
+    name: Arch Linux (.pkg.tar.zst) [${{ matrix.arch }}]
+    runs-on: ${{ matrix.runner }}
     container:
-      image: archlinux:latest
+      image: ${{ matrix.image }}
+
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-latest
+            image: archlinux:latest
+          - arch: aarch64
+            runner: ubuntu-24.04-arm
+            image: menci/archlinuxarm:base
 
     steps:
       - name: Install base dependencies
@@ -48,17 +58,17 @@ jobs:
       - name: Build package with makepkg
         run: |
           useradd -m builder
-          
+
           echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder
           chmod 0440 /etc/sudoers.d/builder
-          
+
           chown -R builder:builder "$GITHUB_WORKSPACE"
           runuser -u builder -- bash -lc "cd '$GITHUB_WORKSPACE/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: husky-panel-arch-pkg
+          name: husky-panel-arch-pkg-${{ matrix.arch }}
           path: |
             packages/*.pkg.tar.zst
             packages/*.pkg.tar.zst.sig

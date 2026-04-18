@@ -13,10 +13,18 @@ on:
 
 jobs:
   build-rpm-fedora:
-    name: RPM (Fedora)
-    runs-on: ubuntu-latest
+    name: RPM (Fedora) [${{ matrix.arch }}]
+    runs-on: ${{ matrix.runner }}
     container:
       image: fedora:latest
+
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-latest
+          - arch: aarch64
+            runner: ubuntu-24.04-arm
 
     steps:
       - name: Install build dependencies
@@ -51,10 +59,9 @@ jobs:
       - name: Create source tarball
         run: |
           APP_NAME="husky-panel"
-          APP_VERSION=$(grep -m1 '^Version:' packages/husky-panel.spec | awk '{print $2}')
+          APP_VERSION=$(grep -m1 '^%global app_version' packages/husky-panel.spec | awk '{print $3}')
           TARBALL_NAME="${APP_NAME}-${APP_VERSION}"
 
-          # Mark the workspace safe for git (container runs as root)
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
           git archive \
@@ -63,7 +70,6 @@ jobs:
             -o "${TARBALL_NAME}.tar.gz" \
             HEAD
 
-          # Layer submodule contents if present
           if [[ -f .gitmodules ]]; then
             echo "Packing submodules into tarball..."
             TMPDIR_SUB="$(mktemp -d)"
@@ -93,6 +99,6 @@ jobs:
       - name: Upload RPM artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.TARBALL_NAME }}-rpms
+          name: ${{ env.TARBALL_NAME }}-rpms-${{ matrix.arch }}
           path: rpms/
           retention-days: 30
