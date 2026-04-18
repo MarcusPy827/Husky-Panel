@@ -1,6 +1,6 @@
 简体中文 | [English](./README.md)
 
-VERSION 0.9.4
+VERSION 1.0.0
 
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
@@ -38,13 +38,13 @@ VERSION 0.9.4
 <h3 align="center">Husky Panel</h3>
 
   <p align="center">
-    [正在施工中] Linux Wayland会话下又一个状态栏...
+    为Linux桌面端准备的整体式状态栏
     <br />
     <!--
     <a style="display: none;" href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     -->
     <img src="./docs/screenshots/screenshot.png" />
-    <span>(<i>截图中图标来自 <a href="https://github.com/vinceliuice/Colloid-icon-theme.git">Colloid Icon Theme</a>，仅供展示，与本项目无关，相关内容不包含在本项目中。</i>)</span>
+    <span><span>(程序截图，在KDE Plasma6（Wayland会话）下截取。壁纸由Santiago César创作)</span></span>
     <br />
     <br />
     <!--

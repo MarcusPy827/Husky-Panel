@@ -1,6 +1,6 @@
 [简体中文](./README.zh.md) | English
 
-VERSION 0.9.4
+VERSION 1.0.0
 
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
@@ -38,13 +38,13 @@ VERSION 0.9.4
 <h3 align="center">Husky Panel</h3>
 
   <p align="center">
-    (WIP) Yet another bar for Linux on Wayland session...
+    A monolithic status bar for Linux desktop.
     <br />
     <!--
     <a style="display: none;" href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     -->
     <img src="./docs/screenshots/screenshot.png" />
-    <span>(<i>Icon from <a href="https://github.com/vinceliuice/Colloid-icon-theme.git">Colloid Icon Theme</a>, which is NOT related, and NOT included with this project.</i>)</span>
+    <span>(Screenshot of HuskyPanel running on KDE Plasma 6 (Wayland session). Wallpaper by Santiago César)</span>
     <br />
     <br />
     <!--
