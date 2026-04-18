@@ -7,3 +7,5 @@ override_dh_auto_configure:
 		-DCMAKE_BUILD_TYPE=Release \
 		-DINSTALL_KWIN_PLUGIN=ON \
 		-DDEBIAN_PRESET=ON
+
+override_dh_auto_test:

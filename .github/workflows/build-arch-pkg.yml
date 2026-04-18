@@ -32,7 +32,7 @@ jobs:
       - name: Create source tarball from local checkout
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          PKGVER=0.9.4
+          PKGVER=$(grep -m1 '^pkgver=' packages/PKGBUILD | cut -d= -f2)
           TARBALL="packages/husky-panel-${PKGVER}.tar.gz"
           git archive --format=tar.gz --prefix="Husky-Panel-${PKGVER}/" -o "${TARBALL}" HEAD
           if [[ -f .gitmodules ]]; then
