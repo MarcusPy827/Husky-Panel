@@ -68,7 +68,7 @@ jobs:
           chmod 0440 /etc/sudoers.d/builder
 
           chown -R builder:builder "$GITHUB_WORKSPACE"
-          runuser -u builder -- bash -lc "cd '$GITHUB_WORKSPACE/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
+          runuser -u builder -- bash -lc "cd '$GITHUB_WORKSPACE/packages' && PKGEXT='.pkg.tar.zst' makepkg --syncdeps --cleanbuild --noconfirm"
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
@@ -76,6 +76,8 @@ jobs:
           name: husky-panel-arch-pkg-${{ matrix.arch }}
           path: |
             packages/*.pkg.tar.zst
+            packages/*.pkg.tar.xz
             packages/*.pkg.tar.zst.sig
+            packages/*.pkg.tar.xz.sig
           if-no-files-found: error
           retention-days: 30

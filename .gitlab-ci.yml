@@ -314,7 +314,7 @@ build:pkg:arch:aarch64:
       fi
     - chown -R builder:builder "$CI_PROJECT_DIR"
   script:
-    - runuser -u builder -- bash -lc "cd '$CI_PROJECT_DIR/packages' && makepkg --syncdeps --cleanbuild --noconfirm"
+    - runuser -u builder -- bash -lc "cd '$CI_PROJECT_DIR/packages' && PKGEXT='.pkg.tar.zst' makepkg --syncdeps --cleanbuild --noconfirm"
     - mkdir -p arch-pkgs
     - find packages -maxdepth 1 -name '*.pkg.tar.zst' -exec cp {} arch-pkgs/ \;
     - find packages -maxdepth 1 -name '*.pkg.tar.zst.sig' -exec cp {} arch-pkgs/ \;
