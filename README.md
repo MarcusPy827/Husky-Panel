@@ -131,7 +131,9 @@ Please read the build instructions:
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-(*Documentation work in progress...*)
+Most usage of this bar is pretty straight forward, you just click on the icons on the status bar and a flyout will pop out.
+
+The only hidden menu is for system tray icons. You need to right click on the spare space on the status bar, there is an option called "Configure panel...", that will open a new window, inside there is a system tray icon config, you may choose any items of the tray icons that you would like to hide.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
