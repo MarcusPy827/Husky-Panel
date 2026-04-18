@@ -32,6 +32,13 @@ Rectangle {
   readonly property color stateHover: Theme.status_bar_state_layer_hover
   readonly property color statePressed: Theme.status_bar_state_layer_pressed
 
+  readonly property string perfIcon: {
+    var p = BatteryHandler.performance_profile  // qmllint disable unqualified
+    if (p === "Performance") return "speed"
+    if (p === "ECO") return "nest_eco_leaf"
+    return "electrical_services"
+  }
+
   Rectangle {
     id: stateLayer
     anchors.fill: parent
@@ -104,8 +111,8 @@ Rectangle {
     spacing: 0
 
     Text {
-      text: BatteryProvider.battery_icon
-      color: Theme.status_bar_surface_fg
+      text: BatteryHandler.battery_icon  // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg  // qmllint disable unqualified
       font.pixelSize: 24
       font.family: "Material Symbols Rounded"
     }
@@ -113,9 +120,27 @@ Rectangle {
     Text {
       text: "bolt"
       leftPadding: 8
-      visible: BatteryProvider.is_charging
-      color: Theme.status_bar_surface_fg
+      visible: BatteryHandler.is_charging  // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg  // qmllint disable unqualified
       font.pixelSize: 14
+      font.family: "Material Symbols Rounded"
+    }
+
+    Text {
+      text: root.perfIcon
+      leftPadding: 4
+      visible: !BatteryHandler.has_builtin_battery  // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg  // qmllint disable unqualified
+      font.pixelSize: 18
+      font.family: "Material Symbols Rounded"
+    }
+
+    Text {
+      text: "coffee"
+      leftPadding: 8
+      visible: BatteryHandler.is_sleep_inhibited  // qmllint disable unqualified
+      color: Theme.status_bar_surface_fg  // qmllint disable unqualified
+      font.pixelSize: 18
       font.family: "Material Symbols Rounded"
     }
   }

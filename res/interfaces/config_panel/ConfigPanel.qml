@@ -471,6 +471,7 @@ Item {
             source: {
               switch (root.currentSectionId) {
                 case "system_tray": return "ConfigPanelSystemTrayPage.qml"
+                case "about": return "ConfigPanelAboutPage.qml"
                 default: return ""
               }
             }

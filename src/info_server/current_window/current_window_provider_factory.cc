@@ -46,9 +46,8 @@ std::unique_ptr<CurrentWindowProvider>InitCurrentWindowInfoServer(
   bool is_kwin = session_bus && session_bus->isServiceRegistered(
     DBUS_KWIN_SERVICE);
 
-  // Wayland takes priority over X11 even when DISPLAY is set (XWayland).
-  // The KWin D-Bus script path is only needed on Wayland+KWin; on X11+KWin
-  // (e.g. GXDE/DDE) the XCB impl is self-contained.
+  // The KWin D-Bus script path is only needed on Wayland + KWin.
+  // FOr X11 + KWin then just use X11.
   if (is_wayland && is_kwin) {
     LOG(INFO) << absl::StrCat("KWin Wayland session detected. ",
       "Using KWin D-Bus app-bridge script.");

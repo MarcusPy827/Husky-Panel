@@ -18,9 +18,11 @@
 #ifndef SRC_INFO_SERVER_BATTERY_INFO_BATTERY_INFO_H_
 #define SRC_INFO_SERVER_BATTERY_INFO_BATTERY_INFO_H_
 
+#include <QDBusUnixFileDescriptor>
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QVariantList>
 #include <QVariantMap>
 
 namespace panel {
@@ -29,18 +31,38 @@ namespace backend {
 class BatteryInfo : public QObject {
   Q_OBJECT
  public:
-  explicit BatteryInfo();
+  explicit BatteryInfo(QObject* parent = nullptr);
   ~BatteryInfo() = default;
 
   static int GetBatteryLevel();
   static bool GetIsCharging();
 
+  static bool HasBuiltinBattery();
+  static QVariantList GetBuiltinBatteries();
+  static QVariantList GetExternalBatteries();
+  static QString GetPerformanceProfile();
+
+  bool GetIsSleepInhibited() const;
+  void SetPerformanceProfile(const QString& profile);
+  void SetSleepInhibited(bool inhibit);
+
  private slots:
   void OnUpdateProperties(const QString& interface, const QVariantMap& changed,
     const QStringList& invalidated);
+  void OnPowerProfileChanged(const QString& interface,
+    const QVariantMap& changed, const QStringList& invalidated);
 
  signals:
   void StatusChanged();
+  void PerformanceProfileChanged();
+  void SleepInhibitChanged();
+
+ private:
+  static QString FormatTimeRemaining(qint64 seconds);
+  static QString BatteryLevelToIcon(int level);
+
+  bool is_sleep_inhibited_ = false;
+  QDBusUnixFileDescriptor inhibitor_fd_;
 };
 
 }  // namespace backend

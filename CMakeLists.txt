@@ -26,6 +26,11 @@ option(USE_VENDORED_LIBS
   OFF
 )
 
+option(DEBIAN_PRESET
+  "Debian/Ubuntu preset: vendor and statically link dbusmenu-lxqt, use system LayerShellQt."
+  OFF
+)
+
 # The vendored layer-shell-qt requires a newer ECM than most non-rolling
 # distros ship. When USE_VENDORED_LIBS is ON we prepend the locally-built ECM
 # so that find_package(ECM) picks it up; otherwise the system ECM suffices.
@@ -88,7 +93,7 @@ add_subdirectory(lib/3rdparty/qwindowkit EXCLUDE_FROM_ALL)
 add_subdirectory(cmake/material-color-utils EXCLUDE_FROM_ALL)
 
 # ---------- Switchable vendored / system libraries ----------
-if(USE_VENDORED_LIBS)
+if(USE_VENDORED_LIBS OR DEBIAN_PRESET)
   # Force dbusmenu-lxqt static by wrapper subdirectory
   add_subdirectory(cmake/libdbusmenu)
 endif()
@@ -264,6 +269,12 @@ if(USE_VENDORED_LIBS)
 
   # Let source files know to use vendored layer-shell-qt headers
   add_compile_definitions(HUSKY_USE_VENDORED_LAYERSHELLQT)
+elseif(DEBIAN_PRESET)
+  message(STATUS "DEBIAN_PRESET=ON: vendored static dbusmenu-lxqt, system LayerShellQt")
+  find_package(LayerShellQt REQUIRED)
+
+  set(VENDORED_STATIC_SWITCHABLE_LIBS  dbusmenu-lxqt)
+  set(SYSTEM_DYNAMIC_SWITCHABLE_LIBS   LayerShellQt::Interface)
 else()
   message(STATUS "USE_VENDORED_LIBS=OFF: using system dbusmenu-lxqt and LayerShellQt")
   find_package(dbusmenu-lxqt REQUIRED)
@@ -303,7 +314,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
       ${CMAKE_CURRENT_SOURCE_DIR}/protocols/wlr-foreign-toplevel-management-unstable-v1.xml
   )
 
-  if(USE_VENDORED_LIBS)
+  if(USE_VENDORED_LIBS OR DEBIAN_PRESET)
     target_include_directories(HuskyPanel PRIVATE
       "${CMAKE_CURRENT_SOURCE_DIR}/lib/3rdparty/libdbusmenu/src"
       "${CMAKE_CURRENT_BINARY_DIR}/cmake/libdbusmenu/dbusmenu-build/src"

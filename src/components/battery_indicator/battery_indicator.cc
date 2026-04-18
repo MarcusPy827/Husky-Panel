@@ -23,29 +23,61 @@
 namespace panel {
 namespace frontend {
 
-BatteryIndicator::BatteryIndicator(QObject *parent) : QObject(parent) {
+BatteryIndicator::BatteryIndicator(QObject* parent) : QObject(parent) {
   LOG(INFO) << absl::StrCat("Initializing battery indicator...");
-  battery_info_ = new backend::BatteryInfo();
+  battery_info_ = new backend::BatteryInfo(this);
   connect(battery_info_, &backend::BatteryInfo::StatusChanged,
     this, &BatteryIndicator::BatteryStatusChanged);
+  connect(battery_info_, &backend::BatteryInfo::PerformanceProfileChanged,
+    this, &BatteryIndicator::PerformanceProfileChanged);
+  connect(battery_info_, &backend::BatteryInfo::SleepInhibitChanged,
+    this, &BatteryIndicator::SleepInhibitChanged);
 }
 
 QString BatteryIndicator::GetBatteryIcon() const {
   int level = backend::BatteryInfo::GetBatteryLevel();
   switch (level) {
-    case 0 ... 20:  return QStringLiteral("battery_android_alert");
+    case 0 ... 20: return QStringLiteral("battery_android_alert");
     case 21 ... 30: return QStringLiteral("battery_android_frame_2");
     case 31 ... 40: return QStringLiteral("battery_android_frame_3");
     case 41 ... 50: return QStringLiteral("battery_android_frame_4");
     case 51 ... 75: return QStringLiteral("battery_android_frame_5");
     case 76 ... 90: return QStringLiteral("battery_android_frame_6");
     case 91 ... 100: return QStringLiteral("battery_android_full");
-    default:        return QStringLiteral("battery_android_frame_question");
+    default: return QStringLiteral("battery_android_frame_question");
   }
 }
 
 bool BatteryIndicator::GetIsCharging() const {
   return backend::BatteryInfo::GetIsCharging();
+}
+
+bool BatteryIndicator::GetHasBuiltinBattery() const {
+  return backend::BatteryInfo::HasBuiltinBattery();
+}
+
+QVariantList BatteryIndicator::GetBuiltinBatteries() const {
+  return backend::BatteryInfo::GetBuiltinBatteries();
+}
+
+QVariantList BatteryIndicator::GetExternalBatteries() const {
+  return backend::BatteryInfo::GetExternalBatteries();
+}
+
+QString BatteryIndicator::GetPerformanceProfile() const {
+  return backend::BatteryInfo::GetPerformanceProfile();
+}
+
+bool BatteryIndicator::GetIsSleepInhibited() const {
+  return battery_info_->GetIsSleepInhibited();
+}
+
+void BatteryIndicator::setPerformanceProfile(const QString& profile) {
+  battery_info_->SetPerformanceProfile(profile);
+}
+
+void BatteryIndicator::setSleepInhibited(bool inhibit) {
+  battery_info_->SetSleepInhibited(inhibit);
 }
 
 }  // namespace frontend

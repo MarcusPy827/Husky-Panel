@@ -123,7 +123,7 @@ Item {
             text: BluetoothTranslator.Tr("Bluetooth")
             color: Theme.primary // qmllint disable unqualified
             font.pixelSize: 16
-            font.weight: Font.Medium
+            font.weight: Font.Bold
             Layout.fillWidth: true
           }
 

@@ -1,5 +1,11 @@
 # Changelog | 更新信息
-## VERSION 0.9.5 (UNSTABLE/WIP)
+## VERSION 1.0.0
+* marcus/battery_manager_0417
+  * Implemented a battery manager.
+  * 实现了一个电源管理器
+  * Added a "about system" page in the config panel.
+  * 在配置面板中新增了「关于系统」页
+
 * marcus/xorg_fix_0417
   * Fixed minor mistake on network manager flyout.
   * 修复了网络管理器菜单中的一些问题

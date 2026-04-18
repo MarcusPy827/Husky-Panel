@@ -15,9 +15,13 @@ zh_cn = "折叠托盘中的图标"
 en_us = "Hide icons from the tray"
 
 [ExpandIconConfig]
-zh_cn = "「展开」图标设置"
-en_us = '"Expanding Icon" Preference'
+zh_cn = 「展开」图标设置
+en_us = "Expanding Icon" Preference
 
 [SetExpandIconOnLeftHandSide]
-zh_cn = "将「展开」图标放置于相对于托盘图标左侧"
-en_us = 'Place the "Expanding Icon" on the left-hand side of the tray icons'
+zh_cn = 将「展开」图标放置于相对于托盘图标左侧
+en_us = Place the "Expanding Icon" on the left-hand side of the tray icons
+
+[PanelVersion]
+zh_cn = 面板版本
+en_us = Panel Version

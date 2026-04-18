@@ -88,6 +88,45 @@ build:rpm:fedora:
     - if: $CI_COMMIT_TAG
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
+# ======================== Debian Build (.deb) ========================
+
+build:deb:debian:
+  stage: build
+  image: debian:trixie
+  tags: []
+
+  before_script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends
+        git devscripts dpkg-dev debhelper
+        build-essential cmake pkg-config
+        libwayland-dev wayland-protocols libxkbcommon-dev
+        qt6-base-dev qt6-base-private-dev
+        qt6-declarative-dev qt6-declarative-private-dev
+        qt6-wayland-dev qt6-wayland-private-dev qt6-wayland-dev-tools
+        qt6-tools-dev
+        libkf6service-dev extra-cmake-modules
+        liblayershellqtinterface-dev
+        libpulse-dev
+
+  script:
+    - cp -r packages/debian .
+    - chmod +x debian/rules
+    - dpkg-buildpackage -us -uc -b
+    - mkdir -p debs
+    - find "$CI_PROJECT_DIR/.." -maxdepth 1 -name '*.deb' -exec cp {} debs/ \;
+
+  artifacts:
+    name: "${APP_NAME}-${APP_VERSION}-deb"
+    paths:
+      - debs/
+    expire_in: 30 days
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
 # ======================== Arch Build (zstd package) ========================
 build:pkg:arch:
   stage: build
