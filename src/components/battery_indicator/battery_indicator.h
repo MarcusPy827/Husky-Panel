@@ -20,6 +20,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QVariantList>
 
 #include "src/info_server/battery_info/battery_info.h"
 
@@ -37,18 +38,48 @@ class BatteryIndicator : public QObject {
     READ GetIsCharging
     NOTIFY BatteryStatusChanged)
 
+  Q_PROPERTY(bool has_builtin_battery
+    READ GetHasBuiltinBattery
+    NOTIFY BatteryStatusChanged)
+
+  Q_PROPERTY(QVariantList builtin_batteries
+    READ GetBuiltinBatteries
+    NOTIFY BatteryStatusChanged)
+
+  Q_PROPERTY(QVariantList external_batteries
+    READ GetExternalBatteries
+    NOTIFY BatteryStatusChanged)
+
+  Q_PROPERTY(QString performance_profile
+    READ GetPerformanceProfile
+    NOTIFY PerformanceProfileChanged)
+
+  Q_PROPERTY(bool is_sleep_inhibited
+    READ GetIsSleepInhibited
+    NOTIFY SleepInhibitChanged)
+
  public:
-  explicit BatteryIndicator(QObject *parent = nullptr);
+  explicit BatteryIndicator(QObject* parent = nullptr);
   ~BatteryIndicator() = default;
 
   QString GetBatteryIcon() const;
   bool GetIsCharging() const;
+  bool GetHasBuiltinBattery() const;
+  QVariantList GetBuiltinBatteries() const;
+  QVariantList GetExternalBatteries() const;
+  QString GetPerformanceProfile() const;
+  bool GetIsSleepInhibited() const;
+
+  Q_INVOKABLE void setPerformanceProfile(const QString& profile);
+  Q_INVOKABLE void setSleepInhibited(bool inhibit);
 
  signals:
   void BatteryStatusChanged();
+  void PerformanceProfileChanged();
+  void SleepInhibitChanged();
 
  private:
-  backend::BatteryInfo * battery_info_ = nullptr;
+  backend::BatteryInfo* battery_info_ = nullptr;
 };
 
 }  // namespace frontend

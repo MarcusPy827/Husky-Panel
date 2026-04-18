@@ -366,6 +366,8 @@ Item {
       // Calendar grid
       GridLayout {
         Layout.fillWidth: true
+        Layout.leftMargin: 6
+        Layout.rightMargin: 6
         columns: 7
         columnSpacing: 2; rowSpacing: 2
 
@@ -392,7 +394,7 @@ Item {
               anchors.centerIn: parent
               width:  Math.min(dayCell.width, dayCell.height) - 2
               height: width
-              radius: width / 2
+              radius: 8
               visible: dayCell._valid
               color: dayCell._isToday
                      ? Theme.primary
@@ -411,8 +413,18 @@ Item {
                   var ctx = getContext("2d")
                   ctx.clearRect(0, 0, width, height)
                   ctx.save()
+                  var r = 8
                   ctx.beginPath()
-                  ctx.arc(width / 2, height / 2, width / 2, 0, 2 * Math.PI)
+                  ctx.moveTo(r, 0)
+                  ctx.lineTo(width - r, 0)
+                  ctx.arcTo(width, 0, width, r, r)
+                  ctx.lineTo(width, height - r)
+                  ctx.arcTo(width, height, width - r, height, r)
+                  ctx.lineTo(r, height)
+                  ctx.arcTo(0, height, 0, height - r, r)
+                  ctx.lineTo(0, r)
+                  ctx.arcTo(0, 0, r, 0, r)
+                  ctx.closePath()
                   ctx.clip()
                   var c = Theme.state_layer_pressed
                   ctx.fillStyle = Qt.rgba(c.r, c.g, c.b, 1.0)

@@ -46,166 +46,81 @@ Window {
   readonly property int calendarFlyoutW: 320
   readonly property int volumeFlyoutW: 320
 
-  property bool appDrawerOpen: false
+  // Active flyout key: "" | "drawer" | "calendar" | "trayOverflow" | "volume"
+  //                      | "bluetooth" | "network" | "battery"
+  // Only one flyout may be open at a time; set this property to switch or close.
+  property string activeFlyout: ""
+
   property bool drawerExpanded: false
-  property bool calendarFlyoutOpen: false
   property bool calendarFlyoutExpanded: false
-  property bool trayOverflowOpen: false
   property bool trayOverflowExpanded: false
-  property bool volumeFlyoutOpen: false
   property bool volumeFlyoutExpanded: false
-  property bool bluetoothFlyoutOpen: false
   property bool bluetoothFlyoutExpanded: false
-  property bool networkFlyoutOpen: false
   property bool networkFlyoutExpanded: false
+  property bool batteryFlyoutExpanded: false
 
   // Restrict input to the bar on startup; the window is always drawerH taller
   // than the visible bar, so without this the transparent area eats clicks.
   Component.onCompleted: LayerShellHelper.setBarOnlyMask(root, barHeight)
 
-  onAppDrawerOpenChanged: {
-    if (appDrawerOpen) {
-      calendarFlyoutOpen = false
-      drawerExpanded = true
-      LayerShellHelper.setFullMask(root)
-      appDrawer.open()
-    } else {
-      appDrawer.close()
-      // drawerExpanded → false is set by onCloseAnimationFinished below
+  onActiveFlyoutChanged: {
+    // Close any flyout that is no longer active (starts its close animation)
+    if (activeFlyout !== "drawer"       && drawerExpanded)          appDrawer.close()
+    if (activeFlyout !== "calendar"     && calendarFlyoutExpanded)  calendarFlyout.close()
+    if (activeFlyout !== "trayOverflow" && trayOverflowExpanded)    trayOverflowFlyout.close()
+    if (activeFlyout !== "volume"       && volumeFlyoutExpanded)    volumeFlyout.close()
+    if (activeFlyout !== "bluetooth"    && bluetoothFlyoutExpanded) bluetoothFlyout.close()
+    if (activeFlyout !== "network"      && networkFlyoutExpanded)   networkFlyout.close()
+    if (activeFlyout !== "battery"      && batteryFlyoutExpanded)   batteryFlyout.close()
+
+    switch (activeFlyout) {
+      case "":
+        // Revert mask immediately — do not wait for close animations
+        LayerShellHelper.setBarOnlyMask(root, barHeight)
+        break
+      case "drawer":
+        drawerExpanded = true
+        LayerShellHelper.setFullMask(root)
+        appDrawer.open()
+        break
+      case "calendar":
+        calendarFlyoutExpanded = true
+        LayerShellHelper.setFullMask(root)
+        calendarFlyout.open()
+        break
+      case "trayOverflow":
+        trayOverflowExpanded = true
+        LayerShellHelper.setFullMask(root)
+        trayOverflowFlyout.open()
+        break
+      case "volume":
+        volumeFlyoutExpanded = true
+        LayerShellHelper.setFullMask(root)
+        volumeFlyout.open()
+        break
+      case "bluetooth":
+        bluetoothFlyoutExpanded = true
+        LayerShellHelper.setFullMask(root)
+        bluetoothFlyout.open()
+        break
+      case "network":
+        networkFlyoutExpanded = true
+        LayerShellHelper.setFullMask(root)
+        networkFlyout.open()
+        break
+      case "battery":
+        batteryFlyoutExpanded = true
+        LayerShellHelper.setFullMask(root)
+        batteryFlyout.open()
+        break
     }
-  }
-
-  onCalendarFlyoutOpenChanged: {
-    if (calendarFlyoutOpen) {
-      appDrawerOpen = false
-      trayOverflowOpen = false
-      volumeFlyoutOpen = false
-      calendarFlyoutExpanded = true
-      LayerShellHelper.setFullMask(root)
-      calendarFlyout.open()
-    } else {
-      calendarFlyout.close()
-      // calendarFlyoutExpanded → false is set by onCloseAnimationFinished below
-    }
-  }
-
-  onTrayOverflowOpenChanged: {
-    if (trayOverflowOpen) {
-      calendarFlyoutOpen = false
-      volumeFlyoutOpen = false
-      trayOverflowExpanded = true
-      LayerShellHelper.setFullMask(root)
-      trayOverflowFlyout.open()
-    } else {
-      trayOverflowFlyout.close()
-      // trayOverflowExpanded → false is set by onCloseAnimationFinished below
-    }
-  }
-
-  onVolumeFlyoutOpenChanged: {
-    if (volumeFlyoutOpen) {
-      appDrawerOpen = false
-      calendarFlyoutOpen = false
-      trayOverflowOpen = false
-      bluetoothFlyoutOpen = false
-      volumeFlyoutExpanded = true
-      LayerShellHelper.setFullMask(root)
-      volumeFlyout.open()
-    } else {
-      volumeFlyout.close()
-      // volumeFlyoutExpanded → false is set by onCloseAnimationFinished below
-    }
-  }
-
-  onBluetoothFlyoutOpenChanged: {
-    if (bluetoothFlyoutOpen) {
-      appDrawerOpen = false
-      calendarFlyoutOpen = false
-      trayOverflowOpen = false
-      volumeFlyoutOpen = false
-      networkFlyoutOpen = false
-      bluetoothFlyoutExpanded = true
-      LayerShellHelper.setFullMask(root)
-      bluetoothFlyout.open()
-    } else {
-      bluetoothFlyout.close()
-      // bluetoothFlyoutExpanded → false is set by onCloseAnimationFinished below
-    }
-  }
-
-  onNetworkFlyoutOpenChanged: {
-    if (networkFlyoutOpen) {
-      appDrawerOpen = false
-      calendarFlyoutOpen = false
-      trayOverflowOpen = false
-      volumeFlyoutOpen = false
-      bluetoothFlyoutOpen = false
-      networkFlyoutExpanded = true
-      LayerShellHelper.setFullMask(root)
-      networkFlyout.open()
-    } else {
-      networkFlyout.close()
-      // networkFlyoutExpanded → false is set by onCloseAnimationFinished below
-    }
-  }
-
-  onDrawerExpandedChanged: {
-    if (!drawerExpanded && !calendarFlyoutExpanded && !trayOverflowExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
-        && !networkFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onCalendarFlyoutExpandedChanged: {
-    if (!calendarFlyoutExpanded && !drawerExpanded && !trayOverflowExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
-        && !networkFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onTrayOverflowExpandedChanged: {
-    if (!trayOverflowExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !volumeFlyoutExpanded && !bluetoothFlyoutExpanded
-        && !networkFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onVolumeFlyoutExpandedChanged: {
-    if (!volumeFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !trayOverflowExpanded && !bluetoothFlyoutExpanded
-        && !networkFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onBluetoothFlyoutExpandedChanged: {
-    if (!bluetoothFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !trayOverflowExpanded && !volumeFlyoutExpanded
-        && !networkFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
-  }
-
-  onNetworkFlyoutExpandedChanged: {
-    if (!networkFlyoutExpanded && !drawerExpanded && !calendarFlyoutExpanded
-        && !trayOverflowExpanded && !volumeFlyoutExpanded
-        && !bluetoothFlyoutExpanded)
-      LayerShellHelper.setBarOnlyMask(root, barHeight)
   }
 
   // Background click-catcher
   MouseArea {
     anchors.fill: parent
-    visible: (root.appDrawerOpen || root.calendarFlyoutOpen
-              || root.trayOverflowOpen || root.volumeFlyoutOpen
-              || root.bluetoothFlyoutOpen || root.networkFlyoutOpen)
-             && !confirmDialog.visible
-    onClicked: {
-      root.appDrawerOpen = false
-      root.calendarFlyoutOpen = false
-      root.trayOverflowOpen = false
-      root.volumeFlyoutOpen = false
-      root.bluetoothFlyoutOpen = false
-      root.networkFlyoutOpen = false
-    }
+    visible: root.activeFlyout !== "" && !confirmDialog.visible
+    onClicked: root.activeFlyout = ""
   }
 
   // Confirm dialog (standalone layer-shell overlay window)
@@ -518,7 +433,7 @@ Window {
           // App drawer button
           AppsBtn {
             id: appDrawerBtn
-            onClicked: root.appDrawerOpen = !root.appDrawerOpen
+            onClicked: root.activeFlyout = root.activeFlyout === "drawer" ? "" : "drawer"
           }
 
           // KRunner button
@@ -561,34 +476,37 @@ Window {
           // System tray
           SystemTray {
             id: systemTray
-            onOverflowClicked: root.trayOverflowOpen = !root.trayOverflowOpen
+            onOverflowClicked: root.activeFlyout = root.activeFlyout === "trayOverflow" ? "" : "trayOverflow"
           }
 
           // Bluetooth indicator
           BluetoothIndicator {
             id: bluetoothIndicatorBtn
-            onClicked: root.bluetoothFlyoutOpen = !root.bluetoothFlyoutOpen
+            onClicked: root.activeFlyout = root.activeFlyout === "bluetooth" ? "" : "bluetooth"
           }
 
           // Volume indicator
           VolumeIndicator {
             id: volumeIndicatorBtn
-            onClicked: root.volumeFlyoutOpen = !root.volumeFlyoutOpen
+            onClicked: root.activeFlyout = root.activeFlyout === "volume" ? "" : "volume"
           }
 
           // WLAN / network indicator
           WLANIndicator {
             id: networkIndicatorBtn
-            onClicked: root.networkFlyoutOpen = !root.networkFlyoutOpen
+            onClicked: root.activeFlyout = root.activeFlyout === "network" ? "" : "network"
           }
 
           // Battery indicator
-          BatteryIndicator {}
+          BatteryIndicator {
+            id: batteryIndicatorBtn
+            onClicked: root.activeFlyout = root.activeFlyout === "battery" ? "" : "battery"
+          }
 
           // Clock button
           ClockBtn {
             id: clockBtn
-            onClicked: root.calendarFlyoutOpen = !root.calendarFlyoutOpen
+            onClicked: root.activeFlyout = root.activeFlyout === "calendar" ? "" : "calendar"
           }
         }
       }
@@ -722,6 +640,28 @@ Window {
       id: networkFlyout
       anchors.fill: parent
       onCloseAnimationFinished: root.networkFlyoutExpanded = false
+    }
+  }
+
+  // Battery flyout
+  Item {
+    readonly property int flyoutW: 320
+    x: {
+      var _track = rightBarGroup.x + batteryIndicatorBtn.x + batteryIndicatorBtn.width // qmllint disable missing-property
+      var btnCenterX = batteryIndicatorBtn.mapToItem( // qmllint disable missing-property
+        baseLayer, batteryIndicatorBtn.width / 2, 0).x // qmllint disable missing-property
+      return Math.max(8, Math.min(root.width - flyoutW - 8,
+                                  btnCenterX - flyoutW / 2))
+    }
+    y: root.barHeight + root.drawerTopMargin
+    width: flyoutW
+    height: batteryFlyout.implicitHeight
+    visible: root.batteryFlyoutExpanded
+
+    BatteryFlyout {
+      id: batteryFlyout
+      anchors.fill: parent
+      onCloseAnimationFinished: root.batteryFlyoutExpanded = false
     }
   }
 

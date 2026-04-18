@@ -129,7 +129,7 @@ Item {
           Text {
             text: NetworkTranslator.Tr("Network")
             color: Theme.primary   // qmllint disable unqualified
-            font.pixelSize: 16; font.weight: Font.Medium
+            font.pixelSize: 16; font.weight: Font.Bold
           }
 
           // Tab bar

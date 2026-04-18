@@ -1,0 +1,43 @@
+[Battery]
+zh_cn = 电源
+en_us = Battery
+
+[BuiltInBattery]
+zh_cn = 内置电池
+en_us = Built-in Battery
+
+[EstimatedTime]
+zh_cn = 预计剩余续航:  
+en_us = Estimated time: 
+
+[Health]
+zh_cn = 健康度: 
+en_us = Health: 
+
+[PerformanceProfile]
+zh_cn = 性能模式配置
+en_us = Performance profile
+
+[ECO]
+zh_cn = 节能模式
+en_us = ECO
+
+[Balanced]
+zh_cn = 平衡模式
+en_us = Balanced
+
+[Performance]
+zh_cn = 性能模式
+en_us = Performance
+
+[PreventSystemSleep]
+zh_cn = 阻止系统睡眠
+en_us = Prevent System Sleep
+
+[PreventSystemAutoSleepNLock]
+zh_cn = 手动阻止自动锁屏与睡眠
+en_us = Manually block automatically sleeping & locking
+
+[OtherDevices]
+zh_cn = 其他设备
+en_us = Other Devices

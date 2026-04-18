@@ -149,6 +149,16 @@ void InjectEngineContext(QGuiApplication& application,
   target.rootContext()->setContextProperty("NetworkTranslator",
     translation_loader_network_control);
   LOG(INFO) << absl::StrCat("Successfully injected network translator.");
+
+  LOG(INFO) << absl::StrCat("Initializing translator for battery...");
+  auto* translation_loader_battery =
+    new panel::loader::TranslationLoader(
+      ":/translations/translations/battery_control.locale",
+      panel::loader::LanguageType::EN_US);
+  target.rootContext()->setContextProperty("BatteryTranslator",
+    translation_loader_battery);
+  LOG(INFO) << absl::StrCat("Successfully injected battery translator.");
+
   LOG(INFO) << absl::StrCat("All translator loaders were successfully ",
     "injected!");
 
@@ -195,7 +205,7 @@ void InjectEngineContext(QGuiApplication& application,
 
   LOG(INFO) << absl::StrCat("Initializing battery handler...");
   auto* battery_indicator = new panel::frontend::BatteryIndicator(&application);
-  target.rootContext()->setContextProperty("BatteryProvider",
+  target.rootContext()->setContextProperty("BatteryHandler",
     battery_indicator);
   LOG(INFO) << absl::StrCat("Successfully injected battery handler!!");
 

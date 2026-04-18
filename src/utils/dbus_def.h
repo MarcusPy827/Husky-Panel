@@ -21,11 +21,18 @@
 
 // Battery Info
 #define DBUS_UPOWER_SERVICE "org.freedesktop.UPower"
+#define DBUS_UPOWER_PATH "/org/freedesktop/UPower"
+#define DBUS_UPOWER_INTERFACE "org.freedesktop.UPower"
 #define DBUS_UPOWER_DISPLAY_SERVICE_PATH \
   "/org/freedesktop/UPower/devices/DisplayDevice"
 #define DBUS_UPOWER_DEVICE_INTERFACE "org.freedesktop.UPower.Device"
 #define DBUS_PROPERTIES_INTERFACE "org.freedesktop.DBus.Properties"
 #define DBUS_PROP_UPDTE_METHOD "PropertiesChanged"
+
+// Power Profiles Daemon
+#define DBUS_POWER_PROFILES_SERVICE "net.hadess.PowerProfiles"
+#define DBUS_POWER_PROFILES_PATH "/net/hadess/PowerProfiles"
+#define DBUS_POWER_PROFILES_INTERFACE "net.hadess.PowerProfiles"
 
 // KDE KRunner
 #define DBUS_KRUNNER_SERVICE "org.kde.krunner"
