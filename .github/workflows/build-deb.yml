@@ -19,6 +19,7 @@ jobs:
       image: debian:trixie
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - arch: amd64

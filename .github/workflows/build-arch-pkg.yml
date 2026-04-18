@@ -19,6 +19,7 @@ jobs:
       image: ${{ matrix.image }}
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - arch: x86_64
@@ -29,6 +30,10 @@ jobs:
             image: menci/archlinuxarm:base
 
     steps:
+      - name: Disable pacman sandbox (aarch64 only)
+        if: matrix.arch == 'aarch64'
+        run: echo "DisableSandbox" >> /etc/pacman.conf
+
       - name: Install base dependencies
         run: |
           pacman -Syu --noconfirm --needed

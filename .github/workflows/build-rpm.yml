@@ -19,6 +19,7 @@ jobs:
       image: fedora:latest
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - arch: x86_64
