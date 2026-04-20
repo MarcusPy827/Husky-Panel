@@ -119,22 +119,27 @@ void XOrgPanelHelper::SetupXorgPanelWindow(QWindow* window, int bar_height) {
   xcb_change_property(conn, XCB_PROP_MODE_REPLACE, xwin,
     net_wm_window_type, XCB_ATOM_ATOM, 32, 1, &net_wm_window_type_dock);
 
-  // Legacy strut: left = 0; right = 0; top = bar_height; bottom = 0.
+  // Scale bar_height from logical pixels to physical pixels so that the strut
+  // matches the actual rendered panel height when display scaling is active.
+  const uint32_t physical_bar_height = static_cast<uint32_t>(
+    bar_height * screen->devicePixelRatio());
+
+  // Legacy strut: left = 0; right = 0; top = physical_bar_height; bottom = 0.
   uint32_t strut[4] = {
     0,
     0,
-    static_cast<uint32_t>(bar_height),
+    physical_bar_height,
     0
   };
 
   xcb_change_property(conn, XCB_PROP_MODE_REPLACE, xwin,
     net_wm_strut, XCB_ATOM_CARDINAL, 32, 4, strut);
 
-  // Extended strut: reserve bar_height px along the top edge of this screen.
+  // Extended strut: reserve physical_bar_height px along the top edge of this screen.
   const uint32_t screen_x = static_cast<uint32_t>(screen->geometry().x());
   const uint32_t screen_width = static_cast<uint32_t>(screen->geometry()
     .width());
-  const uint32_t bar_height_casted = static_cast<uint32_t>(bar_height);
+  const uint32_t bar_height_casted = physical_bar_height;
 
   uint32_t strut_partial[12] = {
     0, 0,  // left, right
@@ -154,7 +159,8 @@ void XOrgPanelHelper::SetupXorgPanelWindow(QWindow* window, int bar_height) {
 
   xcb_flush(conn);
   LOG(INFO) << absl::StrCat("Xorg DOCK/STRUT properties has been set at: ",
-    "top = ", bar_height, "px.");
+    "top = ", physical_bar_height, "px (logical=", bar_height,
+    ", dpr=", screen->devicePixelRatio(), ").");
 #else
   LOG(ERROR) << absl::StrCat("XCB unavaliable, failed to set X11 status ",
     "bar...");

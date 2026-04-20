@@ -22,6 +22,9 @@
 #include <QQmlContext>
 #include <QQuickWindow>
 #include <QQuickImageProvider>
+#include <QDir>
+#include <QLibraryInfo>
+#include <QQuickStyle>
 #include <QIcon>
 #include <QRegion>
 #include <QtQml>
@@ -341,11 +344,31 @@ int main(int argc, char *argv[]) {
   absl::InitializeLog();
   absl::SetMinLogLevel(absl::LogSeverityAtLeast::kInfo);
 
+  // Clear platform theme
+  qputenv("QT_QPA_PLATFORMTHEME", "");
+
   LOG(INFO) << absl::StrCat("Initializing SNI types...");
   panel::backend::InitSystemTrayTypes();
 
   LOG(INFO) << absl::StrCat("Now initializing panel...");
   QApplication a(argc, argv);
+
+  // Patch Apr 20, 2026: Defaulting to Breeze if that is avaliable, otherwise
+  // Basic.
+  // This is required patch to ensure the panel runs on GXDE desktop, otherwise
+  // the panel may crash with error "module 'Chameleon' is not installed".
+  const QString qml_root = QLibraryInfo::path(QLibraryInfo::QmlImportsPath);
+  const bool breeze_available =
+    QDir(qml_root + "/QtQuick/Controls/Breeze").exists() ||
+    QDir(qml_root + "/QtQuick/Controls.2/Breeze").exists();
+  const QString controls_style = breeze_available
+    ? QStringLiteral("Breeze")
+    : QStringLiteral("Basic");
+  QQuickStyle::setStyle(controls_style);
+  LOG(INFO) << absl::StrCat("Qt Quick Controls style set to: ",
+    controls_style.toStdString());
+
+  LOG(WARNING) << absl::StrCat("Loading DEPRECIATED translator...");
   InitializedDepreciatedTranslator(a);
 
   LOG(INFO) << absl::StrCat("Loading fonts...");
