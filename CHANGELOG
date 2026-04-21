@@ -1,4 +1,17 @@
 # Changelog | 更新信息
+## VERSION 1.0.1
+* marcus/gxde_patch_0420
+  * Fixed the issue that caused crash by module `Chameleon` is NOT found on some GXDE installations.
+  * 修复了在部分GXDE安装上报告`Chameleon`缺失而导致闪退的问题
+  * Added *Post Installation Manual for Running Husky Panel on GXDE*
+  * 新增文档*在GXDE上安装HuskyPanel后需要做的事*
+  * Fixed keyboard focus issue on XOrg sessions.
+  * 修复了在XOrg会话上的键盘焦点问题
+  * Fixed the alignment issue of the day of the week and date on calendar.
+  * 修复了日历中星期与日期未对齐的问题
+  * Fixed the menu height overflow problem.
+  * 修复了由于菜单比面板高度高而被截断的问题
+
 ## VERSION 1.0.0
 * marcus/battery_manager_0417
   * Implemented a battery manager.

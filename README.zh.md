@@ -118,6 +118,7 @@ VERSION 1.0.0
 请阅读如下构建指南：
 * 对于基于Archlinux的发行版: **[在基于Arch的发行版上构建](./docs/build_instructions/Arch.zh.md)**.
 * 对于基于Debian的发行版: **[在基于Debian的发行版上构建](./docs/build_instructions/Debian.zh.md)**.
+  * **[在GXDE上安装HuskyPanel后需要做的事](./docs/build_instructions/GXDE_Post_Install.zh.md)**
 * 对于Fedora: **[在基于Fedora上构建](./docs/build_instructions/Fedora.zh.md)**.
 
 <p align="right">(<a href="#readme-top">返回顶部</a>)</p>
@@ -151,6 +152,7 @@ VERSION 1.0.0
 - [X] 音量管理器
 - [X] 蓝牙管理器
 - [X] 应用抽屉
+- [X] X11会话支持
 
 <p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
