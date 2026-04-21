@@ -136,11 +136,16 @@ Item {
 
         ColumnLayout {
           anchors.fill: parent
-          anchors.margins: 12
+          anchors.topMargin: 12
+          anchors.bottomMargin: 12
+          anchors.leftMargin: 3
+          anchors.rightMargin: 3
 
           // Today
           Text {
             Layout.fillWidth: true
+            Layout.leftMargin: 9
+            Layout.rightMargin: 9
             text: Qt.formatDate(root._today, StatusBarTranslator.Tr("yyyy-M-") + StatusBarTranslator.Tr("dd")) + " " + StatusBarTranslator.Tr(Qt.formatDate(root._today, "ddd"))
             color: Theme.primary
             font.pixelSize: 16
@@ -151,6 +156,8 @@ Item {
           // Month navigation
           RowLayout {
             Layout.fillWidth: true
+            Layout.leftMargin: 9
+            Layout.rightMargin: 9
             spacing: 0
 
             // Prev month
@@ -332,7 +339,7 @@ Item {
           GridLayout {
             Layout.fillWidth: true
             columns: 7
-            columnSpacing: 0
+            columnSpacing: 2
             rowSpacing: 0
 
             Repeater {
