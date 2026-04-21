@@ -1,10 +1,10 @@
 %global app_name    husky-panel
-%global app_version 1.0.0
+%global app_version 1.0.1
 
 Name:           %{app_name}
 Version:        %{app_version}
 Release:        1%{?dist}
-Summary:        (WIP) Yet another bar for Linux on Wayland session...
+Summary:        A monolithic bar for Linux desktop
 License:        GPL-3.0-only
 URL:            https://github.com/MarcusPy827/Husky-Panel
 
@@ -58,6 +58,13 @@ Plasma 6 / KWin.
 %{_datadir}/kwin/scripts/marcus-app-bridge/
 
 %changelog
+* Tue Apr 21 2026 MarcusPy827 - 1.0.1-1
+- Fixed the issue that caused crash by module `Chameleon` is NOT found on some GXDE installations.
+- Added *Post Installation Manual for Running Husky Panel on GXDE*
+- Fixed keyboard focus issue on XOrg sessions.
+- Fixed the alignment issue of the day of the week and date on calendar.
+- Fixed the menu height overflow problem.
+
 * Fri Apr 17 2026 MarcusPy827 - 1.0.0-1
 - Implemented a battery manager
 - Added a "About System" page in the config panel

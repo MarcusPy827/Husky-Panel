@@ -1,3 +1,11 @@
+husky-panel (1.0.1-1) stable; urgency=high
+  * Fixed the issue that caused crash by module `Chameleon` is NOT found on some GXDE installations.
+  * Added *Post Installation Manual for Running Husky Panel on GXDE*
+  * Fixed keyboard focus issue on XOrg sessions.
+  * Fixed the alignment issue of the day of the week and date on calendar.
+  * Fixed the menu height overflow problem.
+ -- MarcusPy827 <>  Tue, 21 Apr 2026 04:03:47 -5000
+
 husky-panel (1.0.0-1) unstable; urgency=medium
 
   * Implemented a battery manager.
