@@ -331,8 +331,8 @@ void LoadIconFonts() {
  * @brief Pre-loads platform theme.
  * 
  * @details Initializes the platform theme by deteting whether the Breeze style
- *          is avaliable. If so, then set the style to Breeze, otherwise set to
- *          Material if Material is avaliable, otherwise fallback to Basic.
+ *          is avaliable. If so, then set the style to Breeze, otherwise
+ *          simply fallback to Basic.
  * @return void.
  */
 
@@ -346,13 +346,6 @@ void LoadPlatformTheme() {
       QDir(qml_root + "/QtQuick/Controls.2/Breeze").exists()) {
     LOG(INFO) << absl::StrCat("Breeze style detected in Qt Quick Controls.");
     QQuickStyle::setStyle("Breeze");
-    return;
-  }
-
-  if (QDir(qml_root + "/QtQuick/Controls/Material").exists() ||
-      QDir(qml_root + "/QtQuick/Controls.2/Material").exists()) {
-    LOG(INFO) << absl::StrCat("Material style detected in Qt Quick Controls.");
-    QQuickStyle::setStyle("Material");
     return;
   }
 
