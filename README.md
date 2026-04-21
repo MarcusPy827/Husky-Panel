@@ -122,6 +122,7 @@ Currently only Plasma 6 is supported, we recommend you to login a Plasma 6.5 ses
 Please read the build instructions: 
 * For Arch-based distros: **[Arch Build Instructions](./docs/build_instructions/Arch.en.md)**.
 * For Debian-based distros: **[Debian Build Instructions](./docs/build_instructions/Debian.en.md)**.
+  * **[Post Installation Manual for Running Husky Panel on GXDE](./docs/build_instructions/GXDE_Post_Install.en.md)**
 * For Fedora: **[Fedora Build Instructions](./docs/build_instructions/Fedora.en.md)**.
 
 
@@ -156,6 +157,7 @@ The only hidden menu is for system tray icons. You need to right click on the sp
 - [X] Volume manager
 - [X] Bluetooth manager
 - [X] App drawer
+- [X] X11 Support
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

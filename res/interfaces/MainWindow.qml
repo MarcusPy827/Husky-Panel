@@ -404,11 +404,18 @@ Window {
       // Config menu
       Menu {
         id: barContextMenu
+
+        onAboutToShow: LayerShellHelper.setFullMask(root)
+        onClosed: {
+          if (root.activeFlyout === "")
+            LayerShellHelper.setBarOnlyMask(root, root.barHeight)
+        }
+
         MenuItem {
           text: StatusBarTranslator.Tr("ConfigurePanel")
           onTriggered: configPanelWindow.open()
         }
-        
+
         MenuItem {
           text: StatusBarTranslator.Tr("ExitPanel")
           onTriggered: Qt.quit()

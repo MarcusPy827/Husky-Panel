@@ -69,10 +69,11 @@ find_package(
   REQUIRED
 )
 
-find_package(Qt${QT_VERSION_MAJOR} 
-  REQUIRED COMPONENTS 
-  Widgets 
-  Quick 
+find_package(Qt${QT_VERSION_MAJOR}
+  REQUIRED COMPONENTS
+  Widgets
+  Quick
+  QuickControls2
   LinguistTools
   WaylandClient
   DBus
@@ -359,6 +360,7 @@ target_link_libraries(HuskyPanel
   ${SYSTEM_DYNAMIC_SWITCHABLE_LIBS}
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::Quick
+  Qt${QT_VERSION_MAJOR}::QuickControls2
   Qt${QT_VERSION_MAJOR}::WaylandClient
   Qt${QT_VERSION_MAJOR}::DBus
   KF6::Service

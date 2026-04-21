@@ -17,6 +17,7 @@ ci_build/*
 
 # IDE Config
 .vscode/settings.json
+.claude/*
 
 # Notes
 private/*

@@ -22,6 +22,9 @@
 #include <QQmlContext>
 #include <QQuickWindow>
 #include <QQuickImageProvider>
+#include <QDir>
+#include <QLibraryInfo>
+#include <QQuickStyle>
 #include <QIcon>
 #include <QRegion>
 #include <QtQml>
@@ -325,6 +328,34 @@ void LoadIconFonts() {
 
 
 /**
+ * @brief Pre-loads platform theme.
+ * 
+ * @details Initializes the platform theme by deteting whether the Breeze style
+ *          is avaliable. If so, then set the style to Breeze, otherwise
+ *          simply fallback to Basic.
+ * @return void.
+ */
+
+void LoadPlatformTheme() {
+  // First clear existing platform theme
+  qputenv("QT_QPA_PLATFORMTHEME", "");
+
+  // Setup new style
+  const QString qml_root = QLibraryInfo::path(QLibraryInfo::QmlImportsPath);
+  if (QDir(qml_root + "/QtQuick/Controls/Breeze").exists() ||
+      QDir(qml_root + "/QtQuick/Controls.2/Breeze").exists()) {
+    LOG(INFO) << absl::StrCat("Breeze style detected in Qt Quick Controls.");
+    QQuickStyle::setStyle("Breeze");
+    return;
+  }
+
+  LOG(WARNING) << absl::StrCat("No known platform style detected in Qt Quick,",
+    " falling back to Basic.");
+  QQuickStyle::setStyle("Basic");
+}
+
+
+/**
  * @brief Application entry point.
  *
  * @details Initializes logging, registers Qt meta-types, sets up the QML
@@ -341,11 +372,16 @@ int main(int argc, char *argv[]) {
   absl::InitializeLog();
   absl::SetMinLogLevel(absl::LogSeverityAtLeast::kInfo);
 
+  LOG(INFO) << absl::StrCat("Loading platform theme...");
+  LoadPlatformTheme();
+
   LOG(INFO) << absl::StrCat("Initializing SNI types...");
   panel::backend::InitSystemTrayTypes();
 
   LOG(INFO) << absl::StrCat("Now initializing panel...");
   QApplication a(argc, argv);
+
+  LOG(WARNING) << absl::StrCat("Loading DEPRECIATED translator...");
   InitializedDepreciatedTranslator(a);
 
   LOG(INFO) << absl::StrCat("Loading fonts...");

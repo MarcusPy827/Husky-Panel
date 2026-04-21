@@ -43,10 +43,10 @@ QDBusObjectPath SessionHandler::CurrentSessionPath() const {
     session_id);
 
   if (!reply.isValid()) {
-    LOG(ERROR) << absl::StrCat(absl::StrFormat(
-      "Failed to get current session path for session ID '%1' from "
-      "logind via D-Bus: %2", session_id.toStdString(),
-      reply.error().message().toStdString()));
+    LOG(ERROR) << absl::StrCat(
+      "Failed to get current session path for session ID '",
+      session_id.toStdString(), "' from logind via D-Bus: ",
+      reply.error().message().toStdString());
     return QDBusObjectPath();
   }
   return reply.value();
